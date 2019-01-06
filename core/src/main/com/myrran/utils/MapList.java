@@ -1,4 +1,4 @@
-package main.com.myrran.misc;
+package main.com.myrran.utils;
 
 import java.util.Collection;
 import java.util.List;

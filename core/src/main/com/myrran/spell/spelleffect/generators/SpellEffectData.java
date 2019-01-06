@@ -2,6 +2,7 @@ package main.com.myrran.spell.spelleffect.generators;
 
 import main.com.myrran.spell.SpellSlot;
 import main.com.myrran.spell.SpellStat;
+import main.com.myrran.spell.spelleffect.generates.EffectEntityFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,12 +10,12 @@ import java.util.Map;
 public class SpellEffectData
 {
     private Map<String, Float> stats = new HashMap<String, Float>();
-    private SpellEffectType type;
+    private EffectEntityFactory factory;
     private String slotType;
 
     public void setSpellEffect(SpellEffectI spellEffect)
     {
-        this.type = spellEffect.getType();
+        this.factory = spellEffect.getFactory();
 
         for (SpellStat stat: spellEffect.getSpellStats())
             stats.put(stat.getID(), stat.getTotal());
@@ -31,6 +32,6 @@ public class SpellEffectData
     public String getSlotType()
     {   return slotType; }
 
-    public SpellEffectType getSpellEffectType()
-    {   return type; }
+    public EffectEntityFactory getFactory()
+    {   return factory; }
 }

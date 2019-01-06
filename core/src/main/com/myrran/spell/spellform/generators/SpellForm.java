@@ -7,17 +7,18 @@ import main.com.myrran.spell.data.SpellSlotDataTemplate;
 import main.com.myrran.spell.data.SpellStatTemplate;
 import main.com.myrran.spell.spelleffect.generators.SpellEffectData;
 import main.com.myrran.spell.spelleffect.generators.SpellEffectI;
+import main.com.myrran.spell.spellform.generates.FormEntity;
+import main.com.myrran.spell.spellform.generates.FormEntityFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 public class SpellForm implements SpellFormI
 {
     private String id;
     private String name;
     private String spellFormDataID;
-    private SpellFormType type;
+    private FormEntityFactory factory;
     private List<SpellStat> spellStats = new ArrayList<SpellStat>();
     private List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
 
@@ -39,13 +40,13 @@ public class SpellForm implements SpellFormI
     public SpellForm setSpellStats(List<SpellStat> spellStats)          { this.spellStats = spellStats; return this; }
     public SpellForm setSpellSlots(List<SpellSlot>spellSlots)           { this.spellSlots = spellSlots; return this; }
 
-    // MAIN:
+    // INITIALIZATION:
     //------------------------------------------------------------------------------------------------------------------
 
     public void setSpellFormTemplate(SpellFormTemplate spellFormTemplate)
     {
         spellFormDataID = spellFormTemplate.getId();
-        type = spellFormTemplate.getType();
+        factory = spellFormTemplate.getFactory();
 
         for (SpellStatTemplate stat: spellFormTemplate.getSpellStats())
         {
@@ -62,6 +63,17 @@ public class SpellForm implements SpellFormI
         }
     }
 
+    // ENTITY GENERATION:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public FormEntity cast()
+    {
+        FormEntity entity = factory.getFormEntity();
+        entity.setSpellFormData(generateSpellFormData());
+        entity.setSpellEffectData(generateSpellEffectData());
+        return entity;
+    }
+
     public SpellFormData generateSpellFormData()
     {
         SpellFormData data = new SpellFormData();
@@ -71,7 +83,7 @@ public class SpellForm implements SpellFormI
 
     public List<SpellEffectData> generateSpellEffectData()
     {
-        List<SpellEffectData>dataList = new Stack<SpellEffectData>();
+        List<SpellEffectData>dataList = new ArrayList<SpellEffectData>();
         for (SpellSlot slot: spellSlots)
         {
             SpellEffectI spellEffect = slot.getSpellEffect();

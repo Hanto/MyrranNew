@@ -3,7 +3,7 @@ import main.com.myrran.spell.data.SpellBookTemplates;
 import main.com.myrran.spell.data.SpellFormTemplate;
 import main.com.myrran.spell.data.SpellSlotDataTemplate;
 import main.com.myrran.spell.data.SpellStatTemplate;
-import main.com.myrran.spell.spellform.generators.SpellFormType;
+import main.com.myrran.spell.spellform.generates.FormEntityFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -67,7 +67,7 @@ class SpellFormStatTest
         SpellFormTemplate spellForm = new SpellFormTemplate()
             .setId("Super Bolt")
             .setName("Hanto super bolt")
-            .setType(SpellFormType.BOLT)
+            .setType(FormEntityFactory.BOLT)
             .setSpellStats(spellStatMap)
             .setSpellSlots(slotList);
 

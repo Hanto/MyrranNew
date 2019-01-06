@@ -11,8 +11,8 @@ public class SpellStat
     private int maxUpgrades;                            //numero de Talentos maximos que se pueden gastar en este SkillStat
     private int upgradeCost;                            //coste por mejorar cada punto de talento
     private float bonusPerUpgrade;                      //Valor con el que mejora el baseValue por punto de talento
-    private float gearBonus;
 
+    private float gearBonus;
     private int numUpgrades;
 
     // GET:
@@ -25,8 +25,8 @@ public class SpellStat
     public int getMaxUpgrades()                         { return maxUpgrades; }
     public int getUpgradeCost()                         { return upgradeCost; }
     public float getBonusPerUpgrade()                   { return bonusPerUpgrade; }
-    public float getGearBonus()                         { return gearBonus; }
 
+    public float getGearBonus()                         { return gearBonus; }
     public int getNumUpgrades()                         { return numUpgrades; }
 
     // SET:
@@ -39,8 +39,8 @@ public class SpellStat
     public SpellStat setMaxUpgrades(int talentoMaximo)  { this.maxUpgrades = talentoMaximo; return this; }
     public SpellStat setUpgradeCost(int upgradeCost)    { this.upgradeCost = upgradeCost; return this; }
     public SpellStat setBonusPerUpgrade(float bonusPerUpgrade)  { this.bonusPerUpgrade = bonusPerUpgrade; return this; }
-    public SpellStat setGearBonus(float gearBonus)      { this.gearBonus = gearBonus; return this; }
 
+    public SpellStat setGearBonus(float gearBonus)      { this.gearBonus = gearBonus; return this; }
     public SpellStat setNumUpgrades(int numUpgrades)    { this.numUpgrades = numUpgrades; return this; }
 
     // MAIN:
