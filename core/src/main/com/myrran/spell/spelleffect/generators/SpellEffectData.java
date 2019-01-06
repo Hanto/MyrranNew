@@ -9,9 +9,19 @@ import java.util.Map;
 
 public class SpellEffectData
 {
-    private Map<String, Float> stats = new HashMap<String, Float>();
-    private EffectEntityFactory factory;
     private String slotType;
+    private EffectEntityFactory factory;
+    private Map<String, Float> stats = new HashMap<>();
+
+    // GET:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public String getSlotType()                             { return slotType; }
+    public EffectEntityFactory getFactory()                 { return factory; }
+    public Float getStat(String stat)                       { return stats.get(stat); }
+
+    // SET:
+    //------------------------------------------------------------------------------------------------------------------
 
     public void setSpellEffect(SpellEffectI spellEffect)
     {
@@ -22,16 +32,5 @@ public class SpellEffectData
     }
 
     public void setSpellSlot(SpellSlot spellSlot)
-    {
-        this.slotType = spellSlot.getSlotType();
-    }
-
-    public Float getStat(String stat)
-    {   return stats.get(stat); }
-
-    public String getSlotType()
-    {   return slotType; }
-
-    public EffectEntityFactory getFactory()
-    {   return factory; }
+    {   this.slotType = spellSlot.getSlotType(); }
 }

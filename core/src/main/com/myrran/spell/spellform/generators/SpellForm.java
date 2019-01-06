@@ -19,14 +19,15 @@ public class SpellForm implements SpellFormI
     private String name;
     private String spellFormDataID;
     private FormEntityFactory factory;
-    private List<SpellStat> spellStats = new ArrayList<SpellStat>();
-    private List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+    private List<SpellStat> spellStats = new ArrayList<>();
+    private List<SpellSlot> spellSlots = new ArrayList<>();
 
     // GET:
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public String getId()                                     { return id; }
     @Override public String getName()                                   { return name; }
+    public FormEntityFactory getFactory()                               { return factory; }
     public String getSpellFormDataID()                                  { return spellFormDataID; }
     public List<SpellStat> getSpellStats()                              { return spellStats; }
     public List<SpellSlot> getSpellSlots()                              { return spellSlots; }
@@ -83,7 +84,7 @@ public class SpellForm implements SpellFormI
 
     public List<SpellEffectData> generateSpellEffectData()
     {
-        List<SpellEffectData>dataList = new ArrayList<SpellEffectData>();
+        List<SpellEffectData>dataList = new ArrayList<>();
         for (SpellSlot slot: spellSlots)
         {
             SpellEffectI spellEffect = slot.getSpellEffect();
