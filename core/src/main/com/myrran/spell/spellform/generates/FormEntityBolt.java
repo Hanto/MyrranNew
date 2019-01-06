@@ -31,16 +31,16 @@ public class FormEntityBolt implements FormEntity, Consumable
     @Override public void setMaxDuration(float maxDuration)         { this.maxDuration = maxDuration; }
     @Override public void setActualDuration(float actualDuration)   { this.actualDuration = actualDuration; }
 
-    // MAIN:
+    // DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setSpellFormData(SpellFormData spellFormData)
-    {   this.spellFormData = spellFormData; }
+    public void setSpellFormData(SpellFormData data)
+    {   this.spellFormData = data; }
 
     public void setSpellEffectData(List<SpellEffectData> spellEffectDataList)
     {
-        for(SpellEffectData spellEffectData : spellEffectDataList)
-            spellEffectsData.add(spellEffectData.getSlotType(), spellEffectData);
+        for(SpellEffectData data : spellEffectDataList)
+            spellEffectsData.add(data.getSlotType(), data);
     }
 
     // INIT:
