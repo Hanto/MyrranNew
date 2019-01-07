@@ -33,7 +33,7 @@ public class SpellEffect implements SpellEffectI
     public SpellEffect setSpellStats(List<SpellStat>spellStats)         { this.spellStats = spellStats; return this; }
     public SpellEffect setOpens(SpellSlotKey... spellSlotKeys)          { this.opens = Arrays.asList(spellSlotKeys); return this; }
 
-    // MAIN:
+    // INITIALIZATION:
     //------------------------------------------------------------------------------------------------------------------
 
     public void setSpellEffectTemplate()

@@ -1,5 +1,6 @@
 package main.com.myrran.spell.spelleffect.generates;
 
+import main.com.myrran.misc.Debuffable;
 import main.com.myrran.misc.Stackable;
 import main.com.myrran.misc.Tickable;
 import main.com.myrran.spell.spelleffect.generators.SpellEffectData;
@@ -53,7 +54,7 @@ public class EffectEntityDOT implements EffectEntity, Tickable, Stackable
         setMaxStacks(spellEffectData.getStat(MAXSTACKS).intValue());
     }
 
-    @Override public void applyTick()
+    @Override public void applyTick(Debuffable debuffable)
     {
         Float damage = spellEffectData.getStat(DAMAGE);
     }

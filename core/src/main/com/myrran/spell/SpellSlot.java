@@ -1,6 +1,6 @@
 package main.com.myrran.spell;
 
-import main.com.myrran.spell.data.SpellSlotDataTemplate;
+import main.com.myrran.spell.data.SpellSlotTemplate;
 import main.com.myrran.spell.spelleffect.generators.SpellEffectI;
 
 import java.util.ArrayList;
@@ -36,11 +36,14 @@ public class SpellSlot
     // MAIN:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setSpellSlotTemplate(SpellSlotDataTemplate data)
+    public SpellSlot(SpellSlotTemplate data)
+    {   setSpellSlotTemplate(data);}
+
+    public void setSpellSlotTemplate(SpellSlotTemplate data)
     {
         this.id = data.getId();
         this.name = data.getName();
-        this.type = data.getType();
+        this.type = data.getSlotType();
         this.lock = new ArrayList<>(data.getLock());
     }
 }

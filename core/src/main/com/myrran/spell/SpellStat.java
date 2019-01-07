@@ -46,6 +46,9 @@ public class SpellStat
     // MAIN:
     //------------------------------------------------------------------------------------------------------------------
 
+    public SpellStat(SpellStatTemplate data)
+    {   setSpellStatTemplate(data); }
+
     public void setSpellStatTemplate(SpellStatTemplate data)
     {
         this.id = data.getID();

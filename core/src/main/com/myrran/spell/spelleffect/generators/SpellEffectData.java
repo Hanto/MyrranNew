@@ -1,7 +1,5 @@
 package main.com.myrran.spell.spelleffect.generators;
 
-import main.com.myrran.spell.SpellSlot;
-import main.com.myrran.spell.SpellStat;
 import main.com.myrran.spell.spelleffect.generates.EffectEntityFactory;
 
 import java.util.HashMap;
@@ -23,14 +21,7 @@ public class SpellEffectData
     // SET:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setSpellEffect(SpellEffectI spellEffect)
-    {
-        this.factory = spellEffect.getFactory();
-
-        for (SpellStat stat: spellEffect.getSpellStats())
-            stats.put(stat.getID(), stat.getTotal());
-    }
-
-    public void setSpellSlot(SpellSlot spellSlot)
-    {   this.slotType = spellSlot.getSlotType(); }
+    public void setSlotType(String slotType)                { this.slotType = slotType; }
+    public void setFactory(EffectEntityFactory factory)     { this.factory = factory; }
+    public void addStat(String key, Float value)            { stats.put(key, value); }
 }

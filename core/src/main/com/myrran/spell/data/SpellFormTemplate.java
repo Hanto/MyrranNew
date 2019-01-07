@@ -19,7 +19,7 @@ public class SpellFormTemplate
     @XmlAttribute
     private FormEntityFactory type;
     private List<SpellStatTemplate>spellStats;
-    private List<SpellSlotDataTemplate>spellSlots;
+    private List<SpellSlotTemplate>spellSlots;
 
     // GET:
     //------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ public class SpellFormTemplate
     public String getName()                                                         { return name; }
     public FormEntityFactory getFactory()                                           { return type; }
     public List<SpellStatTemplate> getSpellStats()                                  { return spellStats; }
-    public List<SpellSlotDataTemplate> getSpellSlots()                              { return spellSlots; }
+    public List<SpellSlotTemplate> getSpellSlots()                              { return spellSlots; }
 
     // SET:
     //------------------------------------------------------------------------------------------------------------------
@@ -37,5 +37,5 @@ public class SpellFormTemplate
     public SpellFormTemplate setName(String name)                                   { this.name = name; return this; }
     public SpellFormTemplate setType(FormEntityFactory type)                        { this.type = type; return this; }
     public SpellFormTemplate setSpellStats(List<SpellStatTemplate> spellStats)      { this.spellStats = spellStats; return this; }
-    public SpellFormTemplate setSpellSlots(List<SpellSlotDataTemplate> spellSlots)  { this.spellSlots = spellSlots; return this; }
+    public SpellFormTemplate setSpellSlots(List<SpellSlotTemplate> spellSlots)  { this.spellSlots = spellSlots; return this; }
 }

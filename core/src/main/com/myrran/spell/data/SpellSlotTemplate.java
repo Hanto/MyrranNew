@@ -10,29 +10,29 @@ import java.util.Arrays;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpellSlotDataTemplate
+public class SpellSlotTemplate
 {
     @XmlAttribute
     private String id;
     @XmlAttribute
     private String name;
     @XmlAttribute
-    private String type;
-    private List<SpellSlotKey> lock = new ArrayList<SpellSlotKey>();
+    private String slotType;
+    private List<SpellSlotKey> lock = new ArrayList<>();
 
     // GET:
     //------------------------------------------------------------------------------------------------------------------
 
     public String getId()                                       { return id; }
     public String getName()                                     { return name; }
-    public String getType()                                     { return type; }
-    public List<SpellSlotKey>getLock()                         { return lock; }
+    public String getSlotType()                                 { return slotType; }
+    public List<SpellSlotKey>getLock()                          { return lock; }
 
     // SET:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SpellSlotDataTemplate setId(String id)                       { this.id = id; return this; }
-    public SpellSlotDataTemplate setName(String name)                   { this.name = name; return this; }
-    public SpellSlotDataTemplate setType(String type)                   { this.type = type; return this; }
-    public SpellSlotDataTemplate setLock(SpellSlotKey...integers)      { lock.addAll(Arrays.asList(integers)); return this; }
+    public SpellSlotTemplate setId(String id)                   { this.id = id; return this; }
+    public SpellSlotTemplate setName(String name)               { this.name = name; return this; }
+    public SpellSlotTemplate setSlotType(String slotType)       { this.slotType = slotType; return this; }
+    public SpellSlotTemplate setLock(SpellSlotKey...integers)   { lock.addAll(Arrays.asList(integers)); return this; }
 }

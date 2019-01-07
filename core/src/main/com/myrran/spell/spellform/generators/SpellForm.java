@@ -3,8 +3,6 @@ package main.com.myrran.spell.spellform.generators;
 import main.com.myrran.spell.SpellSlot;
 import main.com.myrran.spell.SpellStat;
 import main.com.myrran.spell.data.SpellFormTemplate;
-import main.com.myrran.spell.data.SpellSlotDataTemplate;
-import main.com.myrran.spell.data.SpellStatTemplate;
 import main.com.myrran.spell.spelleffect.generators.SpellEffectData;
 import main.com.myrran.spell.spelleffect.generators.SpellEffectI;
 import main.com.myrran.spell.spellform.generates.FormEntity;
@@ -12,6 +10,7 @@ import main.com.myrran.spell.spellform.generates.FormEntityFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpellForm implements SpellFormI
 {
@@ -19,8 +18,8 @@ public class SpellForm implements SpellFormI
     private String name;
     private String spellFormDataID;
     private FormEntityFactory factory;
-    private List<SpellStat> spellStats = new ArrayList<>();
-    private List<SpellSlot> spellSlots = new ArrayList<>();
+    private List<SpellStat> spellStats;
+    private List<SpellSlot> spellSlots;
 
     // GET:
     //------------------------------------------------------------------------------------------------------------------
@@ -49,19 +48,13 @@ public class SpellForm implements SpellFormI
         spellFormDataID = spellFormTemplate.getId();
         factory = spellFormTemplate.getFactory();
 
-        for (SpellStatTemplate stat: spellFormTemplate.getSpellStats())
-        {
-            SpellStat spellStat = new SpellStat();
-            spellStat.setSpellStatTemplate(stat);
-            spellStats.add(spellStat);
-        }
+        spellStats = spellFormTemplate.getSpellStats().parallelStream()
+            .map(SpellStat::new)
+            .collect(Collectors.toList());
 
-        for (SpellSlotDataTemplate slot: spellFormTemplate.getSpellSlots())
-        {
-            SpellSlot spellSlot = new SpellSlot();
-            spellSlot.setSpellSlotTemplate(slot);
-            spellSlots.add(spellSlot);
-        }
+        spellSlots = spellFormTemplate.getSpellSlots().parallelStream()
+            .map(SpellSlot::new)
+            .collect(Collectors.toList());
     }
 
     // ENTITY GENERATION:
@@ -71,28 +64,37 @@ public class SpellForm implements SpellFormI
     {
         FormEntity entity = factory.getFormEntity();
         entity.setSpellFormData(generateSpellFormData());
-        entity.setSpellEffectData(generateSpellEffectData());
+        entity.setSpellEffectData(generateSpellEffectDataList());
         return entity;
     }
 
     public SpellFormData generateSpellFormData()
     {
         SpellFormData data = new SpellFormData();
-        data.setSpellForm(this);
+        data.setFactory(factory);
+
+        for (SpellStat stat: getSpellStats())
+            data.addStat(stat.getID(), stat.getTotal());
+
         return data;
     }
 
-    public List<SpellEffectData> generateSpellEffectData()
+    public List<SpellEffectData> generateSpellEffectDataList()
     {
         List<SpellEffectData>dataList = new ArrayList<>();
+
         for (SpellSlot slot: spellSlots)
         {
             SpellEffectI spellEffect = slot.getSpellEffect();
             if (spellEffect != null)
             {
                 SpellEffectData data = new SpellEffectData();
-                data.setSpellEffect(spellEffect);
-                data.setSpellSlot(slot);
+                data.setFactory(spellEffect.getFactory());
+                data.setSlotType(slot.getSlotType());
+
+                for (SpellStat stat: getSpellStats())
+                    data.addStat(stat.getID(), stat.getTotal());
+
                 dataList.add(data);
             }
         }

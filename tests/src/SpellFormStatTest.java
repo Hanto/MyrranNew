@@ -1,7 +1,7 @@
 import main.com.myrran.spell.SpellSlotKey;
 import main.com.myrran.spell.data.SpellBookTemplates;
 import main.com.myrran.spell.data.SpellFormTemplate;
-import main.com.myrran.spell.data.SpellSlotDataTemplate;
+import main.com.myrran.spell.data.SpellSlotTemplate;
 import main.com.myrran.spell.data.SpellStatTemplate;
 import main.com.myrran.spell.spellform.generates.FormEntityFactory;
 import org.junit.jupiter.api.Test;
@@ -37,25 +37,25 @@ class SpellFormStatTest
             .setUpgradeCost(2)
             .setIsUpgradeable(true);
 
-        SpellSlotDataTemplate slot1 = new SpellSlotDataTemplate()
+        SpellSlotTemplate slot1 = new SpellSlotTemplate()
             .setId("Spot 1")
             .setName("Spot 1")
-            .setType("impacto")
+            .setSlotType("impacto")
             .setLock(SpellSlotKey.DEBUFF, SpellSlotKey.PUREDAMAGE);
 
-        SpellSlotDataTemplate slot2 = new SpellSlotDataTemplate()
+        SpellSlotTemplate slot2 = new SpellSlotTemplate()
             .setId("Spot 2")
             .setName("Spot 2")
-            .setType("aoe")
+            .setSlotType("aoe")
             .setLock(SpellSlotKey.BUFF);
 
-        SpellSlotDataTemplate slot3 = new SpellSlotDataTemplate()
+        SpellSlotTemplate slot3 = new SpellSlotTemplate()
             .setId("Spot 3")
             .setName("Spot 3")
-            .setType("ground")
+            .setSlotType("ground")
             .setLock(SpellSlotKey.DEBUFF);
 
-        List<SpellSlotDataTemplate> slotList = new ArrayList<>();
+        List<SpellSlotTemplate> slotList = new ArrayList<>();
         slotList.add(slot1);
         slotList.add(slot2);
         slotList.add(slot3);

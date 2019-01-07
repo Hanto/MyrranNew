@@ -1,6 +1,5 @@
 package main.com.myrran.spell.spellform.generators;
 
-import main.com.myrran.spell.SpellStat;
 import main.com.myrran.spell.spellform.generates.FormEntityFactory;
 
 import java.util.HashMap;
@@ -20,11 +19,6 @@ public class SpellFormData
     // SET:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setSpellForm(SpellForm spellForm)
-    {
-        this.factory = spellForm.getFactory();
-
-        for (SpellStat stat: spellForm.getSpellStats())
-            stats.put(stat.getID(), stat.getTotal());
-    }
+    public void setFactory(FormEntityFactory factory)       { this.factory = factory; }
+    public void addStat(String key, Float value)            { stats.put(key, value); }
 }

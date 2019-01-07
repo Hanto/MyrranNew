@@ -13,7 +13,10 @@ public interface Tickable extends Consumable
     //------------------------------------------------------------------------------------------------------------------
 
     int getTicksAplicados();
-    void applyTick();
+    void applyTick(Debuffable debuffable);
+
+    // DEFAULT:
+    //------------------------------------------------------------------------------------------------------------------
 
     default int getMaxTicks()
     {   return (int)(getMaxDuration() / TICKDURATION); }
@@ -30,16 +33,12 @@ public interface Tickable extends Consumable
         setActualDuration(getActualDuration() % TICKDURATION);
     }
 
-    @Override default boolean updateDuration(float delta)
+    default void applyTicks(Debuffable debuffable)
     {
-        boolean isOver = Consumable.super.updateDuration(delta);
-
         for (int i=getTicksAplicados(); i< getTickActual(); i++)
         {
             setTicksAplicados(i);
-            applyTick();
+            applyTick(debuffable);
         }
-
-        return isOver;
     }
 }
