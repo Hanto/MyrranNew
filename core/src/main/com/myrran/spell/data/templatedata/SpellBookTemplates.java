@@ -15,6 +15,9 @@ public class SpellBookTemplates
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
 
-    public Map<String, SpellFormTemplate> getSpellFromTemplates()                             { return spellFromTemplates; }
-    public SpellBookTemplates setSpellFromTemplates(Map<String, SpellFormTemplate> spellFromTemplates){ this.spellFromTemplates = spellFromTemplates; return this; }
+    public Map<String, SpellFormTemplate> getSpellFromTemplates()
+    {   return spellFromTemplates; }
+
+    public SpellBookTemplates setSpellFromTemplates(Map<String, SpellFormTemplate> spellFromTemplates)
+    {   this.spellFromTemplates = spellFromTemplates; return this; }
 }
