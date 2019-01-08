@@ -1,4 +1,4 @@
-package main.com.myrran.spell.data;
+package main.com.myrran.spell.data.templatedata;
 
 import main.com.myrran.spell.SpellSlotKey;
 
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SpellSlotTemplate
 {
@@ -20,19 +21,15 @@ public class SpellSlotTemplate
     private String slotType;
     private List<SpellSlotKey> lock = new ArrayList<>();
 
-    // GET:
+    // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
-
     public String getId()                                       { return id; }
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return slotType; }
-    public List<SpellSlotKey>getLock()                          { return lock; }
-
-    // SET:
-    //------------------------------------------------------------------------------------------------------------------
+    public List<SpellSlotKey> getLock()                         { return lock; }
 
     public SpellSlotTemplate setId(String id)                   { this.id = id; return this; }
     public SpellSlotTemplate setName(String name)               { this.name = name; return this; }
     public SpellSlotTemplate setSlotType(String slotType)       { this.slotType = slotType; return this; }
-    public SpellSlotTemplate setLock(SpellSlotKey...integers)   { lock.addAll(Arrays.asList(integers)); return this; }
+    public SpellSlotTemplate setLock(SpellSlotKey... lock)      { this.lock.addAll(Arrays.asList(lock)); return this; }
 }

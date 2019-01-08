@@ -1,9 +1,7 @@
 import main.com.myrran.spell.SpellSlotKey;
-import main.com.myrran.spell.data.SpellBookTemplates;
-import main.com.myrran.spell.data.SpellFormTemplate;
-import main.com.myrran.spell.data.SpellSlotTemplate;
-import main.com.myrran.spell.data.SpellStatTemplate;
-import main.com.myrran.spell.spellform.generates.FormEntityFactory;
+import main.com.myrran.spell.data.templatedata.*;
+import main.com.myrran.spell.entity.effect.SpellEffectFactory;
+import main.com.myrran.spell.entity.form.SpellFormFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -14,10 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class SpellFormStatTest
+class CustomSpellFormStatTest
 {
     @Test
-    public void pim() throws JAXBException
+    public void spellForm() throws JAXBException
     {
         SpellStatTemplate stat1 = new SpellStatTemplate()
             .setID("Cooldown")
@@ -60,15 +58,15 @@ class SpellFormStatTest
         slotList.add(slot2);
         slotList.add(slot3);
 
-        List<SpellStatTemplate>spellStatMap = new ArrayList<>();
-        spellStatMap.add(stat1);
-        spellStatMap.add(stat2);
+        List<SpellStatTemplate>spellStatList = new ArrayList<>();
+        spellStatList.add(stat1);
+        spellStatList.add(stat2);
 
         SpellFormTemplate spellForm = new SpellFormTemplate()
             .setId("Super Bolt")
             .setName("Hanto super bolt")
-            .setType(FormEntityFactory.BOLT)
-            .setSpellStats(spellStatMap)
+            .setFactory(SpellFormFactory.BOLT)
+            .setSpellStats(spellStatList)
             .setSpellSlots(slotList);
 
         SpellBookTemplates bookData = new SpellBookTemplates();
@@ -81,7 +79,41 @@ class SpellFormStatTest
         bookData.setSpellFromTemplates(spellFormDataMap);
 
         marshal(bookData, SpellBookTemplates.class);
+    }
 
+    @Test
+    public void spellEffect() throws JAXBException
+    {
+        SpellStatTemplate stat1 = new SpellStatTemplate()
+                .setID("Cooldown")
+                .setName("Cooldown")
+                .setBaseValue(50)
+                .setBonusPerUpgrade(2)
+                .setMaxUpgrades(50)
+                .setUpgradeCost(2)
+                .setIsUpgradeable(true);
+
+        SpellStatTemplate stat2 = new SpellStatTemplate()
+                .setID("Speed")
+                .setName("Speed")
+                .setBaseValue(100)
+                .setBonusPerUpgrade(2)
+                .setMaxUpgrades(50)
+                .setUpgradeCost(2)
+                .setIsUpgradeable(true);
+
+        List<SpellStatTemplate>spellStatList = new ArrayList<>();
+        spellStatList.add(stat1);
+        spellStatList.add(stat2);
+
+        SpellEffectTemplate effectTemplate = new SpellEffectTemplate()
+            .setFactory(SpellEffectFactory.DOT)
+            .setId("Super DOT")
+            .setName("Hanto Super DOT")
+            .setSpellStats(spellStatList)
+            .setKeys(SpellSlotKey.DEBUFF);
+
+        marshal(effectTemplate, SpellEffectTemplate.class);
     }
 
     private void marshal(Object object, Class classz) throws JAXBException

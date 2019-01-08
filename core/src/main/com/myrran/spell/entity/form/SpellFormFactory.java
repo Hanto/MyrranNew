@@ -1,17 +1,18 @@
-package main.com.myrran.spell.spellform.generates;
+package main.com.myrran.spell.entity.form;
 
-public enum FormEntityFactory
+/** @author Ivan Delgado Huerta */
+public enum SpellFormFactory
 {
     BOLT("Bolt")
     {
-        @Override public FormEntity getFormEntity()
-        {   return new FormEntityBolt(); }
+        @Override public SpellForm getFormEntity()
+        {   return new SpellFormBolt(); }
     }
     ,
     BALL("Ball")
     {
-        @Override public FormEntity getFormEntity()
-        {   return new FormEntityBolt(); }
+        @Override public SpellForm getFormEntity()
+        {   return new SpellFormBolt(); }
     };
 
     // MAIN:
@@ -20,11 +21,11 @@ public enum FormEntityFactory
     private String name;
 
     public String getName()     { return name; }
-    public abstract FormEntity getFormEntity();
+    public abstract SpellForm getFormEntity();
 
     // MAIN:
     //------------------------------------------------------------------------------------------------------------------
 
-    private FormEntityFactory(String name)
+    private SpellFormFactory(String name)
     {   this.name = name; }
 }

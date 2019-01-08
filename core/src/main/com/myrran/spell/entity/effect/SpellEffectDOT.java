@@ -1,11 +1,12 @@
-package main.com.myrran.spell.spelleffect.generates;
+package main.com.myrran.spell.entity.effect;
 
 import main.com.myrran.misc.Debuffable;
 import main.com.myrran.misc.Stackable;
 import main.com.myrran.misc.Tickable;
-import main.com.myrran.spell.spelleffect.generators.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellEffectData;
 
-public class EffectEntityDOT implements EffectEntity, Tickable, Stackable
+/** @author Ivan Delgado Huerta */
+public class SpellEffectDOT implements SpellEffect, Tickable, Stackable
 {
     private static final String DURATION = "duration";
     private static final String MAXSTACKS = "maxStacks";
@@ -50,12 +51,12 @@ public class EffectEntityDOT implements EffectEntity, Tickable, Stackable
 
     public void init()
     {
-        setMaxDuration(spellEffectData.getStat(DURATION));
-        setMaxStacks(spellEffectData.getStat(MAXSTACKS).intValue());
+        setMaxDuration(spellEffectData.getStat(DURATION).getTotal());
+        setMaxStacks(spellEffectData.getStat(MAXSTACKS).getTotal().intValue());
     }
 
     @Override public void applyTick(Debuffable debuffable)
     {
-        Float damage = spellEffectData.getStat(DAMAGE);
+        Float damage = spellEffectData.getStat(DAMAGE).getTotal();
     }
 }

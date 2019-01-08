@@ -1,14 +1,15 @@
-package main.com.myrran.spell.spellform.generates;
+package main.com.myrran.spell.entity.form;
 
 import main.com.myrran.misc.Consumable;
 import main.com.myrran.utils.HashMapArrayList;
 import main.com.myrran.utils.MapList;
-import main.com.myrran.spell.spelleffect.generators.SpellEffectData;
-import main.com.myrran.spell.spellform.generators.SpellFormData;
+import main.com.myrran.spell.data.entitydata.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellFormData;
 
 import java.util.List;
 
-public class FormEntityBolt implements FormEntity, Consumable
+/** @author Ivan Delgado Huerta */
+public class SpellFormBolt implements SpellForm, Consumable
 {
     private static final String DURATION = "duration";
     private static final String SPEED = "speed";
@@ -48,7 +49,7 @@ public class FormEntityBolt implements FormEntity, Consumable
 
     public void init()
     {
-        setMaxDuration(spellFormData.getStat(DURATION));
+        setMaxDuration(spellFormData.getStat(DURATION).getTotal());
     }
 
 }

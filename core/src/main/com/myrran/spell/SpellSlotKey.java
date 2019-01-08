@@ -1,5 +1,6 @@
 package main.com.myrran.spell;
 
+/** @author Ivan Delgado Huerta */
 public enum SpellSlotKey
 {
     DEBUFF("Debuff"),
