@@ -18,7 +18,7 @@ public class SpellSlot
     // GET:
     //------------------------------------------------------------------------------------------------------------------
 
-    public String getId()                                   { return id; }
+    public String getID()                                   { return id; }
     public String getName()                                 { return name; }
     public String getSlotType()                             { return type; }
     public List<SpellSlotKey>getLock()                      { return lock; }

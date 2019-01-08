@@ -9,6 +9,7 @@ import main.com.myrran.spell.spellform.generates.FormEntity;
 import main.com.myrran.spell.spellform.generates.FormEntityFactory;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,12 +49,14 @@ public class SpellForm implements SpellFormI
         spellFormDataID = spellFormTemplate.getId();
         factory = spellFormTemplate.getFactory();
 
-        spellStats = spellFormTemplate.getSpellStats().parallelStream()
+        spellStats = spellFormTemplate.getSpellStats().stream()
             .map(SpellStat::new)
+            .sorted(Comparator.comparing(SpellStat::getID))
             .collect(Collectors.toList());
 
-        spellSlots = spellFormTemplate.getSpellSlots().parallelStream()
+        spellSlots = spellFormTemplate.getSpellSlots().stream()
             .map(SpellSlot::new)
+            .sorted(Comparator.comparing(SpellSlot::getID))
             .collect(Collectors.toList());
     }
 
