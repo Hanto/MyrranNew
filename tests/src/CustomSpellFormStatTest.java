@@ -1,12 +1,14 @@
 import main.com.myrran.spell.SpellSlotKey;
 import main.com.myrran.spell.data.templatedata.*;
-import main.com.myrran.spell.entity.effect.SpellEffectFactory;
+import main.com.myrran.spell.entity.debuff.SpellDebuffFactory;
 import main.com.myrran.spell.entity.form.SpellFormFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,14 +108,15 @@ class CustomSpellFormStatTest
         spellStatList.add(stat1);
         spellStatList.add(stat2);
 
-        SpellEffectTemplate effectTemplate = new SpellEffectTemplate()
-            .setFactory(SpellEffectFactory.DOT)
+        SpellDebuffTemplate effectTemplate = new SpellDebuffTemplate()
+            .setFactory(SpellDebuffFactory.DOT)
             .setId("Super DOT")
             .setName("Hanto Super DOT")
             .setSpellStats(spellStatList)
+            .setBaseCost(30)
             .setKeys(SpellSlotKey.DEBUFF);
 
-        marshal(effectTemplate, SpellEffectTemplate.class);
+        marshal(effectTemplate, SpellDebuffTemplate.class);
     }
 
     private void marshal(Object object, Class classz) throws JAXBException
@@ -122,5 +125,14 @@ class CustomSpellFormStatTest
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(object, System.out);
+    }
+
+    private <T extends Object>T unmarshal(Object object, Class<T> classz) throws JAXBException
+    {
+        JAXBContext context = JAXBContext.newInstance(classz);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        unmarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        File file = new File("");
+        return (T)unmarshaller.unmarshal(file);
     }
 }

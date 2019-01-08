@@ -1,9 +1,9 @@
 package main.com.myrran.spell.generators.form;
 
 import main.com.myrran.spell.SpellSlotKey;
-import main.com.myrran.spell.data.entitydata.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellDebuffData;
 import main.com.myrran.spell.data.templatedata.SpellSlotTemplate;
-import main.com.myrran.spell.generators.effect.CustomSpellEffect;
+import main.com.myrran.spell.generators.debuff.CustomSpellDebuff;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class CustomSpellSlot
     private String name;
     private String type;
     private List<SpellSlotKey>lock = new ArrayList<>();
-    private CustomSpellEffect customSpellEffect;
+    private CustomSpellDebuff customSpellDebuff;
 
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
@@ -25,13 +25,13 @@ public class CustomSpellSlot
     public String getName()                                         { return name; }
     public String getSlotType()                                     { return type; }
     public List<SpellSlotKey>getLock()                              { return lock; }
-    public CustomSpellEffect getCustomSpellEffect()                 { return customSpellEffect; }
+    public CustomSpellDebuff getCustomSpellDebuff()                 { return customSpellDebuff; }
 
     public CustomSpellSlot setId(String id)                         { this.id = id; return this; }
     public CustomSpellSlot setName(String name)                     { this.name = name; return this; }
     public CustomSpellSlot setType(String type)                     { this.type = type; return this; }
     public CustomSpellSlot setLock(SpellSlotKey...integers)         { lock.addAll(Arrays.asList(integers)); return this; }
-    public CustomSpellSlot setCustomSpellEffect(CustomSpellEffect effect){ this.customSpellEffect = effect; return this; }
+    public CustomSpellSlot setCustomSpellDebuff(CustomSpellDebuff effect){ this.customSpellDebuff = effect; return this; }
 
     // TEMPLATE TO CUSTOM:
     //------------------------------------------------------------------------------------------------------------------
@@ -50,11 +50,18 @@ public class CustomSpellSlot
     // CUSTOM TO ENTITY DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SpellEffectData getSpellEffectData()
+    public SpellDebuffData getSpellEffectData()
     {
-        SpellEffectData data = customSpellEffect.getSpellEffectData();
+        SpellDebuffData data = customSpellDebuff.getSpellEffectData();
         data.setSlotType(type);
 
         return data;
     }
+
+    // MAIN:
+    //------------------------------------------------------------------------------------------------------------------
+
+    public int getTotalCost()
+    {   return customSpellDebuff.getTotalCost(); }
+
 }

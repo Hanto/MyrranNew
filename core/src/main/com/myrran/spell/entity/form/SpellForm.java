@@ -1,6 +1,6 @@
 package main.com.myrran.spell.entity.form;
 
-import main.com.myrran.spell.data.entitydata.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellDebuffData;
 import main.com.myrran.spell.data.entitydata.SpellFormData;
 
 import java.util.List;
@@ -9,5 +9,5 @@ import java.util.List;
 public interface SpellForm
 {
     void setSpellFormData(SpellFormData spellFormData);
-    void setSpellEffectData(List<SpellEffectData> spellEffectDataList);
+    void setSpellEffectData(List<SpellDebuffData> spellDebuffDataList);
 }

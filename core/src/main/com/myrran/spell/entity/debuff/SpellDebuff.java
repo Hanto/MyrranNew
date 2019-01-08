@@ -1,16 +1,19 @@
-package main.com.myrran.misc;
+package main.com.myrran.spell.entity.debuff;
 
-public interface Tickable extends Consumable
+import main.com.myrran.misc.Consumable;
+import main.com.myrran.misc.Debuffable;
+import main.com.myrran.spell.data.entitydata.SpellDebuffData;
+
+/** @author Ivan Delgado Huerta */
+public interface SpellDebuff extends Consumable
 {
     float TICKDURATION = 0.5f;
 
-    // SET:
+    // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
 
+    void setSpellDebuffData(SpellDebuffData data);
     void setTicksAplicados(int ticksAplicados);
-
-    // GET:
-    //------------------------------------------------------------------------------------------------------------------
 
     int getTicksAplicados();
     void applyTick(Debuffable debuffable);

@@ -13,7 +13,6 @@ public class CustomSpellStat
     private int maxUpgrades;                                    //numero de Talentos maximos que se pueden gastar en este SkillStat
     private int upgradeCost;                                    //coste por mejorar cada punto de talento
     private float bonusPerUpgrade;                              //Valor con el que mejora el baseValue por punto de talento
-
     private float gearBonus;
     private int numUpgrades;
 
@@ -73,4 +72,7 @@ public class CustomSpellStat
 
     public float getTotal()
     {   return baseValue + (numUpgrades * bonusPerUpgrade) + gearBonus; }
+
+    public int getTotalCost()
+    {   return numUpgrades * upgradeCost; }
 }

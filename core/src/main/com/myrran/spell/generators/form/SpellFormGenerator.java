@@ -1,13 +1,14 @@
 package main.com.myrran.spell.generators.form;
 
-import main.com.myrran.spell.data.entitydata.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellDebuffData;
 import main.com.myrran.spell.data.entitydata.SpellFormData;
 import main.com.myrran.spell.data.templatedata.SpellFormTemplate;
 import main.com.myrran.spell.entity.form.SpellForm;
 
 import java.util.List;
 
-public interface SpellFormI
+/** @author Ivan Delgado Huerta */
+public interface SpellFormGenerator
 {
     String getId();
     String getName();
@@ -17,6 +18,6 @@ public interface SpellFormI
 
     void setSpellFormTemplate(SpellFormTemplate spellFormTemplate);
     SpellFormData getSpellFormData();
-    List<SpellEffectData> getSpellEffectDataList();
+    List<SpellDebuffData> getSpellEffectDataList();
     SpellForm cast();
 }

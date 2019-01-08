@@ -26,6 +26,6 @@ public enum SpellFormFactory
     // MAIN:
     //------------------------------------------------------------------------------------------------------------------
 
-    private SpellFormFactory(String name)
+    SpellFormFactory(String name)
     {   this.name = name; }
 }

@@ -1,18 +1,19 @@
 package main.com.myrran.misc;
 
+/** @author Ivan Delgado Huerta */
 public interface Consumable
 {
-    // SET:
+    // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
 
     void setMaxDuration(float maxDuration);
     void setActualDuration(float actualDuration);
 
-    // GET:
-    //------------------------------------------------------------------------------------------------------------------
-
     float getActualDuration();
     float getMaxDuration();
+
+    // DEFAULT:
+    //------------------------------------------------------------------------------------------------------------------
 
     default boolean updateDuration(float delta)
     {

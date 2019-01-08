@@ -3,7 +3,7 @@ package main.com.myrran.spell.entity.form;
 import main.com.myrran.misc.Consumable;
 import main.com.myrran.utils.HashMapArrayList;
 import main.com.myrran.utils.MapList;
-import main.com.myrran.spell.data.entitydata.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellDebuffData;
 import main.com.myrran.spell.data.entitydata.SpellFormData;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class SpellFormBolt implements SpellForm, Consumable
     private float maxDuration = 5.0f;
 
     private SpellFormData spellFormData;
-    private MapList<String, SpellEffectData>spellEffectsData = new HashMapArrayList<>();
+    private MapList<String, SpellDebuffData>spellEffectsData = new HashMapArrayList<>();
 
     // CONSUMABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -35,21 +35,15 @@ public class SpellFormBolt implements SpellForm, Consumable
     // DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setSpellFormData(SpellFormData data)
-    {   this.spellFormData = data; }
-
-    public void setSpellEffectData(List<SpellEffectData> spellEffectDataList)
+    @Override public void setSpellFormData(SpellFormData data)
     {
-        for(SpellEffectData data : spellEffectDataList)
-            spellEffectsData.add(data.getSlotType(), data);
-    }
-
-    // INIT:
-    //------------------------------------------------------------------------------------------------------------------
-
-    public void init()
-    {
+        this.spellFormData = data;
         setMaxDuration(spellFormData.getStat(DURATION).getTotal());
     }
 
+    @Override public void setSpellEffectData(List<SpellDebuffData> spellDebuffDataList)
+    {
+        for(SpellDebuffData data : spellDebuffDataList)
+            spellEffectsData.add(data.getSlotType(), data);
+    }
 }

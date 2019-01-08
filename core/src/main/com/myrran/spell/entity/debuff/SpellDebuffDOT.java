@@ -1,12 +1,11 @@
-package main.com.myrran.spell.entity.effect;
+package main.com.myrran.spell.entity.debuff;
 
 import main.com.myrran.misc.Debuffable;
 import main.com.myrran.misc.Stackable;
-import main.com.myrran.misc.Tickable;
-import main.com.myrran.spell.data.entitydata.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellDebuffData;
 
 /** @author Ivan Delgado Huerta */
-public class SpellEffectDOT implements SpellEffect, Tickable, Stackable
+public class SpellDebuffDOT implements SpellDebuff, Stackable
 {
     private static final String DURATION = "duration";
     private static final String MAXSTACKS = "maxStacks";
@@ -18,9 +17,9 @@ public class SpellEffectDOT implements SpellEffect, Tickable, Stackable
     private int actualStacks = 0;
     private int maxStacks = 1;
 
-    private SpellEffectData spellEffectData;
+    private SpellDebuffData spellDebuffData;
 
-    // TICKEABLE CONSUMABLE:
+    // SPELLDEBUFF (CONSUMABLE):
     //------------------------------------------------------------------------------------------------------------------
 
     @Override public float getActualDuration()                      { return actualDuration; }
@@ -30,7 +29,6 @@ public class SpellEffectDOT implements SpellEffect, Tickable, Stackable
 
     @Override public int getTicksAplicados()                        { return ticksAplicados; }
     @Override public void setTicksAplicados(int ticksAplicados)     { this.ticksAplicados = ticksAplicados; }
-
 
     // STACKABLE:
     //------------------------------------------------------------------------------------------------------------------
@@ -43,20 +41,21 @@ public class SpellEffectDOT implements SpellEffect, Tickable, Stackable
     // DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    public void setSpellEffectData(SpellEffectData data)
-    {   this.spellEffectData = data; }
-
-    // INIT:
-    //------------------------------------------------------------------------------------------------------------------
-
-    public void init()
+    @Override public void setSpellDebuffData(SpellDebuffData data)
     {
-        setMaxDuration(spellEffectData.getStat(DURATION).getTotal());
-        setMaxStacks(spellEffectData.getStat(MAXSTACKS).getTotal().intValue());
+        this.spellDebuffData = data;
+        setMaxDuration(spellDebuffData.getStat(DURATION).getTotal());
+        setMaxStacks(spellDebuffData.getStat(MAXSTACKS).getTotal().intValue());
     }
+
+    // MAIN:
+    //------------------------------------------------------------------------------------------------------------------
 
     @Override public void applyTick(Debuffable debuffable)
     {
-        Float damage = spellEffectData.getStat(DAMAGE).getTotal();
+        int ticksAplicados = getTicksAplicados();
+        int ticksMax = getMaxTicks();
+
+        Float damage = spellDebuffData.getStat(DAMAGE).getTotal() * getActualStacks();
     }
 }

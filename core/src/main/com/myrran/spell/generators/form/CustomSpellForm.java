@@ -1,7 +1,7 @@
 package main.com.myrran.spell.generators.form;
 
 import main.com.myrran.spell.data.templatedata.SpellFormTemplate;
-import main.com.myrran.spell.data.entitydata.SpellEffectData;
+import main.com.myrran.spell.data.entitydata.SpellDebuffData;
 import main.com.myrran.spell.entity.form.SpellForm;
 import main.com.myrran.spell.entity.form.SpellFormFactory;
 import main.com.myrran.spell.data.entitydata.SpellFormData;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CustomSpellForm implements SpellFormI
+public class CustomSpellForm implements SpellFormGenerator
 {
     private String id;
     private String name;
@@ -68,10 +68,10 @@ public class CustomSpellForm implements SpellFormI
         return data;
     }
 
-    @Override public List<SpellEffectData> getSpellEffectDataList()
+    @Override public List<SpellDebuffData> getSpellEffectDataList()
     {
         return customSpellSlots.stream()
-            .filter(customSpellSlot -> customSpellSlot.getCustomSpellEffect() != null)
+            .filter(customSpellSlot -> customSpellSlot.getCustomSpellDebuff() != null)
             .map(CustomSpellSlot::getSpellEffectData)
             .collect(Collectors.toList());
     }
@@ -85,5 +85,16 @@ public class CustomSpellForm implements SpellFormI
         entity.setSpellFormData(getSpellFormData());
         entity.setSpellEffectData(getSpellEffectDataList());
         return entity;
+    }
+
+    public int getTotalCost()
+    {
+        return customSpellStats.stream()
+            .mapToInt(CustomSpellStat::getTotalCost)
+            .sum() +
+
+        customSpellSlots.stream()
+            .mapToInt(CustomSpellSlot::getTotalCost)
+            .sum();
     }
 }
