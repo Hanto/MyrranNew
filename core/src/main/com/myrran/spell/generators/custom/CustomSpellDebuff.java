@@ -7,6 +7,7 @@ import main.com.myrran.spell.entity.debuff.SpellDebuffFactory;
 import main.com.myrran.spell.generators.SpellDebuffGenerator;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,10 +17,10 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     private String id;
     private String name;
     private String templateID;
-    private Map<String, CustomSpellStat> customSpellStats;
-    private SpellDebuffFactory factory;
     private int baseCost;
+    private SpellDebuffFactory factory;
     private List<CustomSpellSlotKey> keys;
+    private Map<String, CustomSpellStat> customSpellStats = new HashMap<>();
 
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
@@ -41,8 +42,8 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     @Override public void setSpellEffectTemplate(SpellDebuffTemplate spellDebuffTemplate)
     {
         templateID = spellDebuffTemplate.getId();
-        factory = spellDebuffTemplate.getFactory();
         baseCost = spellDebuffTemplate.getBaseCost();
+        factory = spellDebuffTemplate.getFactory();
         keys = spellDebuffTemplate.getKeys();
 
         spellDebuffTemplate.getSpellStats()
@@ -52,6 +53,11 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     private void setSpellStatTemplate(SpellStatTemplate template)
     {
         CustomSpellStat customSpellStat = customSpellStats.get(template.getID());
+        if (customSpellStat == null)
+        {
+            customSpellStat = new CustomSpellStat();
+            customSpellStats.put(template.getID(), customSpellStat);
+        }
         customSpellStat.setSpellStatTemplate(template);
     }
 
@@ -60,8 +66,8 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
 
     @Override public SpellDebuffParams getSpellEffectData()
     {
-        SpellDebuffParams data = new SpellDebuffParams();
-        data.setFactory(factory);
+        SpellDebuffParams data = new SpellDebuffParams().
+            setFactory(factory);
 
         for (CustomSpellStat stat: getCustomSpellStats().values())
             data.addStat(stat.getSpellStatData());

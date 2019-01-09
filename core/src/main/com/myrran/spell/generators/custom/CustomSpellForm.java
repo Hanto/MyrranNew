@@ -53,12 +53,22 @@ public class CustomSpellForm implements SpellFormGenerator
     private void setSpellStatTemplate(SpellStatTemplate template)
     {
         CustomSpellStat customSpellStat = customSpellStats.get(template.getID());
+        if (customSpellStat == null)
+        {
+            customSpellStat = new CustomSpellStat();
+            customSpellStats.put(template.getID(), customSpellStat);
+        }
         customSpellStat.setSpellStatTemplate(template);
     }
 
     private void setSpellSlotTemplate(SpellSlotTemplate template)
     {
         CustomSpellSlot customSpellSlot = customSpellSlots.get(template.getId());
+        if (customSpellSlot == null)
+        {
+            customSpellSlot = new CustomSpellSlot();
+            customSpellSlots.put(template.getId(), customSpellSlot);
+        }
         customSpellSlot.setSpellSlotTemplate(template);
     }
 

@@ -22,13 +22,13 @@ public class CustomSpellSlot
     public String getID()                                           { return id; }
     public String getName()                                         { return name; }
     public String getSlotType()                                     { return type; }
-    public List<CustomSpellSlotKey>getLock()                              { return lock; }
+    public List<CustomSpellSlotKey>getLock()                        { return lock; }
     public CustomSpellDebuff getCustomSpellDebuff()                 { return customSpellDebuff; }
 
     public CustomSpellSlot setId(String id)                         { this.id = id; return this; }
     public CustomSpellSlot setName(String name)                     { this.name = name; return this; }
     public CustomSpellSlot setType(String type)                     { this.type = type; return this; }
-    public CustomSpellSlot setLock(CustomSpellSlotKey...integers)         { lock.addAll(Arrays.asList(integers)); return this; }
+    public CustomSpellSlot setLock(CustomSpellSlotKey...integers)   { lock.addAll(Arrays.asList(integers)); return this; }
     public CustomSpellSlot setCustomSpellDebuff(CustomSpellDebuff effect){ this.customSpellDebuff = effect; return this; }
 
     // TEMPLATE TO CUSTOM:

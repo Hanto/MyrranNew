@@ -10,6 +10,6 @@ public enum CustomSpellSlotKey
     private String name;
     public String getName()     { return name; }
 
-    private CustomSpellSlotKey(String name)
+    CustomSpellSlotKey(String name)
     {   this.name = name; }
 }

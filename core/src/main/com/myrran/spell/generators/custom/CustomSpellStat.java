@@ -13,8 +13,8 @@ public class CustomSpellStat
     private int maxUpgrades;                                    //numero de Talentos maximos que se pueden gastar en este SkillStat
     private int upgradeCost;                                    //coste por mejorar cada punto de talento
     private float bonusPerUpgrade;                              //Valor con el que mejora el baseValue por punto de talento
-    private float gearBonus;
-    private int numUpgrades;
+    private float gearBonus = 0;
+    private int numUpgrades = 0;
 
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
@@ -44,6 +44,7 @@ public class CustomSpellStat
 
     public void setSpellStatTemplate(SpellStatTemplate data)
     {
+        this.id = data.getID();
         this.name = data.getName();
         this.baseValue = data.getBaseValue();
         this.isUpgradeable = data.getIsUpgradeable();
