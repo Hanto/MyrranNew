@@ -34,9 +34,6 @@ public class CustomSpellSlot
     // TEMPLATE TO CUSTOM:
     //------------------------------------------------------------------------------------------------------------------
 
-    public CustomSpellSlot(SpellSlotTemplate data)
-    {   setSpellSlotTemplate(data);}
-
     public void setSpellSlotTemplate(SpellSlotTemplate data)
     {
         this.id = data.getId();

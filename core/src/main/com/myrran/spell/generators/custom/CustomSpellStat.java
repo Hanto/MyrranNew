@@ -42,9 +42,6 @@ public class CustomSpellStat
     // TEMPLATE TO CUSTOM:
     //------------------------------------------------------------------------------------------------------------------
 
-    public CustomSpellStat(SpellStatTemplate data)
-    {   setSpellStatTemplate(data); }
-
     public void setSpellStatTemplate(SpellStatTemplate data)
     {
         this.name = data.getName();

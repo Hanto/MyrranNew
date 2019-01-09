@@ -38,9 +38,6 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     // TEMPLATE TO CUSTOM:
     //------------------------------------------------------------------------------------------------------------------
 
-    public CustomSpellDebuff(SpellDebuffTemplate spellDebuffTemplate)
-    {   setSpellEffectTemplate(spellDebuffTemplate); }
-
     @Override public void setSpellEffectTemplate(SpellDebuffTemplate spellDebuffTemplate)
     {
         templateID = spellDebuffTemplate.getId();

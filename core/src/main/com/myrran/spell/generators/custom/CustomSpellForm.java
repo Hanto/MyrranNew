@@ -3,30 +3,25 @@ package main.com.myrran.spell.generators.custom;
 import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.entityparams.SpellFormParams;
 import main.com.myrran.spell.data.templatedata.SpellFormTemplate;
+import main.com.myrran.spell.data.templatedata.SpellSlotTemplate;
 import main.com.myrran.spell.data.templatedata.SpellStatTemplate;
 import main.com.myrran.spell.entity.form.SpellForm;
 import main.com.myrran.spell.entity.form.SpellFormFactory;
 import main.com.myrran.spell.generators.SpellFormGenerator;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellForm implements SpellFormGenerator
 {
     private String id;
     private String name;
     private String templateID;
     private Map<String, CustomSpellStat> customSpellStats;
+    private Map<String, CustomSpellSlot> customSpellSlots;
     private SpellFormFactory factory;
-    private List<CustomSpellSlot> customSpellSlots;
 
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
@@ -35,16 +30,13 @@ public class CustomSpellForm implements SpellFormGenerator
     @Override public String getName()                                   { return name; }
     public String getTemplateID()                                       { return templateID; }
     public Map<String, CustomSpellStat> getCustomSpellStats()           { return customSpellStats; }
-    public List<CustomSpellSlot> getCustomSpellSlots()                  { return customSpellSlots; }
+    public Map<String, CustomSpellSlot> getCustomSpellSlots()           { return customSpellSlots; }
 
     @Override public CustomSpellForm setId(String id)                   { this.id = id; return this; }
     @Override public CustomSpellForm setName(String name)               { this.name = name; return this; }
 
     // TEMPLATE TO CUSTOM:
     //------------------------------------------------------------------------------------------------------------------
-
-    public CustomSpellForm(SpellFormTemplate spellFormTemplate)
-    {   setSpellFormTemplate(spellFormTemplate);}
 
     @Override public void setSpellFormTemplate(SpellFormTemplate spellFormTemplate)
     {
@@ -54,16 +46,20 @@ public class CustomSpellForm implements SpellFormGenerator
         spellFormTemplate.getSpellStats()
             .forEach(this::setSpellStatTemplate);
 
-        customSpellSlots = spellFormTemplate.getSpellSlots().stream()
-            .map(CustomSpellSlot::new)
-            .sorted(Comparator.comparing(CustomSpellSlot::getID))
-            .collect(Collectors.toList());
+        spellFormTemplate.getSpellSlots()
+            .forEach(this::setSpellSlotTemplate);
     }
 
     private void setSpellStatTemplate(SpellStatTemplate template)
     {
         CustomSpellStat customSpellStat = customSpellStats.get(template.getID());
         customSpellStat.setSpellStatTemplate(template);
+    }
+
+    private void setSpellSlotTemplate(SpellSlotTemplate template)
+    {
+        CustomSpellSlot customSpellSlot = customSpellSlots.get(template.getId());
+        customSpellSlot.setSpellSlotTemplate(template);
     }
 
     // CUSTOM TO ENTITY DATA:
@@ -82,7 +78,7 @@ public class CustomSpellForm implements SpellFormGenerator
 
     @Override public List<SpellDebuffParams> getSpellEffectDataList()
     {
-        return customSpellSlots.stream()
+        return customSpellSlots.values().stream()
             .filter(customSpellSlot -> customSpellSlot.getCustomSpellDebuff() != null)
             .map(CustomSpellSlot::getSpellEffectData)
             .collect(Collectors.toList());
@@ -105,7 +101,7 @@ public class CustomSpellForm implements SpellFormGenerator
             .mapToInt(CustomSpellStat::getTotalCost)
             .sum() +
 
-        customSpellSlots.stream()
+        customSpellSlots.values().stream()
             .mapToInt(CustomSpellSlot::getTotalCost)
             .sum();
     }
