@@ -2,7 +2,7 @@ package main.com.myrran.spell.entity.debuff;
 
 import main.com.myrran.misc.Debuffable;
 import main.com.myrran.misc.Stackable;
-import main.com.myrran.spell.data.entitydata.SpellDebuffData;
+import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 
 /** @author Ivan Delgado Huerta */
 public class SpellDebuffDOT implements SpellDebuff, Stackable
@@ -17,7 +17,7 @@ public class SpellDebuffDOT implements SpellDebuff, Stackable
     private int actualStacks = 0;
     private int maxStacks = 1;
 
-    private SpellDebuffData spellDebuffData;
+    private SpellDebuffParams spellDebuffParams;
 
     // SPELLDEBUFF (CONSUMABLE):
     //------------------------------------------------------------------------------------------------------------------
@@ -41,11 +41,11 @@ public class SpellDebuffDOT implements SpellDebuff, Stackable
     // DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public void setSpellDebuffData(SpellDebuffData data)
+    @Override public void setSpellDebuffParams(SpellDebuffParams data)
     {
-        this.spellDebuffData = data;
-        setMaxDuration(spellDebuffData.getStat(DURATION).getTotal());
-        setMaxStacks(spellDebuffData.getStat(MAXSTACKS).getTotal().intValue());
+        this.spellDebuffParams = data;
+        setMaxDuration(spellDebuffParams.getStat(DURATION).getTotal());
+        setMaxStacks(spellDebuffParams.getStat(MAXSTACKS).getTotal().intValue());
     }
 
     // MAIN:
@@ -56,6 +56,6 @@ public class SpellDebuffDOT implements SpellDebuff, Stackable
         int ticksAplicados = getTicksAplicados();
         int ticksMax = getMaxTicks();
 
-        Float damage = spellDebuffData.getStat(DAMAGE).getTotal() * getActualStacks();
+        Float damage = spellDebuffParams.getStat(DAMAGE).getTotal() * getActualStacks();
     }
 }

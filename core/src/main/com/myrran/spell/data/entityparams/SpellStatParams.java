@@ -1,7 +1,7 @@
-package main.com.myrran.spell.data.entitydata;
+package main.com.myrran.spell.data.entityparams;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStatData
+public class SpellStatParams
 {
     private String id;
     private String name;
@@ -14,7 +14,7 @@ public class SpellStatData
     public String getName()                             { return name; }
     public Float getTotal()                             { return total; }
 
-    public SpellStatData setID(String id)               { this.id = id; return this; }
-    public SpellStatData setName(String name)           { this.name = name; return this; }
-    public SpellStatData setTotal(float total)          { this.total = total; return this; }
+    public SpellStatParams setID(String id)             { this.id = id; return this; }
+    public SpellStatParams setName(String name)         { this.name = name; return this; }
+    public SpellStatParams setTotal(float total)        { this.total = total; return this; }
 }

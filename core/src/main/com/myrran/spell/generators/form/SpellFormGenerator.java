@@ -1,7 +1,7 @@
 package main.com.myrran.spell.generators.form;
 
-import main.com.myrran.spell.data.entitydata.SpellDebuffData;
-import main.com.myrran.spell.data.entitydata.SpellFormData;
+import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
+import main.com.myrran.spell.data.entityparams.SpellFormParams;
 import main.com.myrran.spell.data.templatedata.SpellFormTemplate;
 import main.com.myrran.spell.entity.form.SpellForm;
 
@@ -17,7 +17,7 @@ public interface SpellFormGenerator
     CustomSpellForm setName(String name);
 
     void setSpellFormTemplate(SpellFormTemplate spellFormTemplate);
-    SpellFormData getSpellFormData();
-    List<SpellDebuffData> getSpellEffectDataList();
+    SpellFormParams getSpellFormData();
+    List<SpellDebuffParams> getSpellEffectDataList();
     SpellForm cast();
 }

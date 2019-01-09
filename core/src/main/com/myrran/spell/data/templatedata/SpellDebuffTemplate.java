@@ -40,6 +40,7 @@ public class SpellDebuffTemplate
     public SpellDebuffTemplate setName(String name)                                 { this.name = name; return this; }
     public SpellDebuffTemplate setFactory(SpellDebuffFactory type)                  { this.type = type; return this; }
     public SpellDebuffTemplate setSpellStats(List<SpellStatTemplate> spellStats)    { this.spellStats = spellStats; return this; }
+    public SpellDebuffTemplate setSpellStats(SpellStatTemplate...stats)             { this.spellStats = Arrays.asList(stats); return this; }
     public SpellDebuffTemplate setBaseCost(int baseCost)                            { this.baseCost = baseCost; return this; }
     public SpellDebuffTemplate setKeys(List<SpellSlotKey>keys)                      { this.keys = keys; return this; }
     public SpellDebuffTemplate setKeys(SpellSlotKey...keys)                         { this.keys.addAll(Arrays.asList(keys)); return this; }

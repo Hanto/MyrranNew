@@ -1,23 +1,30 @@
 package main.com.myrran.spell.generators.form;
 
+import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
+import main.com.myrran.spell.data.entityparams.SpellFormParams;
 import main.com.myrran.spell.data.templatedata.SpellFormTemplate;
-import main.com.myrran.spell.data.entitydata.SpellDebuffData;
+import main.com.myrran.spell.data.templatedata.SpellStatTemplate;
 import main.com.myrran.spell.entity.form.SpellForm;
 import main.com.myrran.spell.entity.form.SpellFormFactory;
-import main.com.myrran.spell.data.entitydata.SpellFormData;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellForm implements SpellFormGenerator
 {
     private String id;
     private String name;
     private String templateID;
+    private Map<String, CustomSpellStat> customSpellStats;
     private SpellFormFactory factory;
-    private List<CustomSpellStat> customSpellStats;
     private List<CustomSpellSlot> customSpellSlots;
 
     // SETTERS GETTERS:
@@ -26,7 +33,7 @@ public class CustomSpellForm implements SpellFormGenerator
     @Override public String getId()                                     { return id; }
     @Override public String getName()                                   { return name; }
     public String getTemplateID()                                       { return templateID; }
-    public List<CustomSpellStat> getCustomSpellStats()                  { return customSpellStats; }
+    public Map<String, CustomSpellStat> getCustomSpellStats()           { return customSpellStats; }
     public List<CustomSpellSlot> getCustomSpellSlots()                  { return customSpellSlots; }
 
     @Override public CustomSpellForm setId(String id)                   { this.id = id; return this; }
@@ -43,10 +50,8 @@ public class CustomSpellForm implements SpellFormGenerator
         templateID = spellFormTemplate.getId();
         factory = spellFormTemplate.getFactory();
 
-        customSpellStats = spellFormTemplate.getSpellStats().stream()
-            .map(CustomSpellStat::new)
-            .sorted(Comparator.comparing(CustomSpellStat::getID))
-            .collect(Collectors.toList());
+        spellFormTemplate.getSpellStats()
+            .forEach(this::setSpellStatTemplate);
 
         customSpellSlots = spellFormTemplate.getSpellSlots().stream()
             .map(CustomSpellSlot::new)
@@ -54,21 +59,27 @@ public class CustomSpellForm implements SpellFormGenerator
             .collect(Collectors.toList());
     }
 
+    private void setSpellStatTemplate(SpellStatTemplate template)
+    {
+        CustomSpellStat customSpellStat = customSpellStats.get(template.getID());
+        customSpellStat.setSpellStatTemplate(template);
+    }
+
     // CUSTOM TO ENTITY DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    @Override public SpellFormData getSpellFormData()
+    @Override public SpellFormParams getSpellFormData()
     {
-        SpellFormData data = new SpellFormData();
+        SpellFormParams data = new SpellFormParams();
         data.setFactory(factory);
 
-        for (CustomSpellStat stat: getCustomSpellStats())
+        for (CustomSpellStat stat: getCustomSpellStats().values())
             data.addStat(stat.getSpellStatData());
 
         return data;
     }
 
-    @Override public List<SpellDebuffData> getSpellEffectDataList()
+    @Override public List<SpellDebuffParams> getSpellEffectDataList()
     {
         return customSpellSlots.stream()
             .filter(customSpellSlot -> customSpellSlot.getCustomSpellDebuff() != null)
@@ -82,14 +93,14 @@ public class CustomSpellForm implements SpellFormGenerator
     @Override public SpellForm cast()
     {
         SpellForm entity = factory.getFormEntity();
-        entity.setSpellFormData(getSpellFormData());
+        entity.setSpellFormParams(getSpellFormData());
         entity.setSpellEffectData(getSpellEffectDataList());
         return entity;
     }
 
     public int getTotalCost()
     {
-        return customSpellStats.stream()
+        return customSpellStats.values().stream()
             .mapToInt(CustomSpellStat::getTotalCost)
             .sum() +
 

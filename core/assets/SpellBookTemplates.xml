@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spellBookTemplates>
+    <spellFromTemplates>
+        <entry>
+            <key>Bolt</key>
+            <value id="Bolt" name="Super Bolt" type="BOLT">
+                <spellStats id="Cooldown" name="Cooldown">
+                    <baseValue>50.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <spellStats id="Speed" name="Speed">
+                    <baseValue>100.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <spellSlots id="Spot 1" name="Spot 1" slotType="impacto">
+                    <lock>DEBUFF</lock>
+                    <lock>PUREDAMAGE</lock>
+                </spellSlots>
+                <spellSlots id="Spot 2" name="Spot 2" slotType="aoe">
+                    <lock>BUFF</lock>
+                </spellSlots>
+                <spellSlots id="Spot 3" name="Spot 3" slotType="ground">
+                    <lock>DEBUFF</lock>
+                </spellSlots>
+            </value>
+        </entry>
+    </spellFromTemplates>
+    <spellDebuffTemplates>
+        <entry>
+            <key>Super DOT</key>
+            <value id="Super DOT" name="Hanto Super DOT" type="DOT">
+                <spellStats id="Cooldown" name="Cooldown">
+                    <baseValue>50.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <spellStats id="Speed" name="Speed">
+                    <baseValue>100.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <baseCost>30</baseCost>
+                <keys>DEBUFF</keys>
+            </value>
+        </entry>
+    </spellDebuffTemplates>
+</spellBookTemplates>

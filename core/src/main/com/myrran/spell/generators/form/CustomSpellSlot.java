@@ -1,7 +1,7 @@
 package main.com.myrran.spell.generators.form;
 
 import main.com.myrran.spell.SpellSlotKey;
-import main.com.myrran.spell.data.entitydata.SpellDebuffData;
+import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.templatedata.SpellSlotTemplate;
 import main.com.myrran.spell.generators.debuff.CustomSpellDebuff;
 
@@ -50,9 +50,9 @@ public class CustomSpellSlot
     // CUSTOM TO ENTITY DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SpellDebuffData getSpellEffectData()
+    public SpellDebuffParams getSpellEffectData()
     {
-        SpellDebuffData data = customSpellDebuff.getSpellEffectData();
+        SpellDebuffParams data = customSpellDebuff.getSpellEffectData();
         data.setSlotType(type);
 
         return data;

@@ -1,6 +1,6 @@
 package main.com.myrran.spell.generators.form;
 
-import main.com.myrran.spell.data.entitydata.SpellStatData;
+import main.com.myrran.spell.data.entityparams.SpellStatParams;
 import main.com.myrran.spell.data.templatedata.SpellStatTemplate;
 
 /** @author Ivan Delgado Huerta */
@@ -47,7 +47,6 @@ public class CustomSpellStat
 
     public void setSpellStatTemplate(SpellStatTemplate data)
     {
-        this.id = data.getID();
         this.name = data.getName();
         this.baseValue = data.getBaseValue();
         this.isUpgradeable = data.getIsUpgradeable();
@@ -59,9 +58,9 @@ public class CustomSpellStat
     // CUSTOM TO ENTITY DATA:
     //------------------------------------------------------------------------------------------------------------------
 
-    public SpellStatData getSpellStatData()
+    public SpellStatParams getSpellStatData()
     {
-        return new SpellStatData()
+        return new SpellStatParams()
             .setID(this.id)
             .setName(this.name)
             .setTotal(getTotal());

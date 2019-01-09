@@ -2,7 +2,7 @@ package main.com.myrran.spell.entity.debuff;
 
 import main.com.myrran.misc.Consumable;
 import main.com.myrran.misc.Debuffable;
-import main.com.myrran.spell.data.entitydata.SpellDebuffData;
+import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 
 /** @author Ivan Delgado Huerta */
 public interface SpellDebuff extends Consumable
@@ -12,7 +12,7 @@ public interface SpellDebuff extends Consumable
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
 
-    void setSpellDebuffData(SpellDebuffData data);
+    void setSpellDebuffParams(SpellDebuffParams data);
     void setTicksAplicados(int ticksAplicados);
 
     int getTicksAplicados();

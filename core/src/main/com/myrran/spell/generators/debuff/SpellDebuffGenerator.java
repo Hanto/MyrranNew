@@ -1,6 +1,6 @@
 package main.com.myrran.spell.generators.debuff;
 
-import main.com.myrran.spell.data.entitydata.SpellDebuffData;
+import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 
 /** @author Ivan Delgado Huerta */
@@ -13,5 +13,5 @@ public interface SpellDebuffGenerator
     CustomSpellDebuff setName(String name);
 
     void setSpellEffectTemplate(SpellDebuffTemplate spellDebuffTemplate);
-    SpellDebuffData getSpellEffectData();
+    SpellDebuffParams getSpellEffectData();
 }

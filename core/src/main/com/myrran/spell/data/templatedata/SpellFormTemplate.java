@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Arrays;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
@@ -35,5 +36,7 @@ public class SpellFormTemplate
     public SpellFormTemplate setName(String name)                                   { this.name = name; return this; }
     public SpellFormTemplate setFactory(SpellFormFactory type)                      { this.type = type; return this; }
     public SpellFormTemplate setSpellStats(List<SpellStatTemplate> spellStats)      { this.spellStats = spellStats; return this; }
+    public SpellFormTemplate setSpellStats(SpellStatTemplate...stats)               { this.spellStats = Arrays.asList(stats); return this; }
     public SpellFormTemplate setSpellSlots(List<SpellSlotTemplate> spellSlots)      { this.spellSlots = spellSlots; return this; }
+    public SpellFormTemplate setSpellSlots(SpellSlotTemplate...slots)               { this.spellSlots = Arrays.asList(slots); return this; }
 }
