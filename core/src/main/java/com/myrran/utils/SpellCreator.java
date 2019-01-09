@@ -107,6 +107,6 @@ public class SpellCreator
         JAXBContext context = JAXBContext.newInstance(classz);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        marshaller.marshal(object, new File("core/assets/"+classz.getSimpleName()+".xml"));
+        marshaller.marshal(object, new File("assets/"+classz.getSimpleName()+".xml"));
     }
 }
