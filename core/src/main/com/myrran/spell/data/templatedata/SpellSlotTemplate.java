@@ -1,6 +1,6 @@
 package main.com.myrran.spell.data.templatedata;
 
-import main.com.myrran.spell.SpellSlotKey;
+import main.com.myrran.spell.generators.custom.CustomSpellSlotKey;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,17 +19,17 @@ public class SpellSlotTemplate
     private String name;
     @XmlAttribute
     private String slotType;
-    private List<SpellSlotKey> lock = new ArrayList<>();
+    private List<CustomSpellSlotKey> lock = new ArrayList<>();
 
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
     public String getId()                                       { return id; }
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return slotType; }
-    public List<SpellSlotKey> getLock()                         { return lock; }
+    public List<CustomSpellSlotKey> getLock()                         { return lock; }
 
     public SpellSlotTemplate setId(String id)                   { this.id = id; return this; }
     public SpellSlotTemplate setName(String name)               { this.name = name; return this; }
     public SpellSlotTemplate setSlotType(String slotType)       { this.slotType = slotType; return this; }
-    public SpellSlotTemplate setLock(SpellSlotKey... lock)      { this.lock.addAll(Arrays.asList(lock)); return this; }
+    public SpellSlotTemplate setLock(CustomSpellSlotKey... lock)      { this.lock.addAll(Arrays.asList(lock)); return this; }
 }

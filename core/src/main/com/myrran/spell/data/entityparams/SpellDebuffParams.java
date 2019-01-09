@@ -17,9 +17,9 @@ public class SpellDebuffParams
 
     public String getSlotType()                                     { return slotType; }
     public SpellDebuffFactory getFactory()                          { return factory; }
-    public SpellStatParams getStat(String stat)                       { return stats.get(stat); }
+    public SpellStatParams getStat(String stat)                     { return stats.get(stat); }
 
     public SpellDebuffParams setSlotType(String slotType)           { this.slotType = slotType; return this; }
     public SpellDebuffParams setFactory(SpellDebuffFactory factory) { this.factory = factory; return this; }
-    public SpellDebuffParams addStat(SpellStatParams stat)            { stats.put(stat.getID(), stat); return this; }
+    public SpellDebuffParams addStat(SpellStatParams stat)          { stats.put(stat.getID(), stat); return this; }
 }

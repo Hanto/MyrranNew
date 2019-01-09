@@ -1,4 +1,4 @@
-package main.com.myrran.spell.generators.form;
+package main.com.myrran.spell.generators.custom;
 
 import main.com.myrran.spell.data.entityparams.SpellStatParams;
 import main.com.myrran.spell.data.templatedata.SpellStatTemplate;

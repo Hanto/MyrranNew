@@ -1,7 +1,8 @@
-package main.com.myrran.spell.generators.debuff;
+package main.com.myrran.spell.generators;
 
 import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.templatedata.SpellDebuffTemplate;
+import main.com.myrran.spell.generators.custom.CustomSpellDebuff;
 
 /** @author Ivan Delgado Huerta */
 public interface SpellDebuffGenerator

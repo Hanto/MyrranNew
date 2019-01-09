@@ -1,4 +1,4 @@
-import main.com.myrran.spell.SpellSlotKey;
+import main.com.myrran.spell.generators.custom.CustomSpellSlotKey;
 import main.com.myrran.spell.data.templatedata.*;
 import main.com.myrran.spell.entity.debuff.SpellDebuffFactory;
 import main.com.myrran.spell.entity.form.SpellFormFactory;
@@ -45,26 +45,25 @@ public class SpellCreator
             .setUpgradeCost(2)
             .setIsUpgradeable(true);
 
-        spellForm.setSpellStats(stat1, stat2);
-
         SpellSlotTemplate slot1 = new SpellSlotTemplate()
             .setId("Spot 1")
             .setName("Spot 1")
             .setSlotType("impacto")
-            .setLock(SpellSlotKey.DEBUFF, SpellSlotKey.PUREDAMAGE);
+            .setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.PUREDAMAGE);
 
         SpellSlotTemplate slot2 = new SpellSlotTemplate()
             .setId("Spot 2")
             .setName("Spot 2")
             .setSlotType("aoe")
-            .setLock(SpellSlotKey.BUFF);
+            .setLock(CustomSpellSlotKey.DEBUFF);
 
         SpellSlotTemplate slot3 = new SpellSlotTemplate()
             .setId("Spot 3")
             .setName("Spot 3")
             .setSlotType("ground")
-            .setLock(SpellSlotKey.DEBUFF);
+            .setLock(CustomSpellSlotKey.DEBUFF);
 
+        spellForm.setSpellStats(stat1, stat2);
         spellForm.setSpellSlots(slot1, slot2, slot3);
         book.addSpellFormTemplate(spellForm);
     }
@@ -76,7 +75,7 @@ public class SpellCreator
             .setName("Hanto Super DOT")
             .setFactory(SpellDebuffFactory.DOT)
             .setBaseCost(30)
-            .setKeys(SpellSlotKey.DEBUFF);
+            .setKeys(CustomSpellSlotKey.DEBUFF);
 
         SpellStatTemplate stat1 = new SpellStatTemplate()
             .setID("Cooldown")

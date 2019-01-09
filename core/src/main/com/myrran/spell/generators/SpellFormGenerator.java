@@ -1,9 +1,10 @@
-package main.com.myrran.spell.generators.form;
+package main.com.myrran.spell.generators;
 
 import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.entityparams.SpellFormParams;
 import main.com.myrran.spell.data.templatedata.SpellFormTemplate;
 import main.com.myrran.spell.entity.form.SpellForm;
+import main.com.myrran.spell.generators.custom.CustomSpellForm;
 
 import java.util.List;
 

@@ -1,11 +1,10 @@
-package main.com.myrran.spell.generators.debuff;
+package main.com.myrran.spell.generators.custom;
 
-import main.com.myrran.spell.SpellSlotKey;
 import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import main.com.myrran.spell.data.templatedata.SpellStatTemplate;
 import main.com.myrran.spell.entity.debuff.SpellDebuffFactory;
-import main.com.myrran.spell.generators.form.CustomSpellStat;
+import main.com.myrran.spell.generators.SpellDebuffGenerator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +19,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     private Map<String, CustomSpellStat> customSpellStats;
     private SpellDebuffFactory factory;
     private int baseCost;
-    private List<SpellSlotKey> keys;
+    private List<CustomSpellSlotKey> keys;
 
     // SETTERS GETTERS:
     //------------------------------------------------------------------------------------------------------------------
@@ -30,11 +29,11 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     public String getTemplateID()                                       { return templateID; }
     public SpellDebuffFactory getFactory()                              { return factory; }
     public Map<String, CustomSpellStat> getCustomSpellStats()           { return customSpellStats; }
-    public List<SpellSlotKey> getKeys()                                 { return keys; }
+    public List<CustomSpellSlotKey> getKeys()                           { return keys; }
 
     @Override public CustomSpellDebuff setId(String id)                 { this.id = id; return this; }
     @Override public CustomSpellDebuff setName(String name)             { this.name = name; return this; }
-    public CustomSpellDebuff setKeys(SpellSlotKey... spellSlotKeys)     { this.keys = Arrays.asList(spellSlotKeys); return this; }
+    public CustomSpellDebuff setKeys(CustomSpellSlotKey... keys)        { this.keys = Arrays.asList(keys); return this; }
 
     // TEMPLATE TO CUSTOM:
     //------------------------------------------------------------------------------------------------------------------

@@ -1,9 +1,7 @@
-package main.com.myrran.spell.generators.form;
+package main.com.myrran.spell.generators.custom;
 
-import main.com.myrran.spell.SpellSlotKey;
 import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.templatedata.SpellSlotTemplate;
-import main.com.myrran.spell.generators.debuff.CustomSpellDebuff;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +13,7 @@ public class CustomSpellSlot
     private String id;
     private String name;
     private String type;
-    private List<SpellSlotKey>lock = new ArrayList<>();
+    private List<CustomSpellSlotKey>lock = new ArrayList<>();
     private CustomSpellDebuff customSpellDebuff;
 
     // SETTERS GETTERS:
@@ -24,13 +22,13 @@ public class CustomSpellSlot
     public String getID()                                           { return id; }
     public String getName()                                         { return name; }
     public String getSlotType()                                     { return type; }
-    public List<SpellSlotKey>getLock()                              { return lock; }
+    public List<CustomSpellSlotKey>getLock()                              { return lock; }
     public CustomSpellDebuff getCustomSpellDebuff()                 { return customSpellDebuff; }
 
     public CustomSpellSlot setId(String id)                         { this.id = id; return this; }
     public CustomSpellSlot setName(String name)                     { this.name = name; return this; }
     public CustomSpellSlot setType(String type)                     { this.type = type; return this; }
-    public CustomSpellSlot setLock(SpellSlotKey...integers)         { lock.addAll(Arrays.asList(integers)); return this; }
+    public CustomSpellSlot setLock(CustomSpellSlotKey...integers)         { lock.addAll(Arrays.asList(integers)); return this; }
     public CustomSpellSlot setCustomSpellDebuff(CustomSpellDebuff effect){ this.customSpellDebuff = effect; return this; }
 
     // TEMPLATE TO CUSTOM:

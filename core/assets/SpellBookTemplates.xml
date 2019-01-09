@@ -23,7 +23,7 @@
                     <lock>PUREDAMAGE</lock>
                 </spellSlots>
                 <spellSlots id="Spot 2" name="Spot 2" slotType="aoe">
-                    <lock>BUFF</lock>
+                    <lock>DEBUFF</lock>
                 </spellSlots>
                 <spellSlots id="Spot 3" name="Spot 3" slotType="ground">
                     <lock>DEBUFF</lock>

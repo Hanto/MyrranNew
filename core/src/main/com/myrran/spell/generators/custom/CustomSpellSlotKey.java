@@ -1,7 +1,7 @@
-package main.com.myrran.spell;
+package main.com.myrran.spell.generators.custom;
 
 /** @author Ivan Delgado Huerta */
-public enum SpellSlotKey
+public enum CustomSpellSlotKey
 {
     DEBUFF("Debuff"),
     BUFF("Buff"),
@@ -10,6 +10,6 @@ public enum SpellSlotKey
     private String name;
     public String getName()     { return name; }
 
-    private SpellSlotKey(String name)
+    private CustomSpellSlotKey(String name)
     {   this.name = name; }
 }

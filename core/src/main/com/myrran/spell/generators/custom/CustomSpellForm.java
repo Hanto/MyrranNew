@@ -1,4 +1,4 @@
-package main.com.myrran.spell.generators.form;
+package main.com.myrran.spell.generators.custom;
 
 import main.com.myrran.spell.data.entityparams.SpellDebuffParams;
 import main.com.myrran.spell.data.entityparams.SpellFormParams;
@@ -6,6 +6,7 @@ import main.com.myrran.spell.data.templatedata.SpellFormTemplate;
 import main.com.myrran.spell.data.templatedata.SpellStatTemplate;
 import main.com.myrran.spell.entity.form.SpellForm;
 import main.com.myrran.spell.entity.form.SpellFormFactory;
+import main.com.myrran.spell.generators.SpellFormGenerator;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
