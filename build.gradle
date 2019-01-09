@@ -46,6 +46,8 @@ project(":desktop")
     apply plugin: "java"
 
     dependencies {
+        testCompile "junit:junit:4.11"
+        
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
@@ -65,6 +67,9 @@ project(":core")
     apply plugin: "java"
     
     dependencies {
+
+        testCompile "junit:junit:4.11"
+        
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
@@ -83,9 +88,6 @@ project(":core")
         compile "com.github.czyzby:gdx-kiwi:1.9.1.9.6"
         compile "com.github.czyzby:gdx-lml:1.9.1.9.6"
         compile "com.github.czyzby:gdx-lml-vis:1.9.1.9.6"
-
-        testCompile 'junit:junit:4.12'
-        testCompile "org.mockito:mockito-core:2.2.7"
     }
 }
 
