@@ -29,19 +29,17 @@ public class SpellDebuffTemplate
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public String getId()                                                           { return id; }
-    public String getName()                                                         { return name; }
-    public SpellDebuffFactory getFactory()                                          { return type; }
-    public List<SpellStatTemplate> getSpellStats()                                  { return spellStats; }
-    public int getBaseCost()                                                        { return baseCost; }
-    public List<CustomSpellSlotKey> getKeys()                                             { return keys; }
+    public String getId()                                               { return id; }
+    public String getName()                                             { return name; }
+    public SpellDebuffFactory getFactory()                              { return type; }
+    public List<SpellStatTemplate> getSpellStats()                      { return spellStats; }
+    public int getBaseCost()                                            { return baseCost; }
+    public List<CustomSpellSlotKey> getKeys()                           { return keys; }
 
-    public SpellDebuffTemplate setId(String id)                                     { this.id = id; return this; }
-    public SpellDebuffTemplate setName(String name)                                 { this.name = name; return this; }
-    public SpellDebuffTemplate setFactory(SpellDebuffFactory type)                  { this.type = type; return this; }
-    public SpellDebuffTemplate setSpellStats(List<SpellStatTemplate> spellStats)    { this.spellStats = spellStats; return this; }
-    public SpellDebuffTemplate setSpellStats(SpellStatTemplate...stats)             { this.spellStats = Arrays.asList(stats); return this; }
-    public SpellDebuffTemplate setBaseCost(int baseCost)                            { this.baseCost = baseCost; return this; }
-    public SpellDebuffTemplate setKeys(List<CustomSpellSlotKey>keys)                      { this.keys = keys; return this; }
-    public SpellDebuffTemplate setKeys(CustomSpellSlotKey...keys)                         { this.keys.addAll(Arrays.asList(keys)); return this; }
+    public SpellDebuffTemplate setId(String id)                         { this.id = id; return this; }
+    public SpellDebuffTemplate setName(String name)                     { this.name = name; return this; }
+    public SpellDebuffTemplate setFactory(SpellDebuffFactory type)      { this.type = type; return this; }
+    public SpellDebuffTemplate setSpellStats(SpellStatTemplate...stats) { this.spellStats = Arrays.asList(stats); return this; }
+    public SpellDebuffTemplate setBaseCost(int baseCost)                { this.baseCost = baseCost; return this; }
+    public SpellDebuffTemplate setKeys(CustomSpellSlotKey...keys)       { this.keys.addAll(Arrays.asList(keys)); return this; }
 }

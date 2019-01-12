@@ -26,10 +26,10 @@ public class SpellSlotTemplate
     public String getId()                                       { return id; }
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return slotType; }
-    public List<CustomSpellSlotKey> getLock()                         { return lock; }
+    public List<CustomSpellSlotKey> getLock()                   { return lock; }
 
     public SpellSlotTemplate setId(String id)                   { this.id = id; return this; }
     public SpellSlotTemplate setName(String name)               { this.name = name; return this; }
     public SpellSlotTemplate setSlotType(String slotType)       { this.slotType = slotType; return this; }
-    public SpellSlotTemplate setLock(CustomSpellSlotKey... lock)      { this.lock.addAll(Arrays.asList(lock)); return this; }
+    public SpellSlotTemplate setLock(CustomSpellSlotKey... lock){ this.lock.addAll(Arrays.asList(lock)); return this; }
 }
