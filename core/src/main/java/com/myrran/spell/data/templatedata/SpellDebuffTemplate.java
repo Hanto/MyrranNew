@@ -27,7 +27,7 @@ public class SpellDebuffTemplate
     private List<CustomSpellSlotKey> keys = new ArrayList<>();
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public String getId()                                                           { return id; }
     public String getName()                                                         { return name; }

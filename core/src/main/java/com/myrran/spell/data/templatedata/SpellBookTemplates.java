@@ -15,7 +15,7 @@ public class SpellBookTemplates
     private Map<String, SpellDebuffTemplate> spellDebuffTemplates = new HashMap<>();
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public Map<String, SpellFormTemplate> getSpellFromTemplates()
     {   return spellFromTemplates; }

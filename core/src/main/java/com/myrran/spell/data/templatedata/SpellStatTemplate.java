@@ -19,7 +19,7 @@ public class SpellStatTemplate
     private float bonusPerUpgrade;                                      //Valor con el que mejora el baseValue por punto de talento
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public String getID()                                               { return id;}
     public String getName()                                             { return name; }

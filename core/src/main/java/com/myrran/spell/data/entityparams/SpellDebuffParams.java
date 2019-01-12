@@ -13,7 +13,7 @@ public class SpellDebuffParams
     private Map<String, SpellStatParams> stats = new HashMap<>();
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public String getSlotType()                                     { return slotType; }
     public SpellDebuffFactory getFactory()                          { return factory; }

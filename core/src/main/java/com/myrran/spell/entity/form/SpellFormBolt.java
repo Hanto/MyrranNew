@@ -25,7 +25,7 @@ public class SpellFormBolt implements SpellForm, Consumable
     private MapList<String, SpellDebuffParams> spellEffectsData = new HashMapArrayList<>();
 
     // CONSUMABLE:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public float getActualDuration()                      { return actualDuration; }
     @Override public float getMaxDuration()                         { return maxDuration; }
@@ -33,7 +33,7 @@ public class SpellFormBolt implements SpellForm, Consumable
     @Override public void setActualDuration(float actualDuration)   { this.actualDuration = actualDuration; }
 
     // DATA:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public void setSpellFormParams(SpellFormParams data)
     {

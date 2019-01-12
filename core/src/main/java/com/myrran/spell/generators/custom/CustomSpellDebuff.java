@@ -23,21 +23,21 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     private Map<String, CustomSpellStat> customSpellStats = new HashMap<>();
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
-    @Override public String getId()                                     { return id; }
-    @Override public String getName()                                   { return name; }
-    public String getTemplateID()                                       { return templateID; }
-    public SpellDebuffFactory getFactory()                              { return factory; }
-    public Map<String, CustomSpellStat> getCustomSpellStats()           { return customSpellStats; }
-    public List<CustomSpellSlotKey> getKeys()                           { return keys; }
+    @Override public String getId()                                 { return id; }
+    @Override public String getName()                               { return name; }
+    public String getTemplateID()                                   { return templateID; }
+    public SpellDebuffFactory getFactory()                          { return factory; }
+    public Map<String, CustomSpellStat> getCustomSpellStats()       { return customSpellStats; }
+    public List<CustomSpellSlotKey> getKeys()                       { return keys; }
 
-    @Override public CustomSpellDebuff setId(String id)                 { this.id = id; return this; }
-    @Override public CustomSpellDebuff setName(String name)             { this.name = name; return this; }
-    public CustomSpellDebuff setKeys(CustomSpellSlotKey... keys)        { this.keys = Arrays.asList(keys); return this; }
+    @Override public CustomSpellDebuff setId(String id)             { this.id = id; return this; }
+    @Override public CustomSpellDebuff setName(String name)         { this.name = name; return this; }
+    public CustomSpellDebuff setKeys(CustomSpellSlotKey... keys)    { this.keys = Arrays.asList(keys); return this; }
 
     // TEMPLATE TO CUSTOM:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public void setSpellEffectTemplate(SpellDebuffTemplate spellDebuffTemplate)
     {
@@ -62,7 +62,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     }
 
     // CUSTOM TO ENTITY DATA:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public SpellDebuffParams getSpellEffectData()
     {
@@ -76,7 +76,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     }
 
     // MAIN:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public int getTotalCost()
     {
@@ -87,4 +87,3 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
             + baseCost;
     }
 }
-

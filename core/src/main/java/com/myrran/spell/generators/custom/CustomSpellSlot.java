@@ -17,7 +17,7 @@ public class CustomSpellSlot
     private CustomSpellDebuff customSpellDebuff;
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public String getID()                                           { return id; }
     public String getName()                                         { return name; }
@@ -32,7 +32,7 @@ public class CustomSpellSlot
     public CustomSpellSlot setCustomSpellDebuff(CustomSpellDebuff effect){ this.customSpellDebuff = effect; return this; }
 
     // TEMPLATE TO CUSTOM:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public void setSpellSlotTemplate(SpellSlotTemplate data)
     {
@@ -43,7 +43,7 @@ public class CustomSpellSlot
     }
 
     // CUSTOM TO ENTITY DATA:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public SpellDebuffParams getSpellEffectData()
     {
@@ -54,7 +54,7 @@ public class CustomSpellSlot
     }
 
     // MAIN:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }

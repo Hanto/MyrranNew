@@ -9,6 +9,7 @@ import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.entity.form.SpellFormFactory;
 import com.myrran.spell.generators.SpellFormGenerator;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,12 +20,12 @@ public class CustomSpellForm implements SpellFormGenerator
     private String id;
     private String name;
     private String templateID;
-    private Map<String, CustomSpellStat> customSpellStats;
-    private Map<String, CustomSpellSlot> customSpellSlots;
+    private Map<String, CustomSpellStat> customSpellStats = new HashMap<>();
+    private Map<String, CustomSpellSlot> customSpellSlots = new HashMap<>();
     private SpellFormFactory factory;
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public String getId()                                     { return id; }
     @Override public String getName()                                   { return name; }
@@ -36,7 +37,7 @@ public class CustomSpellForm implements SpellFormGenerator
     @Override public CustomSpellForm setName(String name)               { this.name = name; return this; }
 
     // TEMPLATE TO CUSTOM:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public void setSpellFormTemplate(SpellFormTemplate spellFormTemplate)
     {
@@ -73,7 +74,7 @@ public class CustomSpellForm implements SpellFormGenerator
     }
 
     // CUSTOM TO ENTITY DATA:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public SpellFormParams getSpellFormData()
     {
@@ -95,7 +96,7 @@ public class CustomSpellForm implements SpellFormGenerator
     }
 
     // MAIN:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public SpellForm cast()
     {

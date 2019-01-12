@@ -22,7 +22,7 @@ public class SpellSlotTemplate
     private List<CustomSpellSlotKey> lock = new ArrayList<>();
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
     public String getId()                                       { return id; }
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return slotType; }

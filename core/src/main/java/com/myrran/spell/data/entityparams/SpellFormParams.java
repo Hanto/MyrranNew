@@ -12,7 +12,7 @@ public class SpellFormParams
     private Map<String, SpellStatParams> stats = new HashMap<>();
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public SpellFormFactory getFactory()                        { return factory; }
     public SpellStatParams getStat(String stat)                 { return stats.get(stat); }

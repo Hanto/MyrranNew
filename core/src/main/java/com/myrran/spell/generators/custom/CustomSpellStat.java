@@ -17,7 +17,7 @@ public class CustomSpellStat
     private int numUpgrades = 0;
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public String getID()                                       { return id;}
     public String getName()                                     { return name; }
@@ -40,7 +40,7 @@ public class CustomSpellStat
     public CustomSpellStat setNumUpgrades(int numUpgrades)      { this.numUpgrades = numUpgrades; return this; }
 
     // TEMPLATE TO CUSTOM:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public void setSpellStatTemplate(SpellStatTemplate data)
     {
@@ -54,7 +54,7 @@ public class CustomSpellStat
     }
 
     // CUSTOM TO ENTITY DATA:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public SpellStatParams getSpellStatData()
     {
@@ -65,7 +65,7 @@ public class CustomSpellStat
     }
 
     // MAIN:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public float getTotal()
     {   return baseValue + (numUpgrades * bonusPerUpgrade) + gearBonus; }

@@ -8,7 +8,7 @@ public class SpellStatParams
     private Float total;
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     public String getID()                               { return id;}
     public String getName()                             { return name; }

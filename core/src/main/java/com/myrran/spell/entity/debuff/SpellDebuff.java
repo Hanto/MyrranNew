@@ -10,7 +10,7 @@ public interface SpellDebuff extends Consumable
     float TICKDURATION = 0.5f;
 
     // SETTERS GETTERS:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     void setSpellDebuffParams(SpellDebuffParams data);
     void setTicksAplicados(int ticksAplicados);
@@ -19,7 +19,7 @@ public interface SpellDebuff extends Consumable
     void applyTick(Debuffable debuffable);
 
     // DEFAULT:
-    //------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------
 
     default int getMaxTicks()
     {   return (int)(getMaxDuration() / TICKDURATION); }
