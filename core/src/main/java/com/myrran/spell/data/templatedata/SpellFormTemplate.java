@@ -1,5 +1,6 @@
 package com.myrran.spell.data.templatedata;
 
+import com.myrran.misc.Identifiable;
 import com.myrran.spell.entity.form.SpellFormFactory;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -12,7 +13,7 @@ import java.util.List;
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpellFormTemplate
+public class SpellFormTemplate implements Identifiable
 {
     @XmlAttribute
     private String id;
@@ -26,15 +27,15 @@ public class SpellFormTemplate
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public String getId()                                               { return id; }
-    public String getName()                                             { return name; }
-    public SpellFormFactory getFactory()                                { return type; }
-    public List<SpellStatTemplate> getSpellStats()                      { return spellStats; }
-    public List<SpellSlotTemplate> getSpellSlots()                      { return spellSlots; }
+    @Override public String getID()                         { return id; }
+    public String getName()                                 { return name; }
+    public SpellFormFactory getFactory()                    { return type; }
+    public List<SpellStatTemplate> getSpellStats()          { return spellStats; }
+    public List<SpellSlotTemplate> getSpellSlots()          { return spellSlots; }
 
-    public SpellFormTemplate setId(String id)                           { this.id = id; return this; }
-    public SpellFormTemplate setName(String name)                       { this.name = name; return this; }
-    public SpellFormTemplate setFactory(SpellFormFactory type)          { this.type = type; return this; }
-    public SpellFormTemplate setSpellStats(SpellStatTemplate...stats)   { this.spellStats = Arrays.asList(stats); return this; }
-    public SpellFormTemplate setSpellSlots(SpellSlotTemplate...slots)   { this.spellSlots = Arrays.asList(slots); return this; }
+    @Override public void setID(String id)                  { this.id = id; }
+    public void setName(String name)                        { this.name = name; }
+    public void setFactory(SpellFormFactory type)           { this.type = type; }
+    public void setSpellStats(SpellStatTemplate...stats)    { this.spellStats = Arrays.asList(stats); }
+    public void setSpellSlots(SpellSlotTemplate...slots)    { this.spellSlots = Arrays.asList(slots); }
 }

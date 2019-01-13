@@ -13,6 +13,8 @@ import java.io.File;
 /** @author Ivan Delgado Huerta */
 public class SpellCreator
 {
+    public static final String COOLDOWN = "Cooldown";
+    public static final String SPEED = "Speed";
     private static SpellBookTemplates book = new SpellBookTemplates();
 
     public static void main(String...args) throws JAXBException
@@ -25,46 +27,46 @@ public class SpellCreator
 
     public static void generateSpellForms()
     {
-        SpellFormTemplate spellForm = new SpellFormTemplate()
-            .setId("Bolt")
-            .setName("Super Bolt")
-            .setFactory(SpellFormFactory.BOLT);
+        SpellFormTemplate spellForm = new SpellFormTemplate();
+        spellForm.setID("Bolt");
+        spellForm.setName("Super Bolt");
+        spellForm.setFactory(SpellFormFactory.BOLT);
 
-        SpellStatTemplate stat1 = new SpellStatTemplate()
-            .setID("Cooldown")
-            .setName("Cooldown")
-            .setBaseValue(50)
-            .setBonusPerUpgrade(2)
-            .setMaxUpgrades(50)
-            .setUpgradeCost(2)
-            .setIsUpgradeable(true);
+        SpellStatTemplate stat1 = new SpellStatTemplate();
+        stat1.setID(COOLDOWN);
+        stat1.setName(COOLDOWN);
+        stat1.setBaseValue(50);
+        stat1.setBonusPerUpgrade(2);
+        stat1.setMaxUpgrades(50);
+        stat1.setUpgradeCost(2);
+        stat1.setIsUpgradeable(true);
 
-        SpellStatTemplate stat2 = new SpellStatTemplate()
-            .setID("Speed")
-            .setName("Speed")
-            .setBaseValue(100)
-            .setBonusPerUpgrade(2)
-            .setMaxUpgrades(50)
-            .setUpgradeCost(2)
-            .setIsUpgradeable(true);
+        SpellStatTemplate stat2 = new SpellStatTemplate();
+        stat2.setID(SPEED);
+        stat2.setName(SPEED);
+        stat2.setBaseValue(100);
+        stat2.setBonusPerUpgrade(2);
+        stat2.setMaxUpgrades(50);
+        stat2.setUpgradeCost(2);
+        stat2.setIsUpgradeable(true);
 
-        SpellSlotTemplate slot1 = new SpellSlotTemplate()
-            .setId("Spot 1")
-            .setName("Spot 1")
-            .setSlotType("impacto")
-            .setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.PUREDAMAGE);
+        SpellSlotTemplate slot1 = new SpellSlotTemplate();
+        slot1.setID("Spot 1");
+        slot1.setName("Spot 1");
+        slot1.setSlotType("impacto");
+        slot1.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.PUREDAMAGE);
 
-        SpellSlotTemplate slot2 = new SpellSlotTemplate()
-            .setId("Spot 2")
-            .setName("Spot 2")
-            .setSlotType("aoe")
-            .setLock(CustomSpellSlotKey.DEBUFF);
+        SpellSlotTemplate slot2 = new SpellSlotTemplate();
+        slot2.setID("Spot 2");
+        slot2.setName("Spot 2");
+        slot2.setSlotType("aoe");
+        slot2.setLock(CustomSpellSlotKey.DEBUFF);
 
-        SpellSlotTemplate slot3 = new SpellSlotTemplate()
-            .setId("Spot 3")
-            .setName("Spot 3")
-            .setSlotType("ground")
-            .setLock(CustomSpellSlotKey.DEBUFF);
+        SpellSlotTemplate slot3 = new SpellSlotTemplate();
+        slot3.setID("Spot 3");
+        slot3.setName("Spot 3");
+        slot3.setSlotType("ground");
+        slot3.setLock(CustomSpellSlotKey.DEBUFF);
 
         spellForm.setSpellStats(stat1, stat2);
         spellForm.setSpellSlots(slot1, slot2, slot3);
@@ -73,30 +75,30 @@ public class SpellCreator
 
     public static void generateSpellDebuffs()
     {
-        SpellDebuffTemplate debuff = new SpellDebuffTemplate()
-            .setId("Super DOT")
-            .setName("Hanto Super DOT")
-            .setFactory(SpellDebuffFactory.DOT)
-            .setBaseCost(30)
-            .setKeys(CustomSpellSlotKey.DEBUFF);
+        SpellDebuffTemplate debuff = new SpellDebuffTemplate();
+        debuff.setID("Super DOT");
+        debuff.setName("Hanto Super DOT");
+        debuff.setFactory(SpellDebuffFactory.DOT);
+        debuff.setBaseCost(30);
+        debuff.setKeys(CustomSpellSlotKey.DEBUFF);
 
-        SpellStatTemplate stat1 = new SpellStatTemplate()
-            .setID("Cooldown")
-            .setName("Cooldown")
-            .setBaseValue(50)
-            .setBonusPerUpgrade(2)
-            .setMaxUpgrades(50)
-            .setUpgradeCost(2)
-            .setIsUpgradeable(true);
+        SpellStatTemplate stat1 = new SpellStatTemplate();
+        stat1.setID(COOLDOWN);
+        stat1.setName(COOLDOWN);
+        stat1.setBaseValue(50);
+        stat1.setBonusPerUpgrade(2);
+        stat1.setMaxUpgrades(50);
+        stat1.setUpgradeCost(2);
+        stat1.setIsUpgradeable(true);
 
-        SpellStatTemplate stat2 = new SpellStatTemplate()
-            .setID("Speed")
-            .setName("Speed")
-            .setBaseValue(100)
-            .setBonusPerUpgrade(2)
-            .setMaxUpgrades(50)
-            .setUpgradeCost(2)
-            .setIsUpgradeable(true);
+        SpellStatTemplate stat2 = new SpellStatTemplate();
+        stat2.setID(SPEED);
+        stat2.setName(SPEED);
+        stat2.setBaseValue(100);
+        stat2.setBonusPerUpgrade(2);
+        stat2.setMaxUpgrades(50);
+        stat2.setUpgradeCost(2);
+        stat2.setIsUpgradeable(true);
 
         debuff.setSpellStats(stat1, stat2);
         book.addSpellDebuffTemplate(debuff);

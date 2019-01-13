@@ -1,18 +1,22 @@
 package com.myrran.spell.generators.custom;
 
+import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.data.templatedata.SpellStatTemplate;
 import com.myrran.spell.entity.debuff.SpellDebuffFactory;
 import com.myrran.spell.generators.SpellDebuffGenerator;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /** @author Ivan Delgado Huerta */
-public class CustomSpellDebuff implements SpellDebuffGenerator
+@XmlAccessorType(XmlAccessType.FIELD)
+public class CustomSpellDebuff implements SpellDebuffGenerator, Identifiable
 {
     private String id;
     private String name;
@@ -25,23 +29,23 @@ public class CustomSpellDebuff implements SpellDebuffGenerator
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public String getId()                                 { return id; }
-    @Override public String getName()                               { return name; }
-    public String getTemplateID()                                   { return templateID; }
-    public SpellDebuffFactory getFactory()                          { return factory; }
-    public Map<String, CustomSpellStat> getCustomSpellStats()       { return customSpellStats; }
-    public List<CustomSpellSlotKey> getKeys()                       { return keys; }
+    @Override public String getID()                             { return id; }
+    @Override public String getName()                           { return name; }
+    public String getTemplateID()                               { return templateID; }
+    public SpellDebuffFactory getFactory()                      { return factory; }
+    public Map<String, CustomSpellStat> getCustomSpellStats()   { return customSpellStats; }
+    public List<CustomSpellSlotKey> getKeys()                   { return keys; }
 
-    @Override public CustomSpellDebuff setId(String id)             { this.id = id; return this; }
-    @Override public CustomSpellDebuff setName(String name)         { this.name = name; return this; }
-    public CustomSpellDebuff setKeys(CustomSpellSlotKey... keys)    { this.keys = Arrays.asList(keys); return this; }
+    @Override public void setID(String id)                      { this.id = id; }
+    @Override public void setName(String name)                  { this.name = name; }
+    public void setKeys(CustomSpellSlotKey... keys)             { this.keys = Arrays.asList(keys); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public void setSpellEffectTemplate(SpellDebuffTemplate spellDebuffTemplate)
+    @Override public void setSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate)
     {
-        templateID = spellDebuffTemplate.getId();
+        templateID = spellDebuffTemplate.getID();
         baseCost = spellDebuffTemplate.getBaseCost();
         factory = spellDebuffTemplate.getFactory();
         keys = spellDebuffTemplate.getKeys();

@@ -1,10 +1,15 @@
 package com.myrran.spell.generators.custom;
 
+import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.entityparams.SpellStatParams;
 import com.myrran.spell.data.templatedata.SpellStatTemplate;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /** @author Ivan Delgado Huerta */
-public class CustomSpellStat
+@XmlAccessorType(XmlAccessType.FIELD)
+public class CustomSpellStat implements Identifiable
 {
     private String id;
     private String name;                                        //Nombre del SkillStat: por ej: "Daño, velocidad, Casting Time"
@@ -19,25 +24,25 @@ public class CustomSpellStat
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public String getID()                                       { return id;}
-    public String getName()                                     { return name; }
-    public float getBaseValue()                                 { return baseValue; }
-    public boolean getIsUpgradeable()                           { return isUpgradeable; }
-    public int getMaxUpgrades()                                 { return maxUpgrades; }
-    public int getUpgradeCost()                                 { return upgradeCost; }
-    public float getBonusPerUpgrade()                           { return bonusPerUpgrade; }
-    public float getGearBonus()                                 { return gearBonus; }
-    public int getNumUpgrades()                                 { return numUpgrades; }
+    public String getID()                                   { return id;}
+    public String getName()                                 { return name; }
+    public float getBaseValue()                             { return baseValue; }
+    public boolean getIsUpgradeable()                       { return isUpgradeable; }
+    public int getMaxUpgrades()                             { return maxUpgrades; }
+    public int getUpgradeCost()                             { return upgradeCost; }
+    public float getBonusPerUpgrade()                       { return bonusPerUpgrade; }
+    public float getGearBonus()                             { return gearBonus; }
+    public int getNumUpgrades()                             { return numUpgrades; }
 
-    public CustomSpellStat setID(String id)                     { this.id = id; return this; }
-    public CustomSpellStat setName(String name)                 { this.name = name; return this; }
-    public CustomSpellStat setBaseValue(float baseValue)        { this.baseValue = baseValue; return this; }
-    public CustomSpellStat setIsUpgradeable(boolean b)          { this.isUpgradeable = b; return this; }
-    public CustomSpellStat setMaxUpgrades(int talentoMaximo)    { this.maxUpgrades = talentoMaximo; return this; }
-    public CustomSpellStat setUpgradeCost(int upgradeCost)      { this.upgradeCost = upgradeCost; return this; }
-    public CustomSpellStat setBonusPerUpgrade(float bonusPerUpgrade)  { this.bonusPerUpgrade = bonusPerUpgrade; return this; }
-    public CustomSpellStat setGearBonus(float gearBonus)        { this.gearBonus = gearBonus; return this; }
-    public CustomSpellStat setNumUpgrades(int numUpgrades)      { this.numUpgrades = numUpgrades; return this; }
+    public void setID(String id)                            { this.id = id; }
+    public void setName(String name)                        { this.name = name; }
+    public void setBaseValue(float baseValue)               { this.baseValue = baseValue; }
+    public void setIsUpgradeable(boolean b)                 { this.isUpgradeable = b; }
+    public void setMaxUpgrades(int talentoMaximo)           { this.maxUpgrades = talentoMaximo; }
+    public void setUpgradeCost(int upgradeCost)             { this.upgradeCost = upgradeCost; }
+    public void setBonusPerUpgrade(float bonusPerUpgrade)   { this.bonusPerUpgrade = bonusPerUpgrade; }
+    public void setGearBonus(float gearBonus)               { this.gearBonus = gearBonus; }
+    public void setNumUpgrades(int numUpgrades)             { this.numUpgrades = numUpgrades; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------

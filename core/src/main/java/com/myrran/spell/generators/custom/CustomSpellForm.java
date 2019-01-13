@@ -1,5 +1,6 @@
 package com.myrran.spell.generators.custom;
 
+import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.entityparams.SpellFormParams;
 import com.myrran.spell.data.templatedata.SpellFormTemplate;
@@ -9,13 +10,16 @@ import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.entity.form.SpellFormFactory;
 import com.myrran.spell.generators.SpellFormGenerator;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CustomSpellForm implements SpellFormGenerator
+@XmlAccessorType(XmlAccessType.FIELD)
+public class CustomSpellForm implements SpellFormGenerator, Identifiable
 {
     private String id;
     private String name;
@@ -27,21 +31,22 @@ public class CustomSpellForm implements SpellFormGenerator
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public String getId()                                     { return id; }
-    @Override public String getName()                                   { return name; }
-    public String getTemplateID()                                       { return templateID; }
-    public Map<String, CustomSpellStat> getCustomSpellStats()           { return customSpellStats; }
-    public Map<String, CustomSpellSlot> getCustomSpellSlots()           { return customSpellSlots; }
+    @Override public String getID()                             { return id; }
+    @Override public String getName()                           { return name; }
+    public String getTemplateID()                               { return templateID; }
+    public Map<String, CustomSpellStat> getCustomSpellStats()   { return customSpellStats; }
+    public Map<String, CustomSpellSlot> getCustomSpellSlots()   { return customSpellSlots; }
 
-    @Override public CustomSpellForm setId(String id)                   { this.id = id; return this; }
-    @Override public CustomSpellForm setName(String name)               { this.name = name; return this; }
+    @Override public void setID(String id)                      { this.id = id; }
+    @Override public void setName(String name)                  { this.name = name; }
+    public void setCustomSpellDebuff(CustomSpellDebuff debuff, String slot)  { this.customSpellSlots.get(slot).setCustomSpellDebuff(debuff);}
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void setSpellFormTemplate(SpellFormTemplate spellFormTemplate)
     {
-        templateID = spellFormTemplate.getId();
+        templateID = spellFormTemplate.getID();
         factory = spellFormTemplate.getFactory();
 
         spellFormTemplate.getSpellStats()
@@ -64,11 +69,11 @@ public class CustomSpellForm implements SpellFormGenerator
 
     private void setSpellSlotTemplate(SpellSlotTemplate template)
     {
-        CustomSpellSlot customSpellSlot = customSpellSlots.get(template.getId());
+        CustomSpellSlot customSpellSlot = customSpellSlots.get(template.getID());
         if (customSpellSlot == null)
         {
             customSpellSlot = new CustomSpellSlot();
-            customSpellSlots.put(template.getId(), customSpellSlot);
+            customSpellSlots.put(template.getID(), customSpellSlot);
         }
         customSpellSlot.setSpellSlotTemplate(template);
     }

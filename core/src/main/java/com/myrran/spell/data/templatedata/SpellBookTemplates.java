@@ -17,15 +17,15 @@ public class SpellBookTemplates
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public Map<String, SpellFormTemplate> getSpellFromTemplates()
+    public Map<String, SpellFormTemplate> getSpellFormTemplates()
     {   return spellFromTemplates; }
 
     public Map<String, SpellDebuffTemplate> getSpellDebuffTemplates()
     {   return spellDebuffTemplates; }
 
     public SpellBookTemplates addSpellFormTemplate(SpellFormTemplate spellFormTemplate)
-    {   this.spellFromTemplates.put(spellFormTemplate.getId(), spellFormTemplate); return this; }
+    {   this.spellFromTemplates.put(spellFormTemplate.getID(), spellFormTemplate); return this; }
 
     public SpellBookTemplates addSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate)
-    {   this.spellDebuffTemplates.put(spellDebuffTemplate.getId(), spellDebuffTemplate); return this; }
+    {   this.spellDebuffTemplates.put(spellDebuffTemplate.getID(), spellDebuffTemplate); return this; }
 }
