@@ -12,140 +12,116 @@
       <value available="1" total="2"/>
     </entry>
   </spellDebuffTemplatesLearned>
-  <customSpellFormList>
-    <templateID>Bolt</templateID>
-    <customSpellStats>
-      <entry>
-        <key>Speed</key>
-        <value>
-          <id>Speed</id>
-          <name>Speed</name>
-          <baseValue>100.0</baseValue>
-          <isUpgradeable>true</isUpgradeable>
-          <maxUpgrades>50</maxUpgrades>
-          <upgradeCost>2</upgradeCost>
-          <bonusPerUpgrade>2.0</bonusPerUpgrade>
-          <gearBonus>0.0</gearBonus>
-          <numUpgrades>0</numUpgrades>
-        </value>
-      </entry>
-      <entry>
-        <key>Cooldown</key>
-        <value>
-          <id>Cooldown</id>
-          <name>Cooldown</name>
-          <baseValue>50.0</baseValue>
-          <isUpgradeable>true</isUpgradeable>
-          <maxUpgrades>50</maxUpgrades>
-          <upgradeCost>2</upgradeCost>
-          <bonusPerUpgrade>2.0</bonusPerUpgrade>
-          <gearBonus>0.0</gearBonus>
-          <numUpgrades>0</numUpgrades>
-        </value>
-      </entry>
-    </customSpellStats>
-    <customSpellSlots>
-      <entry>
-        <key>Spot 1</key>
-        <value>
-          <id>Spot 1</id>
-          <name>Spot 1</name>
-          <type>impacto</type>
-          <lock>DEBUFF</lock>
-          <lock>PUREDAMAGE</lock>
-          <customSpellDebuff>
-            <templateID>Super DOT</templateID>
-            <baseCost>30</baseCost>
-            <factory>DOT</factory>
-            <keys>DEBUFF</keys>
-            <customSpellStats>
-              <entry>
-                <key>Speed</key>
-                <value>
-                  <id>Speed</id>
-                  <name>Speed</name>
-                  <baseValue>100.0</baseValue>
-                  <isUpgradeable>true</isUpgradeable>
-                  <maxUpgrades>50</maxUpgrades>
-                  <upgradeCost>2</upgradeCost>
-                  <bonusPerUpgrade>2.0</bonusPerUpgrade>
-                  <gearBonus>0.0</gearBonus>
-                  <numUpgrades>0</numUpgrades>
-                </value>
-              </entry>
-              <entry>
-                <key>Cooldown</key>
-                <value>
-                  <id>Cooldown</id>
-                  <name>Cooldown</name>
-                  <baseValue>50.0</baseValue>
-                  <isUpgradeable>true</isUpgradeable>
-                  <maxUpgrades>50</maxUpgrades>
-                  <upgradeCost>2</upgradeCost>
-                  <bonusPerUpgrade>2.0</bonusPerUpgrade>
-                  <gearBonus>0.0</gearBonus>
-                  <numUpgrades>0</numUpgrades>
-                </value>
-              </entry>
-            </customSpellStats>
-          </customSpellDebuff>
-        </value>
-      </entry>
-      <entry>
-        <key>Spot 2</key>
-        <value>
-          <id>Spot 2</id>
-          <name>Spot 2</name>
-          <type>aoe</type>
-          <lock>DEBUFF</lock>
-        </value>
-      </entry>
-      <entry>
-        <key>Spot 3</key>
-        <value>
-          <id>Spot 3</id>
-          <name>Spot 3</name>
-          <type>ground</type>
-          <lock>DEBUFF</lock>
-        </value>
-      </entry>
-    </customSpellSlots>
-    <factory>BOLT</factory>
-  </customSpellFormList>
-  <customSpellDebuffList>
-    <templateID>Super DOT</templateID>
-    <baseCost>30</baseCost>
-    <factory>DOT</factory>
-    <keys>DEBUFF</keys>
-    <customSpellStats>
-      <entry>
-        <key>Speed</key>
-        <value>
-          <id>Speed</id>
-          <name>Speed</name>
-          <baseValue>100.0</baseValue>
-          <isUpgradeable>true</isUpgradeable>
-          <maxUpgrades>50</maxUpgrades>
-          <upgradeCost>2</upgradeCost>
-          <bonusPerUpgrade>2.0</bonusPerUpgrade>
-          <gearBonus>0.0</gearBonus>
-          <numUpgrades>0</numUpgrades>
-        </value>
-      </entry>
-      <entry>
-        <key>Cooldown</key>
-        <value>
-          <id>Cooldown</id>
-          <name>Cooldown</name>
-          <baseValue>50.0</baseValue>
-          <isUpgradeable>true</isUpgradeable>
-          <maxUpgrades>50</maxUpgrades>
-          <upgradeCost>2</upgradeCost>
-          <bonusPerUpgrade>2.0</bonusPerUpgrade>
-          <gearBonus>0.0</gearBonus>
-          <numUpgrades>0</numUpgrades>
-        </value>
-      </entry>
-    </customSpellStats>
-  </customSpellDebuffList>
+  <customFormMap>
+    <entry>
+      <key>Bolt_0</key>
+      <value>
+        <id>Bolt_0</id>
+        <name>Super Bolt</name>
+        <templateID>Bolt</templateID>
+        <customSpellStats>
+          <entry>
+            <key>Speed</key>
+            <value>
+              <id>Speed</id>
+              <name>Speed</name>
+              <baseValue>100.0</baseValue>
+              <isUpgradeable>true</isUpgradeable>
+              <maxUpgrades>50</maxUpgrades>
+              <upgradeCost>2</upgradeCost>
+              <bonusPerUpgrade>2.0</bonusPerUpgrade>
+              <gearBonus>0.0</gearBonus>
+              <numUpgrades>0</numUpgrades>
+            </value>
+          </entry>
+          <entry>
+            <key>Cooldown</key>
+            <value>
+              <id>Cooldown</id>
+              <name>Cooldown</name>
+              <baseValue>50.0</baseValue>
+              <isUpgradeable>true</isUpgradeable>
+              <maxUpgrades>50</maxUpgrades>
+              <upgradeCost>2</upgradeCost>
+              <bonusPerUpgrade>2.0</bonusPerUpgrade>
+              <gearBonus>0.0</gearBonus>
+              <numUpgrades>0</numUpgrades>
+            </value>
+          </entry>
+        </customSpellStats>
+        <customSpellSlots>
+          <entry>
+            <key>Spot 1</key>
+            <value>
+              <id>Spot 1</id>
+              <name>Spot 1</name>
+              <type>impacto</type>
+              <lock>DEBUFF</lock>
+              <lock>PUREDAMAGE</lock>
+            </value>
+          </entry>
+          <entry>
+            <key>Spot 2</key>
+            <value>
+              <id>Spot 2</id>
+              <name>Spot 2</name>
+              <type>aoe</type>
+              <lock>DEBUFF</lock>
+              <customSpellDebuff>
+                <id>Super DOT_0</id>
+                <name>Hanto Super DOT</name>
+                <templateID>Super DOT</templateID>
+                <baseCost>30</baseCost>
+                <factory>DOT</factory>
+                <keys>DEBUFF</keys>
+                <customSpellStats>
+                  <entry>
+                    <key>Speed</key>
+                    <value>
+                      <id>Speed</id>
+                      <name>Speed</name>
+                      <baseValue>100.0</baseValue>
+                      <isUpgradeable>true</isUpgradeable>
+                      <maxUpgrades>50</maxUpgrades>
+                      <upgradeCost>2</upgradeCost>
+                      <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                      <gearBonus>0.0</gearBonus>
+                      <numUpgrades>0</numUpgrades>
+                    </value>
+                  </entry>
+                  <entry>
+                    <key>Cooldown</key>
+                    <value>
+                      <id>Cooldown</id>
+                      <name>Cooldown</name>
+                      <baseValue>50.0</baseValue>
+                      <isUpgradeable>true</isUpgradeable>
+                      <maxUpgrades>50</maxUpgrades>
+                      <upgradeCost>2</upgradeCost>
+                      <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                      <gearBonus>0.0</gearBonus>
+                      <numUpgrades>0</numUpgrades>
+                    </value>
+                  </entry>
+                </customSpellStats>
+              </customSpellDebuff>
+            </value>
+          </entry>
+          <entry>
+            <key>Spot 3</key>
+            <value>
+              <id>Spot 3</id>
+              <name>Spot 3</name>
+              <type>ground</type>
+              <lock>DEBUFF</lock>
+            </value>
+          </entry>
+        </customSpellSlots>
+        <factory>BOLT</factory>
+      </value>
+    </entry>
+  </customFormMap>
+  <customDebuffMap/>
+  <spellFormUUID>1</spellFormUUID>
+  <spellDebuffUUID>1</spellDebuffUUID>
 </customSpellBook>

@@ -2,8 +2,6 @@ package com.myrran.ztests;
 
 import com.myrran.spell.data.templatedata.SpellBookTemplates;
 import com.myrran.spell.generators.custom.CustomSpellBook;
-import com.myrran.spell.generators.custom.CustomSpellDebuff;
-import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.nitorcreations.junit.runners.NestedRunner;
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,17 +37,15 @@ public class CustomSpellFormStatTest
             cbook.addSpellFormTemplate("Bolt");
             cbook.addSpellFormTemplate("Bolt");
             cbook.addSpellFormTemplate("Bolt");
-            cbook.addCustomSpellForm("Bolt");
+            cbook.addSpellDebuffTemplate("Super DOT");
+            cbook.addSpellDebuffTemplate("Super DOT");
 
-            cbook.addSpellDebuffTemplate("Super DOT");
-            cbook.addSpellDebuffTemplate("Super DOT");
+            cbook.addCustomSpellForm("Bolt");
             cbook.addCustomSpellDebuff("Super DOT");
 
-            CustomSpellForm spellForm = cbook.getCustomSpellForm(0);
-            CustomSpellDebuff spellDebuff = cbook.getCustomSpellDebuff(0);
-
-            spellForm.setCustomSpellDebuff(spellDebuff, "Spot 1");
-
+            cbook.assignSpellDebuff("Super DOT_0", "Bolt_0", "Spot 2");
+            cbook.unnasignSpellDebuff("Bolt_0", "Spot 2");
+            cbook.assignSpellDebuff("Super DOT_0", "Bolt_0", "Spot 2");
 
             marshal(cbook, CustomSpellBook.class);
 

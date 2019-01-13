@@ -46,6 +46,8 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
 
     @Override public void setSpellFormTemplate(SpellFormTemplate spellFormTemplate)
     {
+        id = spellFormTemplate.getID();
+        name = spellFormTemplate.getName();
         templateID = spellFormTemplate.getID();
         factory = spellFormTemplate.getFactory();
 

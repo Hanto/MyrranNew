@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
@@ -18,6 +19,7 @@ public class CustomSpellSlot implements Identifiable
     private String name;
     private String type;
     private List<CustomSpellSlotKey> lock = new ArrayList<>();
+
     private CustomSpellDebuff customSpellDebuff;
 
     // SETTERS GETTERS:
@@ -34,6 +36,7 @@ public class CustomSpellSlot implements Identifiable
     public void setType(String type)                            { this.type = type; }
     public void setLock(CustomSpellSlotKey...integers)          { lock.addAll(Arrays.asList(integers)); }
     public void setCustomSpellDebuff(CustomSpellDebuff effect)  { this.customSpellDebuff = effect; }
+    public void removeCustomSpellDebuff()                       { this.customSpellDebuff = null; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -59,6 +62,9 @@ public class CustomSpellSlot implements Identifiable
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
+
+    public boolean opensLock(List<CustomSpellSlotKey>keys)
+    {   return !Collections.disjoint(keys, lock); }
 
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }

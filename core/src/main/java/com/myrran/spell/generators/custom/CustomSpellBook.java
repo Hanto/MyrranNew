@@ -12,8 +12,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
@@ -22,43 +22,54 @@ public class CustomSpellBook
 {
     private QuantityMap spellFormsTemplatesLearned = new QuantityHashMap();
     private QuantityMap spellDebuffTemplatesLearned = new QuantityHashMap();
-
-    private List<CustomSpellForm> customSpellFormList = new ArrayList<>();
-    private List<CustomSpellDebuff> customSpellDebuffList = new ArrayList<>();
+    private Map<String, CustomSpellForm> customFormMap = new HashMap<>();
+    private Map<String, CustomSpellDebuff> customDebuffMap = new HashMap<>();
+    private int spellFormUUID = 0;
+    private int spellDebuffUUID = 0;
 
     @XmlTransient
-    private SpellBookTemplates spellBookTemplates;
+    private SpellBookTemplates templateBook;
 
     private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellBook.class);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setSpellBookTemplates(SpellBookTemplates tBook) { this.spellBookTemplates = tBook; }
-    public void addSpellFormTemplate(String id)                 { this.spellFormsTemplatesLearned.add(id); }
-    public void addSpellDebuffTemplate(String id)               { this.spellDebuffTemplatesLearned.add(id); }
-    public void removeSpellFormTemplate(String id)              { this.spellFormsTemplatesLearned.remove(id); }
-    public void removeSpellDebuffTemplate(String id)            { this.spellDebuffTemplatesLearned.remove(id); }
-    public CustomSpellForm getCustomSpellForm(int slot)         { return this.customSpellFormList.get(slot); }
-    public CustomSpellDebuff getCustomSpellDebuff(int slot)     { return this.customSpellDebuffList.get(slot); }
+    public void setSpellBookTemplates(SpellBookTemplates tBook) { this.templateBook = tBook; }
 
-    // MAIN:
+    // -> TEMPLATES:
+    //--------------------------------------------------------------------------------------------------------
+
+    public void addSpellFormTemplate(String id)
+    {   this.spellFormsTemplatesLearned.add(id); }
+
+    public void addSpellDebuffTemplate(String id)
+    {   this.spellDebuffTemplatesLearned.add(id); }
+
+    public void removeSpellFormTemplate(String id)
+    {   this.spellFormsTemplatesLearned.remove(id); }
+
+    public void removeSpellDebuffTemplate(String id)
+    {   this.spellDebuffTemplatesLearned.remove(id); }
+
+    // TEMPLATES -> CUSTOMSPELL:
     //--------------------------------------------------------------------------------------------------------
 
     public void addCustomSpellForm(String templateID)
     {
         if (spellFormsTemplatesLearned.borrow(templateID))
         {
-            SpellFormTemplate template = spellBookTemplates.getSpellFormTemplates().get(templateID);
+            SpellFormTemplate template = templateBook.getSpellFormTemplates().get(templateID);
 
             if (template != null)
             {
-                CustomSpellForm customSpellForm = new CustomSpellForm();
-                customSpellForm.setSpellFormTemplate(template);
-                customSpellFormList.add(customSpellForm);
+                CustomSpellForm customSpell = new CustomSpellForm();
+                customSpell.setSpellFormTemplate(template);
+                setUUID(customSpell);
+                customFormMap.put(customSpell.getID(), customSpell);
             }
             else
-                LOG.error("SpellForm template doesn't exist, ID: %s", templateID);
+                LOG.warn("SpellForm template doesn't exist, ID: %s", templateID);
         }
     }
 
@@ -66,40 +77,108 @@ public class CustomSpellBook
     {
         if (spellDebuffTemplatesLearned.borrow(templateID))
         {
-            SpellDebuffTemplate template = spellBookTemplates.getSpellDebuffTemplates().get(templateID);
+            SpellDebuffTemplate template = templateBook.getSpellDebuffTemplates().get(templateID);
 
             if (template != null)
             {
-                CustomSpellDebuff customSpellDebuff = new CustomSpellDebuff();
-                customSpellDebuff.setSpellDebuffTemplate(template);
-                customSpellDebuffList.add(customSpellDebuff);
+                CustomSpellDebuff customSpell = new CustomSpellDebuff();
+                customSpell.setSpellDebuffTemplate(template);
+                setUUID(customSpell);
+                customDebuffMap.put(customSpell.getID(), customSpell);
             }
             else
-                LOG.error("SpellDebuff template doesn't exist, ID: %s", templateID);
+                LOG.warn("SpellDebuff template doesn't exist, ID: %s", templateID);
         }
     }
 
-    public void removeCustomSpellForm(int slot)
+    public void removeCustomSpellForm(String spellID)
     {
-        CustomSpellForm spellForm = customSpellFormList.remove(slot);
-        spellFormsTemplatesLearned.returnBack(spellForm.getTemplateID());
+        CustomSpellForm spell = customFormMap.remove(spellID);
+
+        if (spell != null)
+            spellFormsTemplatesLearned.returnBack(spell.getTemplateID());
     }
 
-    public void removeCustomSpellDebuff(int slot)
+    public void removeSpellDebuff(String spellID)
     {
-        CustomSpellDebuff spellDebuff = customSpellDebuffList.remove(slot);
-        spellDebuffTemplatesLearned.returnBack(spellDebuff.getTemplateID());
+        CustomSpellDebuff spell = customDebuffMap.remove(spellID);
+
+        if (spell != null)
+            spellDebuffTemplatesLearned.returnBack(spell.getTemplateID());
     }
+
+    // CUSTOMSPELL -> CUSTOMSPELL:
+    //--------------------------------------------------------------------------------------------------------
+
+    public void assignSpellDebuff(String debuffID, String formID, String slotID)
+    {
+        CustomSpellForm spellForm = customFormMap.get(formID);
+        CustomSpellDebuff spellDebuff = customDebuffMap.get(debuffID);
+
+        if (spellForm != null && spellDebuff != null)
+        {
+            CustomSpellSlot slot = spellForm.getCustomSpellSlots().get(slotID);
+
+            if (slot != null)
+            {
+                if (slot.opensLock(spellDebuff.getKeys()))
+                {
+                    customDebuffMap.remove(debuffID);
+                    slot.setCustomSpellDebuff(spellDebuff);
+                }
+                else
+                    LOG.warn("SpellDebuff doesn't fit into this slot");
+            }
+            else
+                LOG.warn("SpellSlot with the following ID doesn't exist: %s", slotID);
+        }
+        else
+            LOG.warn("SpellForm or SpellDebuff doesn't exist, ID: %s, %s", formID, debuffID);
+    }
+
+    public void unnasignSpellDebuff(String formID, String slotID)
+    {
+        CustomSpellForm spellForm = customFormMap.get(formID);
+
+        if (spellForm != null)
+        {
+            CustomSpellSlot slot = spellForm.getCustomSpellSlots().get(slotID);
+
+            if (slot != null)
+            {
+                CustomSpellDebuff spellDebuff = slot.getCustomSpellDebuff();
+
+                if (spellDebuff != null)
+                    customDebuffMap.put(spellDebuff.getID(), spellDebuff);
+
+                slot.removeCustomSpellDebuff();
+            }
+            else
+                LOG.warn("SpellDebuff doesn't fit into this slot");
+        }
+        else
+            LOG.warn("SpellForm doesn't exist, ID: %s", formID);
+    }
+
 
     // RELOAD TEMPLATES:
     //--------------------------------------------------------------------------------------------------------
 
     public void reload()
     {
-        for (CustomSpellForm spellForm: customSpellFormList)
-            spellForm.setSpellFormTemplate(spellBookTemplates.getSpellFormTemplates().get(spellForm.getTemplateID()));
+        for (CustomSpellForm spell: customFormMap.values())
+            spell.setSpellFormTemplate(templateBook.getSpellFormTemplates().get(spell.getTemplateID()));
 
-        for (CustomSpellDebuff spellDebuff: customSpellDebuffList)
-            spellDebuff.setSpellDebuffTemplate(spellBookTemplates.getSpellDebuffTemplates().get(spellDebuff.getTemplateID()));
+        for (CustomSpellDebuff spell: customDebuffMap.values())
+            spell.setSpellDebuffTemplate(templateBook.getSpellDebuffTemplates().get(spell.getTemplateID()));
     }
+
+    // HELPER:
+    //--------------------------------------------------------------------------------------------------------
+
+    private void setUUID(CustomSpellForm spellForm)
+    {   spellForm.setID(spellForm.getID() + "_" + spellFormUUID++); }
+
+    private void setUUID (CustomSpellDebuff spellDebuff)
+    {   spellDebuff.setID(spellDebuff.getID() + "_" + spellDebuffUUID++);}
 }

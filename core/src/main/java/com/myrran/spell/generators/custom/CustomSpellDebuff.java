@@ -45,6 +45,8 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, Identifiable
 
     @Override public void setSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate)
     {
+        id = spellDebuffTemplate.getID();
+        name = spellDebuffTemplate.getName();
         templateID = spellDebuffTemplate.getID();
         baseCost = spellDebuffTemplate.getBaseCost();
         factory = spellDebuffTemplate.getFactory();
