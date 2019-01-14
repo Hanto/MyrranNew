@@ -15,10 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
@@ -27,8 +24,7 @@ public class CustomSpellBook
 {
     private QuantityMap formTeplatesLearned = new QuantityHashMap();
     private QuantityMap debuffTemplatesLearned = new QuantityHashMap();
-    private Map<String, CustomSpellForm> customForms = new HashMap<>();
-    private Map<String, CustomSpellDebuff> customDebuffs = new HashMap<>();
+    private Map<String, CustomSpellForm> customSpells = new HashMap<>();
 
     @XmlTransient
     private SpellBookTemplates templateBook;
@@ -58,102 +54,80 @@ public class CustomSpellBook
     // TEMPLATES -> CUSTOMSPELL:
     //--------------------------------------------------------------------------------------------------------
 
-    public void addCustomSpellForm(String templateID) throws InvalidIDException
+    public void addCustomSpellForm(String formTemplateID) throws InvalidIDException
     {
-        if (formTeplatesLearned.borrow(templateID))
+        if (formTeplatesLearned.containsKey(formTemplateID))
         {
-            SpellFormTemplate template = getSpellFormTemplate(templateID);
+            SpellFormTemplate template = getSpellFormTemplate(formTemplateID);
+            CustomSpellForm customSpell = new CustomSpellForm(template);
+            setUUID(customSpell, customSpells);
 
-            CustomSpellForm customSpell = new CustomSpellForm();
-            customSpell.setSpellFormTemplate(template);
-            setUUID(customSpell, customForms);
-            customForms.put(customSpell.getID(), customSpell);
+            customSpells.put(customSpell.getID(), customSpell);
+            formTeplatesLearned.borrow(formTemplateID);
         }
         else
-            throw new InvalidIDException("SpellForm template hasn't been learned, ID: %s", templateID);
+            throw new InvalidIDException("SpellForm template hasn't been learned, ID: %s", formTemplateID);
     }
 
-    public void addCustomSpellDebuff(String templateID) throws InvalidIDException
+    public void addCustomSpellDebuff(String customFormID, String slotID, String debuffTemplateID) throws InvalidIDException
     {
-        if (debuffTemplatesLearned.borrow(templateID))
+        if (debuffTemplatesLearned.containsKey(debuffTemplateID))
         {
-            SpellDebuffTemplate template = getSpellDebuffTemplate(templateID);
+            CustomSpellForm spellForm = getCustomSpellForm(customFormID);
+            SpellDebuffTemplate template = getSpellDebuffTemplate(debuffTemplateID);
+            CustomSpellDebuff spellDebuff = new CustomSpellDebuff(template);
 
-            CustomSpellDebuff customSpell = new CustomSpellDebuff();
-            customSpell.setSpellDebuffTemplate(template);
-            setUUID(customSpell, customDebuffs);
-            customDebuffs.put(customSpell.getID(), customSpell);
-        }
-        else
-            throw new InvalidIDException("SpellDebuff template hasn't been learned, ID: %s", templateID);
-    }
-
-    public void removeCustomSpellForm(String spellID) throws InvalidIDException
-    {
-        CustomSpellForm spell = customForms.remove(spellID);
-
-        if (spell != null)
-        {
-            formTeplatesLearned.returnBack(spell.getTemplateID());
-
-            List<String>customSpellDebuffIDs = spell.getCustomSpellSlots().values().stream()
-                .map(CustomSpellSlot::getID)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-
-            for (String debuffID: customSpellDebuffIDs)
-                removeSpellDebuff(debuffID);
-        }
-        else
-            throw new InvalidIDException("CustomSpellForm with the following ID doesn't exist: %s", spellID);
-    }
-
-    public void removeSpellDebuff(String spellID) throws InvalidIDException
-    {
-        CustomSpellDebuff spell = customDebuffs.remove(spellID);
-
-        if (spell != null)
-            debuffTemplatesLearned.returnBack(spell.getTemplateID());
-        else
-            throw new InvalidIDException("CustomSpellDebuff with the following ID doesn't exist: %s", spellID);
-    }
-
-    // CUSTOMSPELL -> CUSTOMSPELL:
-    //--------------------------------------------------------------------------------------------------------
-
-    public void assignSpellDebuff(String debuffID, String formID, String slotID) throws InvalidIDException
-    {
-        CustomSpellForm spellForm = getCustomSpellForm(formID);
-        CustomSpellDebuff spellDebuff = getCustomSpellDebuff(debuffID);
-
-        if (spellForm.getCustomSpellSlots().get(slotID) != null)
             spellForm.setCustomSpellDebuff(spellDebuff, slotID);
-
+            debuffTemplatesLearned.borrow(debuffTemplateID);
+        }
         else
-            throw new InvalidIDException("An Slot with the following ID doesn't exist: %s", slotID);
+            throw new InvalidIDException("SpellDebuff template hasn't been learned, ID: %s", debuffTemplateID);
     }
 
-    public void unnasignSpellDebuff(String formID, String slotID) throws InvalidIDException
+    public void removeCustomSpellForm(String customFormID) throws InvalidIDException
     {
-        CustomSpellForm spellForm = getCustomSpellForm(formID);
+        CustomSpellForm spellForm = getCustomSpellForm(customFormID);
 
-        if (spellForm.getCustomSpellSlots().get(slotID) != null)
+        for (CustomSpellSlot slot: spellForm.getSlots().values())
+            removeCustomSpellDebuff(customFormID, slot.getID());
+
+        customSpells.remove(customFormID);
+        formTeplatesLearned.returnBack(spellForm.getTemplateID());
+    }
+
+    public void removeCustomSpellDebuff(String customFormID, String slotID) throws InvalidIDException
+    {
+        CustomSpellForm spellForm = getCustomSpellForm(customFormID);
+        CustomSpellDebuff spellDebuff = spellForm.getCustomSpellDebuff(slotID);
+
+        if (spellDebuff != null)
+        {
             spellForm.removeCustomSpellDebuff(slotID);
-
-        else
-            throw new InvalidIDException("An Slot with the following ID doesn't exist: %s", slotID);
+            debuffTemplatesLearned.returnBack(spellDebuff.getTemplateID());
+        }
     }
 
     // RELOAD TEMPLATES:
     //--------------------------------------------------------------------------------------------------------
 
-    public void reload()
+    public void reloadAll() throws InvalidIDException
     {
-        for (CustomSpellForm spell: customForms.values())
-            spell.setSpellFormTemplate(templateBook.getSpellFormTemplates().get(spell.getTemplateID()));
+        for (CustomSpellForm spell: customSpells.values())
+            reloadSpellForm(spell);
+    }
 
-        for (CustomSpellDebuff spell: customDebuffs.values())
-            spell.setSpellDebuffTemplate(templateBook.getSpellDebuffTemplates().get(spell.getTemplateID()));
+    private void reloadSpellForm(CustomSpellForm spellForm) throws InvalidIDException
+    {
+        spellForm.setSpellFormTemplate(getSpellFormTemplate(spellForm.getTemplateID()));
+
+        for (CustomSpellSlot slot: spellForm.getSlots().values())
+            reloadSpellDebuff(slot.getCustomSpellDebuff());
+    }
+
+    private void reloadSpellDebuff(CustomSpellDebuff spellDebuff) throws InvalidIDException
+    {
+        if (spellDebuff != null)
+            spellDebuff.setSpellDebuffTemplate(getSpellDebuffTemplate(spellDebuff.getTemplateID()));
     }
 
     // HELPER:
@@ -174,14 +148,7 @@ public class CustomSpellBook
 
     private CustomSpellForm getCustomSpellForm(String spellID) throws InvalidIDException
     {
-        CustomSpellForm spell = customForms.get(spellID);
-        if (spell != null) return spell;
-        else throw new InvalidIDException("A CustomSpellForm with the following ID doesn't exist: %s", spellID);
-    }
-
-    private CustomSpellDebuff getCustomSpellDebuff(String spellID) throws InvalidIDException
-    {
-        CustomSpellDebuff spell = customDebuffs.get(spellID);
+        CustomSpellForm spell = customSpells.get(spellID);
         if (spell != null) return spell;
         else throw new InvalidIDException("A CustomSpellForm with the following ID doesn't exist: %s", spellID);
     }

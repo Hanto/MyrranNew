@@ -6,6 +6,7 @@ import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.data.templatedata.SpellStatTemplate;
 import com.myrran.spell.entity.debuff.SpellDebuffFactory;
 import com.myrran.spell.generators.SpellDebuffGenerator;
+import com.myrran.utils.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,7 +25,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, Identifiable
     private int baseCost;
     private SpellDebuffFactory factory;
     private List<CustomSpellSlotKey> keys;
-    private Map<String, CustomSpellStat> customSpellStats = new HashMap<>();
+    private Map<String, CustomSpellStat> stats = new HashMap<>();
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -33,9 +34,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, Identifiable
     @Override public String getName()                           { return name; }
     public String getTemplateID()                               { return templateID; }
     public SpellDebuffFactory getFactory()                      { return factory; }
-    public Map<String, CustomSpellStat> getCustomSpellStats()   { return customSpellStats; }
     public List<CustomSpellSlotKey> getKeys()                   { return keys; }
-
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setName(String name)                  { this.name = name; }
     public void setKeys(CustomSpellSlotKey... keys)             { this.keys = Arrays.asList(keys); }
@@ -43,26 +42,29 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, Identifiable
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public void setSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate)
-    {
-        id = spellDebuffTemplate.getID();
-        name = spellDebuffTemplate.getName();
-        templateID = spellDebuffTemplate.getID();
-        baseCost = spellDebuffTemplate.getBaseCost();
-        factory = spellDebuffTemplate.getFactory();
-        keys = spellDebuffTemplate.getKeys();
+    public CustomSpellDebuff(SpellDebuffTemplate template)
+    {   setSpellDebuffTemplate(template); }
 
-        spellDebuffTemplate.getSpellStats()
+    @Override public void setSpellDebuffTemplate(SpellDebuffTemplate template)
+    {
+        id = template.getID();
+        name = template.getName();
+        templateID = template.getID();
+        baseCost = template.getBaseCost();
+        factory = template.getFactory();
+        keys = template.getKeys();
+
+        template.getSpellStats()
             .forEach(this::setSpellStatTemplate);
     }
 
     private void setSpellStatTemplate(SpellStatTemplate template)
     {
-        CustomSpellStat customSpellStat = customSpellStats.get(template.getID());
+        CustomSpellStat customSpellStat = stats.get(template.getID());
         if (customSpellStat == null)
         {
             customSpellStat = new CustomSpellStat();
-            customSpellStats.put(template.getID(), customSpellStat);
+            stats.put(template.getID(), customSpellStat);
         }
         customSpellStat.setSpellStatTemplate(template);
     }
@@ -75,10 +77,20 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, Identifiable
         SpellDebuffParams data = new SpellDebuffParams().
             setFactory(factory);
 
-        for (CustomSpellStat stat: getCustomSpellStats().values())
+        for (CustomSpellStat stat: stats.values())
             data.addStat(stat.getSpellStatData());
 
         return data;
+    }
+
+    // STATS:
+    //--------------------------------------------------------------------------------------------------------
+
+    public CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException
+    {
+        CustomSpellStat stat = stats.get(statID);
+        if (stat != null) return stat;
+        else throw new InvalidIDException("SpellStat with the following ID doesn't exist: %s", statID);
     }
 
     // MAIN:
@@ -86,7 +98,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, Identifiable
 
     public int getTotalCost()
     {
-        return customSpellStats.values().stream()
+        return stats.values().stream()
             .mapToInt(CustomSpellStat::getTotalCost)
             .sum()
 

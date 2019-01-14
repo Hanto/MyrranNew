@@ -12,14 +12,15 @@
       <value available="1" total="2"/>
     </entry>
   </debuffTemplatesLearned>
-  <customForms>
+  <customSpells>
     <entry>
       <key>Bolt_00</key>
       <value>
-        <id>Bolt_00</id>
+        <id>Bolt</id>
         <name>Super Bolt</name>
         <templateID>Bolt</templateID>
-        <customSpellStats>
+        <factory>BOLT</factory>
+        <stats>
           <entry>
             <key>Speed</key>
             <value>
@@ -48,8 +49,8 @@
               <numUpgrades>0</numUpgrades>
             </value>
           </entry>
-        </customSpellStats>
-        <customSpellSlots>
+        </stats>
+        <slots>
           <entry>
             <key>Spot 1</key>
             <value>
@@ -68,13 +69,13 @@
               <type>aoe</type>
               <lock>DEBUFF</lock>
               <customSpellDebuff>
-                <id>Super DOT_00</id>
+                <id>Super DOT</id>
                 <name>Hanto Super DOT</name>
                 <templateID>Super DOT</templateID>
                 <baseCost>30</baseCost>
                 <factory>DOT</factory>
                 <keys>DEBUFF</keys>
-                <customSpellStats>
+                <stats>
                   <entry>
                     <key>Speed</key>
                     <value>
@@ -103,7 +104,7 @@
                       <numUpgrades>0</numUpgrades>
                     </value>
                   </entry>
-                </customSpellStats>
+                </stats>
               </customSpellDebuff>
             </value>
           </entry>
@@ -116,10 +117,8 @@
               <lock>DEBUFF</lock>
             </value>
           </entry>
-        </customSpellSlots>
-        <factory>BOLT</factory>
+        </slots>
       </value>
     </entry>
-  </customForms>
-  <customDebuffs/>
+  </customSpells>
 </customSpellBook>

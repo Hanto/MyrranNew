@@ -19,7 +19,6 @@ public class CustomSpellSlot implements Identifiable
     private String name;
     private String type;
     private List<CustomSpellSlotKey> lock = new ArrayList<>();
-
     private CustomSpellDebuff customSpellDebuff;
 
     // SETTERS GETTERS:
@@ -30,7 +29,6 @@ public class CustomSpellSlot implements Identifiable
     public String getSlotType()                                 { return type; }
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
     public CustomSpellDebuff getCustomSpellDebuff()             { return customSpellDebuff; }
-
     @Override public void setID(String id)                      { this.id = id; }
     public void setName(String name)                            { this.name = name; }
     public void setType(String type)                            { this.type = type; }
@@ -39,12 +37,16 @@ public class CustomSpellSlot implements Identifiable
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setSpellSlotTemplate(SpellSlotTemplate data)
+    public CustomSpellSlot() {}
+    public CustomSpellSlot (SpellSlotTemplate template)
+    {   setSpellSlotTemplate(template); }
+
+    public void setSpellSlotTemplate(SpellSlotTemplate template)
     {
-        this.id = data.getID();
-        this.name = data.getName();
-        this.type = data.getSlotType();
-        this.lock = new ArrayList<>(data.getLock());
+        this.id = template.getID();
+        this.name = template.getName();
+        this.type = template.getSlotType();
+        this.lock = new ArrayList<>(template.getLock());
     }
 
     // CUSTOM TO ENTITY DATA:

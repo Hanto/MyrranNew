@@ -9,6 +9,7 @@ import com.myrran.spell.data.templatedata.SpellStatTemplate;
 import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.entity.form.SpellFormFactory;
 import com.myrran.spell.generators.SpellFormGenerator;
+import com.myrran.utils.InvalidIDException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,59 +27,61 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
     private String id;
     private String name;
     private String templateID;
-    private Map<String, CustomSpellStat> customSpellStats = new HashMap<>();
-    private Map<String, CustomSpellSlot> customSpellSlots = new HashMap<>();
     private SpellFormFactory factory;
+    private Map<String, CustomSpellStat> stats = new HashMap<>();
+    private Map<String, CustomSpellSlot> slots = new HashMap<>();
 
     private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellForm.class);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public String getID()                             { return id; }
-    @Override public String getName()                           { return name; }
-    public String getTemplateID()                               { return templateID; }
-    public Map<String, CustomSpellStat> getCustomSpellStats()   { return customSpellStats; }
-    public Map<String, CustomSpellSlot> getCustomSpellSlots()   { return customSpellSlots; }
-
-    @Override public void setID(String id)                      { this.id = id; }
-    @Override public void setName(String name)                  { this.name = name; }
+    @Override public String getID()                 { return id; }
+    @Override public String getName()               { return name; }
+    public String getTemplateID()                   { return templateID; }
+    public Map<String, CustomSpellSlot> getSlots()  { return slots; }
+    @Override public void setID(String id)          { this.id = id; }
+    @Override public void setName(String name)      { this.name = name; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public void setSpellFormTemplate(SpellFormTemplate spellFormTemplate)
-    {
-        id = spellFormTemplate.getID();
-        name = spellFormTemplate.getName();
-        templateID = spellFormTemplate.getID();
-        factory = spellFormTemplate.getFactory();
+    public CustomSpellForm(SpellFormTemplate template)
+    {   setSpellFormTemplate(template); }
 
-        spellFormTemplate.getSpellStats()
+    @Override
+    public void setSpellFormTemplate(SpellFormTemplate template)
+    {
+        id = template.getID();
+        name = template.getName();
+        templateID = template.getID();
+        factory = template.getFactory();
+
+        template.getSpellStats()
             .forEach(this::setSpellStatTemplate);
 
-        spellFormTemplate.getSpellSlots()
+        template.getSpellSlots()
             .forEach(this::setSpellSlotTemplate);
     }
 
     private void setSpellStatTemplate(SpellStatTemplate template)
     {
-        CustomSpellStat customSpellStat = customSpellStats.get(template.getID());
+        CustomSpellStat customSpellStat = stats.get(template.getID());
         if (customSpellStat == null)
         {
             customSpellStat = new CustomSpellStat();
-            customSpellStats.put(template.getID(), customSpellStat);
+            stats.put(template.getID(), customSpellStat);
         }
         customSpellStat.setSpellStatTemplate(template);
     }
 
     private void setSpellSlotTemplate(SpellSlotTemplate template)
     {
-        CustomSpellSlot customSpellSlot = customSpellSlots.get(template.getID());
+        CustomSpellSlot customSpellSlot = slots.get(template.getID());
         if (customSpellSlot == null)
         {
             customSpellSlot = new CustomSpellSlot();
-            customSpellSlots.put(template.getID(), customSpellSlot);
+            slots.put(template.getID(), customSpellSlot);
         }
         customSpellSlot.setSpellSlotTemplate(template);
     }
@@ -86,29 +89,70 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
     // CUSTOM TO ENTITY DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public SpellFormParams getSpellFormData()
+    @Override
+    public SpellFormParams getSpellFormData()
     {
         SpellFormParams data = new SpellFormParams();
         data.setFactory(factory);
 
-        for (CustomSpellStat stat: getCustomSpellStats().values())
+        for (CustomSpellStat stat : stats.values())
             data.addStat(stat.getSpellStatData());
 
         return data;
     }
 
-    @Override public List<SpellDebuffParams> getSpellEffectDataList()
+    @Override
+    public List<SpellDebuffParams> getSpellEffectDataList()
     {
-        return customSpellSlots.values().stream()
+        return slots.values().stream()
             .filter(customSpellSlot -> customSpellSlot.getCustomSpellDebuff() != null)
             .map(CustomSpellSlot::getSpellEffectData)
             .collect(Collectors.toList());
     }
 
+    // SPELL DEBUFF:
+    //--------------------------------------------------------------------------------------------------------
+
+    public CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
+    {
+        CustomSpellSlot slot = getCustomSpellSlot(slotID);
+        return slot.getCustomSpellDebuff();
+    }
+
+    public void setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException
+    {
+        CustomSpellSlot slot = getCustomSpellSlot(slotID);
+        slot.setCustomSpellDebuff(debuff);
+    }
+
+    public void removeCustomSpellDebuff(String slotID) throws InvalidIDException
+    {
+        CustomSpellSlot slot = getCustomSpellSlot(slotID);
+        slot.removeCustomSpellDebuff();
+    }
+
+    private CustomSpellSlot getCustomSpellSlot(String slotID) throws InvalidIDException
+    {
+        CustomSpellSlot slot = slots.get(slotID);
+        if (slot != null) return slot;
+        else throw new  InvalidIDException("SpellSlot with the following ID doesn't exist: %s", slotID);
+    }
+
+    // STATS:
+    //--------------------------------------------------------------------------------------------------------
+
+    public CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException
+    {
+        CustomSpellStat stat = stats.get(statID);
+        if (stat != null) return stat;
+        else throw new InvalidIDException("SpellStat with the following ID doesn't exist: %s", statID);
+    }
+
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public SpellForm cast()
+    @Override
+    public SpellForm cast()
     {
         SpellForm entity = factory.getFormEntity();
         entity.setSpellFormParams(getSpellFormData());
@@ -118,34 +162,12 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
 
     public int getTotalCost()
     {
-        return customSpellStats.values().stream()
+        return stats.values().stream()
             .mapToInt(CustomSpellStat::getTotalCost)
             .sum() +
 
-        customSpellSlots.values().stream()
-            .mapToInt(CustomSpellSlot::getTotalCost)
-            .sum();
-    }
-
-    public void setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID)
-    {
-        CustomSpellSlot slot = customSpellSlots.get(slotID);
-
-        if (slot!=null)
-            slot.setCustomSpellDebuff(debuff);
-
-        else
-            LOG.warn("SpellSlot with the following ID doesn't exist: %s", slotID);
-    }
-
-    public void removeCustomSpellDebuff(String slotID)
-    {
-        CustomSpellSlot slot = customSpellSlots.get(slotID);
-
-        if (slot!=null)
-            slot.removeCustomSpellDebuff();
-
-        else
-            LOG.warn("SpellSlot with the following ID doesn't exist: %s", slotID);
+            slots.values().stream()
+                .mapToInt(CustomSpellSlot::getTotalCost)
+                .sum();
     }
 }

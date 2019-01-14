@@ -2,6 +2,7 @@ package com.myrran.ztests;
 
 import com.myrran.spell.data.templatedata.SpellBookTemplates;
 import com.myrran.spell.generators.custom.CustomSpellBook;
+import com.myrran.utils.InvalidIDException;
 import com.nitorcreations.junit.runners.NestedRunner;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class CustomSpellFormStatTest
     public class pim
     {
         @Test
-        public void spellForm() throws JAXBException, FileNotFoundException, TransformerException
+        public void spellForm() throws JAXBException, FileNotFoundException, TransformerException, InvalidIDException
         {
             SpellBookTemplates book = unmarshal(SpellBookTemplates.class);
 
@@ -40,11 +41,15 @@ public class CustomSpellFormStatTest
             cbook.addSpellDebuffTemplate("Super DOT");
 
             cbook.addCustomSpellForm("Bolt");
-            cbook.addCustomSpellDebuff("Super DOT");
+            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Super DOT");
+            cbook.removeCustomSpellForm("Bolt_00");
 
-            cbook.assignSpellDebuff("Super DOT_00", "Bolt_00", "Spot 2");
-            cbook.unnasignSpellDebuff("Bolt_00", "Spot 2");
-            cbook.assignSpellDebuff("Super DOT_00", "Bolt_00", "Spot 2");
+            cbook.addCustomSpellForm("Bolt");
+            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Super DOT");
+            cbook.removeCustomSpellDebuff("Bolt_00", "Spot 2");
+            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Super DOT");
+
+            cbook.reloadAll();
 
             marshal(cbook, CustomSpellBook.class);
 
