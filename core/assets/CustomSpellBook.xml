@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <customSpellBook>
-  <spellFormsTemplatesLearned>
+  <formTeplatesLearned>
     <entry>
       <key>Bolt</key>
       <value available="2" total="3"/>
     </entry>
-  </spellFormsTemplatesLearned>
-  <spellDebuffTemplatesLearned>
+  </formTeplatesLearned>
+  <debuffTemplatesLearned>
     <entry>
       <key>Super DOT</key>
       <value available="1" total="2"/>
     </entry>
-  </spellDebuffTemplatesLearned>
-  <customFormMap>
+  </debuffTemplatesLearned>
+  <customForms>
     <entry>
-      <key>Bolt_0</key>
+      <key>Bolt_00</key>
       <value>
-        <id>Bolt_0</id>
+        <id>Bolt_00</id>
         <name>Super Bolt</name>
         <templateID>Bolt</templateID>
         <customSpellStats>
@@ -68,7 +68,7 @@
               <type>aoe</type>
               <lock>DEBUFF</lock>
               <customSpellDebuff>
-                <id>Super DOT_0</id>
+                <id>Super DOT_00</id>
                 <name>Hanto Super DOT</name>
                 <templateID>Super DOT</templateID>
                 <baseCost>30</baseCost>
@@ -120,8 +120,6 @@
         <factory>BOLT</factory>
       </value>
     </entry>
-  </customFormMap>
-  <customDebuffMap/>
-  <spellFormUUID>1</spellFormUUID>
-  <spellDebuffUUID>1</spellDebuffUUID>
+  </customForms>
+  <customDebuffs/>
 </customSpellBook>

@@ -35,8 +35,6 @@ public class CustomSpellSlot implements Identifiable
     public void setName(String name)                            { this.name = name; }
     public void setType(String type)                            { this.type = type; }
     public void setLock(CustomSpellSlotKey...integers)          { lock.addAll(Arrays.asList(integers)); }
-    public void setCustomSpellDebuff(CustomSpellDebuff effect)  { this.customSpellDebuff = effect; }
-    public void removeCustomSpellDebuff()                       { this.customSpellDebuff = null; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -68,5 +66,14 @@ public class CustomSpellSlot implements Identifiable
 
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }
+
+    public void setCustomSpellDebuff(CustomSpellDebuff effect)
+    {
+        if(opensLock(effect.getKeys()))
+            this.customSpellDebuff = effect;
+    }
+
+    public void removeCustomSpellDebuff()
+    {   this.customSpellDebuff =  null; }
 
 }

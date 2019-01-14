@@ -9,6 +9,8 @@ import com.myrran.spell.data.templatedata.SpellStatTemplate;
 import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.entity.form.SpellFormFactory;
 import com.myrran.spell.generators.SpellFormGenerator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -28,6 +30,8 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
     private Map<String, CustomSpellSlot> customSpellSlots = new HashMap<>();
     private SpellFormFactory factory;
 
+    private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellForm.class);
+
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
@@ -39,7 +43,6 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
 
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setName(String name)                  { this.name = name; }
-    public void setCustomSpellDebuff(CustomSpellDebuff debuff, String slot)  { this.customSpellSlots.get(slot).setCustomSpellDebuff(debuff);}
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -122,5 +125,27 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
         customSpellSlots.values().stream()
             .mapToInt(CustomSpellSlot::getTotalCost)
             .sum();
+    }
+
+    public void setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID)
+    {
+        CustomSpellSlot slot = customSpellSlots.get(slotID);
+
+        if (slot!=null)
+            slot.setCustomSpellDebuff(debuff);
+
+        else
+            LOG.warn("SpellSlot with the following ID doesn't exist: %s", slotID);
+    }
+
+    public void removeCustomSpellDebuff(String slotID)
+    {
+        CustomSpellSlot slot = customSpellSlots.get(slotID);
+
+        if (slot!=null)
+            slot.removeCustomSpellDebuff();
+
+        else
+            LOG.warn("SpellSlot with the following ID doesn't exist: %s", slotID);
     }
 }

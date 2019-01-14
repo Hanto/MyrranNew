@@ -23,7 +23,6 @@ import java.io.OutputStream;
 @RunWith(NestedRunner.class)
 public class CustomSpellFormStatTest
 {
-
     public class pim
     {
         @Test
@@ -43,9 +42,9 @@ public class CustomSpellFormStatTest
             cbook.addCustomSpellForm("Bolt");
             cbook.addCustomSpellDebuff("Super DOT");
 
-            cbook.assignSpellDebuff("Super DOT_0", "Bolt_0", "Spot 2");
-            cbook.unnasignSpellDebuff("Bolt_0", "Spot 2");
-            cbook.assignSpellDebuff("Super DOT_0", "Bolt_0", "Spot 2");
+            cbook.assignSpellDebuff("Super DOT_00", "Bolt_00", "Spot 2");
+            cbook.unnasignSpellDebuff("Bolt_00", "Spot 2");
+            cbook.assignSpellDebuff("Super DOT_00", "Bolt_00", "Spot 2");
 
             marshal(cbook, CustomSpellBook.class);
 

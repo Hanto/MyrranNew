@@ -23,9 +23,18 @@ public class SpellBookTemplates
     public Map<String, SpellDebuffTemplate> getSpellDebuffTemplates()
     {   return spellDebuffTemplates; }
 
-    public SpellBookTemplates addSpellFormTemplate(SpellFormTemplate spellFormTemplate)
-    {   this.spellFromTemplates.put(spellFormTemplate.getID(), spellFormTemplate); return this; }
+    // MAIN:
+    //--------------------------------------------------------------------------------------------------------
 
-    public SpellBookTemplates addSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate)
-    {   this.spellDebuffTemplates.put(spellDebuffTemplate.getID(), spellDebuffTemplate); return this; }
+    public SpellFormTemplate getSpellFormTemplate(String templateID)
+    {   return spellFromTemplates.get(templateID); }
+
+    public SpellDebuffTemplate getSpellDebuffTemplate(String templateID)
+    {   return spellDebuffTemplates.get(templateID); }
+
+    public void addSpellFormTemplate(SpellFormTemplate spellFormTemplate)
+    {   this.spellFromTemplates.put(spellFormTemplate.getID(), spellFormTemplate); }
+
+    public void addSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate)
+    {   this.spellDebuffTemplates.put(spellDebuffTemplate.getID(), spellDebuffTemplate); }
 }
