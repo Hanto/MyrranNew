@@ -36,7 +36,7 @@ public class CustomSpellBook
 
     public void setSpellBookTemplates(SpellBookTemplates tBook) { this.templateBook = tBook; }
 
-    // -> TEMPLATES:
+    // TEMPLATES -> LEARNED
     //--------------------------------------------------------------------------------------------------------
 
     public void addSpellFormTemplate(String templateID)
@@ -51,7 +51,7 @@ public class CustomSpellBook
     public void removeSpellDebuffTemplate(String templateID)
     {   this.debuffTemplatesLearned.remove(templateID); }
 
-    // TEMPLATES -> CUSTOMSPELL:
+    // LEARNED -> CUSTOMSPELL:
     //--------------------------------------------------------------------------------------------------------
 
     public void addCustomSpellForm(String formTemplateID) throws InvalidIDException
@@ -60,7 +60,7 @@ public class CustomSpellBook
         {
             SpellFormTemplate template = getSpellFormTemplate(formTemplateID);
             CustomSpellForm customSpell = new CustomSpellForm(template);
-            setUUID(customSpell, customSpells);
+            setUUID(customSpell);
 
             customSpells.put(customSpell.getID(), customSpell);
             formTeplatesLearned.borrow(formTemplateID);
@@ -133,7 +133,7 @@ public class CustomSpellBook
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    private void setUUID(Identifiable spell, Map<String, ?>map)
+    private void setUUID(Identifiable spell)
     {
         int counter = 0;
         String uuid;
@@ -141,7 +141,7 @@ public class CustomSpellBook
         do
         {   uuid = String.format("%s_%02d", spell.getID(), counter++); }
         while
-        (   map.containsKey(uuid));
+        (   customSpells.containsKey(uuid));
 
         spell.setID(uuid);
     }

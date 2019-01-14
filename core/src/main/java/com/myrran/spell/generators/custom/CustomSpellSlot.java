@@ -37,11 +37,7 @@ public class CustomSpellSlot implements Identifiable
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellSlot() {}
-    public CustomSpellSlot (SpellSlotTemplate template)
-    {   setSpellSlotTemplate(template); }
-
-    public void setSpellSlotTemplate(SpellSlotTemplate template)
+    void setSpellSlotTemplate(SpellSlotTemplate template)
     {
         this.id = template.getID();
         this.name = template.getName();
@@ -52,7 +48,7 @@ public class CustomSpellSlot implements Identifiable
     // CUSTOM TO ENTITY DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellDebuffParams getSpellEffectData()
+    SpellDebuffParams getSpellEffectData()
     {
         SpellDebuffParams data = customSpellDebuff.getSpellEffectData();
         data.setSlotType(type);
@@ -69,13 +65,13 @@ public class CustomSpellSlot implements Identifiable
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }
 
-    public void setCustomSpellDebuff(CustomSpellDebuff effect)
+    void setCustomSpellDebuff(CustomSpellDebuff effect)
     {
         if(opensLock(effect.getKeys()))
             this.customSpellDebuff = effect;
     }
 
-    public void removeCustomSpellDebuff()
+    void removeCustomSpellDebuff()
     {   this.customSpellDebuff =  null; }
 
 }

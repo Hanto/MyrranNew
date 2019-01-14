@@ -36,12 +36,12 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public String getID()                 { return id; }
-    @Override public String getName()               { return name; }
-    public String getTemplateID()                   { return templateID; }
-    public Map<String, CustomSpellSlot> getSlots()  { return slots; }
-    @Override public void setID(String id)          { this.id = id; }
-    @Override public void setName(String name)      { this.name = name; }
+    @Override public String getID()                     { return id; }
+    @Override public String getName()                   { return name; }
+    public String getTemplateID()                       { return templateID; }
+    public Map<String, CustomSpellSlot> getSlots()      { return slots; }
+    @Override public void setID(String id)              { this.id = id; }
+    @Override public void setName(String name)          { this.name = name; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
