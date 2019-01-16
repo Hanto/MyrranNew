@@ -1,6 +1,6 @@
 package com.myrran.spell.entity.debuff;
 
-import com.myrran.misc.Consumable.ConsumableI;
+import com.myrran.misc.consumer.ConsumableI;
 import com.myrran.misc.Debuffable;
 
 import java.util.function.Consumer;

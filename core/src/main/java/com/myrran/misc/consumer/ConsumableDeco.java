@@ -1,4 +1,5 @@
-package com.myrran.misc.Consumable;
+package com.myrran.misc.consumer;
+
 
 /** @author Ivan Delgado Huerta */
 public interface ConsumableDeco extends ConsumableI

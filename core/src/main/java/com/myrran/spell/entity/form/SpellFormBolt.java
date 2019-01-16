@@ -1,7 +1,7 @@
 package com.myrran.spell.entity.form;
 
-import com.myrran.misc.Consumable.ConsumableDeco;
-import com.myrran.misc.Consumable.Consumable;
+import com.myrran.misc.consumer.ConsumableDeco;
+import com.myrran.misc.consumer.Consumable;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.entityparams.SpellFormParams;
 import com.myrran.dataestructures.MapList.MapListI;

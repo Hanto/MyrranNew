@@ -1,15 +1,13 @@
 package com.myrran.spell.generators.custom;
 
+import com.myrran.dataestructures.QuantityMap.QuantityMap;
+import com.myrran.dataestructures.QuantityMap.QuantityMapI;
 import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.templatedata.SpellBookTemplates;
 import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.data.templatedata.SpellFormTemplate;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.utils.InvalidIDException;
-import com.myrran.dataestructures.QuantityMap.QuantityMapI;
-import com.myrran.dataestructures.QuantityMap.QuantityMap;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -29,8 +27,6 @@ public class CustomSpellBook
 
     @XmlTransient
     private SpellBookTemplates templateBook;
-
-    private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellBook.class);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -147,7 +143,7 @@ public class CustomSpellBook
         spell.setID(uuid);
     }
 
-    private CustomSpellForm getCustomSpellForm(String spellID) throws InvalidIDException
+    public CustomSpellForm getCustomSpellForm(String spellID) throws InvalidIDException
     {
         CustomSpellForm spell = customSpells.get(spellID);
         if (spell != null) return spell;

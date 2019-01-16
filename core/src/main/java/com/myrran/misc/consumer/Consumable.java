@@ -1,4 +1,4 @@
-package com.myrran.misc.Consumable;
+package com.myrran.misc.consumer;
 
 /** @author Ivan Delgado Huerta */
 public class Consumable implements ConsumableI

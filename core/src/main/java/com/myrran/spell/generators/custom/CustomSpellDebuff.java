@@ -34,7 +34,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats
     public String getTemplateID()                               { return templateID; }
     public SpellDebuffFactory getFactory()                      { return factory; }
     public List<CustomSpellSlotKey> getKeys()                   { return keys; }
-    @Override public CustomSpellStats getSpellStats()        { return spellStats; }
+    @Override public CustomSpellStats getSpellStats()           { return spellStats; }
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setName(String name)                  { this.name = name; }
     public void setKeys(CustomSpellSlotKey... keys)             { this.keys = Arrays.asList(keys); }
@@ -42,6 +42,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
+    public CustomSpellDebuff() {}
     public CustomSpellDebuff(SpellDebuffTemplate template)
     {   setSpellDebuffTemplate(template); }
 

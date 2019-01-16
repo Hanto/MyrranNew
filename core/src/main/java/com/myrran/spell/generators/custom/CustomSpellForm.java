@@ -39,6 +39,7 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
+    public CustomSpellForm() {}
     public CustomSpellForm(SpellFormTemplate template)
     {   setSpellFormTemplate(template); }
 

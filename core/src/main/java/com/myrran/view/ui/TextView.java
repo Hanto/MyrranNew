@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 /** @author Ivan Delgado Huerta */
 public class TextView extends Group
 {
-    private LabelStyle textStyle;        //Fuente y Color del texto normal
-    private LabelStyle shadowStyle;        //Fuente y Color del texto de la sombra
+    private LabelStyle textStyle;
+    private LabelStyle shadowStyle;
     private Label textLabel;
     private Label shadowLabel;
     private int shadowTickness;
@@ -24,12 +24,16 @@ public class TextView extends Group
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public TextView(String text, BitmapFont font, Color textColor, Color shadowColor, int shadowTickness)
+    public TextView(BitmapFont font, Color textColor, Color shadowColor, int shadowTickness)
     {
         this.textStyle = new LabelStyle(font, textColor);
         this.shadowStyle = new LabelStyle(font, shadowColor);
         this.shadowTickness = shadowTickness;
+    }
 
+    public TextView(String text, BitmapFont font, Color textColor, Color shadowColor, int shadowTickness)
+    {
+        this(font, textColor, shadowColor, shadowTickness);
         setText(text);
     }
 
@@ -71,7 +75,7 @@ public class TextView extends Group
     {
         SnapshotArray<Actor> actorsList = getChildren();
 
-        List<Actor>list= Arrays.asList(actorsList.begin()).stream()
+        List<Actor>list= Arrays.stream(actorsList.begin())
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
 
@@ -87,6 +91,7 @@ public class TextView extends Group
 
         actorsList.end();
 
-        setBounds(0, 0, maxX, maxY);
+        setWidth(maxX);
+        setHeight(maxY);
     }
 }

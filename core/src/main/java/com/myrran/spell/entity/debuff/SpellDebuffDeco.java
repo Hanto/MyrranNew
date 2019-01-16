@@ -1,7 +1,7 @@
 package com.myrran.spell.entity.debuff;
 
-import com.myrran.misc.Consumable.ConsumableDeco;
-import com.myrran.misc.Consumable.ConsumableI;
+import com.myrran.misc.consumer.ConsumableDeco;
+import com.myrran.misc.consumer.ConsumableI;
 import com.myrran.misc.Debuffable;
 
 /** @author Ivan Delgado Huerta */
