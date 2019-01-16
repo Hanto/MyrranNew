@@ -6,8 +6,8 @@ import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.data.templatedata.SpellFormTemplate;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.utils.InvalidIDException;
+import com.myrran.dataestructures.QuantityMap.QuantityMapI;
 import com.myrran.dataestructures.QuantityMap.QuantityMap;
-import com.myrran.dataestructures.QuantityMap.QuantityMapImp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,8 +23,8 @@ import java.util.Map;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellBook
 {
-    private QuantityMap formTeplatesLearned = new QuantityMapImp(HashMap::new);
-    private QuantityMap debuffTemplatesLearned = new QuantityMapImp(HashMap::new);
+    private QuantityMapI formTeplatesLearned = new QuantityMap(HashMap::new);
+    private QuantityMapI debuffTemplatesLearned = new QuantityMap(HashMap::new);
     private Map<String, CustomSpellForm> customSpells = new HashMap<>();
 
     @XmlTransient
@@ -82,7 +82,7 @@ public class CustomSpellBook
             debuffTemplatesLearned.borrow(debuffTemplateID);
         }
         else
-            throw new InvalidIDException("SpellDebuff template hasn't been learned, ID: %s", debuffTemplateID);
+            throw new InvalidIDException("SpellDebuffDeco template hasn't been learned, ID: %s", debuffTemplateID);
     }
 
     public void removeCustomSpellForm(String customFormID) throws InvalidIDException

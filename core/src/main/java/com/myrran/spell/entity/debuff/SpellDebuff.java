@@ -1,52 +1,57 @@
 package com.myrran.spell.entity.debuff;
 
-import com.myrran.misc.Consumable;
-import com.myrran.misc.ConsumableImp;
+import com.myrran.misc.Consumable.Consumable;
+import com.myrran.misc.Consumable.ConsumableDeco;
+import com.myrran.misc.Consumable.ConsumableI;
 import com.myrran.misc.Debuffable;
 
+import java.util.function.Consumer;
+
 /** @author Ivan Delgado Huerta */
-public interface SpellDebuff extends Consumable
+public class SpellDebuff implements ConsumableDeco, SpellDebuffI
 {
-    SpellDebuffImp getSpellDebuff();
+    private ConsumableI consumable = new Consumable();
+    private int appliedTicks = 0;
+    private int actualStacks = 0;
+    private int maxStacks = 1;
 
-    void applyTick(Debuffable debuffable);
+    private static final float TICKDURATION = 0.5f;
 
-    // DECORATOR:
+    // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    default ConsumableImp getConsumable()
-    {   return getSpellDebuff().getConsumable(); }
+    @Override public ConsumableI getConsumable()                { return consumable; }
+    @Override public int getTicksAplicados()                    { return appliedTicks; }
+    @Override public int getActualStacks()                      { return actualStacks; }
+    @Override public int getMaxStacks()                         { return maxStacks; }
+    @Override public void setTicksAplicados(int appliedTicks)   { this.appliedTicks = appliedTicks; }
+    @Override public void setActualStacks(int actualStacks)     { this.actualStacks = actualStacks;}
+    @Override public void setMaxStacks(int maxStacks)           { this.maxStacks = maxStacks; }
 
-    default int getTicksAplicados()
-    {   return getSpellDebuff().getAppliedTicks(); }
+    // MAIN:
+    //--------------------------------------------------------------------------------------------------------
 
-    default int getActualStacks()
-    {   return getSpellDebuff().getActualStacks(); }
+    @Override public int getMaxTicks()
+    {   return (int)(getMaxDuration() / TICKDURATION); }
 
-    default int getMaxStacks()
-    {   return getSpellDebuff().getMaxStacks(); }
+    @Override public int getTickActual()
+    {   return (int)(getActualDuration() / TICKDURATION); }
 
-    default void setTicksAplicados(int ticksAplicados)
-    {   getSpellDebuff().setAppliedTicks(ticksAplicados); }
+    @Override public int getTicksRestantes()
+    {   return getMaxTicks() - getTicksAplicados(); }
 
-    default void setActualStacks(int actualStacks)
-    {   getSpellDebuff().setActualStacks(actualStacks); }
+    @Override public void resetDuration()
+    {
+        setTicksAplicados(0);
+        setActualDuration(getActualDuration() % TICKDURATION);
+    }
 
-    default void setMaxStacks(int maxStacks)
-    {   getSpellDebuff().setMaxStacks(maxStacks); }
-
-    default int getMaxTicks()
-    {   return getSpellDebuff().getMaxTicks(); }
-
-    default int getTickActual()
-    {   return getSpellDebuff().getTickActual(); }
-
-    default int getTicksRestantes()
-    {   return getSpellDebuff().getTicksRestantes(); }
-
-    default void resetDuration()
-    {   getSpellDebuff().resetDuration(); }
-
-    default void applyTicks(Debuffable debuffable)
-    {   getSpellDebuff().applyTicks(debuffable, this::applyTick); }
+    @Override public void applyTicks(Debuffable debuffable, Consumer<Debuffable> consumer)
+    {
+        for (int i = getTicksAplicados(); i< getTickActual(); i++)
+        {
+            setTicksAplicados(i);
+            consumer.accept(debuffable);
+        }
+    }
 }

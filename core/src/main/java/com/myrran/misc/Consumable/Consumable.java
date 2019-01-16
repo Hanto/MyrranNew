@@ -1,7 +1,7 @@
-package com.myrran.misc;
+package com.myrran.misc.Consumable;
 
 /** @author Ivan Delgado Huerta */
-public class ConsumableImp
+public class Consumable implements ConsumableI
 {
     private float actualDuration = 0.0f;
     private float maxDuration = 5.0f;
@@ -9,14 +9,15 @@ public class ConsumableImp
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public float getActualDuration()                      { return actualDuration; }
-    public float getMaxDuration()                         { return maxDuration; }
-    public void setMaxDuration(float maxDuration)         { this.maxDuration = maxDuration; }
-    public void setActualDuration(float actualDuration)   { this.actualDuration = actualDuration; }
+    @Override public float getActualDuration()                      { return actualDuration; }
+    @Override public float getMaxDuration()                         { return maxDuration; }
+    @Override public void setMaxDuration(float maxDuration)         { this.maxDuration = maxDuration; }
+    @Override public void setActualDuration(float actualDuration)   { this.actualDuration = actualDuration; }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
+    @Override
     public boolean updateDuration(float delta)
     {
         setActualDuration(getActualDuration() + delta);

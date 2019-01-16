@@ -4,19 +4,19 @@ import com.myrran.misc.Debuffable;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 
 /** @author Ivan Delgado Huerta */
-public class SpellDebuffDOT implements SpellDebuff
+public class SpellDebuffDOT implements SpellDebuffDeco
 {
     private static final String DURATION = "duration";
     private static final String MAXSTACKING = "maxStacks";
     private static final String DAMAGE = "damage";
 
     private SpellDebuffParams spellDebuffParams;
-    private SpellDebuffImp spellDebuff = new SpellDebuffImp();
+    private SpellDebuffI spellDebuff = new SpellDebuff();
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public SpellDebuffImp getSpellDebuff()    { return spellDebuff; }
+    @Override public SpellDebuffI getSpellDebuff()    { return spellDebuff; }
 
     // DATA:
     //--------------------------------------------------------------------------------------------------------

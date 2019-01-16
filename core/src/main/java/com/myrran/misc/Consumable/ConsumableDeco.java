@@ -1,11 +1,11 @@
-package com.myrran.misc;
+package com.myrran.misc.Consumable;
 
 /** @author Ivan Delgado Huerta */
-public interface Consumable
+public interface ConsumableDeco extends ConsumableI
 {
-    ConsumableImp getConsumable();
+    ConsumableI getConsumable();
 
-    // SETTERS GETTERS:
+    // DECORATOR:
     //--------------------------------------------------------------------------------------------------------
 
     default void setMaxDuration(float maxDuration)
@@ -19,9 +19,6 @@ public interface Consumable
 
     default float getMaxDuration()
     {   return getConsumable().getMaxDuration(); }
-
-    // MAIN:
-    //--------------------------------------------------------------------------------------------------------
 
     default boolean updateDuration(float delta)
     {   return getConsumable().updateDuration(delta); }

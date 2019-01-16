@@ -7,23 +7,23 @@ import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.entity.form.SpellFormFactory;
 import com.myrran.spell.generators.SpellFormGenerator;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlots;
-import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlotsImp;
-import com.myrran.spell.generators.custom.stats.CustomSpellStatsImp;
+import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlotsDeco;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
+import com.myrran.spell.generators.custom.stats.CustomSpellStatsDeco;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellForm implements SpellFormGenerator, CustomDebuffSlots, CustomSpellStats, Identifiable
+public class CustomSpellForm implements SpellFormGenerator, Identifiable, CustomDebuffSlotsDeco, CustomSpellStatsDeco
 {
     private String id;
     private String name;
     private String templateID;
     private SpellFormFactory factory;
-    private CustomSpellStatsImp spellStats = new CustomSpellStatsImp();
-    private CustomDebuffSlotsImp debuffSlots = new CustomDebuffSlotsImp();
+    private CustomSpellStats spellStats = new CustomSpellStats();
+    private CustomDebuffSlots debuffSlots = new CustomDebuffSlots();
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -31,8 +31,8 @@ public class CustomSpellForm implements SpellFormGenerator, CustomDebuffSlots, C
     @Override public String getID()                         { return id; }
     @Override public String getName()                       { return name; }
     public String getTemplateID()                           { return templateID; }
-    @Override public CustomSpellStatsImp getSpellStats()    { return spellStats; }
-    @Override public CustomDebuffSlotsImp getDebuffSlots()  { return debuffSlots; }
+    @Override public CustomSpellStats getSpellStats()       { return spellStats; }
+    @Override public CustomDebuffSlots getDebuffSlots()     { return debuffSlots; }
     @Override public void setID(String id)                  { this.id = id; }
     @Override public void setName(String name)              { this.name = name; }
 
@@ -49,6 +49,7 @@ public class CustomSpellForm implements SpellFormGenerator, CustomDebuffSlots, C
         name = template.getName();
         templateID = template.getID();
         factory = template.getFactory();
+        spellStats.clear();
 
         template.getSpellStats()
             .forEach(this::setSpellStatTemplate);

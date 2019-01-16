@@ -5,17 +5,17 @@ public enum SpellDebuffFactory
 {
     BUFF("Buff")
     {
-        @Override public SpellDebuff getEffectEntity()
+        @Override public SpellDebuffDeco getEffectEntity()
         {   return new SpellDebuffDOT(); }
     },
     DOT("DOT")
     {
-        @Override public SpellDebuff getEffectEntity()
+        @Override public SpellDebuffDeco getEffectEntity()
         {   return new SpellDebuffDOT(); }
     },
     PUREDAMAGE("Pure Damage")
     {
-        @Override public SpellDebuff getEffectEntity()
+        @Override public SpellDebuffDeco getEffectEntity()
         {   return new SpellDebuffDOT(); }
     };
 
@@ -24,7 +24,7 @@ public enum SpellDebuffFactory
 
     private String name;
     public String getName()     { return name; }
-    public abstract SpellDebuff getEffectEntity();
+    public abstract SpellDebuffDeco getEffectEntity();
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
