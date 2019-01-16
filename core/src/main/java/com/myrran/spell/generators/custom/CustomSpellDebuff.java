@@ -5,8 +5,9 @@ import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.entity.debuff.SpellDebuffFactory;
 import com.myrran.spell.generators.SpellDebuffGenerator;
+import com.myrran.spell.generators.custom.debuffslot.CustomSpellSlotKey;
+import com.myrran.spell.generators.custom.stats.CustomSpellStatsImp;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
-import com.myrran.spell.generators.custom.stats.CustomSpellStatsable;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,7 +16,7 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStatsable, Identifiable
+public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats, Identifiable
 {
     private String id;
     private String name;
@@ -23,7 +24,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats
     private int baseCost;
     private SpellDebuffFactory factory;
     private List<CustomSpellSlotKey> keys;
-    private CustomSpellStats spellStats = new CustomSpellStats();
+    private CustomSpellStatsImp spellStats = new CustomSpellStatsImp();
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -33,7 +34,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats
     public String getTemplateID()                               { return templateID; }
     public SpellDebuffFactory getFactory()                      { return factory; }
     public List<CustomSpellSlotKey> getKeys()                   { return keys; }
-    @Override public CustomSpellStats getSpellStats()           { return spellStats; }
+    @Override public CustomSpellStatsImp getSpellStats()           { return spellStats; }
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setName(String name)                  { this.name = name; }
     public void setKeys(CustomSpellSlotKey... keys)             { this.keys = Arrays.asList(keys); }

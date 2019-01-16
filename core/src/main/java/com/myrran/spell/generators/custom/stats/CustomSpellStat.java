@@ -1,4 +1,4 @@
-package com.myrran.spell.generators.custom;
+package com.myrran.spell.generators.custom.stats;
 
 import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.entityparams.SpellStatParams;

@@ -3,7 +3,7 @@ package com.myrran.utils;
 import com.myrran.spell.data.templatedata.*;
 import com.myrran.spell.entity.debuff.SpellDebuffFactory;
 import com.myrran.spell.entity.form.SpellFormFactory;
-import com.myrran.spell.generators.custom.CustomSpellSlotKey;
+import com.myrran.spell.generators.custom.debuffslot.CustomSpellSlotKey;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

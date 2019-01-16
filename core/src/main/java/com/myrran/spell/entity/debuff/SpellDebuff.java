@@ -11,7 +11,7 @@ public interface SpellDebuff extends Consumable
 
     void applyTick(Debuffable debuffable);
 
-    // SETTERS GETTERS:
+    // DECORATOR:
     //--------------------------------------------------------------------------------------------------------
 
     default ConsumableImp getConsumable()
@@ -34,9 +34,6 @@ public interface SpellDebuff extends Consumable
 
     default void setMaxStacks(int maxStacks)
     {   getSpellDebuff().setMaxStacks(maxStacks); }
-
-    // MAIN:
-    //--------------------------------------------------------------------------------------------------------
 
     default int getMaxTicks()
     {   return getSpellDebuff().getMaxTicks(); }

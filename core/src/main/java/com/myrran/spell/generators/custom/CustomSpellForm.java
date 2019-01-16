@@ -6,35 +6,35 @@ import com.myrran.spell.data.templatedata.SpellFormTemplate;
 import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.entity.form.SpellFormFactory;
 import com.myrran.spell.generators.SpellFormGenerator;
-import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlotable;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlots;
+import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlotsImp;
+import com.myrran.spell.generators.custom.stats.CustomSpellStatsImp;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
-import com.myrran.spell.generators.custom.stats.CustomSpellStatsable;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellForm implements SpellFormGenerator, CustomDebuffSlotable, CustomSpellStatsable, Identifiable
+public class CustomSpellForm implements SpellFormGenerator, CustomDebuffSlots, CustomSpellStats, Identifiable
 {
     private String id;
     private String name;
     private String templateID;
     private SpellFormFactory factory;
-    private CustomSpellStats spellStats = new CustomSpellStats();
-    private CustomDebuffSlots debuffSlots = new CustomDebuffSlots();
+    private CustomSpellStatsImp spellStats = new CustomSpellStatsImp();
+    private CustomDebuffSlotsImp debuffSlots = new CustomDebuffSlotsImp();
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public String getID()                     { return id; }
-    @Override public String getName()                   { return name; }
-    public String getTemplateID()                       { return templateID; }
-    @Override public CustomSpellStats getSpellStats()   { return spellStats; }
-    @Override public CustomDebuffSlots getDebuffSlots() { return debuffSlots; }
-    @Override public void setID(String id)              { this.id = id; }
-    @Override public void setName(String name)          { this.name = name; }
+    @Override public String getID()                         { return id; }
+    @Override public String getName()                       { return name; }
+    public String getTemplateID()                           { return templateID; }
+    @Override public CustomSpellStatsImp getSpellStats()    { return spellStats; }
+    @Override public CustomDebuffSlotsImp getDebuffSlots()  { return debuffSlots; }
+    @Override public void setID(String id)                  { this.id = id; }
+    @Override public void setName(String name)              { this.name = name; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------

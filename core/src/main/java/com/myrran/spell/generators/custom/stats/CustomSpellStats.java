@@ -2,61 +2,36 @@ package com.myrran.spell.generators.custom.stats;
 
 import com.myrran.spell.data.entityparams.SpellStatParams;
 import com.myrran.spell.data.templatedata.SpellStatTemplate;
-import com.myrran.spell.generators.custom.CustomSpellStat;
 import com.myrran.utils.InvalidIDException;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellStats
+/** @author Ivan Delgado Huerta */
+public interface CustomSpellStats
 {
-    private Map<String, CustomSpellStat> stats = new HashMap<>();
+    CustomSpellStatsImp getSpellStats();
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setSpellStatTemplate(SpellStatTemplate template)
-    {
-        CustomSpellStat customSpellStat = stats.get(template.getID());
-        if (customSpellStat == null)
-        {
-            customSpellStat = new CustomSpellStat();
-            stats.put(template.getID(), customSpellStat);
-        }
-        customSpellStat.setSpellStatTemplate(template);
-    }
+    default void setSpellStatTemplate(SpellStatTemplate template)
+    {   getSpellStats().setSpellStatTemplate(template); }
 
     // CUSTOM TO ENTITY PARAMS:
     //--------------------------------------------------------------------------------------------------------
 
-    public Map<String, SpellStatParams> getSpellStatParams()
-    {
-        return stats.values().stream()
-            .map(CustomSpellStat::getSpellStatParams)
-            .collect(Collectors.toMap(SpellStatParams::getID, spellStatParams -> spellStatParams));
-    }
+    default Map<String, SpellStatParams> getSpellStatParams()
+    {   return getSpellStats().getSpellStatParams(); }
 
     // STATS:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException
-    {
-        CustomSpellStat stat = stats.get(statID);
-        if (stat != null) return stat;
-        else throw new InvalidIDException("SpellStat with the following ID doesn't exist: %s", statID);
-    }
+    default CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException
+    {   return getSpellStats().getCustomSpellStat(statID); }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public int getStatsTotalCost()
-    {
-        return stats.values().stream()
-            .mapToInt(CustomSpellStat::getTotalCost)
-            .sum();
-    }
+    default int getStatsTotalCost()
+    {   return getSpellStats().getStatsTotalCost(); }
 }
