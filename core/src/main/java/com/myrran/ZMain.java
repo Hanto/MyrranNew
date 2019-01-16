@@ -52,6 +52,7 @@ public class ZMain extends ApplicationAdapter
 		sct.setDuration(10)
 			.setMoveY(300)
 			.setMoveX(50)
+			.setInterpolationY(Interpolation.smooth2)
 			.setInterpolationX(Interpolation.smooth2);
 
 		sctView = sct.sct("Johancia");
@@ -61,15 +62,12 @@ public class ZMain extends ApplicationAdapter
 		{
 			book = unmarshal(CustomSpellBook.class);
 			spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
-			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(100);
-
+			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(20);
 		}
 		catch (Exception e) { System.out.println(e); }
 
 		spellFormView.setPosition(100, 100);
 		uiStage.addActor(spellFormView);
-
-
 	}
 
 	@Override
@@ -78,9 +76,9 @@ public class ZMain extends ApplicationAdapter
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		batch.begin();
+		//batch.begin();
 		//batch.draw(img, 0, 0);
-		batch.end();
+		//batch.end();
 
 		//shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 		//shapeRenderer.setColor(Color.BLACK);

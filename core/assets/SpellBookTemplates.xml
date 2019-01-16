@@ -18,6 +18,13 @@
                     <upgradeCost>2</upgradeCost>
                     <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 </spellStats>
+                <spellStats id="Damage" name="Damage">
+                    <baseValue>100.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
                 <spellSlots id="Spot 1" name="Spot 1" slotType="impacto">
                     <lock>DEBUFF</lock>
                     <lock>PUREDAMAGE</lock>

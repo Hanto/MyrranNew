@@ -33,7 +33,7 @@
                 <upgradeCost>2</upgradeCost>
                 <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 <gearBonus>0.0</gearBonus>
-                <numUpgrades>0</numUpgrades>
+                <numUpgrades>3</numUpgrades>
               </value>
             </entry>
             <entry>
@@ -47,7 +47,21 @@
                 <upgradeCost>2</upgradeCost>
                 <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 <gearBonus>0.0</gearBonus>
-                <numUpgrades>0</numUpgrades>
+                <numUpgrades>10</numUpgrades>
+              </value>
+            </entry>
+            <entry>
+              <key>Damage</key>
+              <value>
+                <id>Damage</id>
+                <name>Damage</name>
+                <baseValue>100.0</baseValue>
+                <isUpgradeable>true</isUpgradeable>
+                <maxUpgrades>50</maxUpgrades>
+                <upgradeCost>2</upgradeCost>
+                <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                <gearBonus>0.0</gearBonus>
+                <numUpgrades>20</numUpgrades>
               </value>
             </entry>
           </stats>

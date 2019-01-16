@@ -50,6 +50,15 @@ public class SpellCreator
         stat2.setUpgradeCost(2);
         stat2.setIsUpgradeable(true);
 
+        SpellStatTemplate stat3 = new SpellStatTemplate();
+        stat3.setID("Damage");
+        stat3.setName("Damage");
+        stat3.setBaseValue(100);
+        stat3.setBonusPerUpgrade(2);
+        stat3.setMaxUpgrades(50);
+        stat3.setUpgradeCost(2);
+        stat3.setIsUpgradeable(true);
+
         SpellDebuffSlotTemplate slot1 = new SpellDebuffSlotTemplate();
         slot1.setID("Spot 1");
         slot1.setName("Spot 1");
@@ -68,7 +77,7 @@ public class SpellCreator
         slot3.setSlotType("ground");
         slot3.setLock(CustomSpellSlotKey.DEBUFF);
 
-        spellForm.setSpellStats(stat1, stat2);
+        spellForm.setSpellStats(stat1, stat2, stat3);
         spellForm.setSpellSlots(slot1, slot2, slot3);
         book.addSpellFormTemplate(spellForm);
     }

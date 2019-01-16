@@ -18,18 +18,19 @@ public class SpellStatView implements PropertyChangeListener, Disposable
 
     private TextView name;
     private TextView baseValue;
+    private TextView total;
     private TextView numUpgrades;
-    private TextView maxUpgrades;
     private TextView upgradeCost;
     private TextView bonusPerUpgrade;
+    private TextView maxUpgrades;
     private TextView gearBonus;
-    private TextView total;
+    private SpellUpgradesView upgradesView;
 
-    private Color white = Color.WHITE;
-    private Color orange = Color.ORANGE;
-    private Color yellow = Color.YELLOW;
-    private Color green = Color.GREEN;
-    private Color black = white.BLACK;
+    private static final Color white = Color.WHITE;
+    private static final Color orange = Color.ORANGE;
+    private static final Color purpleL = new Color(163/255f, 170/255f, 255/255f, 1);
+    private static final Color purpleH = new Color(110/255f, 110/255f, 211/255f, 1);
+    private static final Color black = Color.BLACK;
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private static final DecimalFormatSymbols simbolos = df.getDecimalFormatSymbols();
@@ -37,11 +38,16 @@ public class SpellStatView implements PropertyChangeListener, Disposable
     // GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public TextView getName()           { return name; }
-    public TextView getBaseValue()      { return baseValue; }
-    public TextView getNumUpgrades()    { return numUpgrades; }
-    public TextView getMaxUpgrades()    { return maxUpgrades; }
-    public TextView getTotal()          { return total; }
+    public TextView getName()                   { return name; }
+    public TextView getBaseValue()              { return baseValue; }
+    public TextView getTotal()                  { return total; }
+    public TextView getNumUpgrades()            { return numUpgrades; }
+    public TextView getUpgradeCost()            { return upgradeCost; }
+    public TextView getBonusPerUpgrade()        { return bonusPerUpgrade; }
+    public TextView getMaxUpgrades()            { return maxUpgrades; }
+    public TextView getGearBonus()              { return gearBonus; }
+    public SpellUpgradesView getUpgradesView()  { return upgradesView; }
+
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -67,12 +73,18 @@ public class SpellStatView implements PropertyChangeListener, Disposable
     private void createView()
     {
         BitmapFont font14 = new BitmapFont(Gdx.files.internal("fonts/14.fnt"), false);
-        BitmapFont font11 = new BitmapFont(Gdx.files.internal("fonts/11.fnt"), false);
+        BitmapFont font10 = new BitmapFont(Gdx.files.internal("fonts/10.fnt"), false);
 
-        name        = new TextView(font11, white, black, 1);
-        baseValue   = new TextView(font14, orange, black, 1);
-        total       = new TextView(font14, green, black, 1);
-        numUpgrades = new TextView(font11, yellow, black, 1);
+        name            = new TextView(font10, white,   black,1);
+        baseValue       = new TextView(font14, orange,  black,1);
+        total           = new TextView(font14, purpleH, black,1);
+        numUpgrades     = new TextView(font10, purpleL, black,1);
+        upgradeCost     = new TextView(font10, purpleL, black,1);
+        bonusPerUpgrade = new TextView(font10, purpleL, black,1);
+        maxUpgrades     = new TextView(font10, purpleL, black,1);
+        gearBonus       = new TextView(font10, purpleL, black,1);
+
+        upgradesView    = new SpellUpgradesView(model);
     }
 
     private void updateView()
@@ -80,8 +92,18 @@ public class SpellStatView implements PropertyChangeListener, Disposable
         name.setText(model.getName());
         baseValue.setText(df.format(model.getBaseValue()));
         total.setText(df.format(model.getTotal()));
-        numUpgrades.setText(model.getIsUpgradeable() ? model.getNumUpgrades().toString() : "-");
+        numUpgrades.setText(format(model.getNumUpgrades()));
+        upgradeCost.setText(format(model.getUpgradeCost()));
+        bonusPerUpgrade.setText(format(model.getBonusPerUpgrade()));
+        maxUpgrades.setText(format(model.getMaxUpgrades()));
+        gearBonus.setText(df.format(model.getGearBonus()));
     }
+
+    private String format(Float rawData)
+    {   return model.getIsUpgradeable() ? df.format(rawData) : "-"; }
+
+    private String format(Integer rawData)
+    {   return model.getIsUpgradeable() ? rawData.toString() : "-"; }
 
     // OBSERVER:
     //--------------------------------------------------------------------------------------------------------
