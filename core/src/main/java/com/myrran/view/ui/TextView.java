@@ -38,15 +38,16 @@ public class TextView extends Group
 
     public void setText(String text)
     {
-        removeActor(this.textLabel);
+        removeActor(textLabel);
         removeActor(shadowLabel);
-        this.textLabel = new Label(text, textStyle);
-        shadowLabel = new Label(text, shadowStyle);
-        addActor(shadowLabel);
-        addActor(this.textLabel);
 
-        this.textLabel.setPosition(0, shadowTickness);
+        textLabel = new Label(text, textStyle);
+        shadowLabel = new Label(text, shadowStyle);
+        textLabel.setPosition(0, shadowTickness);
         shadowLabel.setPosition(shadowTickness, 0);
+
+        addActor(shadowLabel);
+        addActor(textLabel);
         setBounds();
     }
 
