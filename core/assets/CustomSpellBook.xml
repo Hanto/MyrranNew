@@ -20,104 +20,110 @@
         <name>Super Bolt</name>
         <templateID>Bolt</templateID>
         <factory>BOLT</factory>
-        <stats>
-          <entry>
-            <key>Speed</key>
-            <value>
-              <id>Speed</id>
-              <name>Speed</name>
-              <baseValue>100.0</baseValue>
-              <isUpgradeable>true</isUpgradeable>
-              <maxUpgrades>50</maxUpgrades>
-              <upgradeCost>2</upgradeCost>
-              <bonusPerUpgrade>2.0</bonusPerUpgrade>
-              <gearBonus>0.0</gearBonus>
-              <numUpgrades>0</numUpgrades>
-            </value>
-          </entry>
-          <entry>
-            <key>Cooldown</key>
-            <value>
-              <id>Cooldown</id>
-              <name>Cooldown</name>
-              <baseValue>50.0</baseValue>
-              <isUpgradeable>true</isUpgradeable>
-              <maxUpgrades>50</maxUpgrades>
-              <upgradeCost>2</upgradeCost>
-              <bonusPerUpgrade>2.0</bonusPerUpgrade>
-              <gearBonus>0.0</gearBonus>
-              <numUpgrades>0</numUpgrades>
-            </value>
-          </entry>
-        </stats>
-        <slots>
-          <entry>
-            <key>Spot 1</key>
-            <value>
-              <id>Spot 1</id>
-              <name>Spot 1</name>
-              <type>impacto</type>
-              <lock>DEBUFF</lock>
-              <lock>PUREDAMAGE</lock>
-            </value>
-          </entry>
-          <entry>
-            <key>Spot 2</key>
-            <value>
-              <id>Spot 2</id>
-              <name>Spot 2</name>
-              <type>aoe</type>
-              <lock>DEBUFF</lock>
-              <customSpellDebuff>
-                <id>Super DOT</id>
-                <name>Hanto Super DOT</name>
-                <templateID>Super DOT</templateID>
-                <baseCost>30</baseCost>
-                <factory>DOT</factory>
-                <keys>DEBUFF</keys>
-                <stats>
-                  <entry>
-                    <key>Speed</key>
-                    <value>
-                      <id>Speed</id>
-                      <name>Speed</name>
-                      <baseValue>100.0</baseValue>
-                      <isUpgradeable>true</isUpgradeable>
-                      <maxUpgrades>50</maxUpgrades>
-                      <upgradeCost>2</upgradeCost>
-                      <bonusPerUpgrade>2.0</bonusPerUpgrade>
-                      <gearBonus>0.0</gearBonus>
-                      <numUpgrades>0</numUpgrades>
-                    </value>
-                  </entry>
-                  <entry>
-                    <key>Cooldown</key>
-                    <value>
-                      <id>Cooldown</id>
-                      <name>Cooldown</name>
-                      <baseValue>50.0</baseValue>
-                      <isUpgradeable>true</isUpgradeable>
-                      <maxUpgrades>50</maxUpgrades>
-                      <upgradeCost>2</upgradeCost>
-                      <bonusPerUpgrade>2.0</bonusPerUpgrade>
-                      <gearBonus>0.0</gearBonus>
-                      <numUpgrades>0</numUpgrades>
-                    </value>
-                  </entry>
-                </stats>
-              </customSpellDebuff>
-            </value>
-          </entry>
-          <entry>
-            <key>Spot 3</key>
-            <value>
-              <id>Spot 3</id>
-              <name>Spot 3</name>
-              <type>ground</type>
-              <lock>DEBUFF</lock>
-            </value>
-          </entry>
-        </slots>
+        <spellStats>
+          <stats>
+            <entry>
+              <key>Speed</key>
+              <value>
+                <id>Speed</id>
+                <name>Speed</name>
+                <baseValue>100.0</baseValue>
+                <isUpgradeable>true</isUpgradeable>
+                <maxUpgrades>50</maxUpgrades>
+                <upgradeCost>2</upgradeCost>
+                <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                <gearBonus>0.0</gearBonus>
+                <numUpgrades>0</numUpgrades>
+              </value>
+            </entry>
+            <entry>
+              <key>Cooldown</key>
+              <value>
+                <id>Cooldown</id>
+                <name>Cooldown</name>
+                <baseValue>50.0</baseValue>
+                <isUpgradeable>true</isUpgradeable>
+                <maxUpgrades>50</maxUpgrades>
+                <upgradeCost>2</upgradeCost>
+                <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                <gearBonus>0.0</gearBonus>
+                <numUpgrades>0</numUpgrades>
+              </value>
+            </entry>
+          </stats>
+        </spellStats>
+        <debuffSlots>
+          <slots>
+            <entry>
+              <key>Spot 1</key>
+              <value>
+                <id>Spot 1</id>
+                <name>Spot 1</name>
+                <type>impacto</type>
+                <lock>DEBUFF</lock>
+                <lock>PUREDAMAGE</lock>
+              </value>
+            </entry>
+            <entry>
+              <key>Spot 2</key>
+              <value>
+                <id>Spot 2</id>
+                <name>Spot 2</name>
+                <type>aoe</type>
+                <lock>DEBUFF</lock>
+                <customSpellDebuff>
+                  <id>Super DOT</id>
+                  <name>Hanto Super DOT</name>
+                  <templateID>Super DOT</templateID>
+                  <baseCost>30</baseCost>
+                  <factory>DOT</factory>
+                  <keys>DEBUFF</keys>
+                  <spellStats>
+                    <stats>
+                      <entry>
+                        <key>Speed</key>
+                        <value>
+                          <id>Speed</id>
+                          <name>Speed</name>
+                          <baseValue>100.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                      <entry>
+                        <key>Cooldown</key>
+                        <value>
+                          <id>Cooldown</id>
+                          <name>Cooldown</name>
+                          <baseValue>50.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                    </stats>
+                  </spellStats>
+                </customSpellDebuff>
+              </value>
+            </entry>
+            <entry>
+              <key>Spot 3</key>
+              <value>
+                <id>Spot 3</id>
+                <name>Spot 3</name>
+                <type>ground</type>
+                <lock>DEBUFF</lock>
+              </value>
+            </entry>
+          </slots>
+        </debuffSlots>
       </value>
     </entry>
   </customSpells>

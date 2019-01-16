@@ -1,8 +1,10 @@
-package com.myrran.spell.generators.custom;
+package com.myrran.spell.generators.custom.debuffslot;
 
 import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
-import com.myrran.spell.data.templatedata.SpellSlotTemplate;
+import com.myrran.spell.data.templatedata.SpellDebuffSlotTemplate;
+import com.myrran.spell.generators.custom.CustomSpellDebuff;
+import com.myrran.spell.generators.custom.CustomSpellSlotKey;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,7 +15,7 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellSlot implements Identifiable
+public class CustomDebuffSlot implements Identifiable
 {
     private String id;
     private String name;
@@ -37,7 +39,7 @@ public class CustomSpellSlot implements Identifiable
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    void setSpellSlotTemplate(SpellSlotTemplate template)
+    void setSpellSlotTemplate(SpellDebuffSlotTemplate template)
     {
         this.id = template.getID();
         this.name = template.getName();

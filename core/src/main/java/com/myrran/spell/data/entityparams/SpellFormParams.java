@@ -16,7 +16,8 @@ public class SpellFormParams
 
     public SpellFormFactory getFactory()                        { return factory; }
     public SpellStatParams getStat(String stat)                 { return stats.get(stat); }
-
     public SpellFormParams setFactory(SpellFormFactory factory) { this.factory = factory; return this; }
-    public SpellFormParams addStat(SpellStatParams stat)        { stats.put(stat.getID(), stat); return this; }
+
+    public SpellFormParams setSpellStatParams(Map<String, SpellStatParams> stats)
+    {   this.stats = stats; return this; }
 }

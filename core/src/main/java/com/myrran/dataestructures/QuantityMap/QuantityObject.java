@@ -1,4 +1,4 @@
-package com.myrran.utils;
+package com.myrran.dataestructures.QuantityMap;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

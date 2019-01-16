@@ -1,47 +1,55 @@
 package com.myrran.spell.entity.debuff;
 
 import com.myrran.misc.Consumable;
+import com.myrran.misc.ConsumableImp;
 import com.myrran.misc.Debuffable;
-import com.myrran.spell.data.entityparams.SpellDebuffParams;
 
 /** @author Ivan Delgado Huerta */
 public interface SpellDebuff extends Consumable
 {
-    float TICKDURATION = 0.5f;
+    SpellDebuffImp getSpellDebuff();
+
+    void applyTick(Debuffable debuffable);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    void setSpellDebuffParams(SpellDebuffParams data);
-    void setTicksAplicados(int ticksAplicados);
+    default ConsumableImp getConsumable()
+    {   return getSpellDebuff().getConsumable(); }
 
-    int getTicksAplicados();
-    void applyTick(Debuffable debuffable);
+    default int getTicksAplicados()
+    {   return getSpellDebuff().getAppliedTicks(); }
 
-    // DEFAULT:
+    default int getActualStacks()
+    {   return getSpellDebuff().getActualStacks(); }
+
+    default int getMaxStacks()
+    {   return getSpellDebuff().getMaxStacks(); }
+
+    default void setTicksAplicados(int ticksAplicados)
+    {   getSpellDebuff().setAppliedTicks(ticksAplicados); }
+
+    default void setActualStacks(int actualStacks)
+    {   getSpellDebuff().setActualStacks(actualStacks); }
+
+    default void setMaxStacks(int maxStacks)
+    {   getSpellDebuff().setMaxStacks(maxStacks); }
+
+    // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
     default int getMaxTicks()
-    {   return (int)(getMaxDuration() / TICKDURATION); }
+    {   return getSpellDebuff().getMaxTicks(); }
 
     default int getTickActual()
-    {   return (int)(getActualDuration() / TICKDURATION); }
+    {   return getSpellDebuff().getTickActual(); }
 
     default int getTicksRestantes()
-    {   return getMaxTicks() - getTicksAplicados(); }
+    {   return getSpellDebuff().getTicksRestantes(); }
 
     default void resetDuration()
-    {
-        setTicksAplicados(0);
-        setActualDuration(getActualDuration() % TICKDURATION);
-    }
+    {   getSpellDebuff().resetDuration(); }
 
     default void applyTicks(Debuffable debuffable)
-    {
-        for (int i=getTicksAplicados(); i< getTickActual(); i++)
-        {
-            setTicksAplicados(i);
-            applyTick(debuffable);
-        }
-    }
+    {   getSpellDebuff().applyTicks(debuffable, this::applyTick); }
 }

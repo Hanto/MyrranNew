@@ -1,11 +1,14 @@
 package com.myrran.spell.entity.form;
 
 import com.myrran.misc.Consumable;
+import com.myrran.misc.ConsumableImp;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.entityparams.SpellFormParams;
-import com.myrran.utils.HashMapArrayList;
-import com.myrran.utils.MapList;
+import com.myrran.dataestructures.MapList.MapList;
+import com.myrran.dataestructures.MapList.MapListImp;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
@@ -18,26 +21,22 @@ public class SpellFormBolt implements SpellForm, Consumable
     private static final String AOE = "aoe";
     private static final String GROUND = "ground";
 
-    private float actualDuration = 0.0f;
-    private float maxDuration = 5.0f;
-
     private SpellFormParams spellFormParams;
-    private MapList<String, SpellDebuffParams> spellEffectsData = new HashMapArrayList<>();
+    private MapList<String, SpellDebuffParams> spellEffectsData
+        = new MapListImp<>(new HashMap<>(), ArrayList::new);
+    private ConsumableImp consumable = new ConsumableImp();
 
-    // CONSUMABLE:
+    // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public float getActualDuration()                      { return actualDuration; }
-    @Override public float getMaxDuration()                         { return maxDuration; }
-    @Override public void setMaxDuration(float maxDuration)         { this.maxDuration = maxDuration; }
-    @Override public void setActualDuration(float actualDuration)   { this.actualDuration = actualDuration; }
+    @Override public ConsumableImp getConsumable()      { return consumable; }
 
     // DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public void setSpellFormParams(SpellFormParams data)
+    @Override public void setSpellFormParams(SpellFormParams params)
     {
-        this.spellFormParams = data;
+        this.spellFormParams = params;
         setMaxDuration(spellFormParams.getStat(DURATION).getTotal());
     }
 
@@ -46,4 +45,8 @@ public class SpellFormBolt implements SpellForm, Consumable
         for(SpellDebuffParams data : spellDebuffParamsList)
             spellEffectsData.add(data.getSlotType(), data);
     }
+
+    // MAIN:
+    //--------------------------------------------------------------------------------------------------------
+
 }

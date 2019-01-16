@@ -12,7 +12,7 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpellSlotTemplate implements Identifiable
+public class SpellDebuffSlotTemplate implements Identifiable
 {
     @XmlAttribute
     private String id;

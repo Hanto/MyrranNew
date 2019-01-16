@@ -3,21 +3,26 @@ package com.myrran.misc;
 /** @author Ivan Delgado Huerta */
 public interface Consumable
 {
+    ConsumableImp getConsumable();
+
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    void setMaxDuration(float maxDuration);
-    void setActualDuration(float actualDuration);
+    default void setMaxDuration(float maxDuration)
+    {   getConsumable().setMaxDuration(maxDuration); }
 
-    float getActualDuration();
-    float getMaxDuration();
+    default void setActualDuration(float actualDuration)
+    {   getConsumable().setActualDuration(actualDuration); }
 
-    // DEFAULT:
+    default float getActualDuration()
+    {   return getConsumable().getActualDuration(); }
+
+    default float getMaxDuration()
+    {   return getConsumable().getMaxDuration(); }
+
+    // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
     default boolean updateDuration(float delta)
-    {
-        setActualDuration(getActualDuration() + delta);
-        return getActualDuration() > getMaxDuration();
-    }
+    {   return getConsumable().updateDuration(delta); }
 }

@@ -1,11 +1,25 @@
-package com.myrran.utils;
+package com.myrran.dataestructures.QuantityMap;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
-/** @author Ivan Delgado Huerta */
-public interface QuantityMap extends Map<String, QuantityObject>
+public class QuantityMapImp implements QuantityMap
 {
-    default void add(String key)
+    private Map<String, QuantityObject>map;
+
+    @Override public Map<String, QuantityObject>getMap()        { return map; }
+
+    // CONSTRUCTOR:
+    //--------------------------------------------------------------------------------------------------------
+
+    public QuantityMapImp(Supplier<Map<String, QuantityObject>>mapCreator)
+    {   this.map = mapCreator.get(); }
+
+    // MEW FEATURES:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void add(String key)
     {
         QuantityObject quantityObject = get(key);
 
@@ -18,7 +32,8 @@ public interface QuantityMap extends Map<String, QuantityObject>
         quantityObject.setTotal(quantityObject.getTotal() + 1);
     }
 
-    default boolean borrow(String key)
+    @Override
+    public boolean borrow(String key)
     {
         QuantityObject quantityObject = get(key);
 
@@ -28,7 +43,8 @@ public interface QuantityMap extends Map<String, QuantityObject>
         return quantityObject != null;
     }
 
-    default boolean returnBack(String key)
+    @Override
+    public boolean returnBack(String key)
     {
         QuantityObject quantityObject = get(key);
 
@@ -37,4 +53,6 @@ public interface QuantityMap extends Map<String, QuantityObject>
 
         return quantityObject != null;
     }
+
+
 }

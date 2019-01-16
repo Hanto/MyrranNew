@@ -4,9 +4,10 @@ import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.templatedata.SpellBookTemplates;
 import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.data.templatedata.SpellFormTemplate;
+import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.utils.InvalidIDException;
-import com.myrran.utils.QuantityHashMap;
-import com.myrran.utils.QuantityMap;
+import com.myrran.dataestructures.QuantityMap.QuantityMap;
+import com.myrran.dataestructures.QuantityMap.QuantityMapImp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,8 +23,8 @@ import java.util.Map;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellBook
 {
-    private QuantityMap formTeplatesLearned = new QuantityHashMap();
-    private QuantityMap debuffTemplatesLearned = new QuantityHashMap();
+    private QuantityMap formTeplatesLearned = new QuantityMapImp(HashMap::new);
+    private QuantityMap debuffTemplatesLearned = new QuantityMapImp(HashMap::new);
     private Map<String, CustomSpellForm> customSpells = new HashMap<>();
 
     @XmlTransient
@@ -88,7 +89,7 @@ public class CustomSpellBook
     {
         CustomSpellForm spellForm = getCustomSpellForm(customFormID);
 
-        for (CustomSpellSlot slot: spellForm.getSlots().values())
+        for (CustomDebuffSlot slot: spellForm.getDebuffSlots().values())
             removeCustomSpellDebuff(customFormID, slot.getID());
 
         customSpells.remove(customFormID);
@@ -120,7 +121,7 @@ public class CustomSpellBook
     {
         spellForm.setSpellFormTemplate(getSpellFormTemplate(spellForm.getTemplateID()));
 
-        for (CustomSpellSlot slot: spellForm.getSlots().values())
+        for (CustomDebuffSlot slot: spellForm.getDebuffSlots().values())
             reloadSpellDebuff(slot.getCustomSpellDebuff());
     }
 

@@ -61,7 +61,7 @@ public class CustomSpellStat implements Identifiable
     // CUSTOM TO ENTITY DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellStatParams getSpellStatData()
+    public SpellStatParams getSpellStatParams()
     {
         return new SpellStatParams()
             .setID(this.id)
