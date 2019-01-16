@@ -20,12 +20,8 @@ public class CustomSpellStatsImp
 
     public void setSpellStatTemplate(SpellStatTemplate template)
     {
+        stats.computeIfAbsent(template.getID(), v -> new CustomSpellStat());
         CustomSpellStat customSpellStat = stats.get(template.getID());
-        if (customSpellStat == null)
-        {
-            customSpellStat = new CustomSpellStat();
-            stats.put(template.getID(), customSpellStat);
-        }
         customSpellStat.setSpellStatTemplate(template);
     }
 

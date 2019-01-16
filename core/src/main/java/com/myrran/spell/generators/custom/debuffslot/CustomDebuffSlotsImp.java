@@ -19,20 +19,15 @@ public class CustomDebuffSlotsImp
 {
     private Map<String, CustomDebuffSlot> slots = new HashMap<>();
 
-    public Collection<CustomDebuffSlot> values()
-    {   return slots.values(); }
+    public Collection<CustomDebuffSlot> values()            { return slots.values(); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
     public void setSpellSlotTemplate(SpellDebuffSlotTemplate template)
     {
+        slots.computeIfAbsent(template.getID(), v -> new CustomDebuffSlot());
         CustomDebuffSlot customDebuffSlot = slots.get(template.getID());
-        if (customDebuffSlot == null)
-        {
-            customDebuffSlot = new CustomDebuffSlot();
-            slots.put(template.getID(), customDebuffSlot);
-        }
         customDebuffSlot.setSpellSlotTemplate(template);
     }
 
