@@ -2,32 +2,84 @@ package com.myrran;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.myrran.view.ui.ScrollingCombatText;
+import com.myrran.view.ui.TextView;
 
-public class ZMain extends ApplicationAdapter {
+public class ZMain extends ApplicationAdapter
+{
 	SpriteBatch batch;
 	Texture img;
-	
+
+	BitmapFont font;
+	TextView text;
+	Stage uiStage;
+	ScrollingCombatText sct;
+
+	ShapeRenderer shapeRenderer;
+	TextView sctView;
+
 	@Override
-	public void create () {
+	public void create ()
+	{
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+
+		FileHandle file = Gdx.files.internal("fonts/" + "20.fnt");
+		font = new BitmapFont(file, false);
+		text = new TextView("Hola Mundo", font, Color.WHITE, Color.BLACK, 2);
+		uiStage = new Stage();
+		uiStage.addActor(text);
+		text.setText("Hola Johana como te llamas");
+		text.setPosition(0, 0);
+		text.setTextColor(Color.ORANGE);
+		shapeRenderer = new ShapeRenderer();
+		sct = new ScrollingCombatText(font);
+		sct.setDuration(10)
+			.setMoveY(300)
+			.setMoveX(50)
+			.setInterpolationX(Interpolation.smooth2);
+
+		sctView = sct.sct("Johancia");
+		uiStage.addActor(sctView);
+		sctView.setPosition(100, 100);
 	}
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 1, 0, 1);
+	public void render ()
+	{
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		batch.begin();
-		batch.draw(img, 0, 0);
+		//batch.draw(img, 0, 0);
 		batch.end();
+
+		//shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+		//shapeRenderer.setColor(Color.BLACK);
+		//shapeRenderer.rect(sctView.getX(), sctView.getY(), sctView.getWidth(), sctView.getHeight());
+		//shapeRenderer.end();
+
+		uiStage.act();
+		uiStage.draw();
+
 	}
 	
 	@Override
-	public void dispose () {
+	public void dispose ()
+	{
 		batch.dispose();
 		img.dispose();
+
+		font.dispose();
+		shapeRenderer.dispose();
 	}
 }

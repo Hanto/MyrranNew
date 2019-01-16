@@ -32,7 +32,6 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
         customDebuffSlot.setSpellSlotTemplate(template);
     }
 
-
     // CUSTOM TO ENTITY PARAM:
     //--------------------------------------------------------------------------------------------------------
 
