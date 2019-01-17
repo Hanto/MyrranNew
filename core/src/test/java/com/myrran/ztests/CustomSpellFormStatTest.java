@@ -37,17 +37,21 @@ public class CustomSpellFormStatTest
             cbook.addSpellFormTemplate("Bolt");
             cbook.addSpellFormTemplate("Bolt");
             cbook.addSpellFormTemplate("Bolt");
-            cbook.addSpellDebuffTemplate("Super DOT");
-            cbook.addSpellDebuffTemplate("Super DOT");
+            cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Slow");
 
             cbook.addCustomSpellForm("Bolt");
-            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Super DOT");
+            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Poison");
             cbook.removeCustomSpellForm("Bolt_00");
 
             cbook.addCustomSpellForm("Bolt");
-            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Super DOT");
+            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Poison");
             cbook.removeCustomSpellDebuff("Bolt_00", "Spot 2");
-            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Super DOT");
+            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Poison");
+            cbook.addCustomSpellDebuff("Bolt_00", "Spot 1", "Slow");
+
+
 
             cbook.reloadAll();
 

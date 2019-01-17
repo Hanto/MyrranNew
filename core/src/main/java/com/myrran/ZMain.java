@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.spell.generators.custom.CustomSpellBook;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.ScrollingCombatText;
-import com.myrran.view.ui.CustomSpells.SpellFormView;
+import com.myrran.view.ui.customspells.SpellFormView;
 import com.myrran.view.ui.TextView;
 
 import javax.xml.bind.JAXBContext;
@@ -76,7 +76,7 @@ public class ZMain extends ApplicationAdapter
 	@Override
 	public void render ()
 	{
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		//batch.begin();

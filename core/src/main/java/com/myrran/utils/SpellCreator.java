@@ -21,6 +21,7 @@ public class SpellCreator
     {
         generateSpellForms();
         generateSpellDebuffs();
+        generateSpellDebuffs2();
 
         marshal(book, SpellBookTemplates.class);
     }
@@ -85,8 +86,8 @@ public class SpellCreator
     public static void generateSpellDebuffs()
     {
         SpellDebuffTemplate debuff = new SpellDebuffTemplate();
-        debuff.setID("Super DOT");
-        debuff.setName("Hanto Super DOT");
+        debuff.setID("Poison");
+        debuff.setName("Poison");
         debuff.setFactory(SpellDebuffFactory.DOT);
         debuff.setBaseCost(30);
         debuff.setKeys(CustomSpellSlotKey.DEBUFF);
@@ -110,6 +111,46 @@ public class SpellCreator
         stat2.setIsUpgradeable(true);
 
         debuff.setSpellStats(stat1, stat2);
+        book.addSpellDebuffTemplate(debuff);
+    }
+
+    public static void generateSpellDebuffs2()
+    {
+        SpellDebuffTemplate debuff = new SpellDebuffTemplate();
+        debuff.setID("Slow");
+        debuff.setName("Slow");
+        debuff.setFactory(SpellDebuffFactory.DOT);
+        debuff.setBaseCost(30);
+        debuff.setKeys(CustomSpellSlotKey.DEBUFF);
+
+        SpellStatTemplate stat1 = new SpellStatTemplate();
+        stat1.setID(COOLDOWN);
+        stat1.setName(COOLDOWN);
+        stat1.setBaseValue(50);
+        stat1.setBonusPerUpgrade(2);
+        stat1.setMaxUpgrades(50);
+        stat1.setUpgradeCost(2);
+        stat1.setIsUpgradeable(true);
+
+        SpellStatTemplate stat2 = new SpellStatTemplate();
+        stat2.setID(SPEED);
+        stat2.setName(SPEED);
+        stat2.setBaseValue(100);
+        stat2.setBonusPerUpgrade(2);
+        stat2.setMaxUpgrades(50);
+        stat2.setUpgradeCost(2);
+        stat2.setIsUpgradeable(true);
+
+        SpellStatTemplate stat3 = new SpellStatTemplate();
+        stat3.setID("Slow Magnitude");
+        stat3.setName("Slow Magnitude");
+        stat3.setBaseValue(100);
+        stat3.setBonusPerUpgrade(2);
+        stat3.setMaxUpgrades(50);
+        stat3.setUpgradeCost(2);
+        stat3.setIsUpgradeable(true);
+
+        debuff.setSpellStats(stat1, stat2, stat3);
         book.addSpellDebuffTemplate(debuff);
     }
 

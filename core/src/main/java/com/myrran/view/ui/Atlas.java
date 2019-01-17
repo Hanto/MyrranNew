@@ -48,9 +48,13 @@ public class Atlas implements Disposable
     private void loadData()
     {
         atlas = new TextureAtlas(Gdx.files.internal("atlas/atlas.atlas"));
+        addTexture("TexturasIconos/IconoVacio");
+        addTexture("TexturasIconos/FireBall");
+        addTexture("TexturasIconos/IceBall");
         addTexture("TexturasMisc/CasillaTalentoFondo");
         addTexture("TexturasMisc/CasillaTalento");
         addTexture("TexturasMisc/Casillero2");
+        addFont("8");
         addFont("10");
         addFont("11");
         addFont("14");

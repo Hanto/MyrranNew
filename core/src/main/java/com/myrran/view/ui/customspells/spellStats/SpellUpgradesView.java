@@ -1,12 +1,11 @@
 package com.myrran.view.ui.CustomSpells;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
+import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
 public class SpellUpgradesView extends Actor
@@ -24,17 +23,22 @@ public class SpellUpgradesView extends Actor
     public SpellUpgradesView(CustomSpellStat customSpellStat)
     {
         model = customSpellStat;
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("atlas/atlas.atlas"));
-        fondo = new TextureRegion(atlas.findRegion("TexturasMisc/CasillaTalentoFondo"));
-        frente = new TextureRegion(atlas.findRegion("TexturasMisc/CasillaTalento"));
 
-        setWidth(fondo.getRegionWidth());
-        setHeight(fondo.getRegionHeight());
+        createView();
         updateView();
     }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
+
+    private void createView()
+    {
+        fondo   = Atlas.get().getTexture("TexturasMisc/CasillaTalentoFondo");
+        frente  = Atlas.get().getTexture("TexturasMisc/CasillaTalento");
+
+        setWidth(fondo.getRegionWidth());
+        setHeight(fondo.getRegionHeight());
+    }
 
     public void updateView()
     {
@@ -42,6 +46,9 @@ public class SpellUpgradesView extends Actor
         barraTalentos00_25 = ((int)getWidth()/25) * (numUpgrades > 25 ? 25 : numUpgrades)+ 1;
         barraTalentos25_50 = ((int)getWidth()/25) * (numUpgrades > 50 ? 25 : numUpgrades - 25);
     }
+
+    // DRAW:
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public void draw (Batch batch, float alpha)
     {

@@ -8,7 +8,11 @@
   </formTeplatesLearned>
   <debuffTemplatesLearned>
     <entry>
-      <key>Super DOT</key>
+      <key>Slow</key>
+      <value available="0" total="1"/>
+    </entry>
+    <entry>
+      <key>Poison</key>
       <value available="1" total="2"/>
     </entry>
   </debuffTemplatesLearned>
@@ -33,7 +37,7 @@
                 <upgradeCost>2</upgradeCost>
                 <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 <gearBonus>0.0</gearBonus>
-                <numUpgrades>3</numUpgrades>
+                <numUpgrades>0</numUpgrades>
               </value>
             </entry>
             <entry>
@@ -47,7 +51,7 @@
                 <upgradeCost>2</upgradeCost>
                 <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 <gearBonus>0.0</gearBonus>
-                <numUpgrades>10</numUpgrades>
+                <numUpgrades>0</numUpgrades>
               </value>
             </entry>
             <entry>
@@ -61,7 +65,7 @@
                 <upgradeCost>2</upgradeCost>
                 <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 <gearBonus>0.0</gearBonus>
-                <numUpgrades>20</numUpgrades>
+                <numUpgrades>0</numUpgrades>
               </value>
             </entry>
           </stats>
@@ -76,6 +80,60 @@
                 <type>impacto</type>
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
+                <customSpellDebuff>
+                  <id>Slow</id>
+                  <name>Slow</name>
+                  <templateID>Slow</templateID>
+                  <baseCost>30</baseCost>
+                  <factory>DOT</factory>
+                  <keys>DEBUFF</keys>
+                  <spellStats>
+                    <stats>
+                      <entry>
+                        <key>Speed</key>
+                        <value>
+                          <id>Speed</id>
+                          <name>Speed</name>
+                          <baseValue>100.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                      <entry>
+                        <key>Cooldown</key>
+                        <value>
+                          <id>Cooldown</id>
+                          <name>Cooldown</name>
+                          <baseValue>50.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                      <entry>
+                        <key>Slow Magnitude</key>
+                        <value>
+                          <id>Slow Magnitude</id>
+                          <name>Slow Magnitude</name>
+                          <baseValue>100.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                    </stats>
+                  </spellStats>
+                </customSpellDebuff>
               </value>
             </entry>
             <entry>
@@ -88,7 +146,7 @@
                 <customSpellDebuff>
                   <id>Poison</id>
                   <name>Poison</name>
-                  <templateID>Super DOT</templateID>
+                  <templateID>Poison</templateID>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>
                   <keys>DEBUFF</keys>

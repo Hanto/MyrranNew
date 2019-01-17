@@ -40,8 +40,36 @@
     </spellFromTemplates>
     <spellDebuffTemplates>
         <entry>
-            <key>Super DOT</key>
-            <value id="Super DOT" name="Hanto Super DOT" type="DOT">
+            <key>Slow</key>
+            <value id="Slow" name="Slow" type="DOT">
+                <spellStats id="Cooldown" name="Cooldown">
+                    <baseValue>50.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <spellStats id="Speed" name="Speed">
+                    <baseValue>100.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <spellStats id="Slow Magnitude" name="Slow Magnitude">
+                    <baseValue>100.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <baseCost>30</baseCost>
+                <keys>DEBUFF</keys>
+            </value>
+        </entry>
+        <entry>
+            <key>Poison</key>
+            <value id="Poison" name="Poison" type="DOT">
                 <spellStats id="Cooldown" name="Cooldown">
                     <baseValue>50.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>

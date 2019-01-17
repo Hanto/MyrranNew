@@ -66,13 +66,13 @@ public class CustomDebuffSlot implements Identifiable
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }
 
-    void setCustomSpellDebuff(CustomSpellDebuff effect)
+    public void setCustomSpellDebuff(CustomSpellDebuff effect)
     {
         if(opensLock(effect.getKeys()))
             this.customSpellDebuff = effect;
     }
 
-    void removeCustomSpellDebuff()
+    public void removeCustomSpellDebuff()
     {   this.customSpellDebuff =  null; }
 
 }
