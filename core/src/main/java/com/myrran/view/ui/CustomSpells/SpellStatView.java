@@ -1,9 +1,11 @@
-package com.myrran.view.ui;
+package com.myrran.view.ui.CustomSpells;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
+import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.TextView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -11,7 +13,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStatView implements PropertyChangeListener, Disposable
+public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disposable
 {
     private CustomSpellStat model;
 
@@ -37,16 +39,16 @@ public class SpellStatView implements PropertyChangeListener, Disposable
     // GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellStat getModel()           { return model; }
-    public TextView getName()                   { return name; }
-    public TextView getBaseValue()              { return baseValue; }
-    public TextView getTotal()                  { return total; }
-    public TextView getNumUpgrades()            { return numUpgrades; }
-    public TextView getUpgradeCost()            { return upgradeCost; }
-    public TextView getBonusPerUpgrade()        { return bonusPerUpgrade; }
-    public TextView getMaxUpgrades()            { return maxUpgrades; }
-    public TextView getGearBonus()              { return gearBonus; }
-    public SpellUpgradesView getUpgradesView()  { return upgradesView; }
+    public CustomSpellStat getModel()                   { return model; }
+    @Override public TextView getName()                 { return name; }
+    @Override public TextView getBaseValue()            { return baseValue; }
+    @Override public TextView getTotal()                { return total; }
+    @Override public TextView getNumUpgrades()          { return numUpgrades; }
+    @Override public TextView getUpgradeCost()          { return upgradeCost; }
+    @Override public TextView getBonusPerUpgrade()      { return bonusPerUpgrade; }
+    @Override public TextView getMaxUpgrades()          { return maxUpgrades; }
+    @Override public TextView getGearBonus()            { return gearBonus; }
+    @Override public SpellUpgradesView getUpgradesView(){ return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------

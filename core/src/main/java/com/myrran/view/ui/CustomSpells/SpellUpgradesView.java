@@ -1,4 +1,4 @@
-package com.myrran.view.ui;
+package com.myrran.view.ui.CustomSpells;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
