@@ -39,7 +39,7 @@ public class SpellUpgradesView extends Actor
     public void updateView()
     {
         int numUpgrades = model.getNumUpgrades();
-        barraTalentos00_25 = ((int)getWidth()/25) * (numUpgrades > 25 ? 25 : numUpgrades);
+        barraTalentos00_25 = ((int)getWidth()/25) * (numUpgrades > 25 ? 25 : numUpgrades)+ 1;
         barraTalentos25_50 = ((int)getWidth()/25) * (numUpgrades > 50 ? 25 : numUpgrades - 25);
     }
 
