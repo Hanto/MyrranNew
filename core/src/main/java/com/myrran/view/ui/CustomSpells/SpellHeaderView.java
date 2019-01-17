@@ -33,7 +33,7 @@ public class SpellHeaderView implements SpellStatRow
 
     public SpellHeaderView()
     {
-        BitmapFont font11 = Atlas.get().getFont("14");
+        BitmapFont font11 = Atlas.get().getFont("11");
         Color pink = new Color(255/255f, 84/255f, 118/255f, 1);
         Color black = Color.BLACK;
 

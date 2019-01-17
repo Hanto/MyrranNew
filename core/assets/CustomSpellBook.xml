@@ -86,8 +86,8 @@
                 <type>aoe</type>
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>Super DOT</id>
-                  <name>Super DOT</name>
+                  <id>Poison</id>
+                  <name>Poison</name>
                   <templateID>Super DOT</templateID>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>

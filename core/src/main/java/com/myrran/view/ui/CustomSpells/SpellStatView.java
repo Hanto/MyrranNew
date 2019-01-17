@@ -74,9 +74,10 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
     private void createView()
     {
         BitmapFont font14 = Atlas.get().getFont("14");
+        BitmapFont font11 = Atlas.get().getFont("11");
         BitmapFont font10 = Atlas.get().getFont("10");
 
-        name            = new TextView(font10, white,   black,1);
+        name            = new TextView(font11, white,   black,1);
         baseValue       = new TextView(font14, orange,  black,1);
         total           = new TextView(font14, purpleH, black,1);
         numUpgrades     = new TextView(font10, purpleL, black,1);
