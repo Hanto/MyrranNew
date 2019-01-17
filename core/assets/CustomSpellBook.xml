@@ -87,7 +87,7 @@
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
                   <id>Super DOT</id>
-                  <name>Hanto Super DOT</name>
+                  <name>Super DOT</name>
                   <templateID>Super DOT</templateID>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>

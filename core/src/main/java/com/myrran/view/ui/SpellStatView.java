@@ -1,6 +1,5 @@
 package com.myrran.view.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
@@ -38,6 +37,7 @@ public class SpellStatView implements PropertyChangeListener, Disposable
     // GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
+    public CustomSpellStat getModel()           { return model; }
     public TextView getName()                   { return name; }
     public TextView getBaseValue()              { return baseValue; }
     public TextView getTotal()                  { return total; }
@@ -47,7 +47,6 @@ public class SpellStatView implements PropertyChangeListener, Disposable
     public TextView getMaxUpgrades()            { return maxUpgrades; }
     public TextView getGearBonus()              { return gearBonus; }
     public SpellUpgradesView getUpgradesView()  { return upgradesView; }
-    public String getModelID()                  { return model.getID(); }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -72,8 +71,8 @@ public class SpellStatView implements PropertyChangeListener, Disposable
 
     private void createView()
     {
-        BitmapFont font14 = new BitmapFont(Gdx.files.internal("fonts/14.fnt"), false);
-        BitmapFont font10 = new BitmapFont(Gdx.files.internal("fonts/10.fnt"), false);
+        BitmapFont font14 = Atlas.get().getFont("14");
+        BitmapFont font10 = Atlas.get().getFont("10");
 
         name            = new TextView(font10, white,   black,1);
         baseValue       = new TextView(font14, orange,  black,1);

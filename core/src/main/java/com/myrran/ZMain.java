@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.spell.generators.custom.CustomSpellBook;
+import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.ScrollingCombatText;
 import com.myrran.view.ui.SpellFormView;
 import com.myrran.view.ui.TextView;
@@ -104,6 +105,7 @@ public class ZMain extends ApplicationAdapter
 		font.dispose();
 		shapeRenderer.dispose();
 		spellFormView.dispose();
+		Atlas.get().dispose();
 	}
 
 	@SuppressWarnings("unchecked")
