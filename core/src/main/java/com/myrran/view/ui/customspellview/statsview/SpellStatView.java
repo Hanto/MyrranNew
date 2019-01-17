@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspellview.SpellStatRow;
 import com.myrran.view.ui.TextView;
 
 import java.beans.PropertyChangeEvent;
@@ -90,7 +89,7 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
         upgradesView    = new SpellUpgradesView(model);
     }
 
-    private void updateView()
+    public void updateView()
     {
         name.setText(model.getName());
         baseValue.setText(df.format(model.getBaseValue()));

@@ -12,8 +12,11 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.customspellview.statsview.SpellHeaderView;
+import com.myrran.view.ui.customspellview.statsview.SpellStatRow;
 import com.myrran.view.ui.customspellview.statsview.SpellStatView;
 import com.myrran.view.ui.TextView;
+import com.myrran.view.ui.customspellview.statsview.SpellStatsView;
 
 /** @author Ivan Delgado Huerta */
 public class SpellFormView extends Group implements Disposable

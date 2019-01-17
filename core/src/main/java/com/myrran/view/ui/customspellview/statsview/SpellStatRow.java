@@ -1,9 +1,8 @@
-package com.myrran.view.ui.customspellview;
-
-/** @author Ivan Delgado Huerta */
+package com.myrran.view.ui.customspellview.statsview;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/** @author Ivan Delgado Huerta */
 public interface SpellStatRow
 {
     Actor getName();
