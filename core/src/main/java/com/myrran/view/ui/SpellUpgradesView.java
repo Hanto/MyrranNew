@@ -18,6 +18,9 @@ public class SpellUpgradesView extends Actor
     private int barraTalentos00_25 = 0;
     private int barraTalentos25_50 = 0;
 
+    // CONSTRUCTOR:
+    //--------------------------------------------------------------------------------------------------------
+
     public SpellUpgradesView(CustomSpellStat customSpellStat)
     {
         model = customSpellStat;
@@ -27,14 +30,17 @@ public class SpellUpgradesView extends Actor
 
         setWidth(fondo.getRegionWidth());
         setHeight(fondo.getRegionHeight());
-
-        setNumTalentos(model.getNumUpgrades());
+        updateView();
     }
 
-    public void setNumTalentos(int numTalentos)
+    // MAIN:
+    //--------------------------------------------------------------------------------------------------------
+
+    public void updateView()
     {
-        barraTalentos00_25 = ((int)getWidth()/25) * (numTalentos > 25 ? 25 : numTalentos);
-        barraTalentos25_50 = ((int)getWidth()/25) * (numTalentos > 50 ? 25 : numTalentos - 25);
+        int numUpgrades = model.getNumUpgrades();
+        barraTalentos00_25 = ((int)getWidth()/25) * (numUpgrades > 25 ? 25 : numUpgrades);
+        barraTalentos25_50 = ((int)getWidth()/25) * (numUpgrades > 50 ? 25 : numUpgrades - 25);
     }
 
     @Override public void draw (Batch batch, float alpha)

@@ -47,7 +47,7 @@ public class SpellStatView implements PropertyChangeListener, Disposable
     public TextView getMaxUpgrades()            { return maxUpgrades; }
     public TextView getGearBonus()              { return gearBonus; }
     public SpellUpgradesView getUpgradesView()  { return upgradesView; }
-
+    public String getModelID()                  { return model.getID(); }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -97,6 +97,8 @@ public class SpellStatView implements PropertyChangeListener, Disposable
         bonusPerUpgrade.setText(format(model.getBonusPerUpgrade()));
         maxUpgrades.setText(format(model.getMaxUpgrades()));
         gearBonus.setText(df.format(model.getGearBonus()));
+
+        upgradesView.updateView();
     }
 
     private String format(Float rawData)

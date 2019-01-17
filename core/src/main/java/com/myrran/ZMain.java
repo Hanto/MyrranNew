@@ -62,12 +62,14 @@ public class ZMain extends ApplicationAdapter
 		{
 			book = unmarshal(CustomSpellBook.class);
 			spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
-			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(20);
+			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
 		}
 		catch (Exception e) { System.out.println(e); }
 
 		spellFormView.setPosition(100, 100);
 		uiStage.addActor(spellFormView);
+
+		Gdx.input.setInputProcessor(uiStage);
 	}
 
 	@Override
@@ -84,6 +86,9 @@ public class ZMain extends ApplicationAdapter
 		//shapeRenderer.setColor(Color.BLACK);
 		//shapeRenderer.rect(sctView.getX(), sctView.getY(), sctView.getWidth(), sctView.getHeight());
 		//shapeRenderer.end();
+
+		uiStage.setDebugUnderMouse(true);
+		uiStage.setDebugAll(true);
 
 		uiStage.act();
 		uiStage.draw();
