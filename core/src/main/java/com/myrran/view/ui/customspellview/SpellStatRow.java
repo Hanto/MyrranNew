@@ -1,4 +1,4 @@
-package com.myrran.view.ui.CustomSpells;
+package com.myrran.view.ui.customspellview;
 
 /** @author Ivan Delgado Huerta */
 

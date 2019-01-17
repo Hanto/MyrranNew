@@ -1,4 +1,4 @@
-package com.myrran.view.ui.CustomSpells;
+package com.myrran.view.ui.customspellview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
@@ -14,10 +14,12 @@ public class DebuffSlotView implements Disposable
     private boolean isFull = false;
     private TextView name;
     private SpellStatsView debuffStats;
+    private DebuffIcon debuffIcon;
 
     public boolean isFull()                     { return isFull; }
     public TextView getName()                   { return name; }
     public SpellStatsView getDebuffStats()      { return debuffStats; }
+    public DebuffIcon getDebuffIcon()           { return debuffIcon; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -25,6 +27,7 @@ public class DebuffSlotView implements Disposable
     public DebuffSlotView(CustomDebuffSlot customDebuffSlot)
     {
         model = customDebuffSlot;
+        debuffIcon = new DebuffIcon(model);
         updateView();
     }
 

@@ -1,4 +1,4 @@
-package com.myrran.view.ui.CustomSpells;
+package com.myrran.view.ui.customspellview.statsview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;

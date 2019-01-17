@@ -1,10 +1,9 @@
-package com.myrran.view.ui.customspells;
+package com.myrran.view.ui.customspellview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.TextView;
-import com.myrran.view.ui.customspells.spellStats.SpellStatRow;
 
 /** @author Ivan Delgado Huerta */
 public class SpellHeaderView implements SpellStatRow

@@ -1,6 +1,5 @@
-package com.myrran.view.ui.customspells;
+package com.myrran.view.ui.customspellview;
 
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlots;
@@ -14,18 +13,13 @@ import java.util.stream.Collectors;
 public class DebuffSlotsView implements Disposable
 {
     private List<DebuffSlotView> slots = new ArrayList<>();
-    private DragAndDrop dad;
-
     public List<DebuffSlotView>getSlots()          { return slots; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public DebuffSlotsView(CustomDebuffSlots debuffSlots, DragAndDrop dragAndDrop)
-    {
-        dad = dragAndDrop;
-        createView(debuffSlots.values());
-    }
+    public DebuffSlotsView(CustomDebuffSlots debuffSlots)
+    {   createView(debuffSlots.values()); }
 
     @Override public void dispose()
     {   slots.forEach(DebuffSlotView::dispose); }
@@ -36,7 +30,7 @@ public class DebuffSlotsView implements Disposable
     public void createView(Collection<CustomDebuffSlot> debuffSlots)
     {
         slots = debuffSlots.stream()
-            .map(customDebuffSlot -> new DebuffSlotView(customDebuffSlot, dad))
+            .map(DebuffSlotView::new)
             .collect(Collectors.toList());
     }
 }

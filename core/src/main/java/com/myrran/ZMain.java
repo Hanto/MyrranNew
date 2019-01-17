@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.spell.generators.custom.CustomSpellBook;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.CustomSpells.SpellFormView;
+import com.myrran.view.ui.customspellview.SpellFormView;
 import com.myrran.view.ui.ScrollingCombatText;
 import com.myrran.view.ui.TextView;
 

@@ -1,10 +1,11 @@
-package com.myrran.view.ui.CustomSpells;
+package com.myrran.view.ui.customspellview.statsview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.customspellview.SpellStatRow;
 import com.myrran.view.ui.TextView;
 
 import java.beans.PropertyChangeEvent;

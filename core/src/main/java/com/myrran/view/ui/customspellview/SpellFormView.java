@@ -1,4 +1,4 @@
-package com.myrran.view.ui.CustomSpells;
+package com.myrran.view.ui.customspellview;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.CustomSpells.spellStats.SpellStatView;
+import com.myrran.view.ui.customspellview.statsview.SpellStatView;
 import com.myrran.view.ui.TextView;
 
 /** @author Ivan Delgado Huerta */
