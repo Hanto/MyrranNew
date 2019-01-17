@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspells;
+package com.myrran.view.ui.CustomSpells;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -12,8 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspells.spellStats.SpellStatRow;
-import com.myrran.view.ui.customspells.spellStats.SpellStatView;
+import com.myrran.view.ui.CustomSpells.spellStats.SpellStatView;
 import com.myrran.view.ui.TextView;
 
 /** @author Ivan Delgado Huerta */
@@ -69,7 +68,7 @@ public class SpellFormView extends Group implements Disposable
         dispose();
         name = new TextView(model.getName(), Atlas.get().getFont("20"), Color.ORANGE, Color.BLACK, 2);
         formStats = new SpellStatsView(model.getSpellStats());
-        slots = new DebuffSlotsView(model.getDebuffSlots(), dad);
+        slots = new DebuffSlotsView(model.getDebuffSlots());
     }
 
     // UPDATE TABLE:
@@ -83,7 +82,7 @@ public class SpellFormView extends Group implements Disposable
         tableAddDebuffs();
 
         slots.getSlots().stream()
-            .map(DebuffSlotView::getDebuffICon)
+            .map(DebuffSlotView::getDebuffIcon)
             .forEach(this::tableAddDebuffIcon);
 
         tableDebuffs.setPosition(tableStats.getMinWidth(), tableStats.getMinHeight() -name.getHeight()/2);

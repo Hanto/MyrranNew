@@ -1,9 +1,9 @@
-package com.myrran.view.ui.customspells;
+package com.myrran.view.ui.CustomSpells;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
-import com.myrran.view.ui.customspells.spellStats.SpellStatView;
+import com.myrran.view.ui.CustomSpells.spellStats.SpellStatView;
 
 import java.util.ArrayList;
 import java.util.Collection;

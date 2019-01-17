@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspells;
+package com.myrran.view.ui.CustomSpells;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
