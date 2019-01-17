@@ -73,7 +73,7 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public int getTotalCost()
+    public Integer getTotalCost()
     {   return getStatsTotalCost() + getDebuffSlotsTotalCost(); }
 
     @Override

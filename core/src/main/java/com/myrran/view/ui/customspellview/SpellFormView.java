@@ -2,20 +2,20 @@ package com.myrran.view.ui.customspellview;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.TextView;
 import com.myrran.view.ui.customspellview.statsview.SpellHeaderView;
 import com.myrran.view.ui.customspellview.statsview.SpellStatRow;
 import com.myrran.view.ui.customspellview.statsview.SpellStatView;
-import com.myrran.view.ui.TextView;
 import com.myrran.view.ui.customspellview.statsview.SpellStatsView;
 
 /** @author Ivan Delgado Huerta */
@@ -31,7 +31,6 @@ public class SpellFormView extends Group implements Disposable
     private TextView totalCost;
     private SpellStatsView formStats;
     private DebuffSlotsView slots;
-    private DragAndDrop dad;
 
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
@@ -42,17 +41,7 @@ public class SpellFormView extends Group implements Disposable
     {
         model = customSpellForm;
 
-        tableStats = new Table().bottom().left();
-        tableStats.setTransform(false);
-        tableDebuffs = new Table().top().left();
-        header = new SpellHeaderView();
-        background = Atlas.get().getImage("TexturasMisc/Casillero2");
-        background.setColor(1f, 1f, 1f, 0.55f);
-        dad = new DragAndDrop();
-
-        addActor(background);
-        addActor(tableStats);
-        addActor(tableDebuffs);
+        createView();
         updateView();
         updateTable();
     }
@@ -66,10 +55,30 @@ public class SpellFormView extends Group implements Disposable
     // CREATE:
     //--------------------------------------------------------------------------------------------------------
 
+    private void createView()
+    {
+        BitmapFont font20 = Atlas.get().getFont("20");
+        BitmapFont font14 = Atlas.get().getFont("14");
+
+        name        = new TextView(font20, Color.ORANGE, Color.BLACK, 2);
+        totalCost   = new TextView(font14, magenta, Color.BLACK, 2);
+        tableStats  = new Table().bottom().left();
+        tableDebuffs= new Table().top().left();
+        header      = new SpellHeaderView();
+        background  = Atlas.get().getImage("TexturasMisc/Casillero2");
+
+        background.setColor(1f, 1f, 1f, 0.55f);
+        addActor(background);
+        addActor(tableStats);
+        addActor(tableDebuffs);
+    }
+
+
     private void updateView()
     {
         dispose();
-        name = new TextView(model.getName(), Atlas.get().getFont("20"), Color.ORANGE, Color.BLACK, 2);
+        name.setText(model.getName());
+        totalCost.setText("Rank: "+model.getTotalCost().toString());
         formStats = new SpellStatsView(model.getSpellStats());
         slots = new DebuffSlotsView(model.getDebuffSlots());
     }
@@ -94,7 +103,10 @@ public class SpellFormView extends Group implements Disposable
 
     private void tableAddForm()
     {
-        tableStats.add(name).bottom().padBottom(-4).left().row();
+        tableStats.add(name).bottom().padBottom(-4).left();
+        tableStats.add();
+        tableStats.add(totalCost).bottom().center();
+        tableStats.row();
         tableAddRow(header);
         formStats.getStats()
             .forEach(this::tableAddRow);

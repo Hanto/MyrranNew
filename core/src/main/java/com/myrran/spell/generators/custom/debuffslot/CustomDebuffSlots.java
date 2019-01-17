@@ -81,6 +81,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     public int getDebuffSlotsTotalCost()
     {
         return slots.values().stream()
+            .filter(customDebuffSlot -> customDebuffSlot.getCustomSpellDebuff() != null)
             .mapToInt(CustomDebuffSlot::getTotalCost)
             .sum();
     }
