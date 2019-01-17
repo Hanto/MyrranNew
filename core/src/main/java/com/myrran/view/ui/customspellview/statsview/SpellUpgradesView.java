@@ -28,7 +28,7 @@ public class SpellUpgradesView extends Actor
         updateView();
     }
 
-    // MAIN:
+    // CREATE / UPDATE::
     //--------------------------------------------------------------------------------------------------------
 
     private void createView()

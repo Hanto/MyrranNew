@@ -69,7 +69,7 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
     @Override public void dispose()
     {   model.removeObserver(this); }
 
-    // MAIN:
+    // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
     private void createView()

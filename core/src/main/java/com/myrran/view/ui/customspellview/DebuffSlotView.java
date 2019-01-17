@@ -32,7 +32,10 @@ public class DebuffSlotView implements Disposable
     }
 
     @Override public void dispose()
-    {   debuffStats.dispose(); }
+    {
+        if (debuffStats != null)
+            debuffStats.dispose();
+    }
 
     // CREATE:
     //--------------------------------------------------------------------------------------------------------
