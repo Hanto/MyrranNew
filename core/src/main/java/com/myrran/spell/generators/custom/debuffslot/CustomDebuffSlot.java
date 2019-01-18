@@ -1,12 +1,16 @@
 package com.myrran.spell.generators.custom.debuffslot;
 
 import com.myrran.misc.Identifiable;
+import com.myrran.misc.observable.Observable;
+import com.myrran.misc.observable.ObservableDeco;
+import com.myrran.misc.observable.ObservableI;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.templatedata.SpellDebuffSlotTemplate;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,13 +18,15 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomDebuffSlot implements Identifiable
+public class CustomDebuffSlot implements ObservableDeco, Identifiable
 {
     private String id;
     private String name;
     private String type;
     private List<CustomSpellSlotKey> lock = new ArrayList<>();
     private CustomSpellDebuff customSpellDebuff;
+    @XmlTransient
+    private ObservableI observable = new Observable(this);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -31,9 +37,10 @@ public class CustomDebuffSlot implements Identifiable
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
     public CustomSpellDebuff getCustomSpellDebuff()             { return customSpellDebuff; }
     @Override public void setID(String id)                      { this.id = id; }
-    public void setName(String name)                            { this.name = name; }
-    public void setType(String type)                            { this.type = type; }
-    public void setLock(CustomSpellSlotKey...integers)          { lock.addAll(Arrays.asList(integers)); }
+    public void setName(String name)                            { this.name = name; notifyChanges();}
+    public void setType(String type)                            { this.type = type; notifyChanges();}
+    public void setLock(CustomSpellSlotKey...integers)          { lock.addAll(Arrays.asList(integers)); notifyChanges();}
+    @Override public ObservableI getObservable()                { return observable; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -44,6 +51,7 @@ public class CustomDebuffSlot implements Identifiable
         this.name = template.getName();
         this.type = template.getSlotType();
         this.lock = new ArrayList<>(template.getLock());
+        notifyChanges();
     }
 
     // CUSTOM TO ENTITY DATA:
@@ -70,9 +78,18 @@ public class CustomDebuffSlot implements Identifiable
     {
         if(opensLock(effect.getKeys()))
             this.customSpellDebuff = effect;
+        notifyChanges();
     }
 
     public void removeCustomSpellDebuff()
-    {   this.customSpellDebuff =  null; }
+    {
+        this.customSpellDebuff =  null;
+        notifyChanges();
+    }
 
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    private void notifyChanges()
+    {   notify("debuff", null, null); }
 }

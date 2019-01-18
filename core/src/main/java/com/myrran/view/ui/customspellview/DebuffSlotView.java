@@ -7,20 +7,23 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.TextView;
 import com.myrran.view.ui.customspellview.statsview.SpellStatsView;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /** @author Ivan Delgado Huerta */
-public class DebuffSlotView implements Disposable
+public class DebuffSlotView implements Disposable, PropertyChangeListener
 {
     private CustomDebuffSlot model;
 
     private boolean isFull = false;
     private TextView name;
     private SpellStatsView debuffStats;
-    private DebuffIcon debuffIcon;
+    private DebuffView debuffView;
 
     public boolean isFull()                     { return isFull; }
     public TextView getName()                   { return name; }
     public SpellStatsView getDebuffStats()      { return debuffStats; }
-    public DebuffIcon getDebuffIcon()           { return debuffIcon; }
+    public DebuffView getDebuffView()           { return debuffView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -28,7 +31,7 @@ public class DebuffSlotView implements Disposable
     public DebuffSlotView(CustomDebuffSlot customDebuffSlot)
     {
         model = customDebuffSlot;
-        debuffIcon = new DebuffIcon(model);
+        debuffView = new DebuffView(model);
         updateView();
     }
 
@@ -55,5 +58,14 @@ public class DebuffSlotView implements Disposable
             name = null;
             debuffStats = null;
         }
+    }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt)
+    {
+
     }
 }

@@ -25,12 +25,14 @@ public class SpellFormView extends Group implements Disposable
 
     private Table tableStats;
     private Table tableDebuffs;
+
+    private Image icon;
+    private TextView name;
+    private SpellStatsView formStats;
+    private DebuffSlotsView debuffSlots;
     private Image background;
     private SpellHeaderView header;
-    private TextView name;
     private TextView totalCost;
-    private SpellStatsView formStats;
-    private DebuffSlotsView slots;
 
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
@@ -43,13 +45,13 @@ public class SpellFormView extends Group implements Disposable
 
         createView();
         updateView();
-        updateTable();
+        updateTableStats();
     }
 
     @Override public void dispose()
     {
-        if (formStats != null) formStats.dispose();
-        if (slots != null) slots.dispose();
+        formStats.dispose();
+        debuffSlots.dispose();
     }
 
     // CREATE:
@@ -60,68 +62,72 @@ public class SpellFormView extends Group implements Disposable
         BitmapFont font20 = Atlas.get().getFont("20");
         BitmapFont font14 = Atlas.get().getFont("14");
 
+        icon        = Atlas.get().getImage("TexturasIconos/FireBall");
         name        = new TextView(font20, Color.ORANGE, Color.BLACK, 2);
         totalCost   = new TextView(font14, magenta, Color.BLACK, 2);
         tableStats  = new Table().bottom().left();
         tableDebuffs= new Table().top().left();
         header      = new SpellHeaderView();
         background  = Atlas.get().getImage("TexturasMisc/Casillero2");
+        formStats   = new SpellStatsView(model.getSpellStats());
+        debuffSlots = new DebuffSlotsView(model.getDebuffSlots());
 
         background.setColor(1f, 1f, 1f, 0.55f);
+
+        tableAddDebuffIcons();
+        addActor(icon);
         addActor(background);
         addActor(tableStats);
         addActor(tableDebuffs);
     }
 
-
-    private void updateView()
+    private void tableAddDebuffIcons()
     {
-        dispose();
-        name.setText(model.getName());
-        totalCost.setText("Rank: "+model.getTotalCost().toString());
-        formStats = new SpellStatsView(model.getSpellStats());
-        slots = new DebuffSlotsView(model.getDebuffSlots());
+        debuffSlots.getSlots().stream()
+            .map(DebuffSlotView::getDebuffView)
+            .forEach(icon -> tableDebuffs.add(icon).row());
     }
 
     // UPDATE TABLE:
     //--------------------------------------------------------------------------------------------------------
 
-    private void updateTable()
+    private void updateView()
+    {
+        name.setText(model.getName());
+        totalCost.setText("Rank: "+model.getTotalCost().toString());
+    }
+
+    private void updateTableStats()
     {
         tableStats.clear();
-        tableDebuffs.clear();
-        tableAddForm();
-        tableAddDebuffs();
 
-        slots.getSlots().stream()
-            .map(DebuffSlotView::getDebuffIcon)
-            .forEach(this::tableAddDebuffIcon);
+        tableStatsAddFormStats();
+        tableStatsAddDebuffsStats();;
 
+        icon.setPosition(-icon.getWidth(), tableStats.getMinHeight()-icon.getHeight()-name.getHeight()/2);
         tableDebuffs.setPosition(tableStats.getMinWidth(), tableStats.getMinHeight() -name.getHeight()/2);
         background.setBounds(0, 0, tableStats.getMinWidth(), tableStats.getMinHeight() - name.getHeight()/2);
     }
 
-    private void tableAddForm()
+    private void tableStatsAddFormStats()
     {
-        tableStats.add(name).bottom().padBottom(-4).left();
+        tableStats.add(name).bottom().padBottom(-4).padLeft(4).left();
         tableStats.add();
-        tableStats.add(totalCost).bottom().center();
-        tableStats.row();
+        tableStats.add(totalCost).bottom().center().row();
         tableAddRow(header);
-        formStats.getStats()
-            .forEach(this::tableAddRow);
+        formStats.getStats().forEach(this::tableAddRow);
 
         addListener(formStats);
     }
 
-    private void tableAddDebuffs()
+    private void tableStatsAddDebuffsStats()
     {
-        slots.getSlots().stream()
+        debuffSlots.getSlots().stream()
             .filter(DebuffSlotView::isFull)
-            .forEach(this::tableAddDebuff);
+            .forEach(this::tableStatsAddDebuffStats);
     }
 
-    private void tableAddDebuff(DebuffSlotView debuff)
+    private void tableStatsAddDebuffStats(DebuffSlotView debuff)
     {
         tableStats.add(debuff.getName()).bottom().padBottom(-4).left().row();
         debuff.getDebuffStats().getStats()
@@ -133,7 +139,7 @@ public class SpellFormView extends Group implements Disposable
     private void tableAddRow(SpellStatRow row)
     {
         int pad = -4;
-        tableStats.add(row.getName()).bottom().left().padTop(pad).padBottom(pad);
+        tableStats.add(row.getName()).bottom().left().padTop(pad).padBottom(pad).padLeft(4);
         tableStats.add(row.getBaseValue()).bottom().right().padTop(pad).padBottom(pad);
         tableStats.add(row.getUpgradesView()).center().padTop(pad).padBottom(pad).padRight(+3).padLeft(+3);
         tableStats.add(row.getTotal()).bottom().right().padRight(2).padTop(pad).padBottom(pad);
@@ -141,12 +147,9 @@ public class SpellFormView extends Group implements Disposable
         tableStats.add(row.getUpgradeCost()).bottom().right().padRight(2).padTop(pad).padBottom(pad);
         tableStats.add(row.getBonusPerUpgrade()).bottom().right().padRight(2).padTop(pad).padBottom(pad);
         tableStats.add(row.getMaxUpgrades()).bottom().right().padRight(2).padTop(pad).padBottom(pad);
-        tableStats.add(row.getGearBonus()).bottom().right().padRight(2).padTop(pad).padBottom(pad);
+        tableStats.add(row.getGearBonus()).bottom().right().padRight(2).padTop(pad).padBottom(pad).padRight(4);
         tableStats.row();
     }
-
-    private void tableAddDebuffIcon(DebuffIcon icon)
-    {   tableDebuffs.add(icon).row(); }
 
     // INPUT:
     //--------------------------------------------------------------------------------------------------------

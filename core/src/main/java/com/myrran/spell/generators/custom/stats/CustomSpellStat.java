@@ -49,7 +49,6 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
     public void setBonusPerUpgrade(float bonusPerUpgrade)   { this.bonusPerUpgrade = bonusPerUpgrade; notifyChanges();}
     public void setGearBonus(float gearBonus)               { this.gearBonus = gearBonus; notifyChanges();}
     public void setNumUpgrades(int numUpgrades)             { this.numUpgrades = numUpgrades; notifyChanges();}
-
     @Override public ObservableI getObservable()            { return observable; }
 
     // TEMPLATE TO CUSTOM:
@@ -64,6 +63,7 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
         this.maxUpgrades = data.getMaxUpgrades();
         this.upgradeCost = data.getUpgradeCost();
         this.bonusPerUpgrade = data.getBonusPerUpgrade();
+        notifyChanges();
     }
 
     // CUSTOM TO ENTITY DATA:
@@ -85,6 +85,9 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
 
     public int getTotalCost()
     {   return numUpgrades * upgradeCost; }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
 
     private void notifyChanges()
     {   notify("stat", null, null); }

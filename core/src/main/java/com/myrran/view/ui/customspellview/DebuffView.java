@@ -10,7 +10,7 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.TextView;
 
 /** @author Ivan Delgado Huerta */
-public class DebuffIcon extends Group implements Disposable
+public class DebuffView extends Group implements Disposable
 {
     private CustomDebuffSlot model;
 
@@ -29,7 +29,7 @@ public class DebuffIcon extends Group implements Disposable
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public DebuffIcon(CustomDebuffSlot customDebuffSlot)
+    public DebuffView(CustomDebuffSlot customDebuffSlot)
     {
         model = customDebuffSlot;
 
