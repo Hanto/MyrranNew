@@ -15,7 +15,7 @@ public class DebuffView extends Group implements Disposable
     private CustomDebuffSlot model;
 
     private Image iconImage;
-    private TextView slotName;
+    private TextView slotType;
     private TextView debuffName;
     private TextView keys;
     private TextView lock;
@@ -47,18 +47,18 @@ public class DebuffView extends Group implements Disposable
     {
         BitmapFont font10 = Atlas.get().getFont("10");
 
-        slotName    = new TextView(font10, white, black, 1);
+        slotType    = new TextView(font10, white, black, 1);
         lock        = new TextView(font10, white, black, 1);
         debuffName  = new TextView(font10, orange, black, 1);
 
         updateIcon();
         addActor(debuffName);
-        addActor(slotName);
+        addActor(slotType);
         addActor(lock);
 
         setBounds(0, 0, iconImage.getWidth(), iconImage.getHeight());
         debuffName.setPosition(getWidth(), 20);
-        slotName.setPosition(getWidth(), 10);
+        slotType.setPosition(getWidth(), 10);
         lock.setPosition(getWidth(), 0);
     }
 
@@ -66,7 +66,7 @@ public class DebuffView extends Group implements Disposable
     {
         updateIcon();
         debuffName.setText(model.getCustomSpellDebuff() != null ? model.getCustomSpellDebuff().getName() : "-");
-        slotName.setText(model.getName());
+        slotType.setText(model.getSlotType());
         lock.setText(model.getLock().toString().toLowerCase());
     }
 

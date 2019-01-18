@@ -1,6 +1,7 @@
 package com.myrran.view.ui.customspell.debuff;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
@@ -30,26 +31,36 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
 
     public DebuffSlotView(CustomDebuffSlot customDebuffSlot)
     {
-        model = customDebuffSlot;
-        debuffView = new DebuffView(model);
+        this.model = customDebuffSlot;
+        this.model.addObserver(this);
+
+        createView();
         updateView();
     }
 
     @Override public void dispose()
     {
-        if (debuffStats != null)
-            debuffStats.dispose();
+        model.removeObserver(this);
+        if (debuffStats!= null) debuffStats.dispose();
     }
 
-    // CREATE:
+    // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
+
+    private void createView()
+    {
+        BitmapFont font11 = Atlas.get().getFont("11");
+
+        name = new TextView(font11, Color.ORANGE, Color.BLACK, 1);
+        debuffView  = new DebuffView(model);
+    }
 
     private void updateView()
     {
         if (model.getCustomSpellDebuff() != null)
         {
             isFull = true;
-            name = new TextView(model.getCustomSpellDebuff().getName(), Atlas.get().getFont("11"), Color.ORANGE, Color.BLACK, 2);
+            name.setText(model.getCustomSpellDebuff().getName());
             debuffStats = new SpellStatsView(model.getCustomSpellDebuff().getSpellStats());
         }
         else
