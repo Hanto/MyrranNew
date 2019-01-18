@@ -4,13 +4,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.TextView;
 
 /** @author Ivan Delgado Huerta */
-public class DebuffView extends Group implements Disposable
+public class DebuffIconView extends Group
 {
     private CustomDebuffSlot model;
 
@@ -29,16 +28,13 @@ public class DebuffView extends Group implements Disposable
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public DebuffView(CustomDebuffSlot customDebuffSlot)
+    public DebuffIconView(CustomDebuffSlot customDebuffSlot)
     {
         model = customDebuffSlot;
 
         createView();
         updateView();
     }
-
-    @Override public void dispose()
-    {   }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
@@ -62,7 +58,7 @@ public class DebuffView extends Group implements Disposable
         lock.setPosition(getWidth(), 0);
     }
 
-    private void updateView()
+    public void updateView()
     {
         updateIcon();
         debuffName.setText(model.getCustomSpellDebuff() != null ? model.getCustomSpellDebuff().getName() : "-");

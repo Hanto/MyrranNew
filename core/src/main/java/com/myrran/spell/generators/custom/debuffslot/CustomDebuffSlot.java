@@ -37,9 +37,9 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
     public CustomSpellDebuff getCustomSpellDebuff()             { return customSpellDebuff; }
     @Override public void setID(String id)                      { this.id = id; }
-    public void setName(String name)                            { this.name = name; notifyChanges();}
-    public void setType(String type)                            { this.type = type; notifyChanges();}
-    public void setLock(CustomSpellSlotKey...integers)          { lock.addAll(Arrays.asList(integers)); notifyChanges();}
+    public void setName(String name)                            { this.name = name; notifyChanges(); }
+    public void setType(String type)                            { this.type = type; notifyChanges(); }
+    public void setLock(CustomSpellSlotKey...integers)          { lock.addAll(Arrays.asList(integers)); notifyChanges(); }
     @Override public ObservableI getObservable()                { return observable; }
 
     // TEMPLATE TO CUSTOM:

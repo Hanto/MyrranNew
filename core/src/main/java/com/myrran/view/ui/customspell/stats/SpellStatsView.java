@@ -1,12 +1,11 @@
 package com.myrran.view.ui.customspell.stats;
 
 import com.badlogic.gdx.utils.Disposable;
-import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
@@ -19,22 +18,30 @@ public class SpellStatsView implements Disposable
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
+    public SpellStatsView() {}
     public SpellStatsView(CustomSpellStats spellStats)
-    {   createView(spellStats.values());}
+    {   createView(spellStats);}
 
     @Override public void dispose()
-    {   stats.forEach(SpellStatView::dispose); }
+    {
+        stats.stream()
+            .filter(Objects::nonNull)
+            .forEach(SpellStatView::dispose);
+    }
 
     // CREATE / UPDATE::
     //--------------------------------------------------------------------------------------------------------
 
-    private void createView(Collection<CustomSpellStat> spellStats)
+    private void createView(CustomSpellStats customSpellStats)
     {
-        stats = spellStats.stream()
+        stats = customSpellStats.values().stream()
             .map(SpellStatView::new)
             .collect(Collectors.toList());
     }
 
-    public void updateView()
-    {   stats.forEach(SpellStatView::updateView); }
+    public void updateView(CustomSpellStats customSpellStats)
+    {
+        dispose();
+        createView(customSpellStats);
+    }
 }

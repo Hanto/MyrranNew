@@ -3,6 +3,7 @@ package com.myrran.view.ui.customspell.debuff;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
+import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.TextView;
@@ -16,15 +17,14 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
 {
     private CustomDebuffSlot model;
 
-    private boolean isFull = false;
     private TextView name;
+    private DebuffIconView debuffIcon;
     private SpellStatsView debuffStats;
-    private DebuffView debuffView;
 
-    public boolean isFull()                     { return isFull; }
+    public boolean hasDebuff()                     { return model.getCustomSpellDebuff() != null; }
     public TextView getName()                   { return name; }
     public SpellStatsView getDebuffStats()      { return debuffStats; }
-    public DebuffView getDebuffView()           { return debuffView; }
+    public DebuffIconView getDebufIcon()        { return debuffIcon; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
     @Override public void dispose()
     {
         model.removeObserver(this);
-        if (debuffStats!= null) debuffStats.dispose();
+        debuffStats.dispose();
     }
 
     // CREATE / UPDATE:
@@ -51,23 +51,21 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
     {
         BitmapFont font11 = Atlas.get().getFont("11");
 
-        name = new TextView(font11, Color.ORANGE, Color.BLACK, 1);
-        debuffView  = new DebuffView(model);
+        name        = new TextView(font11, Color.ORANGE, Color.BLACK, 1);
+        debuffIcon  = new DebuffIconView(model);
+        debuffStats = new SpellStatsView();
     }
 
     private void updateView()
     {
-        if (model.getCustomSpellDebuff() != null)
+        CustomSpellDebuff debuff = model.getCustomSpellDebuff();
+
+        debuffIcon.updateView();
+
+        if (debuff != null)
         {
-            isFull = true;
-            name.setText(model.getCustomSpellDebuff().getName());
-            debuffStats = new SpellStatsView(model.getCustomSpellDebuff().getSpellStats());
-        }
-        else
-        {
-            isFull = false;
-            name = null;
-            debuffStats = null;
+            name.setText(debuff.getName());
+            debuffStats.updateView(debuff.getSpellStats());
         }
     }
 
@@ -77,6 +75,7 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
     @Override
     public void propertyChange(PropertyChangeEvent evt)
     {
-
+        if (evt.getPropertyName().equals("debuff"))
+            updateView();
     }
 }

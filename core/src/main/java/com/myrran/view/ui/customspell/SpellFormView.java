@@ -26,15 +26,13 @@ public class SpellFormView extends Group implements Disposable
     private CustomSpellForm model;
 
     private Table tableStats;
-    private Table tableDebuffs;
-
     private Image icon;
+    private Image background;
     private TextView name;
+    private TextView totalCost;
+    private SpellHeaderView header;
     private SpellStatsView formStats;
     private DebuffSlotsView debuffSlots;
-    private Image background;
-    private SpellHeaderView header;
-    private TextView totalCost;
 
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
@@ -47,7 +45,6 @@ public class SpellFormView extends Group implements Disposable
 
         createView();
         updateView();
-        updateTableStats();
     }
 
     @Override public void dispose()
@@ -65,35 +62,32 @@ public class SpellFormView extends Group implements Disposable
         BitmapFont font14 = Atlas.get().getFont("14");
 
         icon        = Atlas.get().getImage("TexturasIconos/FireBall");
+        background  = Atlas.get().getImage("TexturasMisc/Casillero2");
+        header      = new SpellHeaderView();
         name        = new TextView(font20, Color.ORANGE, Color.BLACK, 2);
         totalCost   = new TextView(font14, magenta, Color.BLACK, 2);
-        tableStats  = new Table().bottom().left();
-        tableDebuffs= new Table().top().left();
-        header      = new SpellHeaderView();
-        background  = Atlas.get().getImage("TexturasMisc/Casillero2");
         formStats   = new SpellStatsView(model.getSpellStats());
         debuffSlots = new DebuffSlotsView(model.getDebuffSlots());
+        tableStats  = new Table().bottom().left();
 
         background.setColor(1f, 1f, 1f, 0.55f);
 
-        tableAddDebuffIcons();
+        addActor(debuffSlots.getDebuffIconTable());
         addActor(icon);
         addActor(background);
         addActor(tableStats);
-        addActor(tableDebuffs);
-    }
-
-    private void tableAddDebuffIcons()
-    {
-        debuffSlots.getSlots().stream()
-            .map(DebuffSlotView::getDebuffView)
-            .forEach(icon -> tableDebuffs.add(icon).row());
     }
 
     // UPDATE TABLE:
     //--------------------------------------------------------------------------------------------------------
 
     private void updateView()
+    {
+        updateFields();
+        updateTableStats();
+    }
+
+    private void updateFields()
     {
         name.setText(model.getName());
         totalCost.setText("Rank: "+model.getTotalCost().toString());
@@ -102,22 +96,20 @@ public class SpellFormView extends Group implements Disposable
     private void updateTableStats()
     {
         tableStats.clear();
+        tableStats.add(name).bottom().padBottom(-4).padLeft(4).left();
+        tableStats.add();
+        tableStats.add(totalCost).bottom().center().row();
 
+        tableAddRow(header);
         tableStatsAddFormStats();
         tableStatsAddDebuffsStats();;
-
-        icon.setPosition(-icon.getWidth(), tableStats.getMinHeight()-icon.getHeight()-name.getHeight()/2);
-        tableDebuffs.setPosition(tableStats.getMinWidth(), tableStats.getMinHeight() -name.getHeight()/2);
-        background.setBounds(0, 0, tableStats.getMinWidth(), tableStats.getMinHeight() - name.getHeight()/2);
+        updatePositions();
     }
 
     private void tableStatsAddFormStats()
     {
-        tableStats.add(name).bottom().padBottom(-4).padLeft(4).left();
-        tableStats.add();
-        tableStats.add(totalCost).bottom().center().row();
-        tableAddRow(header);
-        formStats.getStats().forEach(this::tableAddRow);
+        formStats.getStats().
+            forEach(this::tableAddRow);
 
         addListener(formStats);
     }
@@ -125,7 +117,7 @@ public class SpellFormView extends Group implements Disposable
     private void tableStatsAddDebuffsStats()
     {
         debuffSlots.getSlots().stream()
-            .filter(DebuffSlotView::isFull)
+            .filter(DebuffSlotView::hasDebuff)
             .forEach(this::tableStatsAddDebuffStats);
     }
 
@@ -151,6 +143,13 @@ public class SpellFormView extends Group implements Disposable
         tableStats.add(row.getMaxUpgrades()).bottom().right().padRight(2).padTop(pad).padBottom(pad);
         tableStats.add(row.getGearBonus()).bottom().right().padRight(2).padTop(pad).padBottom(pad).padRight(4);
         tableStats.row();
+    }
+
+    private void updatePositions()
+    {
+        icon.setPosition(-icon.getWidth(), tableStats.getMinHeight()-icon.getHeight()-name.getHeight()/2);
+        debuffSlots.getDebuffIconTable().setPosition(tableStats.getMinWidth(), tableStats.getMinHeight() -name.getHeight()/2);
+        background.setBounds(0, 0, tableStats.getMinWidth(), tableStats.getMinHeight() - name.getHeight()/2);
     }
 
     // INPUT:
