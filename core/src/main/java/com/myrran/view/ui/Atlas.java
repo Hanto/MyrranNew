@@ -15,20 +15,27 @@ import java.util.Map;
 /** @author Ivan Delgado Huerta */
 public class Atlas implements Disposable
 {
-    private static class Singleton                  { private static final Atlas get = new Atlas(); }
-    public static Atlas get()                       { return Singleton.get; }
-
     private TextureAtlas atlas;
     private Map<String, TextureRegion> textures = new HashMap<>();
     private Map<String, BitmapFont> fonts = new HashMap<>();
+
     private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
+
+    // SETTERS / GETTERS:
+    //--------------------------------------------------------------------------------------------------------
 
     public TextureRegion getTexture(String name)    { return textures.get(name); }
     public BitmapFont getFont(String name)          { return fonts.get(name); }
     public Image getImage(String name)              { return new Image(textures.get(name)); }
 
-    // CONSTRUCTOR:
+    // CONSTRUCTOR (SINGLETON):
     //--------------------------------------------------------------------------------------------------------
+
+    private static class Singleton
+    {   private static final Atlas get = new Atlas(); }
+
+    public static Atlas get()
+    {   return Singleton.get; }
 
     private Atlas()
     {
