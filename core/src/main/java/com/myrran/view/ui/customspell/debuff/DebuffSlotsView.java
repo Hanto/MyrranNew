@@ -54,12 +54,12 @@ public class DebuffSlotsView implements Disposable
     }
 
     public void updateView()
-    {   createView(); }
+    {   slots.forEach(DebuffSlotView::updateView); }
 
     public void setModel(CustomDebuffSlots debuffSlots)
     {
         dispose();
         model = debuffSlots;
-        updateView();
+        createView();
     }
 }

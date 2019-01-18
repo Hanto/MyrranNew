@@ -17,4 +17,5 @@ public interface CustomDebuffSlotsI
     boolean setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException;
     void removeCustomSpellDebuff(String slotID) throws InvalidIDException;
     int getDebuffSlotsTotalCost();
+    CustomDebuffSlot getCustomDebufflot(String slotID) throws InvalidIDException;
 }

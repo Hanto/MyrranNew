@@ -119,6 +119,8 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
 
     private void tableStatsAddDebuffsStats()
     {
+        debuffSlots.updateView();
+
         debuffSlots.getSlots().stream()
             .filter(DebuffSlotView::hasDebuff)
             .forEach(this::tableStatsAddDebuffStats);

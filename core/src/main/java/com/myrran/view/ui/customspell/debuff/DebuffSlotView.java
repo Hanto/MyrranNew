@@ -24,11 +24,11 @@ public class DebuffSlotView implements PropertyChangeListener, Disposable
 
     public boolean hasDebuff()                  { return model.getCustomSpellDebuff() != null; }
     public TextView getName()                   { return name; }
-    public TextView getTotalCost()               { return totalCost; }
+    public TextView getTotalCost()              { return totalCost; }
     public SpellStatsView getDebuffStats()      { return debuffStats; }
     public DebuffIconView getDebufIcon()        { return debuffIcon; }
 
-    private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
+    private static final Color magenta = new Color(130/255f, 50/255f, 255/255f, 1f);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ public class DebuffSlotView implements PropertyChangeListener, Disposable
         debuffStats = new SpellStatsView();
     }
 
-    private void updateView()
+    public void updateView()
     {
         CustomSpellDebuff debuff = model.getCustomSpellDebuff();
 

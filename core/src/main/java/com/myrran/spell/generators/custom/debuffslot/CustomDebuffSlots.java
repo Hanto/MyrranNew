@@ -50,25 +50,26 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     @Override
     public CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
     {
-        CustomDebuffSlot slot = getCustomSpellSlot(slotID);
+        CustomDebuffSlot slot = getCustomDebufflot(slotID);
         return slot.getCustomSpellDebuff();
     }
 
     @Override
     public boolean setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException
     {
-        CustomDebuffSlot slot = getCustomSpellSlot(slotID);
+        CustomDebuffSlot slot = getCustomDebufflot(slotID);
         return slot.setCustomSpellDebuff(debuff);
     }
 
     @Override
     public void removeCustomSpellDebuff(String slotID) throws InvalidIDException
     {
-        CustomDebuffSlot slot = getCustomSpellSlot(slotID);
+        CustomDebuffSlot slot = getCustomDebufflot(slotID);
         slot.removeCustomSpellDebuff();
     }
 
-    private CustomDebuffSlot getCustomSpellSlot(String slotID) throws InvalidIDException
+    @Override
+    public CustomDebuffSlot getCustomDebufflot(String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = slots.get(slotID);
         if (slot != null) return slot;

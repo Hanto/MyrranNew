@@ -46,12 +46,12 @@ public class SpellStatsView implements Disposable
     }
 
     public void updateView()
-    {   createView(); }
+    {   stats.forEach(SpellStatView::updateView); }
 
     public void setModel(CustomSpellStats spellStats)
     {
         dispose();
         model = spellStats;
-        updateView();
+        createView();
     }
 }
