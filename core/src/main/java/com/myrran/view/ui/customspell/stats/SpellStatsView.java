@@ -3,15 +3,13 @@ package com.myrran.view.ui.customspell.stats;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStatsView implements Disposable, PropertyChangeListener
+public class SpellStatsView implements Disposable
 {
     private CustomSpellStats model;
 
@@ -25,7 +23,8 @@ public class SpellStatsView implements Disposable, PropertyChangeListener
     public SpellStatsView() {}
     public SpellStatsView(CustomSpellStats spellStats)
     {
-        model = spellStats;
+        this.model = spellStats;
+
         createView();
     }
 
@@ -47,22 +46,12 @@ public class SpellStatsView implements Disposable, PropertyChangeListener
     }
 
     public void updateView()
-    {
-        dispose();
-        createView();
-    }
+    {   createView(); }
 
     public void setModel(CustomSpellStats spellStats)
     {
         dispose();
         model = spellStats;
-        createView();
+        updateView();
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-    {   updateView();}
 }

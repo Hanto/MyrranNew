@@ -55,7 +55,6 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
         this.name = template.getName();
         this.type = template.getSlotType();
         this.lock = new ArrayList<>(template.getLock());
-        notifyChanges();
     }
 
     // CUSTOM TO ENTITY DATA:
@@ -78,18 +77,18 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }
 
-    public void setCustomSpellDebuff(CustomSpellDebuff effect)
+    public boolean setCustomSpellDebuff(CustomSpellDebuff effect)
     {
         if(opensLock(effect.getKeys()))
-            this.customSpellDebuff = effect;
-        notifyChanges();
+        {
+            customSpellDebuff = effect;
+            return true;
+        }
+        else return false;
     }
 
     public void removeCustomSpellDebuff()
-    {
-        this.customSpellDebuff =  null;
-        notifyChanges();
-    }
+    {   this.customSpellDebuff =  null; }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------

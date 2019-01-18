@@ -10,7 +10,6 @@ import com.myrran.view.ui.TextView;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 
 /** @author Ivan Delgado Huerta */
 public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disposable
@@ -32,9 +31,7 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
     private static final Color purpleL = new Color(163/255f, 170/255f, 255/255f, 1);
     private static final Color purpleH = new Color(110/255f, 110/255f, 211/255f, 1);
     private static final Color black = Color.BLACK;
-
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-    private static final DecimalFormatSymbols simbolos = df.getDecimalFormatSymbols();
+    private static final DecimalFormat df = Atlas.get().getFormater();
 
     // GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -55,9 +52,6 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
 
     public SpellStatView(CustomSpellStat customSpellStat)
     {
-        simbolos.setDecimalSeparator('.');
-        df.setDecimalFormatSymbols(simbolos);
-
         this.model = customSpellStat;
         this.model.addObserver(this);
 
@@ -101,6 +95,14 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
         gearBonus.setText(df.format(model.getGearBonus()));
 
         upgradesView.updateView();
+    }
+
+    public void setModel(CustomSpellStat customSpellStat)
+    {
+        dispose();
+        model = customSpellStat;
+        model.addObserver(this);
+        updateView();
     }
 
     private String format(Float rawData)

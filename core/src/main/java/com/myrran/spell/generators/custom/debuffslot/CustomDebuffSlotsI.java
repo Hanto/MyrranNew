@@ -14,7 +14,7 @@ public interface CustomDebuffSlotsI
     void setDebuffSlotsTemplate(Collection<SpellDebuffSlotTemplate> templates);
     List<SpellDebuffParams> getSpellEffectParams();
     CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException;
-    void setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException;
+    boolean setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException;
     void removeCustomSpellDebuff(String slotID) throws InvalidIDException;
     int getDebuffSlotsTotalCost();
 }

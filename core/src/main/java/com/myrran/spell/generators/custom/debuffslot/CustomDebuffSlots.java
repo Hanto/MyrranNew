@@ -1,8 +1,5 @@
 package com.myrran.spell.generators.custom.debuffslot;
 
-import com.myrran.misc.observable.Observable;
-import com.myrran.misc.observable.ObservableDeco;
-import com.myrran.misc.observable.ObservableI;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.templatedata.SpellDebuffSlotTemplate;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
@@ -10,7 +7,6 @@ import com.myrran.utils.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -19,14 +15,11 @@ import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomDebuffSlots implements CustomDebuffSlotsI, ObservableDeco
+public class CustomDebuffSlots implements CustomDebuffSlotsI
 {
     private Map<String, CustomDebuffSlot> slots = new HashMap<>();
-    @XmlTransient
-    private ObservableI observable = new Observable(this);
 
     public Collection<CustomDebuffSlot> values()        { return slots.values(); }
-    @Override public ObservableI getObservable()        { return observable; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -37,7 +30,6 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI, ObservableDeco
         slots = templates.stream()
             .map(CustomDebuffSlot::new)
             .collect(Collectors.toMap(CustomDebuffSlot::getID, slot -> slot));
-        notifyChanges();
     }
 
     // CUSTOM TO ENTITY PARAM:
@@ -63,10 +55,10 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI, ObservableDeco
     }
 
     @Override
-    public void setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException
+    public boolean setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = getCustomSpellSlot(slotID);
-        slot.setCustomSpellDebuff(debuff);
+        return slot.setCustomSpellDebuff(debuff);
     }
 
     @Override
@@ -93,10 +85,4 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI, ObservableDeco
             .mapToInt(CustomDebuffSlot::getTotalCost)
             .sum();
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    private void notifyChanges()
-    {   notify("debuffSlots", null, null); }
 }

@@ -31,6 +31,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats
 
     @Override public String getID()                             { return id; }
     @Override public String getName()                           { return name; }
+    public Integer getBaseCost()                                { return baseCost; }
     public String getTemplateID()                               { return templateID; }
     public SpellDebuffFactory getFactory()                      { return factory; }
     public List<CustomSpellSlotKey> getKeys()                   { return keys; }

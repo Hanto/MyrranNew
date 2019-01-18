@@ -24,80 +24,89 @@ import java.io.File;
 
 public class ZMain extends ApplicationAdapter
 {
-	SpriteBatch batch;
-	Texture img;
+	private SpriteBatch batch;
+	private Texture img;
 
-	BitmapFont font;
-	TextView text;
-	Stage uiStage;
-	ScrollingCombatText sct;
+	private BitmapFont font;
+	private TextView text;
+	private Stage uiStage;
+	private ScrollingCombatText sct;
 
-	ShapeRenderer shapeRenderer;
-	TextView sctView;
-	CustomSpellBook book;
-	SpellFormView spellFormView;
+	private ShapeRenderer shapeRenderer;
+	private TextView sctView;
+	private CustomSpellBook book;
+	private SpellFormView spellFormView;
 
 	private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
 	@Override
 	public void create ()
 	{
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-
-		font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
-		text = new TextView("Hola Mundo", font, Color.WHITE, Color.BLACK, 2);
-		uiStage = new Stage();
-		uiStage.addActor(text);
-		text.setText("Hola Johana como te llamas");
-		text.setPosition(0, 0);
-		text.setTextColor(Color.ORANGE);
-		shapeRenderer = new ShapeRenderer();
-		sct = new ScrollingCombatText(font);
-		sct.setDuration(10)
-			.setMoveY(300)
-			.setMoveX(50)
-			.setInterpolationY(Interpolation.smooth2)
-			.setInterpolationX(Interpolation.smooth2);
-
-		sctView = sct.sct("Johancia");
-		uiStage.addActor(sctView);
-		sctView.setPosition(100, 100);
 		try
 		{
-			book = unmarshal(CustomSpellBook.class);
-			spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
-			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
+			batch = new SpriteBatch();
+			img = new Texture("badlogic.jpg");
+
+			font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
+			text = new TextView("Hola Mundo", font, Color.WHITE, Color.BLACK, 2);
+			uiStage = new Stage();
+			uiStage.addActor(text);
+			text.setText("Hola Johana como te llamas");
+			text.setPosition(0, 0);
+			text.setTextColor(Color.ORANGE);
+			shapeRenderer = new ShapeRenderer();
+			sct = new ScrollingCombatText(font);
+			sct.setDuration(10)
+				.setMoveY(300)
+				.setMoveX(50)
+				.setInterpolationY(Interpolation.smooth2)
+				.setInterpolationX(Interpolation.smooth2);
+
+			sctView = sct.sct("Johancia");
+			uiStage.addActor(sctView);
+			sctView.setPosition(100, 100);
+
+				book = unmarshal(CustomSpellBook.class);
+				spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
+				book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
+
+
+			spellFormView.setPosition(100, 100);
+			uiStage.addActor(spellFormView);
+
+			Gdx.input.setInputProcessor(uiStage);
+
 		}
 		catch (Exception e)
-		{ LOG.error("PUMBA",e); }
-
-		spellFormView.setPosition(100, 100);
-		uiStage.addActor(spellFormView);
-
-		Gdx.input.setInputProcessor(uiStage);
+		{ 	LOG.error("PUMBA",e); }
 	}
 
 	@Override
 	public void render ()
 	{
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		try
+		{
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		//batch.begin();
-		//batch.draw(img, 0, 0);
-		//batch.end();
+			//batch.begin();
+			//batch.draw(img, 0, 0);
+			//batch.end();
 
-		//shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-		//shapeRenderer.setColor(Color.BLACK);
-		//shapeRenderer.rect(sctView.getX(), sctView.getY(), sctView.getWidth(), sctView.getHeight());
-		//shapeRenderer.end();
+			//shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+			//shapeRenderer.setColor(Color.BLACK);
+			//shapeRenderer.rect(sctView.getX(), sctView.getY(), sctView.getWidth(), sctView.getHeight());
+			//shapeRenderer.end();
 
-		uiStage.setDebugUnderMouse(true);
-		uiStage.setDebugAll(true);
+			uiStage.setDebugUnderMouse(true);
+			uiStage.setDebugAll(true);
 
-		uiStage.act();
-		uiStage.draw();
+			uiStage.act();
+			uiStage.draw();
+
+		}
+		catch (Exception e)
+		{ 	LOG.error("PUMBA",e); }
 
 	}
 	

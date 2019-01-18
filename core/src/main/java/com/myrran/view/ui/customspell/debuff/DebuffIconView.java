@@ -52,14 +52,6 @@ public class DebuffIconView extends Group
         updatePositions();
     }
 
-    private void updatePositions()
-    {
-        setBounds(0, 0, iconImage.getWidth(), iconImage.getHeight());
-        debuffName.setPosition(getWidth(), 20);
-        slotType.setPosition(getWidth(), 10);
-        lock.setPosition(getWidth(), 0);
-    }
-
     public void updateView()
     {
         updateIcon();
@@ -69,8 +61,22 @@ public class DebuffIconView extends Group
         updatePositions();
     }
 
+    public void setModel(CustomDebuffSlot customDebuffSlot)
+    {
+        model = customDebuffSlot;
+        updateView();
+    }
+
     // MISC:
     //--------------------------------------------------------------------------------------------------------
+
+    private void updatePositions()
+    {
+        setBounds(0, 0, iconImage.getWidth(), iconImage.getHeight());
+        debuffName.setPosition(getWidth(), 20);
+        slotType.setPosition(getWidth(), 10);
+        lock.setPosition(getWidth(), 0);
+    }
 
     private void updateIcon()
     {

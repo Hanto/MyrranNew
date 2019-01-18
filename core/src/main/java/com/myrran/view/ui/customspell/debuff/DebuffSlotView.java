@@ -13,18 +13,22 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public class DebuffSlotView implements Disposable, PropertyChangeListener
+public class DebuffSlotView implements PropertyChangeListener, Disposable
 {
     private CustomDebuffSlot model;
 
     private TextView name;
+    private TextView totalCost;
     private DebuffIconView debuffIcon;
     private SpellStatsView debuffStats;
 
     public boolean hasDebuff()                  { return model.getCustomSpellDebuff() != null; }
     public TextView getName()                   { return name; }
+    public TextView getTotalCost()               { return totalCost; }
     public SpellStatsView getDebuffStats()      { return debuffStats; }
     public DebuffIconView getDebufIcon()        { return debuffIcon; }
+
+    private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -49,9 +53,10 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
 
     private void createView()
     {
-        BitmapFont font11 = Atlas.get().getFont("11");
+        BitmapFont font11 = Atlas.get().getFont("14");
 
         name        = new TextView(font11, Color.ORANGE, Color.BLACK, 1);
+        totalCost   = new TextView(font11, magenta, Color.BLACK, 1);
         debuffIcon  = new DebuffIconView(model);
         debuffStats = new SpellStatsView();
     }
@@ -66,7 +71,16 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
         {
             name.setText(debuff.getName());
             debuffStats.setModel(debuff.getSpellStats());
+            totalCost.setText(String.format("Rank: %s(%s)", debuff.getTotalCost()-debuff.getBaseCost(), debuff.getBaseCost()));
         }
+    }
+
+    public void setModel(CustomDebuffSlot customDebuffSlot)
+    {
+        dispose();
+        model = customDebuffSlot;
+        model.addObserver(this);
+        updateView();
     }
 
     // MVC:

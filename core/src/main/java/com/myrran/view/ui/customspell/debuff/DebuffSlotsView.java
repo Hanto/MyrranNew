@@ -4,15 +4,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlots;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class DebuffSlotsView implements Disposable, PropertyChangeListener
+public class DebuffSlotsView implements Disposable
 {
     private CustomDebuffSlots model;
 
@@ -27,7 +25,8 @@ public class DebuffSlotsView implements Disposable, PropertyChangeListener
 
     public DebuffSlotsView(CustomDebuffSlots debuffSlots)
     {
-        model = debuffSlots;
+        this.model = debuffSlots;
+
         createView();
     }
 
@@ -55,15 +54,12 @@ public class DebuffSlotsView implements Disposable, PropertyChangeListener
     }
 
     public void updateView()
+    {   createView(); }
+
+    public void setModel(CustomDebuffSlots debuffSlots)
     {
         dispose();
-        createView();
+        model = debuffSlots;
+        updateView();
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override
-    public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-    {   updateView();}
 }

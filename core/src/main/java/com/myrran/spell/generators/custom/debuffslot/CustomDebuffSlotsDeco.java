@@ -25,8 +25,8 @@ public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
     default CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
     {   return getDebuffSlots().getCustomSpellDebuff(slotID); }
 
-    default void setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException
-    {   getDebuffSlots().setCustomSpellDebuff(debuff, slotID); }
+    default boolean setCustomSpellDebuff(CustomSpellDebuff debuff, String slotID) throws InvalidIDException
+    {   return getDebuffSlots().setCustomSpellDebuff(debuff, slotID); }
 
     default void removeCustomSpellDebuff(String slotID) throws InvalidIDException
     {   getDebuffSlots().removeCustomSpellDebuff(slotID); }

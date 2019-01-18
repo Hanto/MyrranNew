@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.Disposable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ public class Atlas implements Disposable
     private TextureAtlas atlas;
     private Map<String, TextureRegion> textures = new HashMap<>();
     private Map<String, BitmapFont> fonts = new HashMap<>();
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+    private static final DecimalFormatSymbols simbolos = df.getDecimalFormatSymbols();
 
     private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
@@ -27,6 +31,7 @@ public class Atlas implements Disposable
     public TextureRegion getTexture(String name)    { return textures.get(name); }
     public BitmapFont getFont(String name)          { return fonts.get(name); }
     public Image getImage(String name)              { return new Image(textures.get(name)); }
+    public DecimalFormat getFormater()              { return df; }
 
     // CONSTRUCTOR (SINGLETON):
     //--------------------------------------------------------------------------------------------------------
@@ -55,6 +60,7 @@ public class Atlas implements Disposable
     private void loadData()
     {
         atlas = new TextureAtlas(Gdx.files.internal("atlas/atlas.atlas"));
+
         addTexture("TexturasIconos/IconoVacio");
         addTexture("TexturasIconos/FireBall");
         addTexture("TexturasIconos/IceBall");
@@ -66,6 +72,9 @@ public class Atlas implements Disposable
         addFont("11");
         addFont("14");
         addFont("20");
+
+        simbolos.setDecimalSeparator('.');
+        df.setDecimalFormatSymbols(simbolos);
     }
 
     private void addTexture(String name)

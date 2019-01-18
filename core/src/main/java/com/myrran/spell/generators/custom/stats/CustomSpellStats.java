@@ -1,29 +1,22 @@
 package com.myrran.spell.generators.custom.stats;
 
-import com.myrran.misc.observable.Observable;
-import com.myrran.misc.observable.ObservableDeco;
-import com.myrran.misc.observable.ObservableI;
 import com.myrran.spell.data.entityparams.SpellStatParams;
 import com.myrran.spell.data.templatedata.SpellStatTemplate;
 import com.myrran.utils.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellStats implements CustomSpellStatsI, ObservableDeco
+public class CustomSpellStats implements CustomSpellStatsI
 {
     private Map<String, CustomSpellStat> stats = new HashMap<>();
-    @XmlTransient
-    private ObservableI observable = new Observable(this);
 
-    public Collection<CustomSpellStat> values()         { return stats.values(); }
-    @Override public ObservableI getObservable()        { return observable; }
+    public Collection<CustomSpellStat> values() { return stats.values(); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -34,7 +27,6 @@ public class CustomSpellStats implements CustomSpellStatsI, ObservableDeco
         stats = templates.stream()
             .map(CustomSpellStat::new)
             .collect(Collectors.toMap(CustomSpellStat::getID, stat -> stat));
-        notifyChanges();
     }
 
     // CUSTOM TO ENTITY PARAMS:
@@ -69,10 +61,4 @@ public class CustomSpellStats implements CustomSpellStatsI, ObservableDeco
             .mapToInt(CustomSpellStat::getTotalCost)
             .sum();
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    private void notifyChanges()
-    {   notify("stats", null, null); }
 }

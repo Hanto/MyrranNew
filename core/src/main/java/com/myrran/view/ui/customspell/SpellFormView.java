@@ -20,8 +20,11 @@ import com.myrran.view.ui.customspell.stats.SpellStatRow;
 import com.myrran.view.ui.customspell.stats.SpellStatView;
 import com.myrran.view.ui.customspell.stats.SpellStatsView;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /** @author Ivan Delgado Huerta */
-public class SpellFormView extends Group implements Disposable
+public class SpellFormView extends Group implements PropertyChangeListener, Disposable
 {
     private CustomSpellForm model;
 
@@ -123,7 +126,10 @@ public class SpellFormView extends Group implements Disposable
 
     private void tableStatsAddDebuffStats(DebuffSlotView debuff)
     {
-        tableStats.add(debuff.getName()).bottom().padBottom(-4).left().row();
+        tableStats.add(debuff.getName()).bottom().padBottom(-4).left();
+        tableStats.add();
+        tableStats.add(debuff.getTotalCost()).bottom().center().row();
+
         debuff.getDebuffStats().getStats()
             .forEach(this::tableAddRow);
 
@@ -181,6 +187,7 @@ public class SpellFormView extends Group implements Disposable
     {
         tableStats.invalidate();
         stat.setNumUpgrades(stat.getNumUpgrades() + modifyBy);
+        updateFields();
     }
 
     private void modifyStatTo(CustomSpellStat stat, int modifyTo)
@@ -188,5 +195,19 @@ public class SpellFormView extends Group implements Disposable
         tableStats.invalidate();
         modifyTo = stat.getNumUpgrades() > 25 ? modifyTo +25 : modifyTo;
         stat.setNumUpgrades(modifyTo);
+        updateFields();
+    }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt)
+    {
+        if (evt.getPropertyName().equals("fieldChange"))
+            updateFields();
+
+        else if (evt.getPropertyName().equals("fullChange"))
+            updateView();
     }
 }

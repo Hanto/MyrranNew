@@ -67,7 +67,6 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
         this.maxUpgrades = template.getMaxUpgrades();
         this.upgradeCost = template.getUpgradeCost();
         this.bonusPerUpgrade = template.getBonusPerUpgrade();
-        notifyChanges();
     }
 
     // CUSTOM TO ENTITY DATA:
