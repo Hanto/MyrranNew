@@ -1,11 +1,11 @@
-package com.myrran.view.ui.customspellview;
+package com.myrran.view.ui.customspell.debuff;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.TextView;
-import com.myrran.view.ui.customspellview.statsview.SpellStatsView;
+import com.myrran.view.ui.customspell.stats.SpellStatsView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

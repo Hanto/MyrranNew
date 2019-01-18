@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspellview;
+package com.myrran.view.ui.customspell.debuff;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;

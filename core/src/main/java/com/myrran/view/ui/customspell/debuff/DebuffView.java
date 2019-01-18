@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspellview;
+package com.myrran.view.ui.customspell.debuff;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

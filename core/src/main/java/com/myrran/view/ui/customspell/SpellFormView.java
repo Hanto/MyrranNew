@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspellview;
+package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -13,10 +13,12 @@ import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.TextView;
-import com.myrran.view.ui.customspellview.statsview.SpellHeaderView;
-import com.myrran.view.ui.customspellview.statsview.SpellStatRow;
-import com.myrran.view.ui.customspellview.statsview.SpellStatView;
-import com.myrran.view.ui.customspellview.statsview.SpellStatsView;
+import com.myrran.view.ui.customspell.debuff.DebuffSlotView;
+import com.myrran.view.ui.customspell.debuff.DebuffSlotsView;
+import com.myrran.view.ui.customspell.stats.SpellHeaderView;
+import com.myrran.view.ui.customspell.stats.SpellStatRow;
+import com.myrran.view.ui.customspell.stats.SpellStatView;
+import com.myrran.view.ui.customspell.stats.SpellStatsView;
 
 /** @author Ivan Delgado Huerta */
 public class SpellFormView extends Group implements Disposable
