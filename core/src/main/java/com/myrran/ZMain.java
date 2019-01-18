@@ -15,6 +15,8 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.customspell.SpellFormView;
 import com.myrran.view.ui.ScrollingCombatText;
 import com.myrran.view.ui.TextView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
@@ -34,6 +36,8 @@ public class ZMain extends ApplicationAdapter
 	TextView sctView;
 	CustomSpellBook book;
 	SpellFormView spellFormView;
+
+	private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
 	@Override
 	public void create ()
@@ -65,7 +69,8 @@ public class ZMain extends ApplicationAdapter
 			spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
 			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
 		}
-		catch (Exception e) { System.out.println(e); }
+		catch (Exception e)
+		{ LOG.error("PUMBA",e); }
 
 		spellFormView.setPosition(100, 100);
 		uiStage.addActor(spellFormView);

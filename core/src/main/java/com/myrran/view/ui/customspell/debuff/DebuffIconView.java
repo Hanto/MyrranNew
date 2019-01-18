@@ -19,8 +19,6 @@ public class DebuffIconView extends Group
     private TextView keys;
     private TextView lock;
 
-    public CustomDebuffSlot getModel()              { return model; }
-
     private static final Color white = Color.WHITE;
     private static final Color orange = Color.ORANGE;
     private static final Color black = Color.BLACK;

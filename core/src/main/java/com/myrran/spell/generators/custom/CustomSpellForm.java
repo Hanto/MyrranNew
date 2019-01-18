@@ -50,7 +50,6 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
         name = template.getName();
         templateID = template.getID();
         factory = template.getFactory();
-        spellStats.clear();
 
         setSpellStatsTemplates(template.getSpellStats());
         setDebuffSlotsTemplate(template.getSpellSlots());

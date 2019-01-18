@@ -21,7 +21,7 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
     private DebuffIconView debuffIcon;
     private SpellStatsView debuffStats;
 
-    public boolean hasDebuff()                     { return model.getCustomSpellDebuff() != null; }
+    public boolean hasDebuff()                  { return model.getCustomSpellDebuff() != null; }
     public TextView getName()                   { return name; }
     public SpellStatsView getDebuffStats()      { return debuffStats; }
     public DebuffIconView getDebufIcon()        { return debuffIcon; }
@@ -65,7 +65,7 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
         if (debuff != null)
         {
             name.setText(debuff.getName());
-            debuffStats.updateView(debuff.getSpellStats());
+            debuffStats.setModel(debuff.getSpellStats());
         }
     }
 
@@ -74,8 +74,5 @@ public class DebuffSlotView implements Disposable, PropertyChangeListener
 
     @Override
     public void propertyChange(PropertyChangeEvent evt)
-    {
-        if (evt.getPropertyName().equals("debuff"))
-            updateView();
-    }
+    {   updateView(); }
 }

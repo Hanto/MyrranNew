@@ -45,6 +45,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
+    public CustomDebuffSlot() {}
     public CustomDebuffSlot(SpellDebuffSlotTemplate template)
     {   setDebuffSlotTemplate(template); }
 
@@ -94,5 +95,5 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     //--------------------------------------------------------------------------------------------------------
 
     private void notifyChanges()
-    {   notify("debuff", null, null); }
+    {   notify("debuffSlot", null, null); }
 }

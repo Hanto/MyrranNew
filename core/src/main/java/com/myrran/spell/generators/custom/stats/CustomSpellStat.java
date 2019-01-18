@@ -54,6 +54,7 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
+    public CustomSpellStat() {}
     public CustomSpellStat(SpellStatTemplate template)
     {   setSpellStatTemplate(template); }
 

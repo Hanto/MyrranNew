@@ -54,10 +54,7 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats
         baseCost = template.getBaseCost();
         factory = template.getFactory();
         keys = template.getKeys();
-        spellStats.clear();
-
-        template.getSpellStats()
-            .forEach(this::setSpellStatTemplate);
+        spellStats.setSpellStatsTemplates(template.getSpellStats());
     }
 
     // CUSTOM TO ENTITY DATA:
