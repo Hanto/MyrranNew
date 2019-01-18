@@ -47,11 +47,8 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
         templateID = template.getID();
         factory = template.getFactory();
 
-        template.getSpellStats()
-            .forEach(this::setSpellStatTemplate);
-
-        template.getSpellSlots()
-            .forEach(this::setSpellSlotTemplate);
+        setSpellStatsTemplates(template.getSpellStats());
+        setDebuffSlotsTemplate(template.getSpellSlots());
     }
 
     // CUSTOM TO ENTITY DATA:

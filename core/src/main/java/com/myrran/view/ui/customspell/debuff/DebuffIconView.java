@@ -36,7 +36,7 @@ public class DebuffIconView extends Group
         updateView();
     }
 
-    // MAIN:
+    // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
     private void createView()
@@ -51,7 +51,11 @@ public class DebuffIconView extends Group
         addActor(debuffName);
         addActor(slotType);
         addActor(lock);
+        updatePositions();
+    }
 
+    private void updatePositions()
+    {
         setBounds(0, 0, iconImage.getWidth(), iconImage.getHeight());
         debuffName.setPosition(getWidth(), 20);
         slotType.setPosition(getWidth(), 10);
@@ -64,7 +68,11 @@ public class DebuffIconView extends Group
         debuffName.setText(model.getCustomSpellDebuff() != null ? model.getCustomSpellDebuff().getName() : "-");
         slotType.setText(model.getSlotType());
         lock.setText(model.getLock().toString().toLowerCase());
+        updatePositions();
     }
+
+    // MISC:
+    //--------------------------------------------------------------------------------------------------------
 
     private void updateIcon()
     {

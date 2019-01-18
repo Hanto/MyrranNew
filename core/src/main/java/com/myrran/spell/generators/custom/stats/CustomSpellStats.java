@@ -22,16 +22,18 @@ public class CustomSpellStats implements CustomSpellStatsI
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setSpellStatTemplate(SpellStatTemplate template)
+    @Override
+    public void setSpellStatsTemplates(Collection<SpellStatTemplate> templates)
     {
-        stats.computeIfAbsent(template.getID(), v -> new CustomSpellStat());
-        CustomSpellStat customSpellStat = stats.get(template.getID());
-        customSpellStat.setSpellStatTemplate(template);
+        stats = templates.stream()
+            .map(CustomSpellStat::new)
+            .collect(Collectors.toMap(CustomSpellStat::getID, stat -> stat));
     }
 
     // CUSTOM TO ENTITY PARAMS:
     //--------------------------------------------------------------------------------------------------------
 
+    @Override
     public Map<String, SpellStatParams> getSpellStatParams()
     {
         return stats.values().stream()
@@ -42,6 +44,7 @@ public class CustomSpellStats implements CustomSpellStatsI
     // STATS:
     //--------------------------------------------------------------------------------------------------------
 
+    @Override
     public CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException
     {
         CustomSpellStat stat = stats.get(statID);
@@ -52,6 +55,7 @@ public class CustomSpellStats implements CustomSpellStatsI
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
+    @Override
     public int getStatsTotalCost()
     {
         return stats.values().stream()

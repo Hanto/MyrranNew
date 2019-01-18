@@ -25,11 +25,11 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public void setSpellSlotTemplate(SpellDebuffSlotTemplate template)
+    public void setDebuffSlotsTemplate(Collection<SpellDebuffSlotTemplate> templates)
     {
-        slots.computeIfAbsent(template.getID(), v -> new CustomDebuffSlot());
-        CustomDebuffSlot customDebuffSlot = slots.get(template.getID());
-        customDebuffSlot.setSpellSlotTemplate(template);
+        slots = templates.stream()
+            .map(CustomDebuffSlot::new)
+            .collect(Collectors.toMap(CustomDebuffSlot::getID, slot -> slot));
     }
 
     // CUSTOM TO ENTITY PARAM:

@@ -54,15 +54,18 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setSpellStatTemplate(SpellStatTemplate data)
+    public CustomSpellStat(SpellStatTemplate template)
+    {   setSpellStatTemplate(template); }
+
+    public void setSpellStatTemplate(SpellStatTemplate template)
     {
-        this.id = data.getID();
-        this.name = data.getName();
-        this.baseValue = data.getBaseValue();
-        this.isUpgradeable = data.getIsUpgradeable();
-        this.maxUpgrades = data.getMaxUpgrades();
-        this.upgradeCost = data.getUpgradeCost();
-        this.bonusPerUpgrade = data.getBonusPerUpgrade();
+        this.id = template.getID();
+        this.name = template.getName();
+        this.baseValue = template.getBaseValue();
+        this.isUpgradeable = template.getIsUpgradeable();
+        this.maxUpgrades = template.getMaxUpgrades();
+        this.upgradeCost = template.getUpgradeCost();
+        this.bonusPerUpgrade = template.getBonusPerUpgrade();
         notifyChanges();
     }
 

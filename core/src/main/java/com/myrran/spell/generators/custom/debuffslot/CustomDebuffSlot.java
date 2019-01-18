@@ -45,7 +45,10 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    void setSpellSlotTemplate(SpellDebuffSlotTemplate template)
+    public CustomDebuffSlot(SpellDebuffSlotTemplate template)
+    {   setDebuffSlotTemplate(template); }
+
+    public void setDebuffSlotTemplate(SpellDebuffSlotTemplate template)
     {
         this.id = template.getID();
         this.name = template.getName();
@@ -57,7 +60,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     // CUSTOM TO ENTITY DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    SpellDebuffParams getSpellEffectData()
+    public SpellDebuffParams getSpellEffectData()
     {
         SpellDebuffParams data = customSpellDebuff.getSpellEffectData();
         data.setSlotType(type);

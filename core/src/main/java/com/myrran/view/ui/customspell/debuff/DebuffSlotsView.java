@@ -17,8 +17,8 @@ public class DebuffSlotsView implements Disposable
     private Table tableDebuffIcons;
     private List<DebuffSlotView> slots = new ArrayList<>();
 
-    public List<DebuffSlotView>getSlots()           { return slots; }
     public Table getDebuffIconTable()               { return tableDebuffIcons; }
+    public List<DebuffSlotView>getSlots()           { return slots; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ public class DebuffSlotsView implements Disposable
             .forEach(DebuffSlotView::dispose);
     }
 
-    // CREATE / UPDATE::
+    // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
     public void createView()

@@ -102,7 +102,7 @@ public class SpellFormView extends Group implements Disposable
 
         tableAddRow(header);
         tableStatsAddFormStats();
-        tableStatsAddDebuffsStats();;
+        tableStatsAddDebuffsStats();
         updatePositions();
     }
 

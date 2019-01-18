@@ -109,7 +109,7 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
     private String format(Integer rawData)
     {   return model.getIsUpgradeable() ? rawData.toString() : "-"; }
 
-    // OBSERVER:
+    // MVC:
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void propertyChange(PropertyChangeEvent evt)

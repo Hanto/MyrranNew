@@ -5,6 +5,7 @@ import com.myrran.spell.data.templatedata.SpellDebuffSlotTemplate;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.utils.InvalidIDException;
 
+import java.util.Collection;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
@@ -15,8 +16,8 @@ public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
     // DECORATOR
     //--------------------------------------------------------------------------------------------------------
 
-    default void setSpellSlotTemplate(SpellDebuffSlotTemplate template)
-    {   getDebuffSlots().setSpellSlotTemplate(template); }
+    default void setDebuffSlotsTemplate(Collection<SpellDebuffSlotTemplate> templates)
+    {   getDebuffSlots().setDebuffSlotsTemplate(templates); }
 
     default List<SpellDebuffParams> getSpellEffectParams()
     {   return getDebuffSlots().getSpellEffectParams(); }

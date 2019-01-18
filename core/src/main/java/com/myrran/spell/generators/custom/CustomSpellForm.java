@@ -52,11 +52,8 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
         factory = template.getFactory();
         spellStats.clear();
 
-        template.getSpellStats()
-            .forEach(this::setSpellStatTemplate);
-
-        template.getSpellSlots()
-            .forEach(this::setSpellSlotTemplate);
+        setSpellStatsTemplates(template.getSpellStats());
+        setDebuffSlotsTemplate(template.getSpellSlots());
     }
 
     // CUSTOM TO ENTITY PARAMS:
