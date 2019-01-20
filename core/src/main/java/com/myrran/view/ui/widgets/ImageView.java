@@ -8,6 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 /** @author Ivan Delgado Huerta */
 public class ImageView extends Image
 {
+    // Original image doesn't have a default size that wraps the texture region
+    // so you always have to manually specify it.
+
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
