@@ -89,6 +89,9 @@ public class ZMain extends ApplicationAdapter
 			debuffSlotView.setPosition(100, 250);;
 			uiStage.addActor(debuffSlotView);
 
+			sctView = sct.sct("HoLaaaaa");
+			uiStage.addActor(sctView);
+
 			//spell.setNumUpgrades("Spot 1", "Speed", 30);
 		}
 		catch (Exception e)

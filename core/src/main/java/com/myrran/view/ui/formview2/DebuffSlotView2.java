@@ -9,6 +9,7 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
+import com.myrran.view.ui.window.MoveWindowListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -26,7 +27,6 @@ public class DebuffSlotView2 extends Table implements PropertyChangeListener, Di
     private WidgetText lock;
 
     private static final BitmapFont font10 = Atlas.get().getFont("10");
-    private static final BitmapFont font20 = Atlas.get().getFont("20");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
@@ -70,6 +70,7 @@ public class DebuffSlotView2 extends Table implements PropertyChangeListener, Di
         top().left();
         add(icon).top().left();
         add(textTable).top().left();
+        icon.addListener(new MoveWindowListener(icon, this));
     }
 
     public void setModel(CustomDebuffSlot debuffSlot)
@@ -88,8 +89,6 @@ public class DebuffSlotView2 extends Table implements PropertyChangeListener, Di
 
     private void removeModel()
     {
-        dispose();
-
         model = null;
         debuffName.setText(null);
         slotType.setText(null);
@@ -98,7 +97,7 @@ public class DebuffSlotView2 extends Table implements PropertyChangeListener, Di
         debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
     }
 
-    public void update()
+    private void update()
     {
         debuffName.setText(model.getCustomSpellDebuff() != null ? model.getCustomSpellDebuff().getName() : null);
         slotType.setText(model.getSlotType());

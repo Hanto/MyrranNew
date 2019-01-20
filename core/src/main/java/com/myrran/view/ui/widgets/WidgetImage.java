@@ -42,5 +42,6 @@ public class WidgetImage extends Image
     {
         TextureRegionDrawable drawableRegion = new TextureRegionDrawable(region);
         setDrawable(drawableRegion);
+        invalidateHierarchy();
     }
 }
