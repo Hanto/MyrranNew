@@ -11,10 +11,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.spell.generators.custom.CustomSpellBook;
+import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspell.SpellFormView;
 import com.myrran.view.ui.ScrollingCombatText;
-import com.myrran.view.ui.TextView;
+import com.myrran.view.ui.widgets.TextView;
+import com.myrran.view.ui.customspell.SpellFormView;
+import com.myrran.view.ui.formview2.DebuffSlotView2;
+import com.myrran.view.ui.formview2.SpellFormView2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,16 +69,26 @@ public class ZMain extends ApplicationAdapter
 			uiStage.addActor(sctView);
 			sctView.setPosition(100, 100);
 
-				book = unmarshal(CustomSpellBook.class);
-				spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
-				book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
+			book = unmarshal(CustomSpellBook.class);
+			CustomSpellForm spell = book.getCustomSpellForm("Bolt_00");
+			spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
+			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
 
-
-			spellFormView.setPosition(100, 100);
+			spellFormView.setPosition(100, 20);
 			uiStage.addActor(spellFormView);
 
 			Gdx.input.setInputProcessor(uiStage);
 
+
+			SpellFormView2 formView2 = new SpellFormView2();
+			formView2.setModel(spell);
+			uiStage.addActor(formView2);
+			formView2.setPosition(100, 400);
+
+			DebuffSlotView2 debuffSlotView = new DebuffSlotView2();
+			debuffSlotView.setModel(spell.getDebuffSlots().getCustomDebufflot("Spot 1"));
+			debuffSlotView.setPosition(100, 250);
+			uiStage.addActor(debuffSlotView);
 		}
 		catch (Exception e)
 		{ 	LOG.error("PUMBA",e); }

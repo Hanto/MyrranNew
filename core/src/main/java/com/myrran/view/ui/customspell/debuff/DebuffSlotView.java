@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.TextView;
+import com.myrran.view.ui.widgets.TextView;
 import com.myrran.view.ui.customspell.stats.SpellStatsView;
 
 import java.beans.PropertyChangeEvent;

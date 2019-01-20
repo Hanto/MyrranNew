@@ -71,6 +71,6 @@ public class CustomSpellDebuff implements SpellDebuffGenerator, CustomSpellStats
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public int getTotalCost()
+    public Integer getTotalCost()
     {   return getStatsTotalCost() + baseCost; }
 }

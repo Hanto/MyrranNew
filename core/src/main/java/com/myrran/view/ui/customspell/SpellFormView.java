@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.TextView;
+import com.myrran.view.ui.widgets.TextView;
 import com.myrran.view.ui.customspell.debuff.DebuffSlotView;
 import com.myrran.view.ui.customspell.debuff.DebuffSlotsView;
 import com.myrran.view.ui.customspell.stats.SpellHeaderView;
@@ -37,6 +37,7 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
     private SpellStatsView formStats;
     private DebuffSlotsView debuffSlots;
 
+    private static final Color pink = new Color(255/255f, 84/255f, 118/255f, 1);
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
     // CONSTRUCTOR:
@@ -187,14 +188,14 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
 
     private void modifyStatBy(CustomSpellStat stat, int modifyBy)
     {
-        tableStats.invalidate();
+        //tableStats.invalidate();
         stat.setNumUpgrades(stat.getNumUpgrades() + modifyBy);
         updateFields();
     }
 
     private void modifyStatTo(CustomSpellStat stat, int modifyTo)
     {
-        tableStats.invalidate();
+        //tableStats.invalidate();
         modifyTo = stat.getNumUpgrades() > 25 ? modifyTo +25 : modifyTo;
         stat.setNumUpgrades(modifyTo);
         updateFields();

@@ -3,7 +3,7 @@ package com.myrran.view.ui.customspell.stats;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.TextView;
+import com.myrran.view.ui.widgets.TextView;
 
 /** @author Ivan Delgado Huerta */
 public class SpellHeaderView implements SpellStatRow

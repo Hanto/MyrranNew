@@ -94,6 +94,12 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
         notifyChange();
     }
 
+    public void setNumUpgrades(String statID, int upgrades) throws InvalidIDException
+    {
+        getCustomSpellStat(statID).setNumUpgrades(upgrades);
+        notifyFieldChange();
+    }
+
     public void setNumUpgrades(String slotID, String statID, int upgrades) throws InvalidIDException
     {
         getCustomDebufflot(slotID).setNumUpgrades(statID, upgrades);
