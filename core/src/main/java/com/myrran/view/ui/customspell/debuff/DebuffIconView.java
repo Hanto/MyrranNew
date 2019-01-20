@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.widgets.TextView;
+import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
 public class DebuffIconView extends Group
@@ -14,10 +14,10 @@ public class DebuffIconView extends Group
     private CustomDebuffSlot model;
 
     private Image iconImage;
-    private TextView slotType;
-    private TextView debuffName;
-    private TextView keys;
-    private TextView lock;
+    private WidgetText slotType;
+    private WidgetText debuffName;
+    private WidgetText keys;
+    private WidgetText lock;
 
     private static final Color white = Color.WHITE;
     private static final Color orange = Color.ORANGE;
@@ -41,9 +41,9 @@ public class DebuffIconView extends Group
     {
         BitmapFont font10 = Atlas.get().getFont("10");
 
-        slotType    = new TextView(font10, white, black, 1);
-        lock        = new TextView(font10, white, black, 1);
-        debuffName  = new TextView(font10, orange, black, 1);
+        slotType    = new WidgetText(font10, white, black, 1);
+        lock        = new WidgetText(font10, white, black, 1);
+        debuffName  = new WidgetText(font10, orange, black, 1);
 
         updateIcon();
         addActor(debuffName);

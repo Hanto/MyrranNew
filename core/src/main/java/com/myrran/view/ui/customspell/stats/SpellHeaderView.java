@@ -3,30 +3,30 @@ package com.myrran.view.ui.customspell.stats;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.widgets.TextView;
+import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
 public class SpellHeaderView implements SpellStatRow
 {
-    private TextView name;
-    private TextView baseValue;
-    private TextView upgradesView;
-    private TextView total;
-    private TextView numUpgrades;
-    private TextView upgradeCost;
-    private TextView bonusPerUpgrade;
-    private TextView maxUpgrades;
-    private TextView gearBonus;
+    private WidgetText name;
+    private WidgetText baseValue;
+    private WidgetText upgradesView;
+    private WidgetText total;
+    private WidgetText numUpgrades;
+    private WidgetText upgradeCost;
+    private WidgetText bonusPerUpgrade;
+    private WidgetText maxUpgrades;
+    private WidgetText gearBonus;
 
-    @Override public TextView getName()             { return name; }
-    @Override public TextView getBaseValue()        { return baseValue; }
-    @Override public TextView getUpgradesView()     { return upgradesView; }
-    @Override public TextView getTotal()            { return total; }
-    @Override public TextView getNumUpgrades()      { return numUpgrades; }
-    @Override public TextView getUpgradeCost()      { return upgradeCost; }
-    @Override public TextView getBonusPerUpgrade()  { return bonusPerUpgrade; }
-    @Override public TextView getMaxUpgrades()      { return maxUpgrades; }
-    @Override public TextView getGearBonus()        { return gearBonus; }
+    @Override public WidgetText getName()             { return name; }
+    @Override public WidgetText getBaseValue()        { return baseValue; }
+    @Override public WidgetText getUpgradesView()     { return upgradesView; }
+    @Override public WidgetText getTotal()            { return total; }
+    @Override public WidgetText getNumUpgrades()      { return numUpgrades; }
+    @Override public WidgetText getUpgradeCost()      { return upgradeCost; }
+    @Override public WidgetText getBonusPerUpgrade()  { return bonusPerUpgrade; }
+    @Override public WidgetText getMaxUpgrades()      { return maxUpgrades; }
+    @Override public WidgetText getGearBonus()        { return gearBonus; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -37,14 +37,14 @@ public class SpellHeaderView implements SpellStatRow
         Color pink = new Color(255/255f, 84/255f, 118/255f, 1);
         Color black = Color.BLACK;
 
-        name            = new TextView("Name", font11, pink, black, 1);
-        baseValue       = new TextView("Base", font11, pink, black, 1);
-        upgradesView    = new TextView("Level",font11, pink, black, 1);
-        total           = new TextView("Total",font11, pink, black, 1);
-        numUpgrades     = new TextView("nv",   font11, pink, black, 1);
-        upgradeCost     = new TextView("c",    font11, pink, black, 1);
-        bonusPerUpgrade = new TextView("bon",  font11, pink, black, 1);
-        maxUpgrades     = new TextView("mx",   font11, pink, black, 1);
-        gearBonus       = new TextView("gear", font11, pink, black, 1);
+        name            = new WidgetText("Name", font11, pink, black, 1);
+        baseValue       = new WidgetText("Base", font11, pink, black, 1);
+        upgradesView    = new WidgetText("Level",font11, pink, black, 1);
+        total           = new WidgetText("Total",font11, pink, black, 1);
+        numUpgrades     = new WidgetText("nv",   font11, pink, black, 1);
+        upgradeCost     = new WidgetText("c",    font11, pink, black, 1);
+        bonusPerUpgrade = new WidgetText("bon",  font11, pink, black, 1);
+        maxUpgrades     = new WidgetText("mx",   font11, pink, black, 1);
+        gearBonus       = new WidgetText("gear", font11, pink, black, 1);
     }
 }

@@ -7,27 +7,27 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 
 /** @author Ivan Delgado Huerta */
-public class TextView extends Widget
+public class WidgetText extends Widget
 {
     private LabelStyle textStyle;
     private LabelStyle shadowStyle;
-    private LabelView textLabel;
-    private LabelView shadowLabel;
+    private WidgetLabel textLabel;
+    private WidgetLabel shadowLabel;
     private int shadowTickness;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public TextView(BitmapFont font, Color textColor, Color shadowColor, int shadowTickness)
+    public WidgetText(BitmapFont font, Color textColor, Color shadowColor, int shadowTickness)
     {
         this.textStyle      = new LabelStyle(font, textColor);
         this.shadowStyle    = new LabelStyle(font, shadowColor);
-        this.textLabel      = new LabelView(null, textStyle);
-        this.shadowLabel    = new LabelView(null, shadowStyle);
+        this.textLabel      = new WidgetLabel(null, textStyle);
+        this.shadowLabel    = new WidgetLabel(null, shadowStyle);
         this.shadowTickness = shadowTickness;
     }
 
-    public TextView(String text, BitmapFont font, Color textColor, Color shadowColor, int shadowTickness)
+    public WidgetText(String text, BitmapFont font, Color textColor, Color shadowColor, int shadowTickness)
     {
         this(font, textColor, shadowColor, shadowTickness);
         setText(text);

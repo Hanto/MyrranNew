@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.widgets.TextView;
+import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -16,14 +16,14 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
 {
     private CustomSpellStat model;
 
-    private TextView name;
-    private TextView baseValue;
-    private TextView total;
-    private TextView numUpgrades;
-    private TextView upgradeCost;
-    private TextView bonusPerUpgrade;
-    private TextView maxUpgrades;
-    private TextView gearBonus;
+    private WidgetText name;
+    private WidgetText baseValue;
+    private WidgetText total;
+    private WidgetText numUpgrades;
+    private WidgetText upgradeCost;
+    private WidgetText bonusPerUpgrade;
+    private WidgetText maxUpgrades;
+    private WidgetText gearBonus;
     private SpellUpgradesView upgradesView;
 
     private static final Color white = Color.WHITE;
@@ -37,14 +37,14 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellStat getModel()                   { return model; }
-    @Override public TextView getName()                 { return name; }
-    @Override public TextView getBaseValue()            { return baseValue; }
-    @Override public TextView getTotal()                { return total; }
-    @Override public TextView getNumUpgrades()          { return numUpgrades; }
-    @Override public TextView getUpgradeCost()          { return upgradeCost; }
-    @Override public TextView getBonusPerUpgrade()      { return bonusPerUpgrade; }
-    @Override public TextView getMaxUpgrades()          { return maxUpgrades; }
-    @Override public TextView getGearBonus()            { return gearBonus; }
+    @Override public WidgetText getName()                 { return name; }
+    @Override public WidgetText getBaseValue()            { return baseValue; }
+    @Override public WidgetText getTotal()                { return total; }
+    @Override public WidgetText getNumUpgrades()          { return numUpgrades; }
+    @Override public WidgetText getUpgradeCost()          { return upgradeCost; }
+    @Override public WidgetText getBonusPerUpgrade()      { return bonusPerUpgrade; }
+    @Override public WidgetText getMaxUpgrades()          { return maxUpgrades; }
+    @Override public WidgetText getGearBonus()            { return gearBonus; }
     @Override public SpellUpgradesView getUpgradesView(){ return upgradesView; }
 
     // CONSTRUCTOR:
@@ -71,14 +71,14 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
         BitmapFont font11 = Atlas.get().getFont("11");
         BitmapFont font10 = Atlas.get().getFont("10");
 
-        name            = new TextView(font11, white,   black,1);
-        baseValue       = new TextView(font14, orange,  black,1);
-        total           = new TextView(font14, purpleH, black,1);
-        numUpgrades     = new TextView(font10, purpleL, black,1);
-        upgradeCost     = new TextView(font10, purpleL, black,1);
-        bonusPerUpgrade = new TextView(font10, purpleL, black,1);
-        maxUpgrades     = new TextView(font10, purpleL, black,1);
-        gearBonus       = new TextView(font10, purpleL, black,1);
+        name            = new WidgetText(font11, white,   black,1);
+        baseValue       = new WidgetText(font14, orange,  black,1);
+        total           = new WidgetText(font14, purpleH, black,1);
+        numUpgrades     = new WidgetText(font10, purpleL, black,1);
+        upgradeCost     = new WidgetText(font10, purpleL, black,1);
+        bonusPerUpgrade = new WidgetText(font10, purpleL, black,1);
+        maxUpgrades     = new WidgetText(font10, purpleL, black,1);
+        gearBonus       = new WidgetText(font10, purpleL, black,1);
 
         upgradesView    = new SpellUpgradesView(model);
     }

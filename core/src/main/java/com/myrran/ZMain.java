@@ -14,10 +14,10 @@ import com.myrran.spell.generators.custom.CustomSpellBook;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.ScrollingCombatText;
-import com.myrran.view.ui.widgets.TextView;
 import com.myrran.view.ui.customspell.SpellFormView;
 import com.myrran.view.ui.formview2.DebuffSlotView2;
 import com.myrran.view.ui.formview2.SpellFormView2;
+import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,12 +31,12 @@ public class ZMain extends ApplicationAdapter
 	private Texture img;
 
 	private BitmapFont font;
-	private TextView text;
+	private WidgetText text;
 	private Stage uiStage;
 	private ScrollingCombatText sct;
 
 	private ShapeRenderer shapeRenderer;
-	private TextView sctView;
+	private WidgetText sctView;
 	private CustomSpellBook book;
 	private SpellFormView spellFormView;
 
@@ -51,7 +51,7 @@ public class ZMain extends ApplicationAdapter
 			img = new Texture("badlogic.jpg");
 
 			font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
-			text = new TextView("Hola Mundo", font, Color.WHITE, Color.BLACK, 2);
+			text = new WidgetText("Hola Mundo", font, Color.WHITE, Color.BLACK, 2);
 			uiStage = new Stage();
 			uiStage.addActor(text);
 			text.setText("Hola Johana como te llamas");
@@ -79,7 +79,6 @@ public class ZMain extends ApplicationAdapter
 
 			Gdx.input.setInputProcessor(uiStage);
 
-
 			SpellFormView2 formView2 = new SpellFormView2();
 			formView2.setModel(spell);
 			uiStage.addActor(formView2);
@@ -87,8 +86,10 @@ public class ZMain extends ApplicationAdapter
 
 			DebuffSlotView2 debuffSlotView = new DebuffSlotView2();
 			debuffSlotView.setModel(spell.getDebuffSlots().getCustomDebufflot("Spot 1"));
-			debuffSlotView.setPosition(100, 250);
+			debuffSlotView.setPosition(100, 250);;
 			uiStage.addActor(debuffSlotView);
+
+			//spell.setNumUpgrades("Spot 1", "Speed", 30);
 		}
 		catch (Exception e)
 		{ 	LOG.error("PUMBA",e); }

@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.widgets.TextView;
+import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
 public class SpellDebuffView2 implements Disposable
@@ -14,8 +14,8 @@ public class SpellDebuffView2 implements Disposable
     private CustomSpellDebuff model;
 
     private Table debuffStats;
-    private TextView name;
-    private TextView totalCost;
+    private WidgetText name;
+    private WidgetText totalCost;
     private SpellStatsView2 stats;
 
     private static final BitmapFont font20 = Atlas.get().getFont("20");
@@ -28,8 +28,8 @@ public class SpellDebuffView2 implements Disposable
     public SpellDebuffView2()
     {
         debuffStats = new Table().top().left();
-        name        = new TextView(font14, Color.ORANGE, Color.BLACK, 2);
-        totalCost   = new TextView(font14, magenta, Color.BLACK, 2);
+        name        = new WidgetText(font14, Color.ORANGE, Color.BLACK, 2);
+        totalCost   = new WidgetText(font14, magenta, Color.BLACK, 2);
         stats       = new SpellStatsView2();
 
 
@@ -44,6 +44,11 @@ public class SpellDebuffView2 implements Disposable
 
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
+
+    public void createLayour()
+    {
+
+    }
 
     public void setModel(CustomSpellDebuff spellDebuff)
     {
@@ -65,8 +70,8 @@ public class SpellDebuffView2 implements Disposable
 
         model = null;
         stats.setModel(null);
-        name.setText("");
-        totalCost.setText("");
+        name.setText(null);
+        totalCost.setText(null);
     }
 
     private void update()

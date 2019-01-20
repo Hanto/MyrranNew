@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.myrran.view.ui.widgets.TextView;
+import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
 public class ScrollingCombatText
@@ -43,22 +43,22 @@ public class ScrollingCombatText
     // VARIANTS:
     //--------------------------------------------------------------------------------------------------------
 
-    public TextView sct(String text)
+    public WidgetText sct(String text)
     {   return sct(text, duration, moveX, moveY, interpolationX, interpolationY) ;}
 
-    public TextView sct(String text, float duration)
+    public WidgetText sct(String text, float duration)
     {   return sct(text, duration, moveX, moveY, interpolationX, interpolationY) ;}
 
-    public TextView sct(String text, float duration, float moveX, float moveY)
+    public WidgetText sct(String text, float duration, float moveX, float moveY)
     {   return sct(text, duration, moveX, moveY, interpolationX, interpolationY) ;}
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public TextView sct(String text, float duration, float moveX, float moveY,
-        Interpolation interpolationX, Interpolation interpolationY)
+    public WidgetText sct(String text, float duration, float moveX, float moveY,
+                          Interpolation interpolationX, Interpolation interpolationY)
     {
-        TextView textView = new TextView(text, font, Color.RED, Color.BLACK, 2);
+        WidgetText textView = new WidgetText(text, font, Color.RED, Color.BLACK, 2);
         textView.setColor(textView.getColor().r, textView.getColor().g, textView.getColor().b, 0);
 
         textView.addAction(Actions.sequence(
