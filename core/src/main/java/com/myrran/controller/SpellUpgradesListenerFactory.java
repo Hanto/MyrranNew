@@ -1,28 +1,28 @@
 package com.myrran.controller;
 
-import static com.myrran.controller.SpellUpgradesListener.StatsType;
+import com.myrran.spell.generators.custom.CustomSpellForm;
+import static com.myrran.spell.generators.custom.StatsDTO.StatsType;
+
+import com.myrran.spell.generators.custom.StatsDTO;
+import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
+import com.myrran.utils.InvalidIDException;
+
 
 /** @author Ivan Delgado Huerta */
 public class SpellUpgradesListenerFactory
 {
     private CustomSpellController controller;
-    private SpellUpgradesListener.StatsType type;
-    private String formID;
-    private String slotID;
+    private StatsDTO dto;
 
-    public SpellUpgradesListenerFactory(CustomSpellController controller, StatsType type)
-    {
-        this.controller = controller;
-        this.type = type;
-    }
+    public SpellUpgradesListenerFactory(CustomSpellController controller)
+    {   this.controller = controller; }
 
-    public SpellUpgradesListenerFactory set(String formID, String slotID)
+    public SpellUpgradesListenerFactory set(String uuid) throws InvalidIDException
     {
-        this.formID = formID;
-        this.slotID = slotID;
+        this.dto = controller.getStatsDTO(uuid);
         return this;
     }
 
-    public SpellUpgradesListener getListener(String statID)
-    {   return new SpellUpgradesListener(controller, type, formID, slotID, statID); }
+    public SpellUpgradesListener newListener(String statID)
+    {   return new SpellUpgradesListener(controller, dto, statID); }
 }

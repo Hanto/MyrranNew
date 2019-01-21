@@ -3,6 +3,7 @@ package com.myrran.controller;
 import com.myrran.spell.generators.custom.CustomSpellBook;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.CustomSpellForm;
+import com.myrran.spell.generators.custom.StatsDTO;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.utils.InvalidIDException;
 
@@ -42,4 +43,7 @@ public class CustomSpellController
         if (upgrades >= 0 && upgrades <= stat.getMaxUpgrades())
             form.setNumUpgrades(slotID, statID, upgrades);
     }
+
+    public StatsDTO getStatsDTO(String uuid) throws InvalidIDException
+    {   return spellBook.getStatsDTO(uuid); }
 }

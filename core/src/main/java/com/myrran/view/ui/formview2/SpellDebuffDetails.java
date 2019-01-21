@@ -7,14 +7,15 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.SpellUpgradesListenerFactory;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
+import com.myrran.spell.generators.custom.StatsDTO.StatsType;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
+import com.myrran.utils.InvalidIDException;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import static com.myrran.controller.SpellUpgradesListener.StatsType;
 
 /** @author Ivan Delgado Huerta */
 public class SpellDebuffDetails extends Table implements PropertyChangeListener, Disposable
@@ -33,10 +34,10 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellDebuffDetails(CustomSpellController customSpellController, StatsType statsType)
+    public SpellDebuffDetails(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        listenerFactory = new SpellUpgradesListenerFactory(controller, statsType);
+        listenerFactory = new SpellUpgradesListenerFactory(controller);
         name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 2);
         totalCost       = new WidgetText(font14, magenta, Color.BLACK, 2);
         stats           = new SpellStatsView2();
@@ -83,7 +84,7 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
         if (debuff != null)
         {
             stats.setModel(debuff.getSpellStats());
-            stats.createListeners(listenerFactory.set("Bolt_00", model.getID()));
+            stats.createListeners(listenerFactory.set(debuff.getID()));
             name.setText(debuff.getName());
             totalCost.setText(String.format("%s(%s)", debuff.getTotalCost() - debuff.getBaseCost(), debuff.getBaseCost()));
         }

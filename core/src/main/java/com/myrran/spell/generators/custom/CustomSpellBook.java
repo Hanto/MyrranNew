@@ -6,6 +6,7 @@ import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.templatedata.SpellBookTemplates;
 import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.data.templatedata.SpellFormTemplate;
+import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.utils.InvalidIDException;
 
@@ -13,8 +14,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
@@ -73,6 +74,7 @@ public class CustomSpellBook
             CustomSpellForm spellForm = getCustomSpellForm(customFormID);
             SpellDebuffTemplate template = getSpellDebuffTemplate(debuffTemplateID);
             CustomSpellDebuff spellDebuff = new CustomSpellDebuff(template);
+            setUUID(spellDebuff);
 
             spellForm.setCustomSpellDebuff(spellDebuff, slotID);
             debuffTemplatesLearned.borrow(debuffTemplateID);
@@ -127,19 +129,38 @@ public class CustomSpellBook
             spellDebuff.setSpellDebuffTemplate(getSpellDebuffTemplate(spellDebuff.getTemplateID()));
     }
 
+    // FORM of any ID:
+    //--------------------------------------------------------------------------------------------------------
+
+    public StatsDTO getStatsDTO(String uuid) throws InvalidIDException
+    {
+        // from FORM
+        if (customSpells.containsKey(uuid))
+            return new StatsDTO(customSpells.get(uuid));
+
+        for (CustomSpellForm form: customSpells.values())
+        {
+            List<CustomDebuffSlot> slots = form.getDebuffSlots().values().stream()
+                .filter(slot -> slot.getCustomSpellDebuff() != null)
+                .collect(Collectors.toList());
+
+            // from FORM DEBUFFSLOT
+            for (CustomDebuffSlot slot: slots)
+            {
+                if (slot.getCustomSpellDebuff().getID().equals(uuid))
+                    return new StatsDTO(form, slot);
+            }
+        }
+
+        throw new InvalidIDException("The following ID isn't assigned to any SpellForm: %s", uuid);
+    }
+
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
     private void setUUID(Identifiable spell)
     {
-        int counter = 0;
-        String uuid;
-
-        do
-        {   uuid = String.format("%s_%02d", spell.getID(), counter++); }
-        while
-        (   customSpells.containsKey(uuid));
-
+        String uuid = UUID.randomUUID().toString();
         spell.setID(uuid);
     }
 

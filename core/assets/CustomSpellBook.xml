@@ -20,7 +20,7 @@
     <entry>
       <key>Bolt_00</key>
       <value>
-        <id>Bolt</id>
+        <id>Bolt_00</id>
         <name>Super Bolt</name>
         <templateID>Bolt</templateID>
         <factory>BOLT</factory>

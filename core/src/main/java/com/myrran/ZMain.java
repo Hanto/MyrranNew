@@ -83,7 +83,7 @@ public class ZMain extends ApplicationAdapter
 
 			CustomSpellController controller = new CustomSpellController(book);
 
-			SpellDebuffDetails debuffView = new SpellDebuffDetails(controller, SpellUpgradesListener.StatsType.DebuffStats);
+			SpellDebuffDetails debuffView = new SpellDebuffDetails(controller);
 			debuffView.setModel(spell.getCustomDebufflot("Spot 1"));
 			uiStage.addActor(debuffView);
 			debuffView.setPosition(100, 400);

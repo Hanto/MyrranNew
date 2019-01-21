@@ -74,7 +74,7 @@ public class SpellStatsView2 extends Table implements Disposable
         for (SpellStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
-            view.getUpgradesView().addListener(listenerFactory.getListener(statID));
+            view.getUpgradesView().addListener(listenerFactory.newListener(statID));
         }
     }
 
