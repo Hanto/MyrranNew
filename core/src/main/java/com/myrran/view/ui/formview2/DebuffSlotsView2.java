@@ -67,7 +67,7 @@ public class DebuffSlotsView2 implements Disposable
 
     private DebuffSlotIcon getView(CustomDebuffSlot customDebuffSlot)
     {
-        DebuffSlotIcon view = new DebuffSlotIcon();
+        DebuffSlotIcon view = new DebuffSlotIcon(null);
         view.setModel(customDebuffSlot);
         return view;
     }

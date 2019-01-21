@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
+import com.myrran.controller.CustomSpellController;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
@@ -19,6 +20,7 @@ import java.beans.PropertyChangeListener;
 public class DebuffSlotIcon extends Table implements PropertyChangeListener, Disposable
 {
     private CustomDebuffSlot model;
+    private CustomSpellController controller;
 
     private WidgetGroup icon;
     private WidgetImage debuffIcon;
@@ -34,8 +36,9 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public DebuffSlotIcon()
+    public DebuffSlotIcon(CustomSpellController customSpellController)
     {
+        controller  = customSpellController;
         icon        = new WidgetGroup();
         debuffIcon  = new WidgetImage();
         cost        = new WidgetText(font14, magenta, Color.BLACK, 1);

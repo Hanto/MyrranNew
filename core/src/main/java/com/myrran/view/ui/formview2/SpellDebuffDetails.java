@@ -4,10 +4,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
+import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.SpellUpgradesListener;
+import com.myrran.controller.SpellUpgradesListenerFactory;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;
+import static com.myrran.controller.SpellUpgradesListener.StatsType;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -16,6 +20,8 @@ import java.beans.PropertyChangeListener;
 public class SpellDebuffDetails extends Table implements PropertyChangeListener, Disposable
 {
     private CustomDebuffSlot model;
+    private CustomSpellController controller;
+    private SpellUpgradesListenerFactory listenerFactory;
 
     private WidgetText name;
     private WidgetText totalCost;
@@ -27,11 +33,13 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellDebuffDetails()
+    public SpellDebuffDetails(CustomSpellController customSpellController)
     {
-        name        = new WidgetText(font14, Color.ORANGE, Color.BLACK, 2);
-        totalCost   = new WidgetText(font14, magenta, Color.BLACK, 2);
-        stats       = new SpellStatsView2();
+        controller      = customSpellController;
+        listenerFactory = new SpellUpgradesListenerFactory(controller, "Bolt_00", StatsType.DebuffStats, "Spot 1");
+        name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 2);
+        totalCost       = new WidgetText(font14, magenta, Color.BLACK, 2);
+        stats           = new SpellStatsView2();
 
         createLayout();
     }
@@ -75,6 +83,7 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
         if (debuff != null)
         {
             stats.setModel(debuff.getSpellStats());
+            stats.createListeners(listenerFactory);
             name.setText(debuff.getName());
             totalCost.setText(String.format("%s(%s)", debuff.getTotalCost() - debuff.getBaseCost(), debuff.getBaseCost()));
         }

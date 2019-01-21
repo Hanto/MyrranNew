@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.myrran.controller.CustomSpellController;
 import com.myrran.spell.generators.custom.CustomSpellBook;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
@@ -79,13 +80,15 @@ public class ZMain extends ApplicationAdapter
 
 			Gdx.input.setInputProcessor(uiStage);
 
-			SpellDebuffDetails debuffView = new SpellDebuffDetails();
+			CustomSpellController controller = new CustomSpellController(book);
+
+			SpellDebuffDetails debuffView = new SpellDebuffDetails(controller);
 			debuffView.setModel(spell.getCustomDebufflot("Spot 1"));
 			uiStage.addActor(debuffView);
 			debuffView.setPosition(100, 400);
 
 
-			DebuffSlotIcon debuffSlotView = new DebuffSlotIcon();
+			DebuffSlotIcon debuffSlotView = new DebuffSlotIcon(controller);
 			debuffSlotView.setModel(spell.getDebuffSlots().getCustomDebufflot("Spot 1"));
 			debuffSlotView.setPosition(100, 250);;
 			uiStage.addActor(debuffSlotView);

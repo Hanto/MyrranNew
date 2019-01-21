@@ -18,16 +18,29 @@ public class CustomSpellController
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public void modifySpellFormUpgrades(String formID, String statID, int numUpgrades) throws InvalidIDException
+    public void formUpgradesModifyBy(String formID, String statID, int upgradesBy) throws InvalidIDException
     {
         CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        form.setNumUpgrades(statID, numUpgrades);
+        int upgrades = form.getCustomSpellStat(statID).getNumUpgrades() + upgradesBy;
+        form.setNumUpgrades(statID, upgrades);
     }
 
-    public void modifySpellDebuffUpgrades(String formID, String slotID, String statID, int numUpgrades) throws InvalidIDException
+    public void formUpgradesModifyTo(String formID, String statID, int upgradesTo) throws InvalidIDException
     {
         CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        form.setNumUpgrades(slotID, statID, numUpgrades);
+        form.setNumUpgrades(statID, upgradesTo);
     }
 
+    public void debuffUpgradesModifyBy(String formID, String slotID, String statID, int upgradesBy) throws InvalidIDException
+    {
+        CustomSpellForm form = spellBook.getCustomSpellForm(formID);
+        int upgrades = form.getCustomSpellDebuff(slotID).getCustomSpellStat(statID).getNumUpgrades() + upgradesBy;
+        form.setNumUpgrades(slotID, statID, upgrades);
+    }
+
+    public void debuffUpgradesModifyTo(String formID, String slotID, String statID, int upgradesTo) throws InvalidIDException
+    {
+        CustomSpellForm form = spellBook.getCustomSpellForm(formID);
+        form.setNumUpgrades(slotID, statID, upgradesTo);
+    }
 }
