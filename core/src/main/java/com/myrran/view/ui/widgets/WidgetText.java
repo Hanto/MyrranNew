@@ -69,7 +69,7 @@ public class WidgetText extends Widget
         invalidateHierarchy();
     }
 
-    // HELPER:
+    // DRAW:
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void draw (Batch batch, float alpha)

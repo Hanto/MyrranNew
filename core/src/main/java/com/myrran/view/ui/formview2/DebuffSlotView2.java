@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
+import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetGroup;
@@ -70,7 +71,7 @@ public class DebuffSlotView2 extends Table implements PropertyChangeListener, Di
         top().left();
         add(icon).top().left();
         add(textTable).top().left();
-        icon.addListener(new MoveWindowListener(icon, this));
+        icon.addListener(new MoveWindowListener(icon));
     }
 
     public void setModel(CustomDebuffSlot debuffSlot)
@@ -99,10 +100,11 @@ public class DebuffSlotView2 extends Table implements PropertyChangeListener, Di
 
     private void update()
     {
+        CustomSpellDebuff debuff = model.getCustomSpellDebuff();
         debuffName.setText(model.getCustomSpellDebuff() != null ? model.getCustomSpellDebuff().getName() : null);
         slotType.setText(model.getSlotType());
         lock.setText(model.getLock().toString().toLowerCase());
-        cost.setText(model.getCustomSpellDebuff() != null ? model.getCustomSpellDebuff().getTotalCost().toString() : null);
+        cost.setText(debuff != null ? debuff.getTotalCost().toString() : null);
         debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
     }
 
