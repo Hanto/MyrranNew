@@ -23,6 +23,7 @@ public class SpellStatsView2 extends Table implements Disposable
     public SpellStatsView2()
     {
         statsViewList   = new ArrayList<>();
+
         createLayout();
     }
 

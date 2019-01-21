@@ -21,7 +21,6 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
     private WidgetText totalCost;
     private SpellStatsView2 stats;
 
-    private static final BitmapFont font20 = Atlas.get().getFont("20");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
