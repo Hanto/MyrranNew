@@ -2,8 +2,6 @@ package com.myrran.view.ui.formview2;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
-import static com.myrran.controller.SpellUpgradesListener.StatsType;
-
 import com.myrran.controller.SpellUpgradesListenerFactory;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
@@ -73,8 +71,13 @@ public class SpellStatsView2 extends Table implements Disposable
 
     public void createListeners(SpellUpgradesListenerFactory listenerFactory)
     {
-        statsViewList.forEach(stat -> stat.getUpgradesView().addListener(listenerFactory.getListener(stat.getModel().getID())));
+        for (SpellStatView view: statsViewList)
+        {
+            String statID = view.getModel().getID();
+            view.getUpgradesView().addListener(listenerFactory.getListener(statID));
+        }
     }
+
 
     // CREATE LAYOUT:
     //--------------------------------------------------------------------------------------------------------

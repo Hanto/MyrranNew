@@ -1,7 +1,9 @@
 package com.myrran.controller;
 
 import com.myrran.spell.generators.custom.CustomSpellBook;
+import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.CustomSpellForm;
+import com.myrran.spell.generators.custom.stats.CustomSpellStat;
 import com.myrran.utils.InvalidIDException;
 
 /** @author Ivan Delgado Huerta */
@@ -21,26 +23,23 @@ public class CustomSpellController
     public void formUpgradesModifyBy(String formID, String statID, int upgradesBy) throws InvalidIDException
     {
         CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        int upgrades = form.getCustomSpellStat(statID).getNumUpgrades() + upgradesBy;
-        form.setNumUpgrades(statID, upgrades);
-    }
+        CustomSpellStat stat = form.getCustomSpellStat(statID);
 
-    public void formUpgradesModifyTo(String formID, String statID, int upgradesTo) throws InvalidIDException
-    {
-        CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        form.setNumUpgrades(statID, upgradesTo);
+        int upgrades = stat.getNumUpgrades() + upgradesBy;
+
+        if (upgrades >= 0 && upgrades <= stat.getMaxUpgrades())
+            form.setNumUpgrades(statID, upgrades);
     }
 
     public void debuffUpgradesModifyBy(String formID, String slotID, String statID, int upgradesBy) throws InvalidIDException
     {
         CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        int upgrades = form.getCustomSpellDebuff(slotID).getCustomSpellStat(statID).getNumUpgrades() + upgradesBy;
-        form.setNumUpgrades(slotID, statID, upgrades);
-    }
+        CustomSpellDebuff debuff = form.getCustomSpellDebuff(slotID);
+        CustomSpellStat stat = debuff.getCustomSpellStat(statID);
 
-    public void debuffUpgradesModifyTo(String formID, String slotID, String statID, int upgradesTo) throws InvalidIDException
-    {
-        CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        form.setNumUpgrades(slotID, statID, upgradesTo);
+        int upgrades = stat.getNumUpgrades() + upgradesBy;
+
+        if (upgrades >= 0 && upgrades <= stat.getMaxUpgrades())
+            form.setNumUpgrades(slotID, statID, upgrades);
     }
 }

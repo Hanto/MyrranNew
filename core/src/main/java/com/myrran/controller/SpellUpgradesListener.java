@@ -48,16 +48,19 @@ public class SpellUpgradesListener extends InputListener
     @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
     {
         float width = event.getListenerActor().getWidth();
+        int modifyBy = getAmount(button);
 
-        if (button == Input.Buttons.LEFT)
-        {
-            if      (x < (width / 2))   modifyStatBy(-1);
-            else if (x > (width / 2))   modifyStatBy(+1);
-        }
-        else if (button == Input.Buttons.RIGHT)
-            modifyStatTo((int)(x/(width/25)));
+        if      (x < (width / 2)) modifyStatBy(-modifyBy);
+        else if (x > (width / 2)) modifyStatBy(+modifyBy);
 
         return true;
+    }
+
+    private int getAmount(int button)
+    {
+        if      (button == Input.Buttons.LEFT) return 1;
+        else if (button == Input.Buttons.RIGHT) return 5;
+        else return 0;
     }
 
     private void modifyStatBy(int modifyBy)
@@ -74,20 +77,4 @@ public class SpellUpgradesListener extends InputListener
         catch (InvalidIDException e)
         {   LOG.error("Cannot modify stat: ", e); }
     }
-
-    private void modifyStatTo(int modifyTo)
-    {
-        try
-        {
-            switch (type)
-            {
-                case FormStats: controller.formUpgradesModifyTo(formID, statID, modifyTo); break;
-                case DebuffStats: controller.debuffUpgradesModifyTo(formID, slotID, statID, modifyTo); break;
-                case SubformStats: break;
-            }
-        }
-        catch (InvalidIDException e)
-        {   LOG.error("Cannot modify stat: ", e); }
-    }
-
 }

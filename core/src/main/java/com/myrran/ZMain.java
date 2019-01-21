@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.SpellUpgradesListener;
 import com.myrran.spell.generators.custom.CustomSpellBook;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
@@ -82,7 +83,7 @@ public class ZMain extends ApplicationAdapter
 
 			CustomSpellController controller = new CustomSpellController(book);
 
-			SpellDebuffDetails debuffView = new SpellDebuffDetails(controller);
+			SpellDebuffDetails debuffView = new SpellDebuffDetails(controller, SpellUpgradesListener.StatsType.DebuffStats);
 			debuffView.setModel(spell.getCustomDebufflot("Spot 1"));
 			uiStage.addActor(debuffView);
 			debuffView.setPosition(100, 400);

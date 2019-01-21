@@ -10,12 +10,17 @@ public class SpellUpgradesListenerFactory
     private String formID;
     private String slotID;
 
-    public SpellUpgradesListenerFactory(CustomSpellController controller, String formID, StatsType type, String slotID)
+    public SpellUpgradesListenerFactory(CustomSpellController controller, StatsType type)
     {
         this.controller = controller;
         this.type = type;
+    }
+
+    public SpellUpgradesListenerFactory set(String formID, String slotID)
+    {
         this.formID = formID;
         this.slotID = slotID;
+        return this;
     }
 
     public SpellUpgradesListener getListener(String statID)
