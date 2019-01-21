@@ -34,7 +34,7 @@ public class SpellFormView2 extends Group implements Disposable
         totalCost   = new WidgetText(font14, magenta, Color.BLACK, 2);
 
         addActor(table);
-        table.add(stats.getTable()).row();
+        table.add(stats).row();
     }
 
     @Override public void dispose()

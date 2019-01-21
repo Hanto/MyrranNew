@@ -15,8 +15,8 @@ import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.ScrollingCombatText;
 import com.myrran.view.ui.customspell.SpellFormView;
-import com.myrran.view.ui.formview2.DebuffSlotView2;
-import com.myrran.view.ui.formview2.SpellDebuffView2;
+import com.myrran.view.ui.formview2.DebuffSlotIcon;
+import com.myrran.view.ui.formview2.SpellDebuffDetails;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -79,13 +79,13 @@ public class ZMain extends ApplicationAdapter
 
 			Gdx.input.setInputProcessor(uiStage);
 
-			SpellDebuffView2 debuffView = new SpellDebuffView2();
-			debuffView.setModel(spell.getCustomSpellDebuff("Spot 1"));
-			uiStage.addActor(debuffView.debuffStats);
-			debuffView.debuffStats.setPosition(100, 400);
+			SpellDebuffDetails debuffView = new SpellDebuffDetails();
+			debuffView.setModel(spell.getCustomDebufflot("Spot 1"));
+			uiStage.addActor(debuffView);
+			debuffView.setPosition(100, 400);
 
 
-			DebuffSlotView2 debuffSlotView = new DebuffSlotView2();
+			DebuffSlotIcon debuffSlotView = new DebuffSlotIcon();
 			debuffSlotView.setModel(spell.getDebuffSlots().getCustomDebufflot("Spot 1"));
 			debuffSlotView.setPosition(100, 250);;
 			uiStage.addActor(debuffSlotView);

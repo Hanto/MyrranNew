@@ -7,12 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 /** @author Ivan Delgado Huerta */
-public class MoveWindowListener extends DragListener
+public class MoveWidgetListener extends DragListener
 {
     private Actor parent;
     private Actor dragActor;
 
-    public MoveWindowListener(Actor drager)
+    public MoveWidgetListener(Actor drager)
     {
         this.dragActor = drager;
         this.parent = drager.getParent();

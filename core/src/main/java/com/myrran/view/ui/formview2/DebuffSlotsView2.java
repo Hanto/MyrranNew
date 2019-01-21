@@ -14,7 +14,7 @@ public class DebuffSlotsView2 implements Disposable
     private CustomDebuffSlots model;
 
     private Table table;
-    private List<DebuffSlotView2> slotList;
+    private List<DebuffSlotIcon> slotList;
 
     public Table getTable()                 { return table; }
 
@@ -28,7 +28,7 @@ public class DebuffSlotsView2 implements Disposable
     }
 
     @Override public void dispose()
-    {   slotList.forEach(DebuffSlotView2::dispose); }
+    {   slotList.forEach(DebuffSlotIcon::dispose); }
 
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -65,14 +65,14 @@ public class DebuffSlotsView2 implements Disposable
     // MISC:
     //--------------------------------------------------------------------------------------------------------
 
-    private DebuffSlotView2 getView(CustomDebuffSlot customDebuffSlot)
+    private DebuffSlotIcon getView(CustomDebuffSlot customDebuffSlot)
     {
-        DebuffSlotView2 view = new DebuffSlotView2();
+        DebuffSlotIcon view = new DebuffSlotIcon();
         view.setModel(customDebuffSlot);
         return view;
     }
 
-    private void tableAddRow(DebuffSlotView2 view)
+    private void tableAddRow(DebuffSlotIcon view)
     {
         //table.add(view);
     }

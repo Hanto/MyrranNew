@@ -11,28 +11,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStatsView2 implements Disposable
+public class SpellStatsView2 extends Table implements Disposable
 {
     private CustomSpellStats model;
 
-    private Table table;
     private List<SpellStatView> statsViewList;
-
-    public Table getTable()             { return table; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
     public SpellStatsView2()
     {
-        table           = new Table().top().left();
         statsViewList   = new ArrayList<>();
+        createLayout();
     }
 
     @Override public void dispose()
     {   statsViewList.forEach(SpellStatView::dispose); }
 
-    // CREATE / UPDATE:
+    // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
     public void setModel(CustomSpellStats customSpellStats)
@@ -50,16 +47,14 @@ public class SpellStatsView2 implements Disposable
 
     private void removeModel()
     {
-        dispose();
-
         model = null;
-        table.clear();
+        clear();
         statsViewList.clear();
     }
 
     private void update()
     {
-        table.clear();
+        clear();
         statsViewList.clear();
 
         model.values().stream()
@@ -69,9 +64,12 @@ public class SpellStatsView2 implements Disposable
         statsViewList.forEach(this::tableAddRow);
     }
 
-    private void create()
-    {
+    // CREATE LAYOUT:
+    //--------------------------------------------------------------------------------------------------------
 
+    private void createLayout()
+    {
+        top().left();
     }
 
     // MISC:
@@ -85,15 +83,15 @@ public class SpellStatsView2 implements Disposable
         int vPad = -4;
         int hPad = +3;
 
-        table.add(row.getName()).left()             .minWidth(100).padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getBaseValue()).right()       .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getUpgradesView()).center()   .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getTotal()).right()           .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getNumUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getUpgradeCost()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getBonusPerUpgrade()).right() .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getMaxUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getGearBonus()).right()       .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.row();
+        add(row.getName()).left()             .minWidth(100).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getBaseValue()).right()       .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getUpgradesView()).center()   .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getTotal()).right()           .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getNumUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getUpgradeCost()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getBonusPerUpgrade()).right() .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getMaxUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getGearBonus()).right()       .padRight(hPad).padTop(vPad).padBottom(vPad);
+        row();
     }
 }
