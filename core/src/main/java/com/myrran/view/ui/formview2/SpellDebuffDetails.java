@@ -83,10 +83,14 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
 
         if (debuff != null)
         {
-            stats.setModel(debuff.getSpellStats());
-            stats.createListeners(listenerFactory.set(debuff.getID()));
-            name.setText(debuff.getName());
-            totalCost.setText(String.format("%s(%s)", debuff.getTotalCost() - debuff.getBaseCost(), debuff.getBaseCost()));
+            try {
+                stats.setModel(debuff.getSpellStats());
+                stats.createListeners(listenerFactory.set(debuff.getID()));
+                name.setText(debuff.getName());
+                totalCost.setText(String.format("%s(%s)", debuff.getTotalCost() - debuff.getBaseCost(), debuff.getBaseCost()));
+            }
+            catch(InvalidIDException e)
+            {   removeModel(); }
         }
         else
         {
