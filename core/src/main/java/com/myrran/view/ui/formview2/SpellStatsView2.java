@@ -85,10 +85,10 @@ public class SpellStatsView2 implements Disposable
         int vPad = -4;
         int hPad = +3;
 
-        table.add(row.getName()).left()             .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getBaseValue()).right()       .padRight(hPad).padTop(vPad).padBottom(vPad);
+        table.add(row.getName()).left()             .minWidth(100).padRight(hPad).padTop(vPad).padBottom(vPad);
+        table.add(row.getBaseValue()).right()       .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
         table.add(row.getUpgradesView()).center()   .padRight(hPad).padTop(vPad).padBottom(vPad);
-        table.add(row.getTotal()).right()           .padRight(hPad).padTop(vPad).padBottom(vPad);
+        table.add(row.getTotal()).right()           .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
         table.add(row.getNumUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
         table.add(row.getUpgradeCost()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
         table.add(row.getBonusPerUpgrade()).right() .padRight(hPad).padTop(vPad).padBottom(vPad);

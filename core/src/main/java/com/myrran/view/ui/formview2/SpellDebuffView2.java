@@ -13,7 +13,7 @@ public class SpellDebuffView2 implements Disposable
 {
     private CustomSpellDebuff model;
 
-    private Table debuffStats;
+    public Table debuffStats;
     private WidgetText name;
     private WidgetText totalCost;
     private SpellStatsView2 stats;
@@ -32,11 +32,7 @@ public class SpellDebuffView2 implements Disposable
         totalCost   = new WidgetText(font14, magenta, Color.BLACK, 2);
         stats       = new SpellStatsView2();
 
-
-        debuffStats.addActor(name);
-        debuffStats.addActor(totalCost);
-        debuffStats.add(stats.getTable());
-        totalCost.setPosition(50, 0);
+        createLayout();
     }
 
     @Override public void dispose()
@@ -45,9 +41,14 @@ public class SpellDebuffView2 implements Disposable
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void createLayour()
+    public void createLayout()
     {
+        Table header = new Table().top().left();
+        header.add(name).left().padBottom(-5);
+        header.add(totalCost).right().padBottom(-5).row();
 
+        debuffStats.add(header).left().row();
+        debuffStats.add(stats.getTable());
     }
 
     public void setModel(CustomSpellDebuff spellDebuff)
@@ -59,15 +60,12 @@ public class SpellDebuffView2 implements Disposable
         else
         {
             model = spellDebuff;
-            stats.setModel(spellDebuff.getSpellStats());
             update();
         }
     }
 
     private void removeModel()
     {
-        dispose();
-
         model = null;
         stats.setModel(null);
         name.setText(null);
@@ -76,12 +74,8 @@ public class SpellDebuffView2 implements Disposable
 
     private void update()
     {
+        stats.setModel(model.getSpellStats());
         name.setText(model.getName());
-        totalCost.setText(model.getTotalCost().toString());
-    }
-
-    private void create()
-    {
-
+        totalCost.setText(String.format("%s(%s)", model.getTotalCost() - model.getBaseCost(), model.getBaseCost()));
     }
 }
