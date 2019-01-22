@@ -1,8 +1,8 @@
 package com.myrran.ztests;
 
-import com.myrran.spell.data.templatedata.SpellBookTemplates;
-import com.myrran.spell.generators.custom.CustomSpellBook;
-import com.myrran.utils.InvalidIDException;
+import com.myrran.model.spell.templates.SpellBookTemplates;
+import com.myrran.model.spell.generators.custom.CustomSpellBook;
+import com.myrran.misc.InvalidIDException;
 import com.nitorcreations.junit.runners.NestedRunner;
 import org.junit.Assert;
 import org.junit.Test;

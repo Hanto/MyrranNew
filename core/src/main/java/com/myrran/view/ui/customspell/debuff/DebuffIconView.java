@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
+import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;
 

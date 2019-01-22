@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.myrran.spell.generators.custom.stats.CustomSpellStat;
+import com.myrran.model.spell.generators.custom.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */

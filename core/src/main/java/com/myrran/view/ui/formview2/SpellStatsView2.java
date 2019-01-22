@@ -4,8 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.SpellUpgradesListener;
-import com.myrran.spell.generators.custom.stats.CustomSpellStat;
-import com.myrran.spell.generators.custom.stats.CustomSpellStatsI;
+import com.myrran.model.spell.generators.custom.CustomSpellStat;
+import com.myrran.model.spell.generators.custom.CustomSpellStatsI;
 import com.myrran.view.ui.customspell.stats.SpellStatRow;
 
 import java.util.ArrayList;

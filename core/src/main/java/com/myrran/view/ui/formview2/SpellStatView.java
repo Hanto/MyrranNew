@@ -3,7 +3,7 @@ package com.myrran.view.ui.formview2;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
-import com.myrran.spell.generators.custom.stats.CustomSpellStat;
+import com.myrran.model.spell.generators.custom.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.customspell.stats.SpellStatRow;
 import com.myrran.view.ui.customspell.stats.SpellUpgradesView;

@@ -1,10 +1,10 @@
 package com.myrran.controller;
 
-import com.myrran.spell.generators.custom.CustomSpellBook;
-import com.myrran.spell.generators.custom.CustomSpellForm;
-import com.myrran.spell.generators.custom.stats.CustomSpellStat;
-import com.myrran.spell.generators.custom.stats.CustomSpellStatsI;
-import com.myrran.utils.InvalidIDException;
+import com.myrran.model.spell.generators.custom.CustomSpellBook;
+import com.myrran.model.spell.generators.custom.CustomSpellForm;
+import com.myrran.model.spell.generators.custom.CustomSpellStat;
+import com.myrran.model.spell.generators.custom.CustomSpellStatsI;
+import com.myrran.misc.InvalidIDException;
 
 /** @author Ivan Delgado Huerta */
 public class CustomSpellController

@@ -2,7 +2,7 @@ package com.myrran.view.ui.customspell.debuff;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
-import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlots;
+import com.myrran.model.spell.generators.custom.CustomDebuffSlots;
 
 import java.util.ArrayList;
 import java.util.List;

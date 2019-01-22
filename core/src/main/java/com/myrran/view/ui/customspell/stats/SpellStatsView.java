@@ -1,7 +1,7 @@
 package com.myrran.view.ui.customspell.stats;
 
 import com.badlogic.gdx.utils.Disposable;
-import com.myrran.spell.generators.custom.stats.CustomSpellStats;
+import com.myrran.model.spell.generators.custom.CustomSpellStats;
 import com.myrran.view.ui.formview2.SpellStatView;
 
 import java.util.ArrayList;
