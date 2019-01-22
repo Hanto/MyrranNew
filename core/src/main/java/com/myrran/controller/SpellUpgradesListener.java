@@ -3,8 +3,7 @@ package com.myrran.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-
-import com.myrran.spell.generators.custom.StatsDTO;
+import com.myrran.spell.generators.custom.stats.CustomSpellStatsI;
 import com.myrran.utils.InvalidIDException;
 import com.myrran.view.ui.Atlas;
 import org.apache.logging.log4j.LogManager;
@@ -14,19 +13,18 @@ import org.apache.logging.log4j.Logger;
 public class SpellUpgradesListener extends InputListener
 {
     private CustomSpellController controller;
-    private StatsDTO dto;
+    private CustomSpellStatsI stats;
     private String statID;
-
 
     private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellUpgradesListener(CustomSpellController controller, StatsDTO dto, String statID)
+    public SpellUpgradesListener(CustomSpellController controller, CustomSpellStatsI stats, String statID)
     {
         this.controller = controller;
-        this.dto = dto;
+        this.stats = stats;
         this.statID = statID;
     }
 
@@ -55,15 +53,7 @@ public class SpellUpgradesListener extends InputListener
     private void modifyStatBy(int modifyBy)
     {
         try
-        {
-            switch (dto.type)
-            {
-                case FormStats: controller.formUpgradesModifyBy(dto.form.getID(), statID, modifyBy); break;
-                case FormDebuffStats: controller.debuffUpgradesModifyBy(dto.form.getID(), dto.debuffSlot.getID(), statID, modifyBy); break;
-                case SubformStats: break;
-                case SubformDebuffStats: break;
-            }
-        }
+        {   controller.modifyStatBy(stats, statID, modifyBy);}
         catch (InvalidIDException e)
         {   LOG.error("Cannot modify stat: ", e); }
     }
