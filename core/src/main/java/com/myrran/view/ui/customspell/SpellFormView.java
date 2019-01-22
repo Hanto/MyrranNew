@@ -156,7 +156,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
     }
 
     private void setBackgroundBounds()
-    {   background.setSize(getMinWidth() -tableIcons.getMinWidth() -spellIcon.getWidth(), -getMinHeight()); }
+    {   background.setSize(getMinWidth() -tableIcons.getMinWidth() -spellIcon.getWidth(), -getMinHeight() +5); }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------
