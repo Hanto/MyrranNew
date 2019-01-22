@@ -59,7 +59,7 @@ public class Atlas implements Disposable
 
     private void loadData()
     {
-        textureAtlas = new TextureAtlas(Gdx.files.internal("textureAtlas/textureAtlas.textureAtlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("Atlas/Atlas.Atlas"));
 
         addTexture("TexturasMisc/RebindOn");
         addTexture("TexturasIconos/IconoVacio");

@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.model.spell.generators.custom.CustomSpellForm;
+import com.myrran.model.spell.templates.SpellBookTemplates;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.ScrollingCombatText;
 import com.myrran.view.ui.customspell.SpellFormView;
@@ -72,6 +73,8 @@ public class ZMain extends ApplicationAdapter
 			sctView.setPosition(100, 100);
 
 			book = unmarshal(CustomSpellBook.class);
+			SpellBookTemplates templateBook = unmarshal(SpellBookTemplates.class);
+			book.setSpellBookTemplates(templateBook);
 			CustomSpellForm spell = book.getCustomSpellForm("Bolt_00");
 
 			/*spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
@@ -102,6 +105,8 @@ public class ZMain extends ApplicationAdapter
 			formView2.setModel(spell);
 			uiStage.addActor(formView2);
 			formView2.setPosition(100, 200);
+
+			//book.addCustomSpellDebuff("Bolt_00", "Spot 3", "Slow");
 
 		}
 		catch (Exception e)

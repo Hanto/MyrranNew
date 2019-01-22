@@ -6,6 +6,7 @@ import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.parameters.SpellDebuffParams;
 import com.myrran.model.spell.templates.SpellDebuffSlotTemplate;
+import com.myrran.model.spell.templates.SpellDebuffTemplate;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -35,6 +36,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     public String getSlotType()                                 { return type; }
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
     public CustomSpellDebuff getCustomSpellDebuff()             { return customSpellDebuff; }
+    public boolean hasDebuff()                                  { return customSpellDebuff.hasDebuff(); }
     @Override public void setID(String id)                      { this.id = id; }
     public void setName(String name)                            { this.name = name; notifyChanges(); }
     public void setType(String type)                            { this.type = type; notifyChanges(); }
@@ -54,6 +56,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
         this.name = template.getName();
         this.type = template.getSlotType();
         this.lock = new ArrayList<>(template.getLock());
+        this.customSpellDebuff = new CustomSpellDebuff();
     }
 
     // CUSTOM TO ENTITY DATA:
@@ -76,11 +79,11 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }
 
-    public boolean setCustomSpellDebuff(CustomSpellDebuff effect)
+    public boolean setCustomSpellDebuff(SpellDebuffTemplate template)
     {
-        if(opensLock(effect.getKeys()))
+        if (opensLock(template.getKeys()))
         {
-            customSpellDebuff = effect;
+            customSpellDebuff.setSpellDebuffTemplate(template);
             notifyChanges();
             return true;
         }
@@ -89,7 +92,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
 
     public void removeCustomSpellDebuff()
     {
-        this.customSpellDebuff =  null;
+        customSpellDebuff.setSpellDebuffTemplate(null);
         notifyChanges();
     }
 

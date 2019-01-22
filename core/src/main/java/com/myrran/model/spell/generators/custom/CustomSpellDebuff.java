@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -39,6 +40,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     public String getTemplateID()                               { return templateID; }
     public SpellDebuffFactory getFactory()                      { return factory; }
     public List<CustomSpellSlotKey> getKeys()                   { return keys;  }
+    public boolean hasDebuff()                                  { return id != null; }
     @Override public CustomSpellStats getSpellStats()           { return spellStats; }
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setName(String name)                  { this.name = name; notifyChanges(); }
@@ -48,19 +50,27 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellDebuff() {}
+    public CustomSpellDebuff() { }
     public CustomSpellDebuff(SpellDebuffTemplate template)
     {   setSpellDebuffTemplate(template); }
 
     @Override public void setSpellDebuffTemplate(SpellDebuffTemplate template)
     {
-        id = template.getID();
-        name = template.getName();
-        templateID = template.getID();
-        baseCost = template.getBaseCost();
-        factory = template.getFactory();
-        keys = template.getKeys();
-        spellStats.setSpellStatsTemplates(template.getSpellStats());
+        if (template != null)
+        {
+            id = UUID.randomUUID().toString();
+            name = template.getName();
+            templateID = template.getID();
+            baseCost = template.getBaseCost();
+            factory = template.getFactory();
+            keys = template.getKeys();
+            spellStats.setSpellStatsTemplates(template.getSpellStats());
+        }
+        else
+        {
+            id = null;
+            removeAllObservers();
+        }
     }
 
     // CUSTOM TO ENTITY DATA:

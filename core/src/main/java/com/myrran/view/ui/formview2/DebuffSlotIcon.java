@@ -70,8 +70,9 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
         else
         {
             debuffSlot = customDebuffSlot;
+            spellDebuff = debuffSlot.getCustomSpellDebuff();
             debuffSlot.addObserver(this);
-            reobserveDebuff(debuffSlot);
+            spellDebuff.addObserver(this);
             update();
         }
     }
@@ -88,16 +89,14 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
 
     private void update()
     {
-        CustomSpellDebuff debuff = debuffSlot.getCustomSpellDebuff();
-
         slotType.setText(debuffSlot.getSlotType());
         lock.setText(debuffSlot.getLock().toString().toLowerCase());
 
-        if (debuff != null)
+        if (debuffSlot.hasDebuff())
         {
             debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
-            cost.setText(debuff.getTotalCost().toString());
-            debuffName.setText(debuff.getName());
+            cost.setText(spellDebuff.getTotalCost().toString());
+            debuffName.setText(spellDebuff.getName());
         }
         else
         {
@@ -105,19 +104,6 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
             cost.setText(null);
             debuffName.setText(null);
         }
-    }
-
-    private void reobserveDebuff(CustomDebuffSlot slot)
-    {
-        CustomSpellDebuff debuff = slot.getCustomSpellDebuff();
-
-        if (spellDebuff != null)
-            spellDebuff.removeObserver(this);
-
-        spellDebuff = debuff;
-
-        if (spellDebuff != null)
-            spellDebuff.addObserver(this);
     }
 
     // CREATE LAYOUT:
@@ -145,10 +131,5 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void propertyChange(PropertyChangeEvent evt)
-    {
-        if (evt.getPropertyName().equals("debuffSlot"))
-            reobserveDebuff(debuffSlot);
-
-        update();
-    }
+    {   update(); }
 }

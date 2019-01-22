@@ -73,10 +73,8 @@ public class CustomSpellBook
         {
             CustomSpellForm spellForm = getCustomSpellForm(customFormID);
             SpellDebuffTemplate template = getSpellDebuffTemplate(debuffTemplateID);
-            CustomSpellDebuff spellDebuff = new CustomSpellDebuff(template);
-            setUUID(spellDebuff);
 
-            spellForm.setCustomSpellDebuff(spellDebuff, slotID);
+            spellForm.setCustomSpellDebuff(template, slotID);
             debuffTemplatesLearned.borrow(debuffTemplateID);
         }
         else

@@ -192,6 +192,8 @@
                 <name>Spot 3</name>
                 <type>ground</type>
                 <lock>DEBUFF</lock>
+                <customSpellDebuff>
+                </customSpellDebuff>
               </value>
             </entry>
           </slots>

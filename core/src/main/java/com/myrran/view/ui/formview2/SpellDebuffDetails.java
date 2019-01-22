@@ -65,8 +65,9 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
         else
         {
             debuffSlot = customDebuffSlot;
+            spellDebuff = debuffSlot.getCustomSpellDebuff();
             debuffSlot.addObserver(this);
-            reobserveDebuff(debuffSlot);
+            spellDebuff.addObserver(this);
             update();
         }
     }
@@ -81,13 +82,11 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
 
     private void update()
     {
-        CustomSpellDebuff debuff = debuffSlot.getCustomSpellDebuff();
-
-        if (debuff != null)
+        if (debuffSlot.hasDebuff())
         {
-            stats.setModel(debuff);
-            name.setText(debuff.getName());
-            totalCost.setText(String.format("%s(%s)", debuff.getTotalCost() - debuff.getBaseCost(), debuff.getBaseCost()));
+            stats.setModel(spellDebuff);
+            name.setText(spellDebuff.getName());
+            totalCost.setText(String.format("%s(%s)", spellDebuff.getTotalCost() - spellDebuff.getBaseCost(), spellDebuff.getBaseCost()));
         }
         else
         {
@@ -95,19 +94,6 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
             name.setText(null);
             totalCost.setText(null);
         }
-    }
-
-    private void reobserveDebuff(CustomDebuffSlot slot)
-    {
-        CustomSpellDebuff debuff = slot.getCustomSpellDebuff();
-
-        if (spellDebuff != null)
-            spellDebuff.removeObserver(this);
-
-        spellDebuff = debuff;
-
-        if (spellDebuff != null)
-            spellDebuff.addObserver(this);
     }
 
     // CREATE LAYOUT:
@@ -128,10 +114,5 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void propertyChange(PropertyChangeEvent evt)
-    {
-        if (evt.getPropertyName().equals("debuffSlot"))
-            reobserveDebuff(debuffSlot);
-
-        update();
-    }
+    {   update(); }
 }
