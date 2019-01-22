@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.controller.SpellUpgradesListener;
 import com.myrran.spell.generators.custom.CustomSpellBook;
 import com.myrran.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
@@ -19,6 +18,7 @@ import com.myrran.view.ui.ScrollingCombatText;
 import com.myrran.view.ui.customspell.SpellFormView;
 import com.myrran.view.ui.formview2.DebuffSlotIcon;
 import com.myrran.view.ui.formview2.SpellDebuffDetails;
+import com.myrran.view.ui.formview2.SpellFormView2;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -73,11 +73,11 @@ public class ZMain extends ApplicationAdapter
 
 			book = unmarshal(CustomSpellBook.class);
 			CustomSpellForm spell = book.getCustomSpellForm("Bolt_00");
-			spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
-			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
 
+			/*spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
+			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
 			spellFormView.setPosition(100, 20);
-			uiStage.addActor(spellFormView);
+			uiStage.addActor(spellFormView);*/
 
 			Gdx.input.setInputProcessor(uiStage);
 
@@ -97,7 +97,12 @@ public class ZMain extends ApplicationAdapter
 			sctView = sct.sct("HoLaaaaa");
 			uiStage.addActor(sctView);
 
-			//spell.setNumUpgrades("Spot 1", "Speed", 30);
+
+			SpellFormView2 formView2 = new SpellFormView2(controller);
+			formView2.setModel(spell);
+			uiStage.addActor(formView2);
+			formView2.setPosition(100, 200);
+
 		}
 		catch (Exception e)
 		{ 	LOG.error("PUMBA",e); }
@@ -140,7 +145,6 @@ public class ZMain extends ApplicationAdapter
 
 		font.dispose();
 		shapeRenderer.dispose();
-		spellFormView.dispose();
 		Atlas.get().dispose();
 	}
 
