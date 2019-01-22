@@ -2,11 +2,11 @@ package com.myrran.view.ui.formview2;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
-import com.myrran.controller.SpellUpgradesListenerFactory;
+import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.SpellUpgradesListener;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
-import com.myrran.spell.generators.custom.stats.CustomSpellStats;
+import com.myrran.spell.generators.custom.stats.CustomSpellStatsI;
 import com.myrran.view.ui.customspell.stats.SpellStatRow;
-import com.myrran.view.ui.customspell.stats.SpellStatView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +14,18 @@ import java.util.List;
 /** @author Ivan Delgado Huerta */
 public class SpellStatsView2 extends Table implements Disposable
 {
-    private CustomSpellStats model;
+    private CustomSpellStatsI model;
+    private CustomSpellController controller;
 
     private List<SpellStatView> statsViewList;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellStatsView2()
+    public SpellStatsView2(CustomSpellController spellController)
     {
-        statsViewList   = new ArrayList<>();
+        controller = spellController;
+        statsViewList = new ArrayList<>();
 
         createLayout();
     }
@@ -34,7 +36,7 @@ public class SpellStatsView2 extends Table implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSpellStats customSpellStats)
+    public void setModel(CustomSpellStatsI customSpellStats)
     {
         dispose();
 
@@ -49,8 +51,8 @@ public class SpellStatsView2 extends Table implements Disposable
 
     private void removeModel()
     {
-        model = null;
         clear();
+        model = null;
         statsViewList.clear();
     }
 
@@ -63,21 +65,22 @@ public class SpellStatsView2 extends Table implements Disposable
             .map(this::getView)
             .forEach(statView -> statsViewList.add(statView));
 
+        createListeners();
+
         statsViewList.forEach(this::tableAddRow);
     }
 
     // LISTENERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public void createListeners(SpellUpgradesListenerFactory listenerFactory)
+    public void createListeners()
     {
         for (SpellStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
-            view.getUpgradesView().addListener(listenerFactory.newListener(statID));
+            view.getUpgradesView().addListener(new SpellUpgradesListener(controller, model, statID));
         }
     }
-
 
     // CREATE LAYOUT:
     //--------------------------------------------------------------------------------------------------------
