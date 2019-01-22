@@ -1,10 +1,9 @@
 package com.myrran.controller;
 
 import com.myrran.spell.generators.custom.CustomSpellBook;
-import com.myrran.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.spell.generators.custom.CustomSpellForm;
-import com.myrran.spell.generators.custom.StatsDTO;
 import com.myrran.spell.generators.custom.stats.CustomSpellStat;
+import com.myrran.spell.generators.custom.stats.CustomSpellStatsI;
 import com.myrran.utils.InvalidIDException;
 
 /** @author Ivan Delgado Huerta */
@@ -21,29 +20,17 @@ public class CustomSpellController
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public void formUpgradesModifyBy(String formID, String statID, int upgradesBy) throws InvalidIDException
+    public void modifyStatBy(CustomSpellStatsI stats, String statID, int upgradesBy) throws InvalidIDException
     {
-        CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        CustomSpellStat stat = form.getCustomSpellStat(statID);
+        CustomSpellForm form = spellBook.getSpellFormWithTheStats(stats.getID());
+
+        CustomSpellStat stat = stats.getCustomSpellStat(statID);
 
         int upgrades = stat.getNumUpgrades() + upgradesBy;
 
         if (upgrades >= 0 && upgrades <= stat.getMaxUpgrades())
-            form.setNumUpgrades(statID, upgrades);
+            stats.setNumUpgrades(statID, upgrades);
+
+        form.notify("", null, null);
     }
-
-    public void debuffUpgradesModifyBy(String formID, String slotID, String statID, int upgradesBy) throws InvalidIDException
-    {
-        CustomSpellForm form = spellBook.getCustomSpellForm(formID);
-        CustomSpellDebuff debuff = form.getCustomSpellDebuff(slotID);
-        CustomSpellStat stat = debuff.getCustomSpellStat(statID);
-
-        int upgrades = stat.getNumUpgrades() + upgradesBy;
-
-        if (upgrades >= 0 && upgrades <= stat.getMaxUpgrades())
-            form.setNumUpgrades(slotID, statID, upgrades);
-    }
-
-    public StatsDTO getStatsDTO(String uuid) throws InvalidIDException
-    {   return spellBook.getStatsDTO(uuid); }
 }

@@ -6,7 +6,6 @@ import com.myrran.misc.Identifiable;
 import com.myrran.spell.data.templatedata.SpellBookTemplates;
 import com.myrran.spell.data.templatedata.SpellDebuffTemplate;
 import com.myrran.spell.data.templatedata.SpellFormTemplate;
-import com.myrran.spell.entity.form.SpellForm;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlot;
 import com.myrran.utils.InvalidIDException;
 
@@ -14,7 +13,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
@@ -132,27 +133,24 @@ public class CustomSpellBook
     // FORM of any ID:
     //--------------------------------------------------------------------------------------------------------
 
-    public StatsDTO getStatsDTO(String uuid) throws InvalidIDException
+    public CustomSpellForm getSpellFormWithTheStats(String customSpellStatsID) throws InvalidIDException
     {
-        // from FORM
-        if (customSpells.containsKey(uuid))
-            return new StatsDTO(customSpells.get(uuid));
+        if (customSpells.containsKey(customSpellStatsID))
+            return customSpells.get(customSpellStatsID);
 
         for (CustomSpellForm form: customSpells.values())
         {
-            List<CustomDebuffSlot> slots = form.getDebuffSlots().values().stream()
+            if (form.getDebuffSlots().values().stream()
                 .filter(slot -> slot.getCustomSpellDebuff() != null)
-                .collect(Collectors.toList());
+                .map(CustomDebuffSlot::getCustomSpellDebuff)
+                .map(CustomSpellDebuff::getID)
+                .collect(Collectors.toList())
+                .contains(customSpellStatsID))
 
-            // from FORM DEBUFFSLOT
-            for (CustomDebuffSlot slot: slots)
-            {
-                if (slot.getCustomSpellDebuff().getID().equals(uuid))
-                    return new StatsDTO(form, slot);
-            }
+                return form;
         }
 
-        throw new InvalidIDException("The following ID isn't assigned to any SpellForm: %s", uuid);
+        throw new InvalidIDException("The following ID isn't assigned to any SpellForm: %s", customSpellStatsID);
     }
 
     // HELPER:

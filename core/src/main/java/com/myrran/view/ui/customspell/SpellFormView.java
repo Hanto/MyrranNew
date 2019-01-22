@@ -17,7 +17,7 @@ import com.myrran.view.ui.customspell.debuff.DebuffSlotView;
 import com.myrran.view.ui.customspell.debuff.DebuffSlotsView;
 import com.myrran.view.ui.customspell.stats.SpellHeaderView;
 import com.myrran.view.ui.customspell.stats.SpellStatRow;
-import com.myrran.view.ui.customspell.stats.SpellStatView;
+import com.myrran.view.ui.formview2.SpellStatView;
 import com.myrran.view.ui.customspell.stats.SpellStatsView;
 
 import java.beans.PropertyChangeEvent;

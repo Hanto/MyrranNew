@@ -10,14 +10,23 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 public class MoveWidgetListener extends DragListener
 {
     private Actor parent;
-    private Actor dragActor;
+    private Actor dragger;
 
-    public MoveWidgetListener(Actor drager)
+    private Vector2 draggerPos;
+    private Vector2 parentPos;
+    private Vector2 offset;
+
+    // CONSTRUCTOR:
+    //--------------------------------------------------------------------------------------------------------
+
+    public MoveWidgetListener(Actor parent)
     {
-        this.dragActor = drager;
-        this.parent = drager.getParent();
+        this.parent = parent;
         setTapSquareSize(0);
     }
+
+    // MAIN:
+    //--------------------------------------------------------------------------------------------------------
 
     @Override public boolean touchDown (InputEvent event, float x, float y, int pointer, int button)
     {
@@ -31,20 +40,23 @@ public class MoveWidgetListener extends DragListener
         float scrollX = getDragX() - getTouchDownX();
         float scrollY = getDragY() - getTouchDownY();
 
+        dragger = event.getListenerActor();
         parent.moveBy(scrollX, scrollY);
 
-        Vector2 dragPos = dragActor.localToStageCoordinates(new Vector2());
+        draggerPos = dragger.localToStageCoordinates(new Vector2());
+        parentPos = parent.localToStageCoordinates(new Vector2());
+        offset = parentPos.sub(draggerPos);
 
-        if (dragPos.x < 0)
-            parent.setX(-dragActor.getX());
+        if (draggerPos.x < 0)
+            parent.setX(offset.x);
 
-        if (dragPos.x + dragActor.getWidth() > Gdx.graphics.getWidth())
-            parent.setX(Gdx.graphics.getWidth() - dragActor.getWidth() - dragActor.getX());
+        if (draggerPos.x + dragger.getWidth() > Gdx.graphics.getWidth())
+            parent.setX(Gdx.graphics.getWidth() - dragger.getWidth() + offset.x);
 
-        if (dragPos.y < 0)
-            parent.setY(-dragActor.getY());
+        if (draggerPos.y < 0)
+            parent.setY(offset.y);
 
-        if (dragPos.y + dragActor.getHeight() > Gdx.graphics.getHeight())
-            parent.setY(Gdx.graphics.getHeight() - dragActor.getHeight() - dragActor.getY());
+        if (draggerPos.y + dragger.getHeight() > Gdx.graphics.getHeight())
+            parent.setY(Gdx.graphics.getHeight() - dragger.getHeight() + offset.y);
     }
 }

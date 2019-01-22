@@ -7,7 +7,6 @@ import com.myrran.misc.observable.ObservableI;
 import com.myrran.spell.data.entityparams.SpellDebuffParams;
 import com.myrran.spell.data.templatedata.SpellDebuffSlotTemplate;
 import com.myrran.spell.generators.custom.CustomSpellDebuff;
-import com.myrran.utils.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -83,17 +82,15 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
         if(opensLock(effect.getKeys()))
         {
             customSpellDebuff = effect;
+            notifyChanges();
             return true;
         }
         else return false;
     }
 
     public void removeCustomSpellDebuff()
-    {   this.customSpellDebuff =  null; }
-
-    public void setNumUpgrades(String statID, int upgrades) throws InvalidIDException
     {
-        getCustomSpellDebuff().getCustomSpellStat(statID).setNumUpgrades(upgrades);
+        this.customSpellDebuff =  null;
         notifyChanges();
     }
 

@@ -8,6 +8,7 @@ import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlotsDeco;
 import com.myrran.spell.generators.custom.debuffslot.CustomDebuffSlots;
 import com.myrran.spell.generators.custom.stats.CustomSpellStats;
 import com.myrran.spell.generators.custom.stats.CustomSpellStatsDeco;
+import com.myrran.utils.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -66,4 +67,8 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
 
     public int getTotalCost()
     {   return getStatsTotalCost() + getDebuffSlotsTotalCost(); }
+
+    @Override
+    public void setNumUpgrades(String statID, int numUpgrades) throws InvalidIDException
+    {   spellStats.setNumUpgrades(statID, numUpgrades); }
 }

@@ -51,6 +51,13 @@ public class CustomSpellStats implements CustomSpellStatsI
         else throw new InvalidIDException("SpellStat with the following ID doesn't exist: %s", statID);
     }
 
+    @Override
+    public void setNumUpgrades(String statID, int numUpgrades) throws InvalidIDException
+    {
+        CustomSpellStat stat = getCustomSpellStat(statID);
+        stat.setNumUpgrades(numUpgrades);
+    }
+
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 

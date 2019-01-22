@@ -21,6 +21,9 @@ public interface CustomSpellStatsDeco extends CustomSpellStatsI
     default Map<String, SpellStatParams> getSpellStatParams()
     {   return getSpellStats().getSpellStatParams(); }
 
+    default Collection<CustomSpellStat>values()
+    {   return getSpellStats().values(); }
+
     default CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException
     {   return getSpellStats().getCustomSpellStat(statID); }
 

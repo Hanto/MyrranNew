@@ -10,7 +10,11 @@ import java.util.Map;
 /** @author Ivan Delgado Huerta */
 public interface CustomSpellStatsI
 {
-    public void setSpellStatsTemplates(Collection<SpellStatTemplate> templates);
+    void setSpellStatsTemplates(Collection<SpellStatTemplate> templates);
+    void setNumUpgrades(String statID, int numUpgrades) throws InvalidIDException;
+
+    default String getID()  { return null; }
+    Collection<CustomSpellStat>values();
     Map<String, SpellStatParams> getSpellStatParams();
     CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException;
     int getStatsTotalCost();

@@ -11,7 +11,6 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
-import com.myrran.view.ui.window.MoveWidgetListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -19,10 +18,11 @@ import java.beans.PropertyChangeListener;
 /** @author Ivan Delgado Huerta */
 public class DebuffSlotIcon extends Table implements PropertyChangeListener, Disposable
 {
-    private CustomDebuffSlot model;
+    private CustomDebuffSlot debuffSlot;
+    private CustomSpellDebuff spellDebuff;
     private CustomSpellController controller;
 
-    private WidgetGroup icon;
+    public WidgetGroup icon;
     private WidgetImage debuffIcon;
     private WidgetText cost;
     private WidgetText debuffName;
@@ -51,30 +51,34 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
 
     @Override public void dispose()
     {
-        if(model != null)
-            model.removeObserver(this);
+        if (debuffSlot != null)
+            debuffSlot.removeObserver(this);
+
+        if (spellDebuff != null)
+            spellDebuff.removeObserver(this);
     }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomDebuffSlot debuffSlot)
+    public void setModel(CustomDebuffSlot customDebuffSlot)
     {
         dispose();
 
-        if (debuffSlot == null)
+        if (customDebuffSlot == null)
             removeModel();
         else
         {
-            model = debuffSlot;
-            model.addObserver(this);
+            debuffSlot = customDebuffSlot;
+            debuffSlot.addObserver(this);
+            reobserveDebuff(debuffSlot);
             update();
         }
     }
 
     private void removeModel()
     {
-        model = null;
+        debuffSlot = null;
         debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
         cost.setText(null);
         debuffName.setText(null);
@@ -84,12 +88,36 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
 
     private void update()
     {
-        CustomSpellDebuff debuff = model.getCustomSpellDebuff();
-        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
-        cost.setText(debuff != null ? debuff.getTotalCost().toString() : null);
-        debuffName.setText(model.getCustomSpellDebuff() != null ? model.getCustomSpellDebuff().getName() : null);
-        slotType.setText(model.getSlotType());
-        lock.setText(model.getLock().toString().toLowerCase());
+        CustomSpellDebuff debuff = debuffSlot.getCustomSpellDebuff();
+
+        slotType.setText(debuffSlot.getSlotType());
+        lock.setText(debuffSlot.getLock().toString().toLowerCase());
+
+        if (debuff != null)
+        {
+            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
+            cost.setText(debuff.getTotalCost().toString());
+            debuffName.setText(debuff.getName());
+        }
+        else
+        {
+            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
+            cost.setText(null);
+            debuffName.setText(null);
+        }
+    }
+
+    private void reobserveDebuff(CustomDebuffSlot slot)
+    {
+        CustomSpellDebuff debuff = slot.getCustomSpellDebuff();
+
+        if (spellDebuff != null)
+            spellDebuff.removeObserver(this);
+
+        spellDebuff = debuff;
+
+        if (spellDebuff != null)
+            spellDebuff.addObserver(this);
     }
 
     // CREATE LAYOUT:
@@ -111,12 +139,16 @@ public class DebuffSlotIcon extends Table implements PropertyChangeListener, Dis
         top().left();
         add(icon).top().left();
         add(textTable).top().left();
-        icon.addListener(new MoveWidgetListener(icon));
     }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
+    {
+        if (evt.getPropertyName().equals("debuffSlot"))
+            reobserveDebuff(debuffSlot);
+
+        update();
+    }
 }
