@@ -17,13 +17,13 @@ import java.util.Map;
 /** @author Ivan Delgado Huerta */
 public class Atlas implements Disposable
 {
-    private TextureAtlas atlas;
+    private TextureAtlas textureAtlas;
     private Map<String, TextureRegion> textures = new HashMap<>();
     private Map<String, BitmapFont> fonts = new HashMap<>();
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private static final DecimalFormatSymbols simbolos = df.getDecimalFormatSymbols();
 
-    private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
+    private static final Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
     // SETTERS / GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ public class Atlas implements Disposable
     @Override public void dispose()
     {
         LOG.info("Disposing Atlas");
-        atlas.dispose();
+        textureAtlas.dispose();
         fonts.values().forEach(BitmapFont::dispose);
     }
 
@@ -59,7 +59,7 @@ public class Atlas implements Disposable
 
     private void loadData()
     {
-        atlas = new TextureAtlas(Gdx.files.internal("atlas/atlas.atlas"));
+        textureAtlas = new TextureAtlas(Gdx.files.internal("textureAtlas/textureAtlas.textureAtlas"));
 
         addTexture("TexturasMisc/RebindOn");
         addTexture("TexturasIconos/IconoVacio");
@@ -81,7 +81,7 @@ public class Atlas implements Disposable
     private void addTexture(String name)
     {
         LOG.info("Adding texture: %s from Atlas", name);
-        TextureRegion texture = new TextureRegion(atlas.findRegion(name));
+        TextureRegion texture = new TextureRegion(textureAtlas.findRegion(name));
         textures.put(name, texture);
     }
 
