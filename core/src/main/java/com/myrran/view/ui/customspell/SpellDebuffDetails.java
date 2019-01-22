@@ -86,7 +86,7 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
         {
             stats.setModel(spellDebuff);
             name.setText(spellDebuff.getName());
-            totalCost.setText(String.format("%s(%s)", spellDebuff.getTotalCost() - spellDebuff.getBaseCost(), spellDebuff.getBaseCost()));
+            totalCost.setText(String.format("%s(%s)", spellDebuff.getStatsCost(), spellDebuff.getTotalCost()));
         }
         else
         {

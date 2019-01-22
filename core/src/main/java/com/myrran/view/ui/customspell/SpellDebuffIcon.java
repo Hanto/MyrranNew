@@ -22,7 +22,7 @@ public class SpellDebuffIcon extends Table implements PropertyChangeListener, Di
     private CustomSpellDebuff spellDebuff;
     private CustomSpellController controller;
 
-    public WidgetGroup icon;
+    private WidgetGroup icon;
     private WidgetImage debuffIcon;
     private WidgetText cost;
     private WidgetText debuffName;

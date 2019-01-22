@@ -89,6 +89,9 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     public Integer getTotalCost()
     {   return getStatsTotalCost() + baseCost; }
 
+    public Integer getStatsCost()
+    {   return getStatsTotalCost(); }
+
     @Override public void setNumUpgrades(String statID, int numUpgrades) throws InvalidIDException
     {
         spellStats.setNumUpgrades(statID, numUpgrades);

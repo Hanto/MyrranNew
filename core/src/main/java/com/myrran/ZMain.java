@@ -16,8 +16,6 @@ import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.model.spell.templates.SpellBookTemplates;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.ScrollingCombatText;
-import com.myrran.view.ui.customspell.SpellDebuffIcon;
-import com.myrran.view.ui.customspell.SpellDebuffDetails;
 import com.myrran.view.ui.customspell.SpellFormView;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
@@ -78,17 +76,6 @@ public class ZMain extends ApplicationAdapter
 			Gdx.input.setInputProcessor(uiStage);
 
 			CustomSpellController controller = new CustomSpellController(book);
-
-			SpellDebuffDetails debuffView = new SpellDebuffDetails(controller);
-			debuffView.setModel(spell.getCustomDebufflot("Spot 1"));
-			uiStage.addActor(debuffView);
-			debuffView.setPosition(100, 400);
-
-
-			SpellDebuffIcon debuffSlotView = new SpellDebuffIcon(controller);
-			debuffSlotView.setModel(spell.getDebuffSlots().getCustomDebufflot("Spot 1"));
-			debuffSlotView.setPosition(100, 250);;
-			uiStage.addActor(debuffSlotView);
 
 			sctView = sct.sct("HoLaaaaa");
 			uiStage.addActor(sctView);

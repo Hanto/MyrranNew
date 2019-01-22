@@ -20,6 +20,9 @@ public class WidgetLabel extends Label
     @Override public void setText(CharSequence newText)
     {
         super.setText(newText);
-        setSize(getPrefWidth(), getPrefHeight());
+        if (newText != null)
+            setSize(getPrefWidth(), getPrefHeight());
+        else
+            setSize(0, 0);
     }
 }

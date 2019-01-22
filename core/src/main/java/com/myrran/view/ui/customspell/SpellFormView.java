@@ -1,15 +1,18 @@
 package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
+import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
+import com.myrran.view.ui.window.MoveWidgetListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -17,12 +20,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class SpellFormView extends Group implements PropertyChangeListener, Disposable
+public class SpellFormView extends Table implements PropertyChangeListener, Disposable
 {
     private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private Table table;
+    private WidgetImage spellIcon;
+    private Image background;
+    private Table tableIcons;
     private SpellStats stats;
     private WidgetText name;
     private WidgetText totalCost;
@@ -39,11 +44,11 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
     public SpellFormView(CustomSpellController spellController)
     {
         controller  = spellController;
-        table       = new Table().top().left();
+        spellIcon   = new WidgetImage();
+        background  = Atlas.get().getImage("TexturasMisc/Casillero2");
         stats       = new SpellStats(controller);
         name        = new WidgetText(font20, Color.ORANGE, Color.BLACK, 2);
         totalCost   = new WidgetText(font14, magenta, Color.BLACK, 2);
-        addActor(table);
     }
 
     @Override public void dispose()
@@ -78,8 +83,9 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
     {
         dispose();
 
-        table.clear();
+        clear();
         model = null;
+        spellIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
         stats.setModel(null);
         name.setText(null);
         totalCost.setText(null);
@@ -87,9 +93,10 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
 
     private void update()
     {
+        spellIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
         stats.setModel(model);
         name.setText(model.getName());
-        totalCost.setText(model.getTotalCost().toString());
+        totalCost.setText(String.format("%s(%s)", model.getStatsCost(), model.getTotalCost()));
     }
 
     private void createLayout()
@@ -102,27 +109,29 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
         tableStats.add(header).left().row();
         tableStats.add(stats).left().row();
 
-        Table tableIcons = new Table().top().left().padTop(20);
+        tableIcons = new Table().top().left().padTop(10);
 
-        table.clear();
-        table.top().left();
-        table.add(tableStats).left();
-        table.add(tableIcons).top().left();
+        clear();
+        top().left();
+        add(spellIcon).top().left().padTop(10).padRight(3);
+        add(tableStats).left().padRight(3);
+        add(tableIcons).top().left();
 
-        if (model != null)
-        {
-            formDebuffs = model.getDebuffSlots().values().stream()
-                .map(this::addDebuffViews)
-                .collect(Collectors.toList());
+        formDebuffs = model.getDebuffSlots().values().stream()
+            .map(this::addDebuffViews)
+            .collect(Collectors.toList());
 
-            debuffIcons = model.getDebuffSlots().values().stream()
-                .map(this::addDebuffSlotIcons)
-                .collect(Collectors.toList());
+        debuffIcons = model.getDebuffSlots().values().stream()
+            .map(this::addDebuffSlotIcons)
+            .collect(Collectors.toList());
 
-            formDebuffs.forEach(spellDebuffDetails -> tableStats.add(spellDebuffDetails).left().row());
+        formDebuffs.forEach(spellDebuffDetails -> tableStats.add(spellDebuffDetails).left().row());
 
-            debuffIcons.forEach(spellDebuffIcon -> tableIcons.add(spellDebuffIcon).left().row());
-        }
+        debuffIcons.forEach(spellDebuffIcon -> tableIcons.add(spellDebuffIcon).left().row());
+
+        background.setColor(1f, 1f, 1f, 0.55f);
+        spellIcon.addListener(new MoveWidgetListener(this));
+
         update();
     }
 
@@ -140,11 +149,25 @@ public class SpellFormView extends Group implements PropertyChangeListener, Disp
         return icon;
     }
 
+    public void invalidateHierarchy()
+    {
+        super.invalidateHierarchy();
+        setBackgroundBounds();
+    }
+
+    private void setBackgroundBounds()
+    {   background.setSize(getMinWidth() -tableIcons.getMinWidth() -spellIcon.getWidth(), -getMinHeight()); }
+
     // MVC:
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {   update(); }
 
-
+    @Override public void draw (Batch batch, float alpha)
+    {
+        background.setPosition(spellIcon.getWidth() + getX() -2, getY()-10);
+        background.draw(batch, this.getColor().a * alpha);
+        super.draw(batch, this.getColor().a * alpha);
+    }
 }

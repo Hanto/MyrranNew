@@ -78,6 +78,9 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     public Integer getTotalCost()
     {   return getStatsTotalCost() + getDebuffSlotsTotalCost(); }
 
+    public Integer getStatsCost()
+    {   return getStatsTotalCost(); }
+
     @Override
     public void setNumUpgrades(String statID, int upgrades) throws InvalidIDException
     {

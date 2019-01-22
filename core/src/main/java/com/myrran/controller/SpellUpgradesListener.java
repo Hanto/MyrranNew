@@ -33,7 +33,6 @@ public class SpellUpgradesListener extends InputListener
 
     @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
     {
-
         float width = event.getListenerActor().getWidth();
         int modifyBy = getAmount(button);
 
