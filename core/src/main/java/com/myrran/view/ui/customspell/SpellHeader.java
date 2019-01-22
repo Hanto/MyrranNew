@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.stats;
+package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -6,7 +6,7 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
-public class SpellHeaderView implements SpellStatRow
+public class SpellHeader implements SpellStatRow
 {
     private WidgetText name;
     private WidgetText baseValue;
@@ -31,7 +31,7 @@ public class SpellHeaderView implements SpellStatRow
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellHeaderView()
+    public SpellHeader()
     {
         BitmapFont font11 = Atlas.get().getFont("11");
         Color pink = new Color(255/255f, 84/255f, 118/255f, 1);

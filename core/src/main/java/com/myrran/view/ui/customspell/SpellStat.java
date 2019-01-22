@@ -1,12 +1,10 @@
-package com.myrran.view.ui.formview2;
+package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.spell.generators.custom.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspell.stats.SpellStatRow;
-import com.myrran.view.ui.customspell.stats.SpellUpgradesView;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
@@ -14,7 +12,7 @@ import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disposable
+public class SpellStat implements PropertyChangeListener, SpellStatRow, Disposable
 {
     private CustomSpellStat model;
 
@@ -26,7 +24,7 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
     private WidgetText bonusPerUpgrade;
     private WidgetText maxUpgrades;
     private WidgetText gearBonus;
-    private SpellUpgradesView upgradesView;
+    private SpellUpgradeBar upgradesView;
 
     private static final Color white = Color.WHITE;
     private static final Color orange = Color.ORANGE;
@@ -47,12 +45,12 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
     @Override public WidgetText getBonusPerUpgrade()      { return bonusPerUpgrade; }
     @Override public WidgetText getMaxUpgrades()          { return maxUpgrades; }
     @Override public WidgetText getGearBonus()            { return gearBonus; }
-    @Override public SpellUpgradesView getUpgradesView(){ return upgradesView; }
+    @Override public SpellUpgradeBar getUpgradesView(){ return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellStatView(CustomSpellStat customSpellStat)
+    public SpellStat(CustomSpellStat customSpellStat)
     {
         this.model = customSpellStat;
         this.model.addObserver(this);
@@ -82,7 +80,7 @@ public class SpellStatView implements PropertyChangeListener, SpellStatRow, Disp
         maxUpgrades     = new WidgetText(font10, purpleL, black,1);
         gearBonus       = new WidgetText(font10, purpleL, black,1);
 
-        upgradesView    = new SpellUpgradesView(model);
+        upgradesView    = new SpellUpgradeBar(model);
     }
 
     public void updateView()

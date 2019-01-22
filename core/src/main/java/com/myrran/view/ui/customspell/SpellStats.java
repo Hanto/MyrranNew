@@ -1,4 +1,4 @@
-package com.myrran.view.ui.formview2;
+package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
@@ -6,23 +6,22 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.SpellUpgradesListener;
 import com.myrran.model.spell.generators.custom.CustomSpellStat;
 import com.myrran.model.spell.generators.custom.CustomSpellStatsI;
-import com.myrran.view.ui.customspell.stats.SpellStatRow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStatsView2 extends Table implements Disposable
+public class SpellStats extends Table implements Disposable
 {
     private CustomSpellStatsI model;
     private CustomSpellController controller;
 
-    private List<SpellStatView> statsViewList;
+    private List<SpellStat> statsViewList;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellStatsView2(CustomSpellController spellController)
+    public SpellStats(CustomSpellController spellController)
     {
         controller = spellController;
         statsViewList = new ArrayList<>();
@@ -31,7 +30,7 @@ public class SpellStatsView2 extends Table implements Disposable
     }
 
     @Override public void dispose()
-    {   statsViewList.forEach(SpellStatView::dispose); }
+    {   statsViewList.forEach(SpellStat::dispose); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -75,7 +74,7 @@ public class SpellStatsView2 extends Table implements Disposable
 
     public void createListeners()
     {
-        for (SpellStatView view: statsViewList)
+        for (SpellStat view: statsViewList)
         {
             String statID = view.getModel().getID();
             view.getUpgradesView().addListener(new SpellUpgradesListener(controller, model, statID));
@@ -93,8 +92,8 @@ public class SpellStatsView2 extends Table implements Disposable
     // MISC:
     //--------------------------------------------------------------------------------------------------------
 
-    private SpellStatView getView(CustomSpellStat customSpellStat)
-    {   return new SpellStatView(customSpellStat); }
+    private SpellStat getView(CustomSpellStat customSpellStat)
+    {   return new SpellStat(customSpellStat); }
 
     private void tableAddRow(SpellStatRow row)
     {

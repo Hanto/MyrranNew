@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.stats;
+package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 

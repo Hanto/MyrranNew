@@ -16,10 +16,9 @@ import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.model.spell.templates.SpellBookTemplates;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.ScrollingCombatText;
+import com.myrran.view.ui.customspell.SpellDebuffIcon;
+import com.myrran.view.ui.customspell.SpellDebuffDetails;
 import com.myrran.view.ui.customspell.SpellFormView;
-import com.myrran.view.ui.formview2.DebuffSlotIcon;
-import com.myrran.view.ui.formview2.SpellDebuffDetails;
-import com.myrran.view.ui.formview2.SpellFormView2;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +40,6 @@ public class ZMain extends ApplicationAdapter
 	private ShapeRenderer shapeRenderer;
 	private WidgetText sctView;
 	private CustomSpellBook book;
-	private SpellFormView spellFormView;
 
 	private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
@@ -77,11 +75,6 @@ public class ZMain extends ApplicationAdapter
 			book.setSpellBookTemplates(templateBook);
 			CustomSpellForm spell = book.getCustomSpellForm("Bolt_00");
 
-			/*spellFormView = new SpellFormView(book.getCustomSpellForm("Bolt_00"));
-			book.getCustomSpellForm("Bolt_00").getSpellStats().getCustomSpellStat("Speed").setNumUpgrades(40);
-			spellFormView.setPosition(100, 20);
-			uiStage.addActor(spellFormView);*/
-
 			Gdx.input.setInputProcessor(uiStage);
 
 			CustomSpellController controller = new CustomSpellController(book);
@@ -92,7 +85,7 @@ public class ZMain extends ApplicationAdapter
 			debuffView.setPosition(100, 400);
 
 
-			DebuffSlotIcon debuffSlotView = new DebuffSlotIcon(controller);
+			SpellDebuffIcon debuffSlotView = new SpellDebuffIcon(controller);
 			debuffSlotView.setModel(spell.getDebuffSlots().getCustomDebufflot("Spot 1"));
 			debuffSlotView.setPosition(100, 250);;
 			uiStage.addActor(debuffSlotView);
@@ -101,7 +94,7 @@ public class ZMain extends ApplicationAdapter
 			uiStage.addActor(sctView);
 
 
-			SpellFormView2 formView2 = new SpellFormView2(controller);
+			SpellFormView formView2 = new SpellFormView(controller);
 			formView2.setModel(spell);
 			uiStage.addActor(formView2);
 			formView2.setPosition(100, 200);

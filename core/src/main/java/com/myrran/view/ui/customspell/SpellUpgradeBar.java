@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.stats;
+package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,7 +8,7 @@ import com.myrran.model.spell.generators.custom.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
-public class SpellUpgradesView extends Actor
+public class SpellUpgradeBar extends Actor
 {
     private CustomSpellStat model;
 
@@ -20,7 +20,7 @@ public class SpellUpgradesView extends Actor
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellUpgradesView(CustomSpellStat customSpellStat)
+    public SpellUpgradeBar(CustomSpellStat customSpellStat)
     {
         model = customSpellStat;
 
