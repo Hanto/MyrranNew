@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GraphicSettings
 {
-    public int horizontalRes = 600;
-    public int verticalRes = 400;
-    public String tittle = "application";
-    public boolean fullScreen = false;
-    public boolean vsync = false;
+    public int horizontalRes    = 600;
+    public int verticalRes      = 400;
+    public String tittle        = "application";
+    public boolean fullScreen   = false;
+    public boolean vsync        = false;
 }

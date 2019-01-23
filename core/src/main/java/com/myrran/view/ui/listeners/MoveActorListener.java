@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+import com.myrran.data.Settings;
 
 /** @author Ivan Delgado Huerta */
 public class MoveActorListener extends DragListener
@@ -15,6 +16,9 @@ public class MoveActorListener extends DragListener
     private Vector2 draggerPos;
     private Vector2 parentPos;
     private Vector2 offset;
+
+    private static final float uiHeight = Settings.get().getGraphicSettings().verticalRes;
+    private static final float uiWidth = Settings.get().getGraphicSettings().horizontalRes;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -50,13 +54,13 @@ public class MoveActorListener extends DragListener
         if (draggerPos.x < 0)
             parent.setX(offset.x);
 
-        if (draggerPos.x + dragger.getWidth() > Gdx.graphics.getWidth())
-            parent.setX(Gdx.graphics.getWidth() - dragger.getWidth() + offset.x);
+        if (draggerPos.x + dragger.getWidth() > uiWidth)
+            parent.setX(uiWidth - dragger.getWidth() + offset.x);
 
         if (draggerPos.y < 0)
             parent.setY(offset.y);
 
-        if (draggerPos.y + dragger.getHeight() > Gdx.graphics.getHeight())
-            parent.setY(Gdx.graphics.getHeight() - dragger.getHeight() + offset.y);
+        if (draggerPos.y + dragger.getHeight() > uiHeight)
+            parent.setY(uiHeight - dragger.getHeight() + offset.y);
     }
 }

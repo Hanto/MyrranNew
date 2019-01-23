@@ -24,8 +24,6 @@ import java.io.File;
 public class ZMain extends ApplicationAdapter
 {
 	private SpriteBatch batch;
-	private Texture img;
-
 	private BitmapFont font;
 	private WidgetText text;
 	private Stage uiStage;
@@ -43,8 +41,6 @@ public class ZMain extends ApplicationAdapter
 		{
 			uiStage = new Stage();
 			batch = new SpriteBatch();
-
-			img = new Texture("badlogic.jpg");
 			font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
 
 			templateBook = unmarshal(TemplateSpellBook.class);
@@ -94,7 +90,6 @@ public class ZMain extends ApplicationAdapter
 	public void dispose ()
 	{
 		batch.dispose();
-		img.dispose();
 		font.dispose();
 
 		Atlas.get().dispose();
