@@ -41,7 +41,7 @@ public class TemplateSpellDebuff implements QuantityObjectI, Identifiable
     @Override public Integer getAvailable()                 { return available; }
     public SpellDebuffFactory getFactory()                  { return type; }
     public List<TemplateSpellStat> getSpellStats()          { return spellStats; }
-    public int getBaseCost()                                { return baseCost; }
+    public Integer getBaseCost()                            { return baseCost; }
     public List<CustomSpellSlotKey> getKeys()               { return keys; }
 
     @Override public void setID(String id)                  { this.id = id; }

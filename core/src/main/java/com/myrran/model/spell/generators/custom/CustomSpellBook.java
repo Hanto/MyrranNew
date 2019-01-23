@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ public class CustomSpellBook
     //--------------------------------------------------------------------------------------------------------
 
     public void setSpellBookTemplates(TemplateSpellBook tBook) { this.templateBook = tBook; }
+    public Collection<TemplateSpellDebuff> getDebuffsTemplatesLearned() { return debuffTemplatesLearned.values(); }
 
     // TEMPLATES -> LEARNED
     //--------------------------------------------------------------------------------------------------------

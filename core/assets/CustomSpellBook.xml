@@ -153,7 +153,7 @@
                 <type>aoe</type>
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>476b3363-a20f-4b62-b4e0-8608c26edcd2</id>
+                  <id>717955ee-7b92-43ba-83b8-a2649a6a6599</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -169,7 +169,7 @@
                 <type>ground</type>
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>06f4f662-a7c6-480b-bcb1-86458c32572b</id>
+                  <id>07f80ad8-bea9-40bd-8f12-6145f396c9aa</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -186,7 +186,7 @@
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff>
-                  <id>79d972c9-6127-4dad-a31b-2d6fd26c60fc</id>
+                  <id>ed1c3f0b-172a-4c66-9d4f-ba2b49cc593d</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -261,7 +261,7 @@
                 <type>aoe</type>
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>dd4ce546-c1a6-4f82-a7ed-49d46c99a741</id>
+                  <id>b05108e9-f4f0-4c80-ab20-0e6b80e855ba</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -277,7 +277,7 @@
                 <type>ground</type>
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>94e7dc2d-f6ea-4e72-bf76-c15d2e732d71</id>
+                  <id>d08247f1-7aba-4a4c-a799-ea534ad770cb</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -294,7 +294,7 @@
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff>
-                  <id>f493103d-b034-4ce0-9fba-4948961e1c38</id>
+                  <id>118704aa-47e1-473d-a3d6-502536ae9f27</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -369,7 +369,7 @@
                 <type>aoe</type>
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>b9432385-d192-4856-92b3-d46faca88d3f</id>
+                  <id>90c05ea0-c37c-4f96-bc3c-1c6a917721ec</id>
                   <name>Poison</name>
                   <templateID>Poison</templateID>
                   <baseCost>30</baseCost>
@@ -418,7 +418,7 @@
                 <type>ground</type>
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>fc100265-420a-4593-adc6-c4c810728beb</id>
+                  <id>a8058421-24fc-41c9-853b-b25426fee380</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -435,7 +435,7 @@
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff>
-                  <id>a78073ad-022c-4665-8c5f-49a350f96647</id>
+                  <id>e4a253a6-80ae-4c2b-9e30-2c8d6caa1e48</id>
                   <name>Slow</name>
                   <templateID>Slow</templateID>
                   <baseCost>30</baseCost>

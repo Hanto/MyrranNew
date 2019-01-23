@@ -1,14 +1,12 @@
 package com.myrran.view.ui.templatespell;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.templates.TemplateSpellBook;
+import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -16,12 +14,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Comparator.comparing;
-
 /** @author Ivan Delgado Huerta */
-public class TemplateBookDebuffView extends Table implements PropertyChangeListener, Disposable
+public class CustomSpellBookDebuffView extends Table implements PropertyChangeListener, Disposable
 {
-    private TemplateSpellBook model;
+    private CustomSpellBook model;
     private CustomSpellController controller;
 
     List<TemplateDebuffIcon> list;
@@ -30,28 +26,28 @@ public class TemplateBookDebuffView extends Table implements PropertyChangeListe
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public TemplateBookDebuffView(CustomSpellController controller)
+    public CustomSpellBookDebuffView(CustomSpellController controller)
     {   this.controller = controller; }
 
     @Override public void dispose()
     {
-        if (model != null)
-            model.removeObserver(this);
+        //if (model != null)
+        //    model.removeObserver(this);
     }
 
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(TemplateSpellBook templateSpellBook)
+    public void setModel(CustomSpellBook customSpellBook)
     {
         dispose();
 
-        if (templateSpellBook == null)
+        if (customSpellBook == null)
             removeModel();
         else
         {
-            model = templateSpellBook;
-            model.addObserver(this);
+            model = customSpellBook;
+            //model.addObserver(this);
             createLayout(SortDebuffsBy.NAME);
         }
     }
@@ -69,12 +65,13 @@ public class TemplateBookDebuffView extends Table implements PropertyChangeListe
     private void createLayout(SortDebuffsBy sortBy)
     {
         clear();
-        list = model.getSpellDebuffTemplates().values().stream()
+        list = model.getDebuffsTemplatesLearned().stream()
             .sorted(sortBy.comparator)
             .map(this::getDebuffIcon)
             .collect(Collectors.toList());
 
-        list.forEach(this::add);
+        for (TemplateDebuffIcon icon: list)
+        {   add(icon).left().row(); }
     }
 
     private TemplateDebuffIcon getDebuffIcon(TemplateSpellDebuff templateDebuff)

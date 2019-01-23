@@ -12,7 +12,7 @@ import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.customspell.SpellFormView;
-import com.myrran.view.ui.templatespell.TemplateBookDebuffView;
+import com.myrran.view.ui.templatespell.CustomSpellBookDebuffView;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,10 +56,10 @@ public class ZMain extends ApplicationAdapter
 
 			//book.addCustomSpellDebuff("Bolt_00", "Spot 3", "Slow");
 
-			TemplateBookDebuffView templateBookView = new TemplateBookDebuffView(controller);
-			templateBookView.setModel(templateBook);
-			uiStage.addActor(templateBookView);
-			templateBookView.setPosition(100, 200);
+			CustomSpellBookDebuffView spellBookView = new CustomSpellBookDebuffView(controller);
+			spellBookView.setModel(book);
+			uiStage.addActor(spellBookView);
+			spellBookView.setPosition(100, 200);
 
 
 			Gdx.input.setInputProcessor(uiStage);

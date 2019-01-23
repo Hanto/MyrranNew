@@ -35,8 +35,8 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
     public SpellDebuffDetails(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 2);
-        totalCost       = new WidgetText(font14, magenta, Color.BLACK, 2);
+        name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
+        totalCost       = new WidgetText(font14, magenta, Color.BLACK, 1);
         stats           = new SpellStats(controller);
 
         createLayout();
@@ -101,9 +101,11 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
 
     private void createLayout()
     {
+        int vPad = -4;
+
         Table header = new Table().top().left();
-        header.add(name).bottom().left().padBottom(-5);
-        header.add(totalCost).bottom().right().padBottom(-5).row();
+        header.add(name).bottom().left().padBottom(vPad);
+        header.add(totalCost).bottom().right().padBottom(vPad).row();
 
         top().left();
         add(header).left().row();
