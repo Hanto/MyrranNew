@@ -2,20 +2,16 @@ package com.myrran;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.model.spell.generators.custom.CustomSpellForm;
-import com.myrran.model.spell.templates.SpellBookTemplates;
+import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.ScrollingCombatText;
 import com.myrran.view.ui.customspell.SpellFormView;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +30,7 @@ public class ZMain extends ApplicationAdapter
 	private WidgetText text;
 	private Stage uiStage;
 	private CustomSpellBook book;
-	private SpellBookTemplates templateBook;
+	private TemplateSpellBook templateBook;
 	private CustomSpellForm spell;
 	private CustomSpellController controller;
 
@@ -51,7 +47,7 @@ public class ZMain extends ApplicationAdapter
 			img = new Texture("badlogic.jpg");
 			font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
 
-			templateBook = unmarshal(SpellBookTemplates.class);
+			templateBook = unmarshal(TemplateSpellBook.class);
 			book = unmarshal(CustomSpellBook.class);
 			book.setSpellBookTemplates(templateBook);
 			spell = book.getCustomSpellForm("Bolt_00");

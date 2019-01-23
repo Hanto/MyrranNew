@@ -11,7 +11,7 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpellSubformTemplate implements Identifiable
+public class TemplateSpellSubform implements Identifiable
 {
     @XmlAttribute
     private String id;
@@ -19,8 +19,8 @@ public class SpellSubformTemplate implements Identifiable
     private String name;
     @XmlAttribute
     private SpellSubformFactory type;
-    private List<SpellStatTemplate> spellStats;
-    private List<SpellDebuffSlotTemplate> spellSlots;
+    private List<TemplateSpellStat> spellStats;
+    private List<TemplateSpellDebuffSlot> spellSlots;
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -28,11 +28,11 @@ public class SpellSubformTemplate implements Identifiable
     @Override public String getID()                         { return id; }
     public String getName()                                 { return name; }
     public SpellSubformFactory getFactory()                 { return type; }
-    public List<SpellStatTemplate> getSpellStats()          { return spellStats; }
-    public List<SpellDebuffSlotTemplate> getSpellSlots()          { return spellSlots; }
+    public List<TemplateSpellStat> getSpellStats()          { return spellStats; }
+    public List<TemplateSpellDebuffSlot> getSpellSlots()          { return spellSlots; }
 
     @Override public void setID(String id)                  { this.id = id; }
     public void setName(String name)                        { this.name = name; }
-    public void setSpellStats(SpellStatTemplate...stats)    { this.spellStats = Arrays.asList(stats); }
-    public void setSpellSlots(SpellDebuffSlotTemplate...slots)    { this.spellSlots = Arrays.asList(slots); }
+    public void setSpellStats(TemplateSpellStat...stats)    { this.spellStats = Arrays.asList(stats); }
+    public void setSpellSlots(TemplateSpellDebuffSlot...slots)    { this.spellSlots = Arrays.asList(slots); }
 }

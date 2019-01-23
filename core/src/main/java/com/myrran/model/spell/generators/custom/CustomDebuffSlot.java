@@ -5,8 +5,8 @@ import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.parameters.SpellDebuffParams;
-import com.myrran.model.spell.templates.SpellDebuffSlotTemplate;
-import com.myrran.model.spell.templates.SpellDebuffTemplate;
+import com.myrran.model.spell.templates.TemplateSpellDebuffSlot;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -47,10 +47,10 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     //--------------------------------------------------------------------------------------------------------
 
     public CustomDebuffSlot() {}
-    public CustomDebuffSlot(SpellDebuffSlotTemplate template)
+    public CustomDebuffSlot(TemplateSpellDebuffSlot template)
     {   setDebuffSlotTemplate(template); }
 
-    public void setDebuffSlotTemplate(SpellDebuffSlotTemplate template)
+    public void setDebuffSlotTemplate(TemplateSpellDebuffSlot template)
     {
         this.id = template.getID();
         this.name = template.getName();
@@ -79,7 +79,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }
 
-    public boolean setCustomSpellDebuff(SpellDebuffTemplate template)
+    public boolean setCustomSpellDebuff(TemplateSpellDebuff template)
     {
         if (opensLock(template.getKeys()))
         {

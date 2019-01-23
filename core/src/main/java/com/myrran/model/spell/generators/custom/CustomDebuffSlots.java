@@ -1,9 +1,9 @@
 package com.myrran.model.spell.generators.custom;
 
 import com.myrran.model.spell.parameters.SpellDebuffParams;
-import com.myrran.model.spell.templates.SpellDebuffSlotTemplate;
+import com.myrran.model.spell.templates.TemplateSpellDebuffSlot;
 import com.myrran.misc.InvalidIDException;
-import com.myrran.model.spell.templates.SpellDebuffTemplate;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,7 +25,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public void setDebuffSlotsTemplate(Collection<SpellDebuffSlotTemplate> templates)
+    public void setDebuffSlotsTemplate(Collection<TemplateSpellDebuffSlot> templates)
     {
         slots = templates.stream()
             .map(CustomDebuffSlot::new)
@@ -55,7 +55,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     }
 
     @Override
-    public boolean setCustomSpellDebuff(SpellDebuffTemplate template, String slotID) throws InvalidIDException
+    public boolean setCustomSpellDebuff(TemplateSpellDebuff template, String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = getCustomDebufflot(slotID);
         return slot.setCustomSpellDebuff(template);

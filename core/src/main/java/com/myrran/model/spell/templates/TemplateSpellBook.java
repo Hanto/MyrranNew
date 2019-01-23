@@ -9,32 +9,32 @@ import java.util.Map;
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpellBookTemplates
+public class TemplateSpellBook
 {
-    private Map<String, SpellFormTemplate> spellFromTemplates = new HashMap<>();
-    private Map<String, SpellDebuffTemplate> spellDebuffTemplates = new HashMap<>();
+    private Map<String, TemplateSpellForm> spellFromTemplates = new HashMap<>();
+    private Map<String, TemplateSpellDebuff> spellDebuffTemplates = new HashMap<>();
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public Map<String, SpellFormTemplate> getSpellFormTemplates()
+    public Map<String, TemplateSpellForm> getSpellFormTemplates()
     {   return spellFromTemplates; }
 
-    public Map<String, SpellDebuffTemplate> getSpellDebuffTemplates()
+    public Map<String, TemplateSpellDebuff> getSpellDebuffTemplates()
     {   return spellDebuffTemplates; }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellFormTemplate getSpellFormTemplate(String templateID)
+    public TemplateSpellForm getSpellFormTemplate(String templateID)
     {   return spellFromTemplates.get(templateID); }
 
-    public SpellDebuffTemplate getSpellDebuffTemplate(String templateID)
+    public TemplateSpellDebuff getSpellDebuffTemplate(String templateID)
     {   return spellDebuffTemplates.get(templateID); }
 
-    public void addSpellFormTemplate(SpellFormTemplate spellFormTemplate)
+    public void addSpellFormTemplate(TemplateSpellForm spellFormTemplate)
     {   this.spellFromTemplates.put(spellFormTemplate.getID(), spellFormTemplate); }
 
-    public void addSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate)
+    public void addSpellDebuffTemplate(TemplateSpellDebuff spellDebuffTemplate)
     {   this.spellDebuffTemplates.put(spellDebuffTemplate.getID(), spellDebuffTemplate); }
 }

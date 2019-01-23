@@ -5,7 +5,7 @@ import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.parameters.SpellStatParams;
-import com.myrran.model.spell.templates.SpellStatTemplate;
+import com.myrran.model.spell.templates.TemplateSpellStat;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -55,10 +55,10 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellStat() {}
-    public CustomSpellStat(SpellStatTemplate template)
+    public CustomSpellStat(TemplateSpellStat template)
     {   setSpellStatTemplate(template); }
 
-    public void setSpellStatTemplate(SpellStatTemplate template)
+    public void setSpellStatTemplate(TemplateSpellStat template)
     {
         this.id = template.getID();
         this.name = template.getName();

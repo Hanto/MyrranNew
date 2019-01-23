@@ -1,7 +1,7 @@
 package com.myrran.model.spell.generators.custom;
 
 import com.myrran.model.spell.parameters.SpellStatParams;
-import com.myrran.model.spell.templates.SpellStatTemplate;
+import com.myrran.model.spell.templates.TemplateSpellStat;
 import com.myrran.misc.InvalidIDException;
 
 import java.util.Collection;
@@ -15,7 +15,7 @@ public interface CustomSpellStatsDeco extends CustomSpellStatsI
     // DECORATOR
     //--------------------------------------------------------------------------------------------------------
 
-    default void setSpellStatsTemplates(Collection<SpellStatTemplate> templates)
+    default void setSpellStatsTemplates(Collection<TemplateSpellStat> templates)
     {   getSpellStats().setSpellStatsTemplates(templates); }
 
     default Map<String, SpellStatParams> getSpellStatParams()

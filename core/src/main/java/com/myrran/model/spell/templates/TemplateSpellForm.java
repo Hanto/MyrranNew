@@ -13,7 +13,7 @@ import java.util.List;
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpellFormTemplate implements Identifiable
+public class TemplateSpellForm implements Identifiable
 {
     @XmlAttribute
     private String id;
@@ -21,8 +21,8 @@ public class SpellFormTemplate implements Identifiable
     private String name;
     @XmlAttribute
     private SpellFormFactory type;
-    private List<SpellStatTemplate> spellStats;
-    private List<SpellDebuffSlotTemplate> spellSlots;
+    private List<TemplateSpellStat> spellStats;
+    private List<TemplateSpellDebuffSlot> spellSlots;
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -30,12 +30,12 @@ public class SpellFormTemplate implements Identifiable
     @Override public String getID()                         { return id; }
     public String getName()                                 { return name; }
     public SpellFormFactory getFactory()                    { return type; }
-    public List<SpellStatTemplate> getSpellStats()          { return spellStats; }
-    public List<SpellDebuffSlotTemplate> getSpellSlots()          { return spellSlots; }
+    public List<TemplateSpellStat> getSpellStats()          { return spellStats; }
+    public List<TemplateSpellDebuffSlot> getSpellSlots()          { return spellSlots; }
 
     @Override public void setID(String id)                  { this.id = id; }
     public void setName(String name)                        { this.name = name; }
     public void setFactory(SpellFormFactory type)           { this.type = type; }
-    public void setSpellStats(SpellStatTemplate...stats)    { this.spellStats = Arrays.asList(stats); }
-    public void setSpellSlots(SpellDebuffSlotTemplate...slots)    { this.spellSlots = Arrays.asList(slots); }
+    public void setSpellStats(TemplateSpellStat...stats)    { this.spellStats = Arrays.asList(stats); }
+    public void setSpellSlots(TemplateSpellDebuffSlot...slots)    { this.spellSlots = Arrays.asList(slots); }
 }

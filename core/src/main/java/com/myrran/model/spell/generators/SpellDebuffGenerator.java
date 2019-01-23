@@ -1,7 +1,7 @@
 package com.myrran.model.spell.generators;
 
 import com.myrran.model.spell.parameters.SpellDebuffParams;
-import com.myrran.model.spell.templates.SpellDebuffTemplate;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 /** @author Ivan Delgado Huerta */
 public interface SpellDebuffGenerator
@@ -12,6 +12,6 @@ public interface SpellDebuffGenerator
     void setID(String id);
     void setName(String name);
 
-    void setSpellDebuffTemplate(SpellDebuffTemplate spellDebuffTemplate);
+    void setSpellDebuffTemplate(TemplateSpellDebuff spellDebuffTemplate);
     SpellDebuffParams getSpellEffectData();
 }

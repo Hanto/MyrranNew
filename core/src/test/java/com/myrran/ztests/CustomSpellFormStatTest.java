@@ -1,6 +1,6 @@
 package com.myrran.ztests;
 
-import com.myrran.model.spell.templates.SpellBookTemplates;
+import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.misc.InvalidIDException;
 import com.nitorcreations.junit.runners.NestedRunner;
@@ -29,7 +29,7 @@ public class CustomSpellFormStatTest
         @Test
         public void spellForm() throws JAXBException, FileNotFoundException, TransformerException, InvalidIDException
         {
-            SpellBookTemplates book = unmarshal(SpellBookTemplates.class);
+            TemplateSpellBook book = unmarshal(TemplateSpellBook.class);
 
             CustomSpellBook cbook = new CustomSpellBook();
             cbook.setSpellBookTemplates(book);

@@ -5,7 +5,7 @@ import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.parameters.SpellFormParams;
-import com.myrran.model.spell.templates.SpellFormTemplate;
+import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.model.spell.entities.form.SpellForm;
 import com.myrran.model.spell.entities.form.SpellFormFactory;
 import com.myrran.model.spell.generators.SpellFormGenerator;
@@ -14,6 +14,7 @@ import com.myrran.misc.InvalidIDException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -45,13 +46,13 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellForm() {}
-    public CustomSpellForm(SpellFormTemplate template)
+    public CustomSpellForm(TemplateSpellForm template)
     {   setSpellFormTemplate(template); }
 
     @Override
-    public void setSpellFormTemplate(SpellFormTemplate template)
+    public void setSpellFormTemplate(TemplateSpellForm template)
     {
-        id = template.getID();
+        id = UUID.randomUUID().toString();
         name = template.getName();
         templateID = template.getID();
         factory = template.getFactory();

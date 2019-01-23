@@ -5,7 +5,7 @@ import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.generators.SpellDebuffGenerator;
-import com.myrran.model.spell.templates.SpellDebuffTemplate;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.model.spell.parameters.SpellDebuffParams;
 import com.myrran.model.spell.entities.debuff.SpellDebuffFactory;
 import com.myrran.misc.InvalidIDException;
@@ -51,10 +51,10 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellDebuff() { }
-    public CustomSpellDebuff(SpellDebuffTemplate template)
+    public CustomSpellDebuff(TemplateSpellDebuff template)
     {   setSpellDebuffTemplate(template); }
 
-    @Override public void setSpellDebuffTemplate(SpellDebuffTemplate template)
+    @Override public void setSpellDebuffTemplate(TemplateSpellDebuff template)
     {
         if (template != null)
         {

@@ -1,7 +1,7 @@
 package com.myrran.model.spell.generators;
 
 import com.myrran.model.spell.parameters.SpellFormParams;
-import com.myrran.model.spell.templates.SpellFormTemplate;
+import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.model.spell.entities.form.SpellForm;
 
 /** @author Ivan Delgado Huerta */
@@ -12,7 +12,7 @@ public interface SpellFormGenerator
 
     void setID(String id);
     void setName(String name);
-    void setSpellFormTemplate(SpellFormTemplate spellFormTemplate);
+    void setSpellFormTemplate(TemplateSpellForm spellFormTemplate);
 
     SpellFormParams getSpellFormParams();
     SpellForm cast();

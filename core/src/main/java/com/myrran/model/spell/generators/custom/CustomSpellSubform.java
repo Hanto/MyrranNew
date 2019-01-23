@@ -2,7 +2,7 @@ package com.myrran.model.spell.generators.custom;
 
 import com.myrran.model.components.Identifiable;
 import com.myrran.model.spell.parameters.SpellSubformParams;
-import com.myrran.model.spell.templates.SpellSubformTemplate;
+import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.model.spell.entities.subform.SpellSubformFactory;
 import com.myrran.misc.InvalidIDException;
 
@@ -34,10 +34,10 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellSubform(SpellSubformTemplate template)
+    public CustomSpellSubform(TemplateSpellSubform template)
     {   setSpellSubformTemplate(template); }
 
-    public void setSpellSubformTemplate(SpellSubformTemplate template)
+    public void setSpellSubformTemplate(TemplateSpellSubform template)
     {
         id = template.getID();
         name = template.getID();

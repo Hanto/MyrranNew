@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpellStatTemplate implements Identifiable
+public class TemplateSpellStat implements Identifiable
 {
     @XmlAttribute
     private String id;

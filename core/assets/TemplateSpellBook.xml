@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<spellBookTemplates>
+<templateSpellBook>
     <spellFromTemplates>
         <entry>
             <key>Bolt</key>
@@ -89,4 +89,4 @@
             </value>
         </entry>
     </spellDebuffTemplates>
-</spellBookTemplates>
+</templateSpellBook>

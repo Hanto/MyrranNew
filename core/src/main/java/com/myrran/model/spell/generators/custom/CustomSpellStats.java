@@ -1,7 +1,7 @@
 package com.myrran.model.spell.generators.custom;
 
 import com.myrran.model.spell.parameters.SpellStatParams;
-import com.myrran.model.spell.templates.SpellStatTemplate;
+import com.myrran.model.spell.templates.TemplateSpellStat;
 import com.myrran.misc.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,7 +22,7 @@ public class CustomSpellStats implements CustomSpellStatsI
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public void setSpellStatsTemplates(Collection<SpellStatTemplate> templates)
+    public void setSpellStatsTemplates(Collection<TemplateSpellStat> templates)
     {
         stats = templates.stream()
             .map(CustomSpellStat::new)

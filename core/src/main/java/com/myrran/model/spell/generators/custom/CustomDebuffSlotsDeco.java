@@ -1,9 +1,9 @@
 package com.myrran.model.spell.generators.custom;
 
 import com.myrran.model.spell.parameters.SpellDebuffParams;
-import com.myrran.model.spell.templates.SpellDebuffSlotTemplate;
+import com.myrran.model.spell.templates.TemplateSpellDebuffSlot;
 import com.myrran.misc.InvalidIDException;
-import com.myrran.model.spell.templates.SpellDebuffTemplate;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +16,7 @@ public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
     // DECORATOR
     //--------------------------------------------------------------------------------------------------------
 
-    default void setDebuffSlotsTemplate(Collection<SpellDebuffSlotTemplate> templates)
+    default void setDebuffSlotsTemplate(Collection<TemplateSpellDebuffSlot> templates)
     {   getDebuffSlots().setDebuffSlotsTemplate(templates); }
 
     default List<SpellDebuffParams> getSpellEffectParams()
@@ -25,7 +25,7 @@ public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
     default CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
     {   return getDebuffSlots().getCustomSpellDebuff(slotID); }
 
-    default boolean setCustomSpellDebuff(SpellDebuffTemplate template, String slotID) throws InvalidIDException
+    default boolean setCustomSpellDebuff(TemplateSpellDebuff template, String slotID) throws InvalidIDException
     {   return getDebuffSlots().setCustomSpellDebuff(template, slotID); }
 
     default void removeCustomSpellDebuff(String slotID) throws InvalidIDException
