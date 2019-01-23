@@ -113,7 +113,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
 
         tableHeader.clear();
         tableHeader.add(name).bottom().left().padBottom(-5);
-        tableHeader.add(totalCost).bottom().right().padBottom(-5).row();
+        tableHeader.add(totalCost).bottom().right().padBottom(-3).row();
 
         tableStats.clear();
         tableStats.add(tableHeader).left().row();
@@ -134,7 +134,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
         formDebuffs.forEach(debuffDetails -> tableStats.add(debuffDetails).left().row());
         debuffIcons.forEach(debuffIcon -> tableIcons.add(debuffIcon).left().row());
 
-        background.setColor(1f, 1f, 1f, 0.55f);
+        background.setColor(1f, 1f, 1f, 0.40f);
         spellIcon.addListener(new MoveActorListener(this));
 
         update();
@@ -161,7 +161,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
     }
 
     private void setBackgroundBounds()
-    {   background.setSize(tableStats.getMinWidth(), -tableStats.getMinHeight() +5); }
+    {   background.setSize(tableStats.getMinWidth() +5, -tableStats.getMinHeight() +5); }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------

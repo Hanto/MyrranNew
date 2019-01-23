@@ -91,12 +91,12 @@ public class TemplateDebuffIcon extends Table
         availableTotal.setPosition(2, 0);
 
         Table nameCostTable = new Table().bottom().left();
-        nameCostTable.add(name).left()      .padTop(vPad);
-        nameCostTable.add(cost).left()      .padTop(vPad);
+        nameCostTable.add(name).bottom().left().padTop(vPad);
+        nameCostTable.add(cost).bottom().left().padTop(vPad).padBottom(1);
 
         Table textTable = new Table().bottom().left();
-        textTable.add(keys).left()          .padTop(-2).padBottom(vPad).row();
-        textTable.add(nameCostTable).left() .padTop(-2).padBottom(vPad).row();
+        textTable.add(keys).left().padTop(-2).padBottom(vPad).row();
+        textTable.add(nameCostTable).left().padTop(-2).padBottom(vPad).row();
 
         top().left();
         add(icon).top().left();
