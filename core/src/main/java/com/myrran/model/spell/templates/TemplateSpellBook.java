@@ -1,5 +1,6 @@
 package com.myrran.model.spell.templates;
 
+import com.myrran.misc.InvalidIDException;
 import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
@@ -16,7 +17,7 @@ import java.util.Map;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class TemplateSpellBook implements ObservableDeco
 {
-    private Map<String, TemplateSpellForm> spellFromTemplates = new HashMap<>();
+    private Map<String, TemplateSpellForm> spellFormTemplates = new HashMap<>();
     private Map<String, TemplateSpellDebuff> spellDebuffTemplates = new HashMap<>();
     @XmlTransient private ObservableI observable = new Observable(this);
 
@@ -24,7 +25,7 @@ public class TemplateSpellBook implements ObservableDeco
     //--------------------------------------------------------------------------------------------------------
 
     public Map<String, TemplateSpellForm> getSpellFormTemplates()
-    {   return spellFromTemplates; }
+    {   return spellFormTemplates; }
 
     public Map<String, TemplateSpellDebuff> getSpellDebuffTemplates()
     {   return spellDebuffTemplates; }
@@ -35,14 +36,22 @@ public class TemplateSpellBook implements ObservableDeco
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public TemplateSpellForm getSpellFormTemplate(String templateID)
-    {   return spellFromTemplates.get(templateID); }
+    public TemplateSpellForm getSpellFormTemplate(String templateID) throws InvalidIDException
+    {
+        TemplateSpellForm template = spellFormTemplates.get(templateID);
+        if (template != null) return template;
+        else throw new InvalidIDException("A TemplateSpellForm with the following ID doesn't exist: %s", templateID);
+    }
 
-    public TemplateSpellDebuff getSpellDebuffTemplate(String templateID)
-    {   return spellDebuffTemplates.get(templateID); }
+    public TemplateSpellDebuff getSpellDebuffTemplate(String templateID) throws InvalidIDException
+    {
+        TemplateSpellDebuff template = spellDebuffTemplates.get(templateID);
+        if (template != null) return template;
+        else throw new InvalidIDException("A TemplateSpellDebuff with the following ID doesn't exist: %s", templateID);
+    }
 
     public void addSpellFormTemplate(TemplateSpellForm spellFormTemplate)
-    {   this.spellFromTemplates.put(spellFormTemplate.getID(), spellFormTemplate); }
+    {   this.spellFormTemplates.put(spellFormTemplate.getID(), spellFormTemplate); }
 
     public void addSpellDebuffTemplate(TemplateSpellDebuff spellDebuffTemplate)
     {   this.spellDebuffTemplates.put(spellDebuffTemplate.getID(), spellDebuffTemplate); }

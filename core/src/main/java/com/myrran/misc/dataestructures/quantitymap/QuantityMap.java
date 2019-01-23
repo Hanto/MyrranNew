@@ -1,41 +1,38 @@
 package com.myrran.misc.dataestructures.quantitymap;
 
 import java.util.Map;
-import java.util.function.Supplier;
 
-public class QuantityMap implements QuantityMapI
+public class QuantityMap<T extends QuantityObjectI> implements QuantityMapI<T>
 {
-    private Map<String, QuantityObject>map;
+    private Map<String, T>map;
 
-    @Override public Map<String, QuantityObject>getMap()        { return map; }
+    @Override public Map<String, T>getMap()        { return map; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public QuantityMap(Supplier<Map<String, QuantityObject>>mapCreator)
-    {   this.map = mapCreator.get(); }
+    public QuantityMap(Map<String, T> map)
+    {   this.map = map; }
 
     // MEW FEATURES:
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public void add(String key)
-    {
-        QuantityObject quantityObject = get(key);
+    public boolean isAvailable(String key)
+    {   return (containsKey(key) && get(key).getAvailable() > 0); }
 
-        if (quantityObject == null)
-        {
-            quantityObject = new QuantityObject();
-            put(key, quantityObject);
-        }
-        quantityObject.setAvailable(quantityObject.getAvailable() + 1);
-        quantityObject.setTotal(quantityObject.getTotal() + 1);
+    @Override
+    public void add(T object)
+    {
+        computeIfAbsent(object.getID(), v -> put(object.getID(), object));
+        object.setAvailable(object.getAvailable() + 1);
+        object.setTotal(object.getTotal() + 1);
     }
 
     @Override
     public boolean borrow(String key)
     {
-        QuantityObject quantityObject = get(key);
+        T quantityObject = get(key);
 
         if (quantityObject != null)
             quantityObject.setAvailable(quantityObject.getAvailable() - 1);
@@ -46,13 +43,11 @@ public class QuantityMap implements QuantityMapI
     @Override
     public boolean returnBack(String key)
     {
-        QuantityObject quantityObject = get(key);
+        QuantityObjectI quantityObject = get(key);
 
         if (quantityObject != null)
             quantityObject.setAvailable(quantityObject.getAvailable() + 1);
 
         return quantityObject != null;
     }
-
-
 }

@@ -46,7 +46,7 @@ public class ZMain extends ApplicationAdapter
 			templateBook = unmarshal(TemplateSpellBook.class);
 			book = unmarshal(CustomSpellBook.class);
 			book.setSpellBookTemplates(templateBook);
-			spell = book.getCustomSpellForm("Bolt_00");
+			spell = book.getCustomSpellForm("SpellForm_00");
 			controller = new CustomSpellController(book);
 
 			SpellFormView formView2 = new SpellFormView(controller);

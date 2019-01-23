@@ -21,7 +21,7 @@ import java.util.UUID;
 public class CustomSpellForm implements SpellFormGenerator, Identifiable, CustomDebuffSlotsDeco,
     CustomSpellStatsDeco, ObservableDeco
 {
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String name;
     private String templateID;
     private SpellFormFactory factory;
@@ -51,7 +51,6 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     @Override
     public void setSpellFormTemplate(TemplateSpellForm template)
     {
-        id = UUID.randomUUID().toString();
         name = template.getName();
         templateID = template.getID();
         factory = template.getFactory();

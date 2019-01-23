@@ -16,6 +16,7 @@ import com.myrran.view.ui.listeners.MoveActorListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,9 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
 
     private WidgetImage spellIcon;
     private Image background;
+    private Table tableHeader;
     private Table tableIcons;
+    private Table tableStats;
     private SpellStats stats;
     private WidgetText name;
     private WidgetText totalCost;
@@ -44,6 +47,9 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
     public SpellFormView(CustomSpellController spellController)
     {
         controller  = spellController;
+        tableHeader = new Table().top().left();
+        tableIcons  = new Table().top().left().padTop(10);
+        tableStats  = new Table().top().left();
         spellIcon   = new WidgetImage();
         background  = Atlas.get().getImage("TexturasMisc/Casillero2");
         stats       = new SpellStats(controller);
@@ -99,27 +105,29 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
 
     private void createLayout()
     {
-        Table header = new Table().top().left();
-        header.add(name).bottom().left().padBottom(-5);
-        header.add(totalCost).bottom().right().padBottom(-5).row();
-
-        Table tableStats = new Table().top().left();
-        tableStats.add(header).left().row();
-        tableStats.add(stats).left().row();
-
-        tableIcons = new Table().top().left().padTop(10);
-
         clear();
         top().left();
         add(spellIcon).top().left().padTop(10).padRight(3);
-        add(tableStats).left().padRight(3);
+        add(tableStats).top().left().padRight(3);
         add(tableIcons).top().left();
 
+        tableHeader.clear();
+        tableHeader.add(name).bottom().left().padBottom(-5);
+        tableHeader.add(totalCost).bottom().right().padBottom(-5).row();
+
+        tableStats.clear();
+        tableStats.add(tableHeader).left().row();
+        tableStats.add(stats).left().row();
+
+        tableIcons.clear();
+
         formDebuffs = model.getDebuffSlots().values().stream()
+            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
             .map(this::addDebuffViews)
             .collect(Collectors.toList());
 
         debuffIcons = model.getDebuffSlots().values().stream()
+            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
             .map(this::addDebuffSlotIcons)
             .collect(Collectors.toList());
 
@@ -153,7 +161,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
     }
 
     private void setBackgroundBounds()
-    {   background.setSize(getMinWidth() -tableIcons.getMinWidth() -spellIcon.getWidth(), -getMinHeight() +5); }
+    {   background.setSize(tableStats.getMinWidth(), -tableStats.getMinHeight() +5); }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------

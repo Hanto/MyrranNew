@@ -1,12 +1,12 @@
 package com.myrran.model.spell.generators.custom;
 
+import com.myrran.misc.InvalidIDException;
 import com.myrran.misc.dataestructures.quantitymap.QuantityMap;
 import com.myrran.misc.dataestructures.quantitymap.QuantityMapI;
 import com.myrran.model.components.Identifiable;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellForm;
-import com.myrran.misc.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
@@ -22,8 +21,8 @@ import java.util.stream.Collectors;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellBook
 {
-    private QuantityMapI formTeplatesLearned = new QuantityMap(HashMap::new);
-    private QuantityMapI debuffTemplatesLearned = new QuantityMap(HashMap::new);
+    private QuantityMapI<TemplateSpellForm> formTemplatesLearned = new QuantityMap<>(new HashMap<>());
+    private QuantityMapI<TemplateSpellDebuff> debuffTemplatesLearned = new QuantityMap<>(new HashMap<>());
     private Map<String, CustomSpellForm> customSpells = new HashMap<>();
 
     @XmlTransient
@@ -37,14 +36,20 @@ public class CustomSpellBook
     // TEMPLATES -> LEARNED
     //--------------------------------------------------------------------------------------------------------
 
-    public void addSpellFormTemplate(String templateID)
-    {   this.formTeplatesLearned.add(templateID); }
+    public void addSpellFormTemplate(String templateID) throws InvalidIDException
+    {
+        TemplateSpellForm templateForm = templateBook.getSpellFormTemplate(templateID);
+        formTemplatesLearned.add(templateForm);
+    }
 
-    public void addSpellDebuffTemplate(String templateID)
-    {   this.debuffTemplatesLearned.add(templateID); }
+    public void addSpellDebuffTemplate(String templateID) throws InvalidIDException
+    {
+        TemplateSpellDebuff templateDebuff = templateBook.getSpellDebuffTemplate(templateID);
+        debuffTemplatesLearned.add(templateDebuff);
+    }
 
     public void removeSpellFormTemplate(String templateID)
-    {   this.formTeplatesLearned.remove(templateID); }
+    {   this.formTemplatesLearned.remove(templateID); }
 
     public void removeSpellDebuffTemplate(String templateID)
     {   this.debuffTemplatesLearned.remove(templateID); }
@@ -54,30 +59,34 @@ public class CustomSpellBook
 
     public void addCustomSpellForm(String formTemplateID) throws InvalidIDException
     {
-        if (formTeplatesLearned.containsKey(formTemplateID))
+        if (formTemplatesLearned.isAvailable(formTemplateID))
         {
             TemplateSpellForm template = getSpellFormTemplate(formTemplateID);
             CustomSpellForm customSpell = new CustomSpellForm(template);
+            setUUID(customSpell);
 
             customSpells.put(customSpell.getID(), customSpell);
-            formTeplatesLearned.borrow(formTemplateID);
+            formTemplatesLearned.borrow(formTemplateID);
         }
         else
-            throw new InvalidIDException("SpellForm template hasn't been learned, ID: %s", formTemplateID);
+            throw new InvalidIDException("SpellForm templates not available, templateID: %s", formTemplateID);
     }
 
     public void addCustomSpellDebuff(String customFormID, String slotID, String debuffTemplateID) throws InvalidIDException
     {
-        if (debuffTemplatesLearned.containsKey(debuffTemplateID))
+        if (debuffTemplatesLearned.isAvailable(debuffTemplateID))
         {
             CustomSpellForm spellForm = getCustomSpellForm(customFormID);
-            TemplateSpellDebuff template = getSpellDebuffTemplate(debuffTemplateID);
 
-            spellForm.setCustomSpellDebuff(template, slotID);
-            debuffTemplatesLearned.borrow(debuffTemplateID);
+            if (!spellForm.getCustomDebufflot(slotID).hasDebuff())
+            {
+                TemplateSpellDebuff template = getSpellDebuffTemplate(debuffTemplateID);
+                spellForm.setCustomSpellDebuff(template, slotID);
+                debuffTemplatesLearned.borrow(debuffTemplateID);
+            }
         }
         else
-            throw new InvalidIDException("SpellDebuffDeco template hasn't been learned, ID: %s", debuffTemplateID);
+            throw new InvalidIDException("SpellDebuffDeco templates not available, templateID: %s", debuffTemplateID);
     }
 
     public void removeCustomSpellForm(String customFormID) throws InvalidIDException
@@ -88,7 +97,7 @@ public class CustomSpellBook
             removeCustomSpellDebuff(customFormID, slot.getID());
 
         customSpells.remove(customFormID);
-        formTeplatesLearned.returnBack(spellForm.getTemplateID());
+        formTemplatesLearned.returnBack(spellForm.getTemplateID());
     }
 
     public void removeCustomSpellDebuff(String customFormID, String slotID) throws InvalidIDException
@@ -96,7 +105,7 @@ public class CustomSpellBook
         CustomSpellForm spellForm = getCustomSpellForm(customFormID);
         CustomSpellDebuff spellDebuff = spellForm.getCustomSpellDebuff(slotID);
 
-        if (spellDebuff != null)
+        if (spellDebuff.hasDebuff())
         {
             spellForm.removeCustomSpellDebuff(slotID);
             debuffTemplatesLearned.returnBack(spellDebuff.getTemplateID());
@@ -108,22 +117,9 @@ public class CustomSpellBook
 
     public void reloadAll() throws InvalidIDException
     {
-        for (CustomSpellForm spell: customSpells.values())
-            reloadSpellForm(spell);
-    }
-
-    private void reloadSpellForm(CustomSpellForm spellForm) throws InvalidIDException
-    {
-        spellForm.setSpellFormTemplate(getSpellFormTemplate(spellForm.getTemplateID()));
-
-        for (CustomDebuffSlot slot: spellForm.getDebuffSlots().values())
-            reloadSpellDebuff(slot.getCustomSpellDebuff());
-    }
-
-    private void reloadSpellDebuff(CustomSpellDebuff spellDebuff) throws InvalidIDException
-    {
-        if (spellDebuff != null)
-            spellDebuff.setSpellDebuffTemplate(getSpellDebuffTemplate(spellDebuff.getTemplateID()));
+        customSpells.clear();
+        formTemplatesLearned.values().forEach(template -> template.setAvailable(template.getTotal()));
+        debuffTemplatesLearned.values().forEach(template -> template.setAvailable(template.getTotal()));
     }
 
     // FORM of any ID:
@@ -137,7 +133,7 @@ public class CustomSpellBook
         for (CustomSpellForm form: customSpells.values())
         {
             if (form.getDebuffSlots().values().stream()
-                .filter(slot -> slot.getCustomSpellDebuff() != null)
+                .filter(CustomDebuffSlot::hasDebuff)
                 .map(CustomDebuffSlot::getCustomSpellDebuff)
                 .map(CustomSpellDebuff::getID)
                 .collect(Collectors.toList())
@@ -151,6 +147,19 @@ public class CustomSpellBook
 
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
+
+    private void setUUID(Identifiable spell)
+    {
+        int counter = 0;
+        String uuid;
+
+        do
+        {   uuid = String.format("SpellForm_%02d", counter++); }
+        while
+        (   customSpells.containsKey(uuid));
+
+        spell.setID(uuid);
+    }
 
     public CustomSpellForm getCustomSpellForm(String spellID) throws InvalidIDException
     {

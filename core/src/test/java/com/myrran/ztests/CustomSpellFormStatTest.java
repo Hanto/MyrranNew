@@ -39,27 +39,24 @@ public class CustomSpellFormStatTest
             cbook.addSpellFormTemplate("Bolt");
             cbook.addSpellDebuffTemplate("Poison");
             cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Poison");
             cbook.addSpellDebuffTemplate("Slow");
 
             cbook.addCustomSpellForm("Bolt");
-            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Poison");
-            cbook.removeCustomSpellForm("Bolt_00");
-
             cbook.addCustomSpellForm("Bolt");
-            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Poison");
-            cbook.removeCustomSpellDebuff("Bolt_00", "Spot 2");
-            cbook.addCustomSpellDebuff("Bolt_00", "Spot 2", "Poison");
-            cbook.addCustomSpellDebuff("Bolt_00", "Spot 1", "Slow");
+            cbook.addCustomSpellForm("Bolt");
 
-
-
-            cbook.reloadAll();
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot2", "Poison");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot2", "Poison");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot2", "Poison");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot1", "Slow");
 
             marshal(cbook, CustomSpellBook.class);
 
             Assert.assertTrue(true);
         }
     }
+
 
     @SuppressWarnings("unchecked")
     private <T extends Object>T unmarshal(Class<T> classz) throws JAXBException

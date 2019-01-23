@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <templateSpellBook>
-    <spellFromTemplates>
+    <spellFormTemplates>
         <entry>
             <key>Bolt</key>
-            <value id="Bolt" name="Super Bolt" type="BOLT">
+            <value id="Bolt" name="Super Bolt" available="0" total="0" type="BOLT">
                 <spellStats id="Cooldown" name="Cooldown">
                     <baseValue>50.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>
@@ -25,23 +25,23 @@
                     <upgradeCost>2</upgradeCost>
                     <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 </spellStats>
-                <spellSlots id="Spot 1" name="Spot 1" slotType="impacto">
+                <spellSlots id="Slot1" name="Slot1" slotType="impact">
                     <lock>DEBUFF</lock>
                     <lock>PUREDAMAGE</lock>
                 </spellSlots>
-                <spellSlots id="Spot 2" name="Spot 2" slotType="aoe">
+                <spellSlots id="Slot2" name="Slot2" slotType="aoe">
                     <lock>DEBUFF</lock>
                 </spellSlots>
-                <spellSlots id="Spot 3" name="Spot 3" slotType="ground">
+                <spellSlots id="Slot3" name="Slot3" slotType="ground">
                     <lock>DEBUFF</lock>
                 </spellSlots>
             </value>
         </entry>
-    </spellFromTemplates>
+    </spellFormTemplates>
     <spellDebuffTemplates>
         <entry>
             <key>Slow</key>
-            <value id="Slow" name="Slow" type="DOT">
+            <value id="Slow" name="Slow" available="0" total="0" type="DOT">
                 <spellStats id="Cooldown" name="Cooldown">
                     <baseValue>50.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>
@@ -69,7 +69,7 @@
         </entry>
         <entry>
             <key>Poison</key>
-            <value id="Poison" name="Poison" type="DOT">
+            <value id="Poison" name="Poison" available="0" total="0" type="DOT">
                 <spellStats id="Cooldown" name="Cooldown">
                     <baseValue>50.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>

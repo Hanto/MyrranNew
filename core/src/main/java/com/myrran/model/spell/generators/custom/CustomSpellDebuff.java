@@ -21,7 +21,7 @@ import java.util.UUID;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, CustomSpellStatsDeco, Identifiable
 {
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String name;
     private String templateID;
     private int baseCost;
@@ -40,7 +40,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     public String getTemplateID()                               { return templateID; }
     public SpellDebuffFactory getFactory()                      { return factory; }
     public List<CustomSpellSlotKey> getKeys()                   { return keys;  }
-    public boolean hasDebuff()                                  { return id != null; }
+    public boolean hasDebuff()                                  { return templateID != null; }
     @Override public CustomSpellStats getSpellStats()           { return spellStats; }
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setName(String name)                  { this.name = name; notifyChanges(); }
@@ -58,7 +58,6 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     {
         if (template != null)
         {
-            id = UUID.randomUUID().toString();
             name = template.getName();
             templateID = template.getID();
             baseCost = template.getBaseCost();
@@ -68,7 +67,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
         }
         else
         {
-            id = null;
+            templateID = null;
             removeAllObservers();
         }
     }

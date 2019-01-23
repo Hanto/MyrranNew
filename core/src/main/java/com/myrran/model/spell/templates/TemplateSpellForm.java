@@ -1,5 +1,6 @@
 package com.myrran.model.spell.templates;
 
+import com.myrran.misc.dataestructures.quantitymap.QuantityObjectI;
 import com.myrran.model.components.Identifiable;
 import com.myrran.model.spell.entities.form.SpellFormFactory;
 
@@ -13,12 +14,16 @@ import java.util.List;
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TemplateSpellForm implements Identifiable
+public class TemplateSpellForm implements QuantityObjectI, Identifiable
 {
     @XmlAttribute
     private String id;
     @XmlAttribute
     private String name;
+    @XmlAttribute
+    private Integer available = 0;
+    @XmlAttribute
+    private Integer total = 0;
     @XmlAttribute
     private SpellFormFactory type;
     private List<TemplateSpellStat> spellStats;
@@ -27,15 +32,19 @@ public class TemplateSpellForm implements Identifiable
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public String getID()                         { return id; }
-    public String getName()                                 { return name; }
-    public SpellFormFactory getFactory()                    { return type; }
-    public List<TemplateSpellStat> getSpellStats()          { return spellStats; }
-    public List<TemplateSpellDebuffSlot> getSpellSlots()          { return spellSlots; }
+    @Override public String getID()                             { return id; }
+    public String getName()                                     { return name; }
+    @Override public Integer getTotal()                         { return total; }
+    @Override public Integer getAvailable()                     { return available; }
+    public SpellFormFactory getFactory()                        { return type; }
+    public List<TemplateSpellStat> getSpellStats()              { return spellStats; }
+    public List<TemplateSpellDebuffSlot> getSpellSlots()        { return spellSlots; }
 
-    @Override public void setID(String id)                  { this.id = id; }
-    public void setName(String name)                        { this.name = name; }
-    public void setFactory(SpellFormFactory type)           { this.type = type; }
-    public void setSpellStats(TemplateSpellStat...stats)    { this.spellStats = Arrays.asList(stats); }
-    public void setSpellSlots(TemplateSpellDebuffSlot...slots)    { this.spellSlots = Arrays.asList(slots); }
+    @Override public void setID(String id)                      { this.id = id; }
+    public void setName(String name)                            { this.name = name; }
+    @Override public void setAvailable(Integer available)       { this.available = available; }
+    @Override public void setTotal(Integer total)               { this.total = total; }
+    public void setFactory(SpellFormFactory type)               { this.type = type; }
+    public void setSpellStats(TemplateSpellStat...stats)        { this.spellStats = Arrays.asList(stats); }
+    public void setSpellSlots(TemplateSpellDebuffSlot...slots)  { this.spellSlots = Arrays.asList(slots); }
 }

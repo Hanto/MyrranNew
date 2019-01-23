@@ -39,7 +39,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     public List<SpellDebuffParams> getSpellEffectParams()
     {
         return slots.values().stream()
-            .filter(customDebuffSlot -> customDebuffSlot.getCustomSpellDebuff() != null)
+            .filter(CustomDebuffSlot::hasDebuff)
             .map(CustomDebuffSlot::getSpellEffectData)
             .collect(Collectors.toList());
     }

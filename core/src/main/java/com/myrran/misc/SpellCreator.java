@@ -61,20 +61,20 @@ public class SpellCreator
         stat3.setIsUpgradeable(true);
 
         TemplateSpellDebuffSlot slot1 = new TemplateSpellDebuffSlot();
-        slot1.setID("Spot 1");
-        slot1.setName("Spot 1");
-        slot1.setSlotType("impacto");
+        slot1.setID("Slot1");
+        slot1.setName("Slot1");
+        slot1.setSlotType("impact");
         slot1.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.PUREDAMAGE);
 
         TemplateSpellDebuffSlot slot2 = new TemplateSpellDebuffSlot();
-        slot2.setID("Spot 2");
-        slot2.setName("Spot 2");
+        slot2.setID("Slot2");
+        slot2.setName("Slot2");
         slot2.setSlotType("aoe");
         slot2.setLock(CustomSpellSlotKey.DEBUFF);
 
         TemplateSpellDebuffSlot slot3 = new TemplateSpellDebuffSlot();
-        slot3.setID("Spot 3");
-        slot3.setName("Spot 3");
+        slot3.setID("Slot3");
+        slot3.setName("Slot3");
         slot3.setSlotType("ground");
         slot3.setLock(CustomSpellSlotKey.DEBUFF);
 
@@ -156,7 +156,7 @@ public class SpellCreator
 
     private static void marshal(Object object, Class classz) throws JAXBException
     {
-        File file = new File("core/assets/"+classz.getSimpleName()+".xml");
+        File file = new File("assets/"+classz.getSimpleName()+".xml");
         JAXBContext context = JAXBContext.newInstance(classz);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

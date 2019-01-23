@@ -24,7 +24,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     private String name;
     private String type;
     private List<CustomSpellSlotKey> lock = new ArrayList<>();
-    private CustomSpellDebuff customSpellDebuff;
+    private CustomSpellDebuff customSpellDebuff = new CustomSpellDebuff();
     @XmlTransient
     private ObservableI observable = new Observable(this);
 
@@ -56,7 +56,6 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
         this.name = template.getName();
         this.type = template.getSlotType();
         this.lock = new ArrayList<>(template.getLock());
-        this.customSpellDebuff = new CustomSpellDebuff();
     }
 
     // CUSTOM TO ENTITY DATA:
