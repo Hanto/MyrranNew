@@ -1,4 +1,4 @@
-package com.myrran.view.ui.window;
+package com.myrran.view.ui.listeners;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 /** @author Ivan Delgado Huerta */
-public class MoveWidgetListener extends DragListener
+public class MoveActorListener extends DragListener
 {
     private Actor parent;
     private Actor dragger;
@@ -19,7 +19,7 @@ public class MoveWidgetListener extends DragListener
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public MoveWidgetListener(Actor parent)
+    public MoveActorListener(Actor parent)
     {
         this.parent = parent;
         setTapSquareSize(0);

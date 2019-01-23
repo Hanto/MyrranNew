@@ -33,11 +33,10 @@ public class ZMain extends ApplicationAdapter
 	private BitmapFont font;
 	private WidgetText text;
 	private Stage uiStage;
-	private ScrollingCombatText sct;
-
-	private ShapeRenderer shapeRenderer;
-	private WidgetText sctView;
 	private CustomSpellBook book;
+	private SpellBookTemplates templateBook;
+	private CustomSpellForm spell;
+	private CustomSpellController controller;
 
 	private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
@@ -46,48 +45,26 @@ public class ZMain extends ApplicationAdapter
 	{
 		try
 		{
-			batch = new SpriteBatch();
-			img = new Texture("badlogic.jpg");
-
-			font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
-			text = new WidgetText("Hola Mundo", font, Color.WHITE, Color.BLACK, 2);
 			uiStage = new Stage();
-			uiStage.addActor(text);
-			text.setText("Hola Johana como te llamas");
-			text.setPosition(0, 0);
-			text.setTextColor(Color.ORANGE);
-			shapeRenderer = new ShapeRenderer();
-			sct = new ScrollingCombatText(font);
-			sct.setDuration(10)
-				.setMoveY(300)
-				.setMoveX(50)
-				.setInterpolationY(Interpolation.smooth2)
-				.setInterpolationX(Interpolation.smooth2);
+			batch = new SpriteBatch();
 
-			sctView = sct.sct("Johancia");
-			uiStage.addActor(sctView);
-			sctView.setPosition(100, 100);
+			img = new Texture("badlogic.jpg");
+			font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
 
+			templateBook = unmarshal(SpellBookTemplates.class);
 			book = unmarshal(CustomSpellBook.class);
-			SpellBookTemplates templateBook = unmarshal(SpellBookTemplates.class);
 			book.setSpellBookTemplates(templateBook);
-			CustomSpellForm spell = book.getCustomSpellForm("Bolt_00");
-
-			Gdx.input.setInputProcessor(uiStage);
-
-			CustomSpellController controller = new CustomSpellController(book);
-
-			sctView = sct.sct("HoLaaaaa");
-			uiStage.addActor(sctView);
-
+			spell = book.getCustomSpellForm("Bolt_00");
+			controller = new CustomSpellController(book);
 
 			SpellFormView formView2 = new SpellFormView(controller);
-			formView2.setModel(spell);
 			uiStage.addActor(formView2);
+			formView2.setModel(spell);
 			formView2.setPosition(100, 200);
 
 			//book.addCustomSpellDebuff("Bolt_00", "Spot 3", "Slow");
 
+			Gdx.input.setInputProcessor(uiStage);
 		}
 		catch (Exception e)
 		{ 	LOG.error("PUMBA",e); }
@@ -104,11 +81,6 @@ public class ZMain extends ApplicationAdapter
 			//batch.begin();
 			//batch.draw(img, 0, 0);
 			//batch.end();
-
-			//shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-			//shapeRenderer.setColor(Color.BLACK);
-			//shapeRenderer.rect(sctView.getX(), sctView.getY(), sctView.getWidth(), sctView.getHeight());
-			//shapeRenderer.end();
 
 			uiStage.setDebugUnderMouse(true);
 			uiStage.setDebugAll(true);
@@ -127,9 +99,8 @@ public class ZMain extends ApplicationAdapter
 	{
 		batch.dispose();
 		img.dispose();
-
 		font.dispose();
-		shapeRenderer.dispose();
+
 		Atlas.get().dispose();
 	}
 
