@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<graphicSettings>
+    <horizontalRes>600</horizontalRes>
+    <verticalRes>400</verticalRes>
+    <tittle>application</tittle>
+    <fullScreen>false</fullScreen>
+    <vsync>false</vsync>
+</graphicSettings>

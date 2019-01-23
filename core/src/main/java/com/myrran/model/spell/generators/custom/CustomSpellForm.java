@@ -27,8 +27,7 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     private SpellFormFactory factory;
     private CustomSpellStats spellStats = new CustomSpellStats();
     private CustomDebuffSlots debuffSlots = new CustomDebuffSlots();
-    @XmlTransient
-    private ObservableI observable = new Observable(this);
+    @XmlTransient private ObservableI observable = new Observable(this);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------

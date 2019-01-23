@@ -58,7 +58,6 @@ public class CustomSpellBook
         {
             TemplateSpellForm template = getSpellFormTemplate(formTemplateID);
             CustomSpellForm customSpell = new CustomSpellForm(template);
-            setUUID(customSpell);
 
             customSpells.put(customSpell.getID(), customSpell);
             formTeplatesLearned.borrow(formTemplateID);
@@ -152,12 +151,6 @@ public class CustomSpellBook
 
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
-
-    private void setUUID(Identifiable spell)
-    {
-        String uuid = UUID.randomUUID().toString();
-        spell.setID(uuid);
-    }
 
     public CustomSpellForm getCustomSpellForm(String spellID) throws InvalidIDException
     {

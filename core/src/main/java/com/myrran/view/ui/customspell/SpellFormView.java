@@ -79,10 +79,8 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
         }
     }
 
-    public void removeModel()
+    private void removeModel()
     {
-        dispose();
-
         clear();
         model = null;
         spellIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));

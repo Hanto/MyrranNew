@@ -37,15 +37,15 @@ public class SpellStat implements PropertyChangeListener, SpellStatRow, Disposab
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellStat getModel()                   { return model; }
-    @Override public WidgetText getName()                 { return name; }
-    @Override public WidgetText getBaseValue()            { return baseValue; }
-    @Override public WidgetText getTotal()                { return total; }
-    @Override public WidgetText getNumUpgrades()          { return numUpgrades; }
-    @Override public WidgetText getUpgradeCost()          { return upgradeCost; }
-    @Override public WidgetText getBonusPerUpgrade()      { return bonusPerUpgrade; }
-    @Override public WidgetText getMaxUpgrades()          { return maxUpgrades; }
-    @Override public WidgetText getGearBonus()            { return gearBonus; }
-    @Override public SpellUpgradeBar getUpgradesView(){ return upgradesView; }
+    @Override public WidgetText getName()               { return name; }
+    @Override public WidgetText getBaseValue()          { return baseValue; }
+    @Override public WidgetText getTotal()              { return total; }
+    @Override public WidgetText getNumUpgrades()        { return numUpgrades; }
+    @Override public WidgetText getUpgradeCost()        { return upgradeCost; }
+    @Override public WidgetText getBonusPerUpgrade()    { return bonusPerUpgrade; }
+    @Override public WidgetText getMaxUpgrades()        { return maxUpgrades; }
+    @Override public WidgetText getGearBonus()          { return gearBonus; }
+    @Override public SpellUpgradeBar getUpgradesView()  { return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
