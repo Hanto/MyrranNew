@@ -42,7 +42,7 @@ public class SpellDebuffIcon extends Table implements PropertyChangeListener, Di
         icon        = new WidgetGroup();
         debuffIcon  = new WidgetImage();
         cost        = new WidgetText(font14, magenta, Color.BLACK, 1);
-        debuffName  = new WidgetText(font10, Color.ORANGE, Color.BLACK, 2);
+        debuffName  = new WidgetText(font10, Color.ORANGE, Color.BLACK, 1);
         slotType    = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
         lock        = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
 

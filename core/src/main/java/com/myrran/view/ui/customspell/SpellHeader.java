@@ -37,7 +37,7 @@ public class SpellHeader implements SpellStatRow
         Color pink = new Color(255/255f, 84/255f, 118/255f, 1);
         Color black = Color.BLACK;
 
-        name            = new WidgetText("Name", font11, pink, black, 1);
+        name            = new WidgetText("NAME", font11, pink, black, 1);
         baseValue       = new WidgetText("Base", font11, pink, black, 1);
         upgradesView    = new WidgetText("Level",font11, pink, black, 1);
         total           = new WidgetText("Total",font11, pink, black, 1);
