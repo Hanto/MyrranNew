@@ -63,7 +63,7 @@ public class CustomSpellBook
     {
         if (formTemplatesLearned.isAvailable(formTemplateID))
         {
-            TemplateSpellForm template = getSpellFormTemplate(formTemplateID);
+            TemplateSpellForm template = templateBook.getSpellFormTemplate(formTemplateID);
             CustomSpellForm customSpell = new CustomSpellForm(template);
             setUUID(customSpell);
 
@@ -82,7 +82,7 @@ public class CustomSpellBook
 
             if (!spellForm.getCustomDebufflot(slotID).hasDebuff())
             {
-                TemplateSpellDebuff template = getSpellDebuffTemplate(debuffTemplateID);
+                TemplateSpellDebuff template = templateBook.getSpellDebuffTemplate(debuffTemplateID);
                 spellForm.setCustomSpellDebuff(template, slotID);
                 debuffTemplatesLearned.borrow(debuffTemplateID);
             }
@@ -168,19 +168,5 @@ public class CustomSpellBook
         CustomSpellForm spell = customSpells.get(spellID);
         if (spell != null) return spell;
         else throw new InvalidIDException("A CustomSpellForm with the following ID doesn't exist: %s", spellID);
-    }
-
-    private TemplateSpellForm getSpellFormTemplate(String spellID) throws InvalidIDException
-    {
-        TemplateSpellForm spell = templateBook.getSpellFormTemplate(spellID);
-        if (spell != null) return spell;
-        else throw new InvalidIDException("A TemplateSpellForm with the following ID doesn't exist: %s", spellID);
-    }
-
-    private TemplateSpellDebuff getSpellDebuffTemplate(String spellID) throws InvalidIDException
-    {
-        TemplateSpellDebuff spell = templateBook.getSpellDebuffTemplate(spellID);
-        if (spell != null) return spell;
-        else throw new InvalidIDException("A TemplateSpellDebuff with the following ID doesn't exist: %s", spellID);
     }
 }
