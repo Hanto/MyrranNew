@@ -7,8 +7,6 @@ import com.myrran.model.components.Identifiable;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellForm;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,8 +28,6 @@ public class CustomSpellBook
 
     @XmlTransient
     private TemplateSpellBook templateBook;
-    @XmlTransient
-    private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellBook.class);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -126,11 +122,6 @@ public class CustomSpellBook
         customSpells.clear();
         formTemplatesLearned.values().forEach(template -> template.setAvailable(template.getTotal()));
         debuffTemplatesLearned.values().forEach(template -> template.setAvailable(template.getTotal()));
-    }
-
-    public void reloadTemplates()
-    {
-
     }
 
     // FORM of any ID:
