@@ -9,28 +9,27 @@ import com.myrran.model.spell.generators.custom.CustomSpellStatsI;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStats extends Table implements Disposable
+public class CustomStatsView extends Table implements Disposable
 {
     private CustomSpellStatsI model;
     private CustomSpellController controller;
 
-    private List<SpellStat> statsViewList;
+    private List<CustomStatView> statsViewList = new ArrayList<>();
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellStats(CustomSpellController spellController)
+    public CustomStatsView(CustomSpellController spellController)
     {
         controller = spellController;
-        statsViewList = new ArrayList<>();
-
         createLayout();
     }
 
     @Override public void dispose()
-    {   statsViewList.forEach(SpellStat::dispose); }
+    {   statsViewList.forEach(CustomStatView::dispose); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -58,15 +57,17 @@ public class SpellStats extends Table implements Disposable
     private void update()
     {
         clear();
-        statsViewList.clear();
-
-        model.values().stream()
+        statsViewList = model.values().stream()
             .map(this::getView)
-            .forEach(statView -> statsViewList.add(statView));
-
-        createListeners();
+            .collect(Collectors.toList());
 
         statsViewList.forEach(this::tableAddRow);
+        createListeners();
+    }
+
+    private void createLayout()
+    {
+        top().left();
     }
 
     // LISTENERS:
@@ -74,26 +75,18 @@ public class SpellStats extends Table implements Disposable
 
     public void createListeners()
     {
-        for (SpellStat view: statsViewList)
+        for (CustomStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
             view.getUpgradesView().addListener(new SpellUpgradesListener(controller, model, statID));
         }
     }
 
-    // CREATE LAYOUT:
-    //--------------------------------------------------------------------------------------------------------
-
-    private void createLayout()
-    {
-        top().left();
-    }
-
     // MISC:
     //--------------------------------------------------------------------------------------------------------
 
-    private SpellStat getView(CustomSpellStat customSpellStat)
-    {   return new SpellStat(customSpellStat); }
+    private CustomStatView getView(CustomSpellStat customSpellStat)
+    {   return new CustomStatView(customSpellStat); }
 
     private void tableAddRow(SpellStatRow row)
     {
@@ -103,7 +96,7 @@ public class SpellStats extends Table implements Disposable
         add(row.getName()).left()             .minWidth(100).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getBaseValue()).right()       .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getUpgradesView()).center()   .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getTotal()).right()           .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getTotal()).right()           .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getNumUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getUpgradeCost()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getBonusPerUpgrade()).right() .padRight(hPad).padTop(vPad).padBottom(vPad);

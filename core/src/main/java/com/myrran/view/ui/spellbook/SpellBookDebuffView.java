@@ -1,4 +1,4 @@
-package com.myrran.view.ui.templatespell;
+package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -15,25 +15,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CustomSpellBookDebuffView extends Table implements PropertyChangeListener, Disposable
+public class SpellBookDebuffView extends Table implements PropertyChangeListener, Disposable
 {
     private CustomSpellBook model;
     private CustomSpellController controller;
 
-    List<TemplateDebuffIcon> list;
+    List<TemplateDebuffView> list;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellBookDebuffView(CustomSpellController controller)
+    public SpellBookDebuffView(CustomSpellController controller)
     {   this.controller = controller; }
 
     @Override public void dispose()
-    {
-        //if (model != null)
-        //    model.removeObserver(this);
-    }
+    { }
 
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -47,7 +44,6 @@ public class CustomSpellBookDebuffView extends Table implements PropertyChangeLi
         else
         {
             model = customSpellBook;
-            //model.addObserver(this);
             createLayout(SortDebuffsBy.NAME);
         }
     }
@@ -66,17 +62,18 @@ public class CustomSpellBookDebuffView extends Table implements PropertyChangeLi
     {
         clear();
         list = model.getDebuffsTemplatesLearned().stream()
+            .filter(template -> template.getTotal() > 0)
             .sorted(sortBy.comparator)
             .map(this::getDebuffIcon)
             .collect(Collectors.toList());
 
-        for (TemplateDebuffIcon icon: list)
+        for (TemplateDebuffView icon: list)
         {   add(icon).left().row(); }
     }
 
-    private TemplateDebuffIcon getDebuffIcon(TemplateSpellDebuff templateDebuff)
+    private TemplateDebuffView getDebuffIcon(TemplateSpellDebuff templateDebuff)
     {
-        TemplateDebuffIcon icon = new TemplateDebuffIcon(controller);
+        TemplateDebuffView icon = new TemplateDebuffView(controller);
         icon.setModel(templateDebuff);
         return icon;
     }
@@ -91,7 +88,8 @@ public class CustomSpellBookDebuffView extends Table implements PropertyChangeLi
         BASECOST(Comparator.comparing(TemplateSpellDebuff::getBaseCost));
 
         Comparator<TemplateSpellDebuff> comparator;
-        private SortDebuffsBy(Comparator<TemplateSpellDebuff> comparator)
+
+        SortDebuffsBy(Comparator<TemplateSpellDebuff> comparator)
         {   this.comparator = comparator; }
     }
 

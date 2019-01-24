@@ -12,7 +12,7 @@ import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class SpellStat implements PropertyChangeListener, SpellStatRow, Disposable
+public class CustomStatView implements PropertyChangeListener, SpellStatRow, Disposable
 {
     private CustomSpellStat model;
 
@@ -24,7 +24,7 @@ public class SpellStat implements PropertyChangeListener, SpellStatRow, Disposab
     private WidgetText bonusPerUpgrade;
     private WidgetText maxUpgrades;
     private WidgetText gearBonus;
-    private SpellUpgradeBar upgradesView;
+    private CustomUpgradeBar upgradesView;
 
     private static final Color white = Color.WHITE;
     private static final Color orange = Color.ORANGE;
@@ -45,15 +45,15 @@ public class SpellStat implements PropertyChangeListener, SpellStatRow, Disposab
     @Override public WidgetText getBonusPerUpgrade()    { return bonusPerUpgrade; }
     @Override public WidgetText getMaxUpgrades()        { return maxUpgrades; }
     @Override public WidgetText getGearBonus()          { return gearBonus; }
-    @Override public SpellUpgradeBar getUpgradesView()  { return upgradesView; }
+    @Override public CustomUpgradeBar getUpgradesView()  { return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellStat(CustomSpellStat customSpellStat)
+    public CustomStatView(CustomSpellStat customSpellStat)
     {
-        this.model = customSpellStat;
-        this.model.addObserver(this);
+        model = customSpellStat;
+        model.addObserver(this);
 
         createView();
         updateView();
@@ -80,7 +80,7 @@ public class SpellStat implements PropertyChangeListener, SpellStatRow, Disposab
         maxUpgrades     = new WidgetText(font10, purpleL, black,1);
         gearBonus       = new WidgetText(font10, purpleL, black,1);
 
-        upgradesView    = new SpellUpgradeBar(model);
+        upgradesView    = new CustomUpgradeBar(model);
     }
 
     public void updateView()

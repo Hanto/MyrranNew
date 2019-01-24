@@ -8,44 +8,49 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.widgets.WidgetGroup;
+import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-
 /** @author Ivan Delgado Huerta */
-public class SpellDebuffDetails extends Table implements PropertyChangeListener, Disposable
+public class CustomDebuffIcon extends Table implements PropertyChangeListener, Disposable
 {
     private CustomDebuffSlot debuffSlot;
     private CustomSpellDebuff spellDebuff;
     private CustomSpellController controller;
 
-    private SpellStats stats;
-    private WidgetText name;
-    private WidgetText totalCost;
+    private WidgetGroup icon;
+    private WidgetImage debuffIcon;
+    private WidgetText cost;
+    private WidgetText debuffName;
+    private WidgetText slotType;
+    private WidgetText lock;
 
+    private static final BitmapFont font10 = Atlas.get().getFont("10");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
-    private static final BitmapFont font11 = Atlas.get().getFont("11");
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellDebuffDetails(CustomSpellController customSpellController)
+    public CustomDebuffIcon(CustomSpellController customSpellController)
     {
-        controller      = customSpellController;
-        name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
-        totalCost       = new WidgetText(font14, magenta, Color.BLACK, 1);
-        stats           = new SpellStats(controller);
+        controller  = customSpellController;
+        icon        = new WidgetGroup();
+        debuffIcon  = new WidgetImage();
+        cost        = new WidgetText(font14, magenta, Color.BLACK, 1);
+        debuffName  = new WidgetText(font10, Color.ORANGE, Color.BLACK, 1);
+        slotType    = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
+        lock        = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
 
         createLayout();
     }
 
     @Override public void dispose()
     {
-        stats.dispose();
-
         if (debuffSlot != null)
             debuffSlot.removeObserver(this);
 
@@ -75,24 +80,29 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
     private void removeModel()
     {
         debuffSlot = null;
-        stats.setModel(null);
-        name.setText(null);
-        totalCost.setText(null);
+        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
+        cost.setText(null);
+        debuffName.setText(null);
+        slotType.setText(null);
+        lock.setText(null);
     }
 
     private void update()
     {
+        slotType.setText(debuffSlot.getSlotType());
+        lock.setText(debuffSlot.getLock().toString().toLowerCase());
+
         if (debuffSlot.hasDebuff())
         {
-            stats.setModel(spellDebuff);
-            name.setText(spellDebuff.getName());
-            totalCost.setText(String.format("%s(%s)", spellDebuff.getStatsCost(), spellDebuff.getTotalCost()));
+            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
+            cost.setText(spellDebuff.getTotalCost().toString());
+            debuffName.setText(spellDebuff.getName());
         }
         else
         {
-            stats.setModel(null);
-            name.setText(null);
-            totalCost.setText(null);
+            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
+            cost.setText(null);
+            debuffName.setText(null);
         }
     }
 
@@ -103,13 +113,18 @@ public class SpellDebuffDetails extends Table implements PropertyChangeListener,
     {
         int vPad = -4;
 
-        Table header = new Table().top().left();
-        header.add(name).bottom().left().padBottom(vPad);
-        header.add(totalCost).bottom().right().padBottom(vPad).row();
+        Table textTable = new Table().top().left();
+        textTable.add(debuffName).left()  .padTop(vPad).padBottom(vPad).row();
+        textTable.add(slotType).left()    .padTop(vPad).padBottom(vPad).row();
+        textTable.add(lock).left()        .padTop(vPad).padBottom(vPad).row();
+
+        icon.addActor(debuffIcon);
+        icon.addActor(cost);
+        cost.setPosition(2, 0);
 
         top().left();
-        add(header).left().row();
-        add(stats);
+        add(icon).top().left();
+        add(textTable).top().left();
     }
 
     // MVC:

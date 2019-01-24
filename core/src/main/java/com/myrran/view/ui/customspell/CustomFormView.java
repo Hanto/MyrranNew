@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class SpellFormView extends Table implements PropertyChangeListener, Disposable
+public class CustomFormView extends Table implements PropertyChangeListener, Disposable
 {
     private CustomSpellForm model;
     private CustomSpellController controller;
@@ -31,11 +31,11 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
     private Table tableHeader;
     private Table tableIcons;
     private Table tableStats;
-    private SpellStats stats;
+    private CustomStatsView stats;
     private WidgetText name;
     private WidgetText totalCost;
-    private List<SpellDebuffDetails>formDebuffs;
-    private List<SpellDebuffIcon>debuffIcons;
+    private List<CustomDebuffDetailsView>formDebuffs;
+    private List<CustomDebuffIcon>debuffIcons;
 
     private static final BitmapFont font20 = Atlas.get().getFont("20");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
@@ -44,7 +44,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellFormView(CustomSpellController spellController)
+    public CustomFormView(CustomSpellController spellController)
     {
         controller  = spellController;
         tableHeader = new Table().top().left();
@@ -52,7 +52,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
         tableStats  = new Table().top().left();
         spellIcon   = new WidgetImage();
         background  = Atlas.get().getImage("TexturasMisc/Casillero2");
-        stats       = new SpellStats(controller);
+        stats       = new CustomStatsView(controller);
         name        = new WidgetText(font20, Color.ORANGE, Color.BLACK, 2);
         totalCost   = new WidgetText(font14, magenta, Color.BLACK, 2);
     }
@@ -62,7 +62,7 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
         stats.dispose();
 
         if (formDebuffs != null)
-            formDebuffs.forEach(SpellDebuffDetails::dispose);
+            formDebuffs.forEach(CustomDebuffDetailsView::dispose);
 
         if (model != null)
             model.removeObserver(this);
@@ -140,16 +140,16 @@ public class SpellFormView extends Table implements PropertyChangeListener, Disp
         update();
     }
 
-    private SpellDebuffDetails addDebuffViews(CustomDebuffSlot slot)
+    private CustomDebuffDetailsView addDebuffViews(CustomDebuffSlot slot)
     {
-        SpellDebuffDetails details = new SpellDebuffDetails(controller);
+        CustomDebuffDetailsView details = new CustomDebuffDetailsView(controller);
         details.setModel(slot);
         return details;
     }
 
-    private SpellDebuffIcon addDebuffSlotIcons(CustomDebuffSlot slot)
+    private CustomDebuffIcon addDebuffSlotIcons(CustomDebuffSlot slot)
     {
-        SpellDebuffIcon icon = new SpellDebuffIcon(controller);
+        CustomDebuffIcon icon = new CustomDebuffIcon(controller);
         icon.setModel(slot);
         return icon;
     }

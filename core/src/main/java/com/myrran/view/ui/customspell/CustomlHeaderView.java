@@ -6,7 +6,7 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
-public class SpellHeader implements SpellStatRow
+public class CustomlHeaderView implements SpellStatRow
 {
     private WidgetText name;
     private WidgetText baseValue;
@@ -31,7 +31,7 @@ public class SpellHeader implements SpellStatRow
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellHeader()
+    public CustomlHeaderView()
     {
         BitmapFont font11 = Atlas.get().getFont("11");
         Color pink = new Color(255/255f, 84/255f, 118/255f, 1);

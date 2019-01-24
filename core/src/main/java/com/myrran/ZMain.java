@@ -12,8 +12,8 @@ import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspell.SpellFormView;
-import com.myrran.view.ui.templatespell.CustomSpellBookDebuffView;
+import com.myrran.view.ui.customspell.CustomFormView;
+import com.myrran.view.ui.spellbook.SpellBookDebuffView;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,17 +51,17 @@ public class ZMain extends ApplicationAdapter
 			spell = book.getCustomSpellForm("SpellForm_00");
 			controller = new CustomSpellController(book);
 
-			SpellFormView formView2 = new SpellFormView(controller);
+			CustomFormView formView2 = new CustomFormView(controller);
 			uiStage.addActor(formView2);
 			formView2.setModel(spell);
 			formView2.setPosition(100, 200);
 
 			//book.addCustomSpellDebuff("Bolt_00", "Spot 3", "Slow");
 
-			CustomSpellBookDebuffView spellBookView = new CustomSpellBookDebuffView(controller);
+			SpellBookDebuffView spellBookView = new SpellBookDebuffView(controller);
 			spellBookView.setModel(book);
 			uiStage.addActor(spellBookView);
-			spellBookView.setPosition(100, 200);
+			spellBookView.setPosition(150, 200);
 
 			uiStage.addActor(fps);
 

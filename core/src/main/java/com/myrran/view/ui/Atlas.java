@@ -20,7 +20,7 @@ public class Atlas implements Disposable
     private TextureAtlas textureAtlas;
     private Map<String, TextureRegion> textures = new HashMap<>();
     private Map<String, BitmapFont> fonts = new HashMap<>();
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+    private static final DecimalFormat df = new DecimalFormat("0");
     private static final DecimalFormatSymbols simbolos = df.getDecimalFormatSymbols();
 
     private static final Logger LOG = LogManager.getFormatterLogger(Atlas.class);

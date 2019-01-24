@@ -64,9 +64,12 @@ public class WidgetText extends Widget
 
     private void updateSize()
     {
-        setWidth(textLabel.getWidth() + shadowTickness);
-        setHeight(textLabel.getHeight() + shadowTickness);
-        invalidateHierarchy();
+        if (getWidth() != textLabel.getWidth() || getHeight() != textLabel.getHeight())
+        {
+            setWidth(textLabel.getWidth() + shadowTickness);
+            setHeight(textLabel.getHeight() + shadowTickness);
+            invalidateHierarchy();
+        }
     }
 
     // DRAW:

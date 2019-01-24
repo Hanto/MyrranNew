@@ -48,7 +48,7 @@ public class CustomSpellStats implements CustomSpellStatsI
     {
         CustomSpellStat stat = stats.get(statID);
         if (stat != null) return stat;
-        else throw new InvalidIDException("SpellStat with the following ID doesn't exist: %s", statID);
+        else throw new InvalidIDException("CustomStatView with the following ID doesn't exist: %s", statID);
     }
 
     @Override

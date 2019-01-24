@@ -1,7 +1,8 @@
-package com.myrran.view.ui.templatespell;
+package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
@@ -13,7 +14,7 @@ import com.myrran.view.ui.widgets.WidgetText;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateDebuffIcon extends Table
+public class TemplateDebuffView extends Table
 {
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
@@ -26,6 +27,9 @@ public class TemplateDebuffIcon extends Table
     private WidgetText name;
     private WidgetText cost;
 
+    private TemplateStatsView statsView;
+    private Cell<TemplateStatsView> cell;
+
     private static final BitmapFont font20 = Atlas.get().getFont("20");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
     private static final BitmapFont font11 = Atlas.get().getFont("10");
@@ -35,7 +39,7 @@ public class TemplateDebuffIcon extends Table
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public TemplateDebuffIcon(CustomSpellController customSpellController)
+    public TemplateDebuffView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
         icon            = new WidgetGroup();
@@ -44,6 +48,7 @@ public class TemplateDebuffIcon extends Table
         keys            = new WidgetText(font11, Color.WHITE, Color.BLACK, 1);
         name            = new WidgetText(font20, Color.ORANGE, Color.BLACK, 1);
         cost            = new WidgetText(font14, magenta, Color.BLACK, 1);
+        statsView       = new TemplateStatsView(customSpellController);
 
         createLayout();
     }
@@ -69,6 +74,7 @@ public class TemplateDebuffIcon extends Table
         keys.setText(null);
         name.setText(null);
         cost.setText(null);
+        statsView.setModel(null);
     }
 
     private void update()
@@ -79,6 +85,7 @@ public class TemplateDebuffIcon extends Table
         keys.setText(model.getKeys().toString());
         name.setText(model.getName());
         cost.setText(model.getBaseCost().toString());
+        statsView.setModel(model.getSpellStats());
     }
 
     private void createLayout()
@@ -100,6 +107,19 @@ public class TemplateDebuffIcon extends Table
 
         top().left();
         add(icon).top().left();
-        add(textTable).left();
+        add(textTable).left().row();
+        add();
+        add(statsView).left().padBottom(4);
+
+        cell = getCell(statsView);
+    }
+
+    // MISC:
+    //--------------------------------------------------------------------------------------------------------
+
+    public void hideStats(boolean hide)
+    {
+        if (hide) cell.setActor(null);
+        else cell.setActor(statsView);
     }
 }
