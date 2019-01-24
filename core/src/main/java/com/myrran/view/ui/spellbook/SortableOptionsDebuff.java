@@ -1,6 +1,8 @@
 package com.myrran.view.ui.spellbook;
 
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.view.ui.sortabletable.SortableOptions;
+import com.myrran.view.ui.sortabletable.SortableTableI;
 
 import java.util.Comparator;
 

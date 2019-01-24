@@ -34,6 +34,7 @@ public class CustomSpellBook
 
     public void setSpellBookTemplates(TemplateSpellBook tBook) { this.templateBook = tBook; }
     public Collection<TemplateSpellDebuff> getDebuffsTemplatesLearned() { return debuffTemplatesLearned.values(); }
+    public Collection<TemplateSpellForm> getFormTemplatesLearned() { return formTemplatesLearned.values(); }
 
     // TEMPLATES -> LEARNED
     //--------------------------------------------------------------------------------------------------------

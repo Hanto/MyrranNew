@@ -1,26 +1,29 @@
-package com.myrran.view.ui.listeners;
+package com.myrran.view.ui.sortabletable;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.myrran.view.ui.spellbook.SortableOptions;
 
 /** @author Ivan Delgado Huerta */
-public class SortableShowListener extends InputListener
+public class SortableOrderTypetListener extends InputListener
 {
     private SortableOptions options;
+    private String type;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SortableShowListener(SortableOptions debuffView)
-    {   options = debuffView; }
+    public SortableOrderTypetListener(SortableOptions debuffView, String sortName)
+    {
+        options = debuffView;
+        type = sortName;
+    }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
     @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
     {
-        options.setShowDetails();
+        options.setSortBy(type);
         return true;
     }
 }

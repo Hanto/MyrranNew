@@ -14,6 +14,7 @@ import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.customspell.CustomFormView;
 import com.myrran.view.ui.spellbook.SpellBookDebuffView;
+import com.myrran.view.ui.spellbook.SpellBookFormView;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,6 +63,10 @@ public class ZMain extends ApplicationAdapter
 			spellBookView.setModel(book);
 			uiStage.addActor(spellBookView);
 			spellBookView.setPosition(150, 200);
+
+			SpellBookFormView spellBookForm = new SpellBookFormView(controller);
+			spellBookForm.setModel(book);
+			uiStage.addActor(spellBookForm);
 
 			uiStage.addActor(fps);
 

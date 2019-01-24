@@ -1,11 +1,8 @@
-package com.myrran.view.ui.spellbook;
+package com.myrran.view.ui.sortabletable;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.listeners.SortableOrderDescListener;
-import com.myrran.view.ui.listeners.SortableShowListener;
-import com.myrran.view.ui.listeners.SortableOrderTypetListener;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.util.*;
@@ -30,6 +27,7 @@ public abstract class SortableOptions<T> extends Table
     private static final String HIDE = "Hide Details";
 
     public boolean getShowDetails()                 { return showDetails; }
+    public boolean getReverseOrder()                { return reverseOrder; }
     public SortBy getActualSortBy()                 { return actualSortBy; }
     public SortBy getSortBy(String sortByName)      { return sortMap.get(sortByName); }
     public void setActualSortBy(SortBy newSortBy)   { actualSortBy = newSortBy; actualSortBy.widgetText.setTextColor(selectedSort);}
@@ -41,7 +39,7 @@ public abstract class SortableOptions<T> extends Table
     {
         sortableTable = spellBookDebuffView;
 
-        reverseOrderText= new WidgetText(ASC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
+        reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         showDetailsText.addListener(new SortableShowListener(this));
         reverseOrderText.addListener(new SortableOrderDescListener(this));

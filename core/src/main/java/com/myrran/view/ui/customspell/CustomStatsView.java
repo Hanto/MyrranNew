@@ -3,7 +3,6 @@ package com.myrran.view.ui.customspell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.view.ui.listeners.CustomUpgradeBarListener;
 import com.myrran.model.spell.generators.custom.CustomSpellStat;
 import com.myrran.model.spell.generators.custom.CustomSpellStatsI;
 

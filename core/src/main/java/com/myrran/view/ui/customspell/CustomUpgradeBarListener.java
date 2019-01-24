@@ -1,4 +1,4 @@
-package com.myrran.view.ui.listeners;
+package com.myrran.view.ui.customspell;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;

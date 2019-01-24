@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.custom.CustomSpellBook;
-import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.sortabletable.SortableTableI;
@@ -20,25 +20,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class SpellBookDebuffView extends Table implements PropertyChangeListener, Disposable,
-    SortableTableI<TemplateSpellDebuff>
+public class SpellBookFormView extends Table implements PropertyChangeListener, Disposable,
+    SortableTableI<TemplateSpellForm>
 {
     private CustomSpellBook model;
     private CustomSpellController controller;
 
     private WidgetText name;
-    private SortableOptionsDebuff options;
-    private List<TemplateDebuffView> list;
+    private SortableOptionsForm options;
+    private List<TemplateFormView> list;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellBookDebuffView(CustomSpellController spellController)
+    public SpellBookFormView(CustomSpellController spellController)
     {
         controller  = spellController;
-        name        = new WidgetText("Debuff SpellBook", font20, Color.WHITE, Color.BLACK, 2);
-        options     = new SortableOptionsDebuff(this);
+        name        = new WidgetText("SpellForm SpellBook", font20, Color.WHITE, Color.BLACK, 2);
+        options     = new SortableOptionsForm(this);
         name.addListener(new ActorMoveListener(this));
         top().left();
     }
@@ -65,11 +65,11 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
     private void update() {}
 
     @Override
-    public void createLayout(Comparator<TemplateSpellDebuff> sortBy, boolean showDetails, boolean reverseOrder)
+    public void createLayout(Comparator<TemplateSpellForm> sortBy, boolean showDetails, boolean reverseOrder)
     {
         clear();
 
-        list = model.getDebuffsTemplatesLearned().stream()
+        list = model.getFormTemplatesLearned().stream()
             .filter(template -> template.getTotal() > 0)
             .sorted(sortBy)
             .map(this::getDebuffIcon)
@@ -83,16 +83,16 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
         add(name).left().padBottom(-8).padTop(-8).row();
         add(options).left().row();
 
-        for (TemplateDebuffView icon: list)
+        for (TemplateFormView icon: list)
             add(icon).left().row();
     }
 
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    private TemplateDebuffView getDebuffIcon(TemplateSpellDebuff template)
+    private TemplateFormView getDebuffIcon(TemplateSpellForm template)
     {
-        TemplateDebuffView icon = new TemplateDebuffView(controller);
+        TemplateFormView icon = new TemplateFormView(controller);
         icon.setModel(template);
         return icon;
     }

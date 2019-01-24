@@ -1,4 +1,4 @@
-package com.myrran.view.ui.spellbook;
+package com.myrran.view.ui.sortabletable;
 
 import java.util.Comparator;
 
