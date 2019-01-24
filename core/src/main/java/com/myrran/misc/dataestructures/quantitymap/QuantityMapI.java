@@ -2,7 +2,7 @@ package com.myrran.misc.dataestructures.quantitymap;
 
 import com.myrran.misc.DefaultMap;
 
-public interface QuantityMapI<T extends QuantityObjectI> extends DefaultMap<String, T>
+public interface QuantityMapI<T extends QuantifiableI> extends DefaultMap<String, T>
 {
     void add(T object);
     boolean isAvailable(String key);

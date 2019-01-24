@@ -2,7 +2,7 @@ package com.myrran.misc.dataestructures.quantitymap;
 
 import java.util.Map;
 
-public class QuantityMap<T extends QuantityObjectI> implements QuantityMapI<T>
+public class QuantityMap<T extends QuantifiableI> implements QuantityMapI<T>
 {
     private Map<String, T>map;
 
@@ -43,7 +43,7 @@ public class QuantityMap<T extends QuantityObjectI> implements QuantityMapI<T>
     @Override
     public boolean returnBack(String key)
     {
-        QuantityObjectI quantityObject = get(key);
+        QuantifiableI quantityObject = get(key);
 
         if (quantityObject != null)
             quantityObject.setAvailable(quantityObject.getAvailable() + 1);

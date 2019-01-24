@@ -9,13 +9,16 @@ import com.myrran.model.spell.templates.TemplateSpellStat;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellStat implements Identifiable, ObservableDeco
 {
+    @XmlAttribute
     private String id;
+    @XmlAttribute
     private String name;                    //Nombre del SkillStat: por ej: "Daño, velocidad, Casting Time"
     private Float baseValue;                //Valor Base del SkillStat: por ej: 100 de Daño
     private boolean isUpgradeable = false;  //Indica si es un SkillStat mejorable por Talentos

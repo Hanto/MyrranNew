@@ -2,6 +2,7 @@ package com.myrran;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -31,6 +32,7 @@ public class ZMain extends ApplicationAdapter
 	private TemplateSpellBook templateBook;
 	private CustomSpellForm spell;
 	private CustomSpellController controller;
+	private WidgetText fps;
 
 	private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
@@ -42,7 +44,7 @@ public class ZMain extends ApplicationAdapter
 			uiStage = new Stage();
 			batch = new SpriteBatch();
 			font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
-
+			fps = new WidgetText(Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
 			templateBook = unmarshal(TemplateSpellBook.class);
 			book = unmarshal(CustomSpellBook.class);
 			book.setSpellBookTemplates(templateBook);
@@ -61,6 +63,7 @@ public class ZMain extends ApplicationAdapter
 			uiStage.addActor(spellBookView);
 			spellBookView.setPosition(100, 200);
 
+			uiStage.addActor(fps);
 
 			Gdx.input.setInputProcessor(uiStage);
 		}
@@ -86,6 +89,7 @@ public class ZMain extends ApplicationAdapter
 			uiStage.act();
 			uiStage.draw();
 
+			fps.setText(Integer.toString(Gdx.graphics.getFramesPerSecond()));
 		}
 		catch (Exception e)
 		{ 	LOG.error("PUMBA",e); }

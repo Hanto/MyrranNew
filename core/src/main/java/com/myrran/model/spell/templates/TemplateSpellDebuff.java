@@ -1,6 +1,6 @@
 package com.myrran.model.spell.templates;
 
-import com.myrran.misc.dataestructures.quantitymap.QuantityObjectI;
+import com.myrran.misc.dataestructures.quantitymap.QuantifiableI;
 import com.myrran.model.components.Identifiable;
 import com.myrran.model.spell.entities.debuff.SpellDebuffFactory;
 import com.myrran.model.spell.generators.custom.CustomSpellSlotKey;
@@ -16,7 +16,7 @@ import java.util.List;
 /** @author Ivan Delgado Huerta */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TemplateSpellDebuff implements QuantityObjectI, Identifiable
+public class TemplateSpellDebuff implements QuantifiableI, Identifiable
 {
     @XmlAttribute
     private String id;

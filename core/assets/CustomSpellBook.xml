@@ -101,9 +101,7 @@
           <stats>
             <entry>
               <key>Speed</key>
-              <value>
-                <id>Speed</id>
-                <name>Speed</name>
+              <value id="Speed" name="Speed">
                 <baseValue>100.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -115,9 +113,7 @@
             </entry>
             <entry>
               <key>Cooldown</key>
-              <value>
-                <id>Cooldown</id>
-                <name>Cooldown</name>
+              <value id="Cooldown" name="Cooldown">
                 <baseValue>50.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -129,9 +125,7 @@
             </entry>
             <entry>
               <key>Damage</key>
-              <value>
-                <id>Damage</id>
-                <name>Damage</name>
+              <value id="Damage" name="Damage">
                 <baseValue>100.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -147,13 +141,10 @@
           <slots>
             <entry>
               <key>Slot2</key>
-              <value>
-                <id>Slot2</id>
-                <name>Slot2</name>
-                <type>aoe</type>
+              <value id="Slot2" name="Slot2" type="aoe">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>717955ee-7b92-43ba-83b8-a2649a6a6599</id>
+                  <id>24322daf-6823-4feb-b5c9-e5249cbed629</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -163,13 +154,10 @@
             </entry>
             <entry>
               <key>Slot3</key>
-              <value>
-                <id>Slot3</id>
-                <name>Slot3</name>
-                <type>ground</type>
+              <value id="Slot3" name="Slot3" type="ground">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>07f80ad8-bea9-40bd-8f12-6145f396c9aa</id>
+                  <id>778e3c27-1630-4ab1-93b9-20abb581a06b</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -179,14 +167,11 @@
             </entry>
             <entry>
               <key>Slot1</key>
-              <value>
-                <id>Slot1</id>
-                <name>Slot1</name>
-                <type>impact</type>
+              <value id="Slot1" name="Slot1" type="impact">
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff>
-                  <id>ed1c3f0b-172a-4c66-9d4f-ba2b49cc593d</id>
+                  <id>1350b13a-5e83-4b42-9b37-41fb83ff3125</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -209,9 +194,7 @@
           <stats>
             <entry>
               <key>Speed</key>
-              <value>
-                <id>Speed</id>
-                <name>Speed</name>
+              <value id="Speed" name="Speed">
                 <baseValue>100.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -223,9 +206,7 @@
             </entry>
             <entry>
               <key>Cooldown</key>
-              <value>
-                <id>Cooldown</id>
-                <name>Cooldown</name>
+              <value id="Cooldown" name="Cooldown">
                 <baseValue>50.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -237,9 +218,7 @@
             </entry>
             <entry>
               <key>Damage</key>
-              <value>
-                <id>Damage</id>
-                <name>Damage</name>
+              <value id="Damage" name="Damage">
                 <baseValue>100.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -255,13 +234,10 @@
           <slots>
             <entry>
               <key>Slot2</key>
-              <value>
-                <id>Slot2</id>
-                <name>Slot2</name>
-                <type>aoe</type>
+              <value id="Slot2" name="Slot2" type="aoe">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>b05108e9-f4f0-4c80-ab20-0e6b80e855ba</id>
+                  <id>9f11220b-07c5-4020-8b86-c74149a4380d</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -271,13 +247,10 @@
             </entry>
             <entry>
               <key>Slot3</key>
-              <value>
-                <id>Slot3</id>
-                <name>Slot3</name>
-                <type>ground</type>
+              <value id="Slot3" name="Slot3" type="ground">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>d08247f1-7aba-4a4c-a799-ea534ad770cb</id>
+                  <id>dfd96162-edcb-4c00-bb6e-6a6364e78aa9</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -287,14 +260,11 @@
             </entry>
             <entry>
               <key>Slot1</key>
-              <value>
-                <id>Slot1</id>
-                <name>Slot1</name>
-                <type>impact</type>
+              <value id="Slot1" name="Slot1" type="impact">
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff>
-                  <id>118704aa-47e1-473d-a3d6-502536ae9f27</id>
+                  <id>3573db47-813b-44ce-b2c7-0c90258a7dbb</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -317,9 +287,7 @@
           <stats>
             <entry>
               <key>Speed</key>
-              <value>
-                <id>Speed</id>
-                <name>Speed</name>
+              <value id="Speed" name="Speed">
                 <baseValue>100.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -331,9 +299,7 @@
             </entry>
             <entry>
               <key>Cooldown</key>
-              <value>
-                <id>Cooldown</id>
-                <name>Cooldown</name>
+              <value id="Cooldown" name="Cooldown">
                 <baseValue>50.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -345,9 +311,7 @@
             </entry>
             <entry>
               <key>Damage</key>
-              <value>
-                <id>Damage</id>
-                <name>Damage</name>
+              <value id="Damage" name="Damage">
                 <baseValue>100.0</baseValue>
                 <isUpgradeable>true</isUpgradeable>
                 <maxUpgrades>50</maxUpgrades>
@@ -363,15 +327,10 @@
           <slots>
             <entry>
               <key>Slot2</key>
-              <value>
-                <id>Slot2</id>
-                <name>Slot2</name>
-                <type>aoe</type>
+              <value id="Slot2" name="Slot2" type="aoe">
                 <lock>DEBUFF</lock>
-                <customSpellDebuff>
-                  <id>90c05ea0-c37c-4f96-bc3c-1c6a917721ec</id>
-                  <name>Poison</name>
-                  <templateID>Poison</templateID>
+                <customSpellDebuff name="Poison" templateID="Poison">
+                  <id>316563d5-8f77-4979-ae37-b2493d87c759</id>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>
                   <keys>DEBUFF</keys>
@@ -379,9 +338,7 @@
                     <stats>
                       <entry>
                         <key>Speed</key>
-                        <value>
-                          <id>Speed</id>
-                          <name>Speed</name>
+                        <value id="Speed" name="Speed">
                           <baseValue>100.0</baseValue>
                           <isUpgradeable>true</isUpgradeable>
                           <maxUpgrades>50</maxUpgrades>
@@ -393,9 +350,7 @@
                       </entry>
                       <entry>
                         <key>Cooldown</key>
-                        <value>
-                          <id>Cooldown</id>
-                          <name>Cooldown</name>
+                        <value id="Cooldown" name="Cooldown">
                           <baseValue>50.0</baseValue>
                           <isUpgradeable>true</isUpgradeable>
                           <maxUpgrades>50</maxUpgrades>
@@ -412,13 +367,10 @@
             </entry>
             <entry>
               <key>Slot3</key>
-              <value>
-                <id>Slot3</id>
-                <name>Slot3</name>
-                <type>ground</type>
+              <value id="Slot3" name="Slot3" type="ground">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>a8058421-24fc-41c9-853b-b25426fee380</id>
+                  <id>d9d0c2f9-df1c-4f21-a0c0-a6559c408191</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -428,16 +380,11 @@
             </entry>
             <entry>
               <key>Slot1</key>
-              <value>
-                <id>Slot1</id>
-                <name>Slot1</name>
-                <type>impact</type>
+              <value id="Slot1" name="Slot1" type="impact">
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
-                <customSpellDebuff>
-                  <id>e4a253a6-80ae-4c2b-9e30-2c8d6caa1e48</id>
-                  <name>Slow</name>
-                  <templateID>Slow</templateID>
+                <customSpellDebuff name="Slow" templateID="Slow">
+                  <id>68490a09-59ad-419c-8b9b-d229f1486bc7</id>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>
                   <keys>DEBUFF</keys>
@@ -445,9 +392,7 @@
                     <stats>
                       <entry>
                         <key>Speed</key>
-                        <value>
-                          <id>Speed</id>
-                          <name>Speed</name>
+                        <value id="Speed" name="Speed">
                           <baseValue>100.0</baseValue>
                           <isUpgradeable>true</isUpgradeable>
                           <maxUpgrades>50</maxUpgrades>
@@ -459,9 +404,7 @@
                       </entry>
                       <entry>
                         <key>Cooldown</key>
-                        <value>
-                          <id>Cooldown</id>
-                          <name>Cooldown</name>
+                        <value id="Cooldown" name="Cooldown">
                           <baseValue>50.0</baseValue>
                           <isUpgradeable>true</isUpgradeable>
                           <maxUpgrades>50</maxUpgrades>
@@ -473,9 +416,7 @@
                       </entry>
                       <entry>
                         <key>Slow Magnitude</key>
-                        <value>
-                          <id>Slow Magnitude</id>
-                          <name>Slow Magnitude</name>
+                        <value id="Slow Magnitude" name="Slow Magnitude">
                           <baseValue>100.0</baseValue>
                           <isUpgradeable>true</isUpgradeable>
                           <maxUpgrades>50</maxUpgrades>

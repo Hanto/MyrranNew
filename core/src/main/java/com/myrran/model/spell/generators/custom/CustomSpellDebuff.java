@@ -12,6 +12,7 @@ import com.myrran.misc.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +23,9 @@ import java.util.UUID;
 public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, CustomSpellStatsDeco, Identifiable
 {
     private String id = UUID.randomUUID().toString();
+    @XmlAttribute
     private String name;
+    @XmlAttribute
     private String templateID;
     private int baseCost;
     private SpellDebuffFactory factory;

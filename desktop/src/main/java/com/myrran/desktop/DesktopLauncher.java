@@ -5,7 +5,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.myrran.ZMain;
 import com.myrran.data.GraphicSettings;
 import com.myrran.data.Settings;
-import com.myrran.data.XMLloader;
 
 
 public class DesktopLauncher
@@ -21,6 +20,7 @@ public class DesktopLauncher
 		config.title 		= settings.tittle;
 		config.fullscreen 	= settings.fullScreen;
 		config.vSyncEnabled	= settings.vsync;
+		config.foregroundFPS= 5000;
 
 		new LwjglApplication(new ZMain(), config);
 	}

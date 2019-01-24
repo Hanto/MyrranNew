@@ -10,6 +10,7 @@ import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +21,11 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomDebuffSlot implements ObservableDeco, Identifiable
 {
+    @XmlAttribute
     private String id;
+    @XmlAttribute
     private String name;
+    @XmlAttribute
     private String type;
     private List<CustomSpellSlotKey> lock = new ArrayList<>();
     private CustomSpellDebuff customSpellDebuff = new CustomSpellDebuff();
