@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.myrran.data.Settings;
 
 /** @author Ivan Delgado Huerta */
-public class MoveActorListener extends DragListener
+public class ActorMoveListener extends DragListener
 {
     private Actor parent;
     private Actor dragger;
@@ -23,7 +23,7 @@ public class MoveActorListener extends DragListener
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public MoveActorListener(Actor parent)
+    public ActorMoveListener(Actor parent)
     {
         this.parent = parent;
         setTapSquareSize(0);

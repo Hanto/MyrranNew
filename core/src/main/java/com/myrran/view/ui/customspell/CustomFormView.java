@@ -12,7 +12,7 @@ import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
-import com.myrran.view.ui.listeners.MoveActorListener;
+import com.myrran.view.ui.listeners.ActorMoveListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -135,7 +135,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         debuffIcons.forEach(debuffIcon -> tableIcons.add(debuffIcon).left().row());
 
         background.setColor(1f, 1f, 1f, 0.40f);
-        spellIcon.addListener(new MoveActorListener(this));
+        spellIcon.addListener(new ActorMoveListener(this));
 
         update();
     }
