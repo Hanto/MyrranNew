@@ -15,6 +15,13 @@ public class WidgetText extends Widget
     private WidgetLabel shadowLabel;
     private int shadowTickness;
 
+    @Override public float getMinWidth()                { return getWidth(); }
+    @Override public float getPrefWidth()               { return getWidth(); }
+    @Override public float getMaxWidth()                { return getWidth(); }
+    @Override public float getMinHeight()               { return getHeight(); }
+    @Override public float getPrefHeight()              { return getHeight(); }
+    @Override public float getMaxHeight()               { return getHeight(); }
+
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
@@ -35,13 +42,6 @@ public class WidgetText extends Widget
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
-
-    @Override public float getMinWidth()                { return getWidth(); }
-    @Override public float getPrefWidth()               { return getWidth(); }
-    @Override public float getMaxWidth()                { return getWidth(); }
-    @Override public float getMinHeight()               { return getHeight(); }
-    @Override public float getPrefHeight()              { return getHeight(); }
-    @Override public float getMaxHeight()               { return getHeight(); }
 
     public void setText(String text)
     {

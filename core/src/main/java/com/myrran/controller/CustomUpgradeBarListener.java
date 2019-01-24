@@ -10,7 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /** @author Ivan Delgado Huerta */
-public class SpellUpgradesListener extends InputListener
+public class CustomUpgradeBarListener extends InputListener
 {
     private CustomSpellController controller;
     private CustomSpellStatsI stats;
@@ -21,7 +21,7 @@ public class SpellUpgradesListener extends InputListener
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellUpgradesListener(CustomSpellController controller, CustomSpellStatsI stats, String statID)
+    public CustomUpgradeBarListener(CustomSpellController controller, CustomSpellStatsI stats, String statID)
     {
         this.controller = controller;
         this.stats = stats;

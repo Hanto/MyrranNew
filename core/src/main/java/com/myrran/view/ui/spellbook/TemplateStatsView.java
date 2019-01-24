@@ -85,8 +85,8 @@ public class TemplateStatsView extends Table implements Disposable
         int vPad = -4;
         int hPad = +3;
 
-        add(row.getName()).left()             .minWidth(100).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getBaseValue()).right()       .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getName()).left()             .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getBaseValue()).right()       .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getUpgradeCost()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getBonusPerUpgrade()).right() .padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getMaxUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);

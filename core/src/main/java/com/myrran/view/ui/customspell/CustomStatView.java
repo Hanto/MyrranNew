@@ -26,6 +26,9 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
     private WidgetText gearBonus;
     private CustomUpgradeBar upgradesView;
 
+    private static final BitmapFont font14 = Atlas.get().getFont("14");
+    private static final BitmapFont font11 = Atlas.get().getFont("11");
+    private static final BitmapFont font10 = Atlas.get().getFont("10");
     private static final Color white = Color.WHITE;
     private static final Color orange = Color.ORANGE;
     private static final Color purpleL = new Color(163/255f, 170/255f, 255/255f, 1);
@@ -55,22 +58,6 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
         model = customSpellStat;
         model.addObserver(this);
 
-        createView();
-        updateView();
-    }
-
-    @Override public void dispose()
-    {   model.removeObserver(this); }
-
-    // CREATE / UPDATE:
-    //--------------------------------------------------------------------------------------------------------
-
-    private void createView()
-    {
-        BitmapFont font14 = Atlas.get().getFont("14");
-        BitmapFont font11 = Atlas.get().getFont("11");
-        BitmapFont font10 = Atlas.get().getFont("10");
-
         name            = new WidgetText(font11, white,   black,1);
         baseValue       = new WidgetText(font14, orange,  black,1);
         total           = new WidgetText(font14, purpleH, black,1);
@@ -79,11 +66,34 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
         bonusPerUpgrade = new WidgetText(font10, purpleL, black,1);
         maxUpgrades     = new WidgetText(font10, purpleL, black,1);
         gearBonus       = new WidgetText(font10, purpleL, black,1);
-
         upgradesView    = new CustomUpgradeBar(model);
+
+        setModel(customSpellStat);
     }
 
-    public void updateView()
+    @Override public void dispose()
+    {   model.removeObserver(this); }
+
+    // CREATE / UPDATE:
+    //--------------------------------------------------------------------------------------------------------
+
+    public void setModel(CustomSpellStat customSpellStat)
+    {
+        dispose();
+
+        if (customSpellStat == null)
+            removeModel();
+        else
+        {
+            model = customSpellStat;
+            update();
+        }
+    }
+
+    public void removeModel()
+    { }
+
+    public void update()
     {
         name.setText(model.getName());
         baseValue.setText(df.format(model.getBaseValue()));
@@ -93,7 +103,6 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
         bonusPerUpgrade.setText(format(model.getBonusPerUpgrade()));
         maxUpgrades.setText(format(model.getMaxUpgrades()));
         gearBonus.setText(df.format(model.getGearBonus()));
-
         upgradesView.updateView();
     }
 
@@ -107,5 +116,5 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
     //--------------------------------------------------------------------------------------------------------
 
     @Override public void propertyChange(PropertyChangeEvent evt)
-    {   updateView(); }
+    {   update(); }
 }

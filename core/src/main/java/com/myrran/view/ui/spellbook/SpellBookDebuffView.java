@@ -8,9 +8,10 @@ import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 
+import static com.myrran.view.ui.spellbook.TemplateDebuffOptions.SortDebuffsBy;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,14 +21,19 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
     private CustomSpellBook model;
     private CustomSpellController controller;
 
-    List<TemplateDebuffView> list;
+    private TemplateDebuffOptions options;
+    private List<TemplateDebuffView> list;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellBookDebuffView(CustomSpellController controller)
-    {   this.controller = controller; }
+    public SpellBookDebuffView(CustomSpellController spellController)
+    {
+        controller  = spellController;
+        options     = new TemplateDebuffOptions(this);
+        top().left();
+    }
 
     @Override public void dispose()
     { }
@@ -44,31 +50,32 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
         else
         {
             model = customSpellBook;
-            createLayout(SortDebuffsBy.NAME);
+            createLayout(SortDebuffsBy.NAME, options.getShowDetails());
         }
     }
 
     private void removeModel()
-    {
-
-    }
+    { }
 
     private void update()
-    {
+    { }
 
-    }
-
-    private void createLayout(SortDebuffsBy sortBy)
+    public void createLayout(SortDebuffsBy sortBy, boolean showDetails)
     {
         clear();
+
         list = model.getDebuffsTemplatesLearned().stream()
             .filter(template -> template.getTotal() > 0)
             .sorted(sortBy.comparator)
             .map(this::getDebuffIcon)
             .collect(Collectors.toList());
 
+        list.forEach(view -> view.showDetails(showDetails));
+
+        add(options).left().row();
+
         for (TemplateDebuffView icon: list)
-        {   add(icon).left().row(); }
+            add(icon).left().row();
     }
 
     private TemplateDebuffView getDebuffIcon(TemplateSpellDebuff templateDebuff)
@@ -76,21 +83,6 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
         TemplateDebuffView icon = new TemplateDebuffView(controller);
         icon.setModel(templateDebuff);
         return icon;
-    }
-
-    // DEBUFF SORTING:
-    //--------------------------------------------------------------------------------------------------------
-
-    public enum SortDebuffsBy
-    {
-        NAME(Comparator.comparing(TemplateSpellDebuff::getName)),
-        TYPE(Comparator.comparing(TemplateSpellDebuff::getFactory)),
-        BASECOST(Comparator.comparing(TemplateSpellDebuff::getBaseCost));
-
-        Comparator<TemplateSpellDebuff> comparator;
-
-        SortDebuffsBy(Comparator<TemplateSpellDebuff> comparator)
-        {   this.comparator = comparator; }
     }
 
     // MVC:

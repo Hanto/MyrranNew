@@ -3,7 +3,7 @@ package com.myrran.view.ui.customspell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.controller.SpellUpgradesListener;
+import com.myrran.controller.CustomUpgradeBarListener;
 import com.myrran.model.spell.generators.custom.CustomSpellStat;
 import com.myrran.model.spell.generators.custom.CustomSpellStatsI;
 
@@ -78,7 +78,7 @@ public class CustomStatsView extends Table implements Disposable
         for (CustomStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
-            view.getUpgradesView().addListener(new SpellUpgradesListener(controller, model, statID));
+            view.getUpgradesView().addListener(new CustomUpgradeBarListener(controller, model, statID));
         }
     }
 
@@ -93,8 +93,8 @@ public class CustomStatsView extends Table implements Disposable
         int vPad = -4;
         int hPad = +3;
 
-        add(row.getName()).left()             .minWidth(100).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getBaseValue()).right()       .minWidth(45).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getName()).left()             .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getBaseValue()).right()       .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getUpgradesView()).center()   .padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getTotal()).right()           .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(row.getNumUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);

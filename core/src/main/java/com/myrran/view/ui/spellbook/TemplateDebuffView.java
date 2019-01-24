@@ -2,6 +2,7 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.controller.CustomSpellController;
@@ -50,6 +51,7 @@ public class TemplateDebuffView extends Table
         cost            = new WidgetText(font14, magenta, Color.BLACK, 1);
         statsView       = new TemplateStatsView(customSpellController);
 
+        statsView.setTouchable(Touchable.disabled);
         createLayout();
     }
 
@@ -117,9 +119,9 @@ public class TemplateDebuffView extends Table
     // MISC:
     //--------------------------------------------------------------------------------------------------------
 
-    public void hideStats(boolean hide)
+    public void showDetails(boolean showDetails)
     {
-        if (hide) cell.setActor(null);
+        if (!showDetails) cell.setActor(null);
         else cell.setActor(statsView);
     }
 }
