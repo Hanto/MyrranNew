@@ -1,5 +1,6 @@
 package com.myrran.desktop;
 
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.myrran.ZMain;
@@ -21,6 +22,7 @@ public class DesktopLauncher
 		config.fullscreen 	= settings.fullScreen;
 		config.vSyncEnabled	= settings.vsync;
 		config.foregroundFPS= 5000;
+		config.addIcon("textures/icons/IceBall.png", Files.FileType.Internal);
 
 		new LwjglApplication(new ZMain(), config);
 	}

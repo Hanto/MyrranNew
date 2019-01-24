@@ -2,10 +2,11 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.myrran.view.ui.listeners.TemplateDebuffShowListener;
-import com.myrran.view.ui.listeners.TemplateDebuffSortListener;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.listeners.TemplateDebuffOrderListener;
+import com.myrran.view.ui.listeners.TemplateDebuffShowListener;
+import com.myrran.view.ui.listeners.TemplateDebuffSortListener;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.util.Arrays;
@@ -20,13 +21,16 @@ public class TemplateDebuffOptions extends Table
 
     private SortDebuffsBy sortBy = SortDebuffsBy.NAME;
     private boolean showDetails = false;
+    private boolean reverseOrder = false;
     private WidgetText showDetailsText;
+    private WidgetText reverseOrderText;
 
     private Map<SortDebuffsBy, WidgetText> sortMap = new EnumMap<>(SortDebuffsBy.class);
-    private static final Color selectedSort = Color.WHITE;
+    private static final Color selectedSort = Color.ORANGE;
     private static final Color unselectedSort = Color.GRAY;
 
-    public boolean getShowDetails()            { return showDetails; }
+    public boolean getShowDetails()             { return showDetails; }
+    public SortDebuffsBy getSortBy()            { return sortBy; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -35,8 +39,10 @@ public class TemplateDebuffOptions extends Table
     {
         view = spellBookDebuffView;
 
+        reverseOrderText= new WidgetText("Desc", Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText("Show Details", Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         showDetailsText.addListener(new TemplateDebuffShowListener(this));
+        reverseOrderText.addListener(new TemplateDebuffOrderListener(this));
 
         Arrays.asList(SortDebuffsBy.values()).forEach(this::createSortWidget);
 
@@ -47,8 +53,8 @@ public class TemplateDebuffOptions extends Table
     {
         top().left();
         add(showDetailsText).minWidth(80).bottom().left();
-
         sortMap.values().forEach(this::add);
+        add(reverseOrderText);
         row();
     }
 
@@ -72,16 +78,20 @@ public class TemplateDebuffOptions extends Table
     {
         showDetails = !showDetails;
         showDetailsText.setText(showDetails? "Hide Details": "Show Details");
-        view.createLayout(sortBy, showDetails);
+        view.createLayout(sortBy, showDetails, reverseOrder);
     }
 
     public void sortBy(SortDebuffsBy sort)
     {
+        if (sortBy == sort)
+            reverseOrder = !reverseOrder;
+        reverseOrderText.setText(reverseOrder ? "Asc" : "Desc");
+
         sortMap.get(sortBy).setTextColor(unselectedSort);
         sortBy = sort;
         sortMap.get(sortBy).setTextColor(selectedSort);
 
-        view.createLayout(sortBy, showDetails);
+        view.createLayout(sortBy, showDetails, reverseOrder);
     }
 
     // SORT OPTIONS:
@@ -91,7 +101,8 @@ public class TemplateDebuffOptions extends Table
     {
         NAME(Comparator.comparing(TemplateSpellDebuff::getName)),
         TYPE(Comparator.comparing(TemplateSpellDebuff::getFactory)),
-        COST(Comparator.comparing(TemplateSpellDebuff::getBaseCost));
+        COST(Comparator.comparing(TemplateSpellDebuff::getBaseCost)),
+        AVAILABLE(Comparator.comparing(TemplateSpellDebuff::getAvailable));
 
         Comparator<TemplateSpellDebuff> comparator;
 
