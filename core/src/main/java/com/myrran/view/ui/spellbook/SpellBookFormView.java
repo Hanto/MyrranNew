@@ -9,6 +9,7 @@ import com.myrran.view.ui.sortabletable.SortableTableView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
 public class SpellBookFormView extends SortableTableView<TemplateSpellForm>
@@ -23,7 +24,14 @@ public class SpellBookFormView extends SortableTableView<TemplateSpellForm>
     public SpellBookFormView(CustomSpellController spellController)
     {
         controller  = spellController;
-        build("SpellForm SpellBook", new SortableOptionsForm(this), true);
+
+        addSortComparator("name", Comparator.comparing(TemplateSpellForm::getName));
+        addSortComparator("type", Comparator.comparing(TemplateSpellForm::getFactory));
+        addSortComparator("slots", Comparator.comparing(form -> form.getSpellSlots().size()));
+        addSortComparator("available", Comparator.comparing(TemplateSpellForm::getAvailable));
+        addSortComparator("total", Comparator.comparing(TemplateSpellForm::getTotal));
+
+        build("SpellForm SpellBook", true);
     }
 
     @Override public void dispose() {}

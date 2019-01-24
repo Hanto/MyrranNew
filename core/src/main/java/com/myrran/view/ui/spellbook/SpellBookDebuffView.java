@@ -9,6 +9,7 @@ import com.myrran.view.ui.sortabletable.SortableTableView;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
 public class SpellBookDebuffView extends SortableTableView<TemplateSpellDebuff>
@@ -23,7 +24,14 @@ public class SpellBookDebuffView extends SortableTableView<TemplateSpellDebuff>
     public SpellBookDebuffView(CustomSpellController spellController)
     {
         controller  = spellController;
-        build("Debuff SpellBook", new SortableOptionsDebuff(this), true);
+
+        addSortComparator("name", Comparator.comparing(TemplateSpellDebuff::getName));
+        addSortComparator("type", Comparator.comparing(TemplateSpellDebuff::getFactory));
+        addSortComparator("cost", Comparator.comparing(TemplateSpellDebuff::getBaseCost));
+        addSortComparator("available", Comparator.comparing(TemplateSpellDebuff::getAvailable));
+        addSortComparator("total", Comparator.comparing(TemplateSpellDebuff::getTotal));
+
+        build("Debuff SpellBook", true);
     }
 
     @Override public void dispose() {}
