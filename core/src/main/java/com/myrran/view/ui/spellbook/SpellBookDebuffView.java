@@ -14,19 +14,19 @@ import com.myrran.view.ui.widgets.WidgetText;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.myrran.view.ui.spellbook.TemplateDebuffOptions.SortDebuffsBy;
-
 /** @author Ivan Delgado Huerta */
-public class SpellBookDebuffView extends Table implements PropertyChangeListener, Disposable
+public class SpellBookDebuffView extends Table implements PropertyChangeListener, Disposable,
+    SortableTableI<TemplateSpellDebuff>
 {
     private CustomSpellBook model;
     private CustomSpellController controller;
 
     private WidgetText name;
-    private TemplateDebuffOptions options;
+    private SortableOptionsDebuff options;
     private List<TemplateDebuffView> list;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
 
@@ -37,7 +37,7 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
     {
         controller  = spellController;
         name        = new WidgetText("Debuff SpellBook", font20, Color.WHITE, Color.BLACK, 2);
-        options     = new TemplateDebuffOptions(this);
+        options     = new SortableOptionsDebuff(this);
 
         name.addListener(new ActorMoveListener(this));
         top().left();
@@ -58,7 +58,7 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
         else
         {
             model = customSpellBook;
-            createLayout(SortDebuffsBy.NAME, options.getShowDetails(), false);
+            createLayout(Comparator.comparing(TemplateSpellDebuff::getName), options.getShowDetails(), false);
         }
     }
 
@@ -68,13 +68,14 @@ public class SpellBookDebuffView extends Table implements PropertyChangeListener
     private void update()
     { }
 
-    public void createLayout(SortDebuffsBy sortBy, boolean showDetails, boolean reverseOrder)
+    @Override
+    public void createLayout(Comparator<TemplateSpellDebuff> sortBy, boolean showDetails, boolean reverseOrder)
     {
         clear();
 
         list = model.getDebuffsTemplatesLearned().stream()
             .filter(template -> template.getTotal() > 0)
-            .sorted(sortBy.comparator)
+            .sorted(sortBy)
             .map(this::getDebuffIcon)
             .collect(Collectors.toList());
 
