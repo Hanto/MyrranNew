@@ -99,7 +99,7 @@ public abstract class SortableTableView<T> extends Table
         createLayout();
     }
 
-    public void createLayout()
+    private void createLayout()
     {
         top().left();
         clear();
