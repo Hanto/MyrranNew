@@ -2,8 +2,8 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.myrran.controller.TemplateDebuffShowListener;
-import com.myrran.controller.TemplateDebuffSortListener;
+import com.myrran.view.ui.listeners.TemplateDebuffShowListener;
+import com.myrran.view.ui.listeners.TemplateDebuffSortListener;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;

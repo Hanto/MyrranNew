@@ -1,8 +1,9 @@
-package com.myrran.controller;
+package com.myrran.view.ui.listeners;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.custom.CustomSpellStatsI;
 import com.myrran.misc.InvalidIDException;
 import com.myrran.view.ui.Atlas;
