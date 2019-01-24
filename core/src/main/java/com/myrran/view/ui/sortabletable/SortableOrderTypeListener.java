@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /** @author Ivan Delgado Huerta */
-public class SortableOrderTypetListener extends InputListener
+public class SortableOrderTypeListener extends InputListener
 {
     private SortableOptions options;
     private String type;
@@ -12,7 +12,7 @@ public class SortableOrderTypetListener extends InputListener
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SortableOrderTypetListener(SortableOptions debuffView, String sortName)
+    public SortableOrderTypeListener(SortableOptions debuffView, String sortName)
     {
         options = debuffView;
         type = sortName;

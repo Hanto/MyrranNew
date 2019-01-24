@@ -14,18 +14,21 @@ import java.util.stream.Collectors;
 /** @author Ivan Delgado Huerta */
 public abstract class SortableTableView<T> extends Table implements SortableTableI<T>
 {
-    private WidgetText name;
-    private SortableOptions<T> options;
-    private Collection<T>modelData;
-    private List<Actor> list;
+    //protected Table options;
+
+    protected WidgetText name;
+    protected SortableOptions<T> options;
+    protected Collection<T>modelData;
+    protected List<Actor> list;
+
     private static final BitmapFont font20 = Atlas.get().getFont("20");
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SortableTableView(SortableOptions<T> sortableOptions, boolean movable)
+    public void build(String text, SortableOptions<T> sortableOptions, boolean movable)
     {
-        name    = new WidgetText("SpellForm SpellBook", font20, Color.WHITE, Color.BLACK, 2);
+        name    = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 2);
         options = sortableOptions;
 
         if (movable)
@@ -35,10 +38,15 @@ public abstract class SortableTableView<T> extends Table implements SortableTabl
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setData(Collection<T>data)
+    public void createLayout(Collection<T>data)
     {
         modelData = data;
         createLayout(options.getActualSortBy().comparator, options.getShowDetails(), options.getReverseOrder());
+    }
+
+    private void createOptionsLayout()
+    {
+
     }
 
     @Override
@@ -48,12 +56,14 @@ public abstract class SortableTableView<T> extends Table implements SortableTabl
         clear();
 
         list = modelData.stream()
-            .sorted(comparator)
+            .sorted(reverseOrder ? comparator.reversed() : comparator)
             .map(this::getIcon)
             .collect(Collectors.toList());
 
-        if (reverseOrder)
-            Collections.reverse(list);
+        list.stream()
+            .filter(DetailedActorI.class::isInstance)
+            .map(DetailedActorI.class::cast)
+            .forEach(actor -> actor.showDetails(showDetails));
 
         add(name).left().padBottom(-8).padTop(-8).row();
         add(options).left().row();

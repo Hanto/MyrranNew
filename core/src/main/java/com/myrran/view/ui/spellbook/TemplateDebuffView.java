@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.sortabletable.DetailedActorI;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
@@ -15,7 +16,7 @@ import com.myrran.view.ui.widgets.WidgetText;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateDebuffView extends Table
+public class TemplateDebuffView extends Table implements DetailedActorI
 {
     private TemplateSpellDebuff model;
     private CustomSpellController controller;

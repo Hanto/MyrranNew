@@ -35,9 +35,9 @@ public abstract class SortableOptions<T> extends Table
     // CONSTRUCTOR:
     //-----------------------------------------------------------------------------------------------
 
-    public SortableOptions(SortableTableI<T> spellBookDebuffView)
+    public SortableOptions(SortableTableI<T> sortableTabl)
     {
-        sortableTable = spellBookDebuffView;
+        sortableTable = sortableTabl;
 
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
@@ -109,7 +109,7 @@ public abstract class SortableOptions<T> extends Table
             this.insertOrder = sortMap.size();
 
             widgetText = new WidgetText(text, Atlas.get().getFont("10"), unselectedSort, Color.BLACK, 1);
-            widgetText.addListener(new SortableOrderTypetListener(SortableOptions.this, text));
+            widgetText.addListener(new SortableOrderTypeListener(SortableOptions.this, text));
         }
     }
 }

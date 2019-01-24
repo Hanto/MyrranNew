@@ -62,11 +62,12 @@ public class ZMain extends ApplicationAdapter
 			SpellBookDebuffView spellBookView = new SpellBookDebuffView(controller);
 			spellBookView.setModel(book);
 			uiStage.addActor(spellBookView);
-			spellBookView.setPosition(150, 200);
+			spellBookView.setPosition(270, 590);
 
 			SpellBookFormView spellBookForm = new SpellBookFormView(controller);
 			spellBookForm.setModel(book);
 			uiStage.addActor(spellBookForm);
+			spellBookForm.setPosition(10, 590);
 
 			uiStage.addActor(fps);
 
