@@ -95,13 +95,8 @@ public class CustomSpellBook
         if (debuffTemplatesLearned.isAvailable(debuffTemplateID))
         {
             CustomSpellForm spellForm = getCustomSpellForm(customFormID);
-
-            if (!spellForm.getCustomDebufflot(slotID).hasDebuff())
-            {
-                TemplateSpellDebuff template = templateBook.getSpellDebuffTemplate(debuffTemplateID);
-                spellForm.setCustomSpellDebuff(template, slotID);
-                debuffTemplatesLearned.borrow(debuffTemplateID);
-            }
+            CustomDebuffSlot slot = spellForm.getCustomDebufflot(slotID);
+            addCustomSpellDebuff(slot, debuffTemplateID);
         }
         else
             throw new InvalidIDException("SpellDebuffDeco templates not available, templateID: %s", debuffTemplateID);
