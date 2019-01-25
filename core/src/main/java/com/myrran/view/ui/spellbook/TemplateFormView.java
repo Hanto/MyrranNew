@@ -22,11 +22,13 @@ public class TemplateFormView extends Table implements DetailedActorI
     private WidgetImage debuffIcon;
     private WidgetText availableTotal;
 
+    private Table tableHeader;
     private WidgetText name;
     private WidgetText cost;
 
     private Cell<TemplateStatsView> cell;
 
+    private static final int VPAD = -4;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
     private static final BitmapFont font11 = Atlas.get().getFont("10");
@@ -38,12 +40,15 @@ public class TemplateFormView extends Table implements DetailedActorI
     public TemplateFormView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
+        tableHeader     = new Table();
         icon            = new WidgetGroup();
         debuffIcon      = new WidgetImage();
         availableTotal  = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
         name            = new WidgetText(font20, Color.ORANGE, Color.BLACK, 1);
 
         createLayout();
+        createHeaderLayout();
+        createIconLayout();
     }
 
     // UPDATE:
@@ -76,35 +81,39 @@ public class TemplateFormView extends Table implements DetailedActorI
         name.setText(model.getName());
     }
 
+    // CREATE LAYOUTS:
+    //--------------------------------------------------------------------------------------------------------
+
     private void createLayout()
     {
-        int vPad = -4;
-
         clear();
+        top().left();
+        add(icon).top().left();
+        add(tableHeader).left().row();
+        add();
+        add().left().padBottom(8);
+    }
+
+    private void createHeaderLayout()
+    {
+        tableHeader.clear();
+        tableHeader.bottom().left();
+        tableHeader.add().bottom().padTop(VPAD).padBottom(VPAD).left().row();
+        tableHeader.add(name).bottom().padTop(VPAD).padBottom(VPAD).left();
+        tableHeader.add(cost).bottom().padTop(VPAD).padBottom(VPAD+2).left().row();
+    }
+
+    private void createIconLayout()
+    {
         icon.addActor(debuffIcon);
         icon.addActor(availableTotal);
         availableTotal.setPosition(2, 0);
-
-        Table nameCostTable = new Table().bottom().left();
-        nameCostTable.add(name).bottom().left().padTop(vPad);
-        nameCostTable.add(cost).bottom().left().padTop(vPad).padBottom(1);
-
-        Table textTable = new Table().bottom().left();
-        textTable.add().left().padTop(-2).padBottom(vPad).row();
-        textTable.add(nameCostTable).left().padTop(-2).padBottom(vPad).row();
-
-        top().left();
-        add(icon).top().left();
-        add(textTable).left().row();
-        add();
-        add().left().padBottom(4);
-
-        //cell = getCell(statsView);
     }
 
     // MISC:
     //--------------------------------------------------------------------------------------------------------
 
+    @Override
     public void showDetails(boolean showDetails)
     {
         //if (!showDetails) cell.setActor(null);
