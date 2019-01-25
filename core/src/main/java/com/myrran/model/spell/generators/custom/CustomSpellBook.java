@@ -26,16 +26,15 @@ public class CustomSpellBook
     private QuantityMapI<TemplateSpellDebuff> debuffTemplatesLearned = new QuantityMap<>(new HashMap<>());
     private Map<String, CustomSpellForm> customSpells = new HashMap<>();
 
-    @XmlTransient
-    private TemplateSpellBook templateBook;
+    @XmlTransient private TemplateSpellBook templateBook;
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setSpellBookTemplates(TemplateSpellBook tBook) { this.templateBook = tBook; }
+    public void setSpellBookTemplates(TemplateSpellBook tBook)          { this.templateBook = tBook; }
     public Collection<TemplateSpellDebuff> getDebuffsTemplatesLearned() { return debuffTemplatesLearned.values(); }
-    public Collection<TemplateSpellForm> getFormTemplatesLearned() { return formTemplatesLearned.values(); }
-    public Collection<CustomSpellForm> getCustomSpellForms()    { return customSpells.values(); }
+    public Collection<TemplateSpellForm> getFormTemplatesLearned()      { return formTemplatesLearned.values(); }
+    public Collection<CustomSpellForm> getCustomSpellForms()            { return customSpells.values(); }
 
     // TEMPLATES -> LEARNED
     //--------------------------------------------------------------------------------------------------------

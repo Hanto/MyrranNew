@@ -6,12 +6,17 @@ import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.*;
 import com.myrran.misc.InvalidIDException;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.view.ui.Atlas;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /** @author Ivan Delgado Huerta */
 public class DadDebuffTarget extends Target
 {
     private CustomDebuffSlot model;
     private CustomSpellController controller;
+
+    private static Logger LOG = LogManager.getFormatterLogger(DadDebuffTarget.class);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -43,8 +48,6 @@ public class DadDebuffTarget extends Target
             { controller.addCustomSpellDebuff(model, templadeDebuff.getID()); }
         }
         catch (InvalidIDException e)
-        {
-
-        }
+        {   LOG.warn("Cannot drop debuff here", e); }
     }
 }

@@ -36,7 +36,7 @@ public class ZMain extends ApplicationAdapter
 	private CustomSpellController controller;
 	private WidgetText fps;
 
-	private static Logger LOG = LogManager.getFormatterLogger(Atlas.class);
+	private static final Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
 	@Override
 	public void create ()

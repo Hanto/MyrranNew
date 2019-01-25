@@ -49,7 +49,7 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
         lock        = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
         dadTarget   = new DadDebuffTarget(icon, controller);
 
-        controller.addTarget(dadTarget);
+        controller.getDadDebuff().addTarget(dadTarget);
 
         createLayout();
     }
@@ -57,7 +57,7 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
     @Override public void dispose()
     {
         disposeObservers();
-        controller.removeTarget(dadTarget);
+        controller.getDadDebuff().removeTarget(dadTarget);
     }
 
     private void disposeObservers()

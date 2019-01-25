@@ -14,10 +14,12 @@ import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateDebuffView extends Table implements DetailedActorI, Disposable
+public class TemplateDebuffView extends Table implements DetailedActorI, Disposable, PropertyChangeListener
 {
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
@@ -58,7 +60,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
         cost            = new WidgetText(font14, magenta, Color.BLACK, 1);
         statsView       = new TemplateStatsView(customSpellController);
 
-        controller.addSource(dadSource);
+        controller.getDadDebuff().addSource(dadSource);
 
         createLayout();
         createHeaderLayout();
@@ -67,18 +69,30 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     }
 
     @Override public void dispose()
-    {   controller.removeSource(dadSource); }
+    {
+        disposeObservers();
+        controller.getDadDebuff().removeSource(dadSource);
+    }
+
+    private void disposeObservers()
+    {
+        if (model != null)
+            model.removeObserver(this);
+    }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
     public void setModel(TemplateSpellDebuff templateSpellDebuff)
     {
+        disposeObservers();
+
         if (templateSpellDebuff == null)
             removeModel();
         else
         {
             model = templateSpellDebuff;
+            model.addObserver(this);
             dadSource.setModel(model);
             update();
         }
@@ -144,4 +158,10 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
         if (!showDetails)
             cell.setActor(null);
     }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {   update(); }
 }

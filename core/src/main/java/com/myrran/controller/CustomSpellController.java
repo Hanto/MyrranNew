@@ -1,19 +1,14 @@
 package com.myrran.controller;
 
-import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.*;
-
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.myrran.model.spell.generators.custom.*;
 import com.myrran.misc.InvalidIDException;
-import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 /** @author Ivan Delgado Huerta */
 public class CustomSpellController
 {
     private CustomSpellBook spellBook;
-    private DragAndDrop dad;
-
-    public DragAndDrop getDragAndDrop()         { return dad; }
+    private DragAndDrop dadDebuff;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -21,8 +16,13 @@ public class CustomSpellController
     public CustomSpellController(CustomSpellBook spellBook)
     {
         this.spellBook = spellBook;
-        dad = new DragAndDrop();
+        dadDebuff = new DragAndDrop();
     }
+
+    // DRAG AND DROP:
+    //--------------------------------------------------------------------------------------------------------
+
+    public DragAndDrop getDadDebuff()  { return dadDebuff; }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
@@ -43,18 +43,6 @@ public class CustomSpellController
 
         form.notify("", null, null);
     }
-
-    public void addSource(Source source)
-    {   dad.addSource(source); }
-
-    public void removeSource(Source source)
-    {   dad.removeSource(source); }
-
-    public void addTarget(Target target)
-    {   dad.addTarget(target); }
-
-    public void removeTarget(Target target)
-    {   dad.removeTarget(target);}
 
     public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID) throws InvalidIDException
     {   spellBook.addCustomSpellDebuff(slot, debuffTemplateID); }
