@@ -70,7 +70,12 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
         }
         else
         {
+            name = null;
             templateID = null;
+            baseCost = 0;
+            factory = null;
+            keys = null;
+            spellStats.values().clear();
             removeAllObservers();
         }
     }

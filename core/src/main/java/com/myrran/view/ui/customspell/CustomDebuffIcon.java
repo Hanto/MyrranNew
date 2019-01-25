@@ -1,17 +1,15 @@
 package com.myrran.view.ui.customspell;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffTarget;
-import com.myrran.model.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
+import com.myrran.model.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.listeners.TouchDownListener;
+import com.myrran.view.ui.listeners.TouchDownRightListener;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
@@ -53,7 +51,8 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
         dadTarget   = new DadDebuffTarget(icon, controller);
 
         controller.getDadDebuff().addTarget(dadTarget);
-        icon.addListener(new TouchDownListener(event -> { if (event.getButton() == Input.Buttons.RIGHT) controller.removeCustomSpellDebuff(modelSlot);}));
+        icon.addListener(new TouchDownRightListener(event ->
+            controller.removeCustomSpellDebuff(modelSlot)));
 
         createLayout();
     }

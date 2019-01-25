@@ -144,6 +144,9 @@ public class CustomSpellBook
     // FORM of any ID:
     //--------------------------------------------------------------------------------------------------------
 
+    public CustomSpellForm getSpellFormWithTheStats(CustomSpellStatsI stats) throws InvalidIDException
+    {   return getSpellFormWithTheStats(stats.getID()); }
+
     public CustomSpellForm getSpellFormWithTheStats(String customSpellStatsID) throws InvalidIDException
     {
         if (customSpells.containsKey(customSpellStatsID))

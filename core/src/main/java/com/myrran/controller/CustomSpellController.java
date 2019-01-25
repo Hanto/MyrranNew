@@ -1,14 +1,18 @@
 package com.myrran.controller;
 
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
-import com.myrran.model.spell.generators.custom.*;
 import com.myrran.misc.InvalidIDException;
+import com.myrran.model.spell.generators.custom.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /** @author Ivan Delgado Huerta */
 public class CustomSpellController
 {
     private CustomSpellBook spellBook;
     private DragAndDrop dadDebuff;
+
+    private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellController.class);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -29,7 +33,7 @@ public class CustomSpellController
 
     public void modifyStatBy(CustomSpellStatsI stats, String statID, int upgradesBy) throws InvalidIDException
     {
-        CustomSpellForm form = spellBook.getSpellFormWithTheStats(stats.getID());
+        CustomSpellForm form = spellBook.getSpellFormWithTheStats(stats);
         CustomSpellStat stat = stats.getCustomSpellStat(statID);
 
         int upgrades = stat.getNumUpgrades() + upgradesBy;
@@ -41,12 +45,36 @@ public class CustomSpellController
         else
         {   stats.setNumUpgrades(statID, upgrades); }
 
-        form.notify("", null, null);
+        notifyForm(form);
     }
 
-    public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID) throws InvalidIDException
-    {   spellBook.addCustomSpellDebuff(slot, debuffTemplateID); }
+    public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID)
+    {
+        try
+        {
+            spellBook.addCustomSpellDebuff(slot, debuffTemplateID);
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellDebuff());
+            notifyForm(form);
+        }
+        catch (InvalidIDException e)
+        {   LOG.warn("Cannot add debuf: %S into %S", debuffTemplateID, slot.getName());}
+    }
 
     public void removeCustomSpellDebuff(CustomDebuffSlot slot)
-    {   spellBook.removeCustomSpellDebuff(slot); }
+    {
+        try
+        {
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellDebuff());
+            spellBook.removeCustomSpellDebuff(slot);
+            notifyForm(form);
+        }
+        catch (InvalidIDException e)
+        {   LOG.warn("Cannot remove debuf from slot: %s", slot.getName());}
+    }
+
+    // NOTIFY FORM:
+    //--------------------------------------------------------------------------------------------------------
+
+    private void notifyForm(CustomSpellForm form)
+    {   form.notify("fieldChange", null, null);}
 }

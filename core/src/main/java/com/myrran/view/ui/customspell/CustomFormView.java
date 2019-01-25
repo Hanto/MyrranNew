@@ -7,14 +7,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.controller.DadDebuffTarget;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
-import com.myrran.view.ui.listeners.ActorMoveListener;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

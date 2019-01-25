@@ -1,14 +1,12 @@
 package com.myrran.controller;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.*;
-
-import com.myrran.misc.InvalidIDException;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.Atlas;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.*;
 
 /** @author Ivan Delgado Huerta */
 public class DadDebuffTarget extends Target
@@ -40,14 +38,9 @@ public class DadDebuffTarget extends Target
     @Override
     public void drop(Source source, Payload payload, float x, float y, int pointer)
     {
-        try
-        {
-            TemplateSpellDebuff templadeDebuff = (TemplateSpellDebuff) payload.getObject();
+        TemplateSpellDebuff templadeDebuff = (TemplateSpellDebuff) payload.getObject();
 
-            if (model.opensLock(templadeDebuff.getKeys()) && !model.hasDebuff())
-            { controller.addCustomSpellDebuff(model, templadeDebuff.getID()); }
-        }
-        catch (InvalidIDException e)
-        {   LOG.warn("Cannot drop debuff here", e); }
+        if (model.opensLock(templadeDebuff.getKeys()) && !model.hasDebuff())
+        { controller.addCustomSpellDebuff(model, templadeDebuff.getID()); }
     }
 }
