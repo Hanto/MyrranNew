@@ -47,8 +47,6 @@ public class CustomSpellController
     public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID) throws InvalidIDException
     {   spellBook.addCustomSpellDebuff(slot, debuffTemplateID); }
 
-    public void removeCustomSpellDebuff()
-    {
-
-    }
+    public void removeCustomSpellDebuff(CustomDebuffSlot slot)
+    {   spellBook.removeCustomSpellDebuff(slot); }
 }

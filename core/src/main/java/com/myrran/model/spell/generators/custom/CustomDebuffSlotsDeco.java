@@ -34,6 +34,6 @@ public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
     default int getDebuffSlotsTotalCost()
     {   return getDebuffSlots().getDebuffSlotsTotalCost(); }
 
-    default CustomDebuffSlot getCustomDebufflot(String slotID) throws InvalidIDException
-    {   return getDebuffSlots().getCustomDebufflot(slotID); }
+    default CustomDebuffSlot getCustomDebuffSlot(String slotID) throws InvalidIDException
+    {   return getDebuffSlots().getCustomDebuffSlot(slotID); }
 }

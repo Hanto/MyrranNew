@@ -95,7 +95,7 @@ public class CustomSpellBook
         if (debuffTemplatesLearned.isAvailable(debuffTemplateID))
         {
             CustomSpellForm spellForm = getCustomSpellForm(customFormID);
-            CustomDebuffSlot slot = spellForm.getCustomDebufflot(slotID);
+            CustomDebuffSlot slot = spellForm.getCustomDebuffSlot(slotID);
             addCustomSpellDebuff(slot, debuffTemplateID);
         }
         else
@@ -113,16 +113,22 @@ public class CustomSpellBook
         formTemplatesLearned.returnBack(spellForm.getTemplateID());
     }
 
+    public void removeCustomSpellDebuff(CustomDebuffSlot slot)
+    {
+        if (slot.hasDebuff())
+        {
+            CustomSpellDebuff spellDebuff = slot.getCustomSpellDebuff();
+            String templateID = spellDebuff.getTemplateID();
+            slot.removeCustomSpellDebuff();
+            debuffTemplatesLearned.returnBack(templateID);
+        }
+    }
+
     public void removeCustomSpellDebuff(String customFormID, String slotID) throws InvalidIDException
     {
         CustomSpellForm spellForm = getCustomSpellForm(customFormID);
-        CustomSpellDebuff spellDebuff = spellForm.getCustomSpellDebuff(slotID);
-
-        if (spellDebuff.hasDebuff())
-        {
-            spellForm.removeCustomSpellDebuff(slotID);
-            debuffTemplatesLearned.returnBack(spellDebuff.getTemplateID());
-        }
+        CustomDebuffSlot slot = spellForm.getCustomDebuffSlot(slotID);
+        removeCustomSpellDebuff(slot);
     }
 
     // RELOAD TEMPLATES:

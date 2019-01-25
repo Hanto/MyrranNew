@@ -8,14 +8,14 @@ import java.util.function.Consumer;
 /** @author Ivan Delgado Huerta */
 public class TouchDownListener extends InputListener
 {
-    private Consumer<Object> consumer;
+    private Consumer<InputEvent> consumer;
 
-    public TouchDownListener(Consumer<Object> consumer)
+    public TouchDownListener(Consumer<InputEvent> consumer)
     {   this.consumer = consumer; }
 
     @Override public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
     {
-        consumer.accept(null);
+        consumer.accept(event);
         return true;
     }
 }
