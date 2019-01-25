@@ -1,4 +1,4 @@
-package com.myrran.view.ui.sortabletable;
+package com.myrran.view.ui.listeners;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;

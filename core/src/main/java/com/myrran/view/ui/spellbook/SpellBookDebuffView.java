@@ -5,14 +5,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.sortabletable.SortableTableView;
+import com.myrran.view.ui.widgets.WidgetSortableTable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
-public class SpellBookDebuffView extends SortableTableView<TemplateSpellDebuff>
+public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff>
     implements PropertyChangeListener, Disposable
 {
     private CustomSpellBook model;
@@ -25,11 +25,11 @@ public class SpellBookDebuffView extends SortableTableView<TemplateSpellDebuff>
     {
         controller  = spellController;
 
-        addSortComparator("name", Comparator.comparing(TemplateSpellDebuff::getName));
-        addSortComparator("type", Comparator.comparing(TemplateSpellDebuff::getFactory));
-        addSortComparator("cost", Comparator.comparing(TemplateSpellDebuff::getBaseCost));
-        addSortComparator("available", Comparator.comparing(TemplateSpellDebuff::getAvailable));
-        addSortComparator("total", Comparator.comparing(TemplateSpellDebuff::getTotal));
+        addSortOption("name", Comparator.comparing(TemplateSpellDebuff::getName));
+        addSortOption("type", Comparator.comparing(TemplateSpellDebuff::getFactory));
+        addSortOption("cost", Comparator.comparing(TemplateSpellDebuff::getBaseCost));
+        addSortOption("available", Comparator.comparing(TemplateSpellDebuff::getAvailable));
+        addSortOption("total", Comparator.comparing(TemplateSpellDebuff::getTotal));
 
         build("Debuff SpellBook", true);
     }

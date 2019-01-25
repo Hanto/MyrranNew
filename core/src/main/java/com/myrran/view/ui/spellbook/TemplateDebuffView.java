@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.sortabletable.DetailedActorI;
+import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;

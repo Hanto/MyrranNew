@@ -1,4 +1,4 @@
-package com.myrran.view.ui.sortabletable;
+package com.myrran.view.ui.widgets;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -6,25 +6,25 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
-import com.myrran.view.ui.widgets.WidgetText;
+import com.myrran.view.ui.listeners.TouchDownListener;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public abstract class SortableTableView<T> extends Table
+public abstract class WidgetSortableTable<T> extends Table
 {
-    protected Table optionsTable;
-    private SortBy options;
+    private Table optionsTable;
+    private SortOptions options;
     private boolean showDetails = false;
     private boolean reverseOrder = false;
     private WidgetText showDetailsText;
     private WidgetText reverseOrderText;
-    private Map<String, SortBy> sortMap = new HashMap<>();
+    private Map<String, SortOptions> sortMap = new HashMap<>();
 
-    protected WidgetText name;
-    protected Collection<T>modelData;
-    protected List<Actor> list;
+    private WidgetText name;
+    private Collection<T>modelData;
+    private List<Actor> list;
 
     private static final String ASC = "Asc";
     private static final String DESC = "Desc";
@@ -42,7 +42,7 @@ public abstract class SortableTableView<T> extends Table
         name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 2);
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
-        reverseOrderText.addListener(new TouchDownListener( o -> setSortBy(options.text)));
+        reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(options.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 
         if (movable)
@@ -54,43 +54,63 @@ public abstract class SortableTableView<T> extends Table
     // SORT OPTIONS:
     //--------------------------------------------------------------------------------------------------------
 
-    private void createOptionsLayout()
+    public void addSortOption(String text, Comparator<T>comparator)
     {
-        optionsTable = new Table().top().left();
-        optionsTable.add(showDetailsText).minWidth(80).bottom().left();
+        SortOptions options = new SortOptions(text, comparator);
 
-        sortMap.values().stream()
-            .sorted(Comparator.comparing(sortBy -> sortBy.insertOrder))
-            .forEach(sortBy -> optionsTable.add(sortBy.widgetText));
+        if (sortMap.isEmpty())
+            setSortOption(options);
 
-        optionsTable.add(reverseOrderText);
-        optionsTable.row();
+        sortMap.put(text, options);
     }
 
-    private void setShowDetails()
+    public void setShowDetails()
     {
         showDetails = !showDetails;
         showDetailsText.setText(showDetails? HIDE : SHOW);
         createLayout();
     }
 
-    private void setSortBy(String sort)
+    public void setSortOption(String optionName)
     {
-        if (options.text.equals(sort))
-            reverseOrder = !reverseOrder;
+        if (options.text.equals(optionName))
+            setReverseOrder(!reverseOrder);
 
-        reverseOrderText.setText(reverseOrder ? ASC : DESC);
-
-        options.widgetText.setTextColor(unselectedSort);
-        options = sortMap.get(sort);
-        options.widgetText.setTextColor(selectedSort);
+        setSortOption(sortMap.get(optionName));
         createLayout();
     }
 
-    private void setOptions(SortBy newOptions)
-    {   options = newOptions; options.widgetText.setTextColor(selectedSort); }
+    private void setSortOption(SortOptions newOptions)
+    {
+        if (options != null)
+            options.widgetText.setTextColor(unselectedSort);
+        options = newOptions;
+        options.widgetText.setTextColor(selectedSort);
+    }
 
-    // MAIN:
+    private void setReverseOrder(boolean reverse)
+    {
+        reverseOrder = reverse;
+        reverseOrderText.setText(reverseOrder ? ASC : DESC);
+    }
+
+    // OPTIONS LAYOUT:
+    //--------------------------------------------------------------------------------------------------------
+
+    private void createOptionsLayout()
+    {
+        optionsTable = new Table().top().left();
+        optionsTable.add(showDetailsText).minWidth(80).bottom().left();
+
+        sortMap.values().stream()
+            .sorted(Comparator.comparing(options -> options.insertOrder))
+            .forEach(options -> optionsTable.add(options.widgetText));
+
+        optionsTable.add(reverseOrderText);
+        optionsTable.row();
+    }
+
+    // GLOBAL LAYOUT:
     //--------------------------------------------------------------------------------------------------------
 
     public void createLayout(Collection<T>data)
@@ -101,9 +121,6 @@ public abstract class SortableTableView<T> extends Table
 
     private void createLayout()
     {
-        top().left();
-        clear();
-
         list = modelData.stream()
             .sorted(reverseOrder ? options.comparator.reversed() : options.comparator)
             .map(this::getIcon)
@@ -114,6 +131,8 @@ public abstract class SortableTableView<T> extends Table
             .map(DetailedActorI.class::cast)
             .forEach(actor -> actor.showDetails(showDetails));
 
+        clear();
+        top().left();
         add(name).left().padBottom(-8).padTop(-8).row();
         add(optionsTable).left().row();
 
@@ -127,31 +146,21 @@ public abstract class SortableTableView<T> extends Table
     // SORT COMPARATORS:
     //--------------------------------------------------------------------------------------------------------
 
-    public void addSortComparator(String text, Comparator<T>comparator)
+    public class SortOptions
     {
-        SortBy sortBy = new SortBy(text, comparator);
+        int insertOrder;
+        String text;
+        WidgetText widgetText;
+        Comparator<T> comparator;
 
-        if (sortMap.isEmpty())
-            setOptions(sortBy);
-
-        sortMap.put(text, sortBy);
-    }
-
-    public class SortBy
-    {
-        public int insertOrder;
-        public String text;
-        public WidgetText widgetText;
-        public Comparator<T> comparator;
-
-        SortBy(String text, Comparator<T>comparator)
+        SortOptions(String text, Comparator<T>comparator)
         {
             this.text = text;
             this.comparator = comparator;
             this.insertOrder = sortMap.size();
 
             widgetText = new WidgetText(text, Atlas.get().getFont("10"), unselectedSort, Color.BLACK, 1);
-            widgetText.addListener(new TouchDownListener( o -> setSortBy(text)));
+            widgetText.addListener(new TouchDownListener( o -> setSortOption(text)));
         }
     }
 }

@@ -5,14 +5,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.custom.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellForm;
-import com.myrran.view.ui.sortabletable.SortableTableView;
+import com.myrran.view.ui.widgets.WidgetSortableTable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
-public class SpellBookFormView extends SortableTableView<TemplateSpellForm>
+public class SpellBookFormView extends WidgetSortableTable<TemplateSpellForm>
     implements PropertyChangeListener, Disposable
 {
     private CustomSpellBook model;
@@ -25,11 +25,11 @@ public class SpellBookFormView extends SortableTableView<TemplateSpellForm>
     {
         controller  = spellController;
 
-        addSortComparator("name", Comparator.comparing(TemplateSpellForm::getName));
-        addSortComparator("type", Comparator.comparing(TemplateSpellForm::getFactory));
-        addSortComparator("slots", Comparator.comparing(form -> form.getSpellSlots().size()));
-        addSortComparator("available", Comparator.comparing(TemplateSpellForm::getAvailable));
-        addSortComparator("total", Comparator.comparing(TemplateSpellForm::getTotal));
+        addSortOption("name", Comparator.comparing(TemplateSpellForm::getName));
+        addSortOption("type", Comparator.comparing(TemplateSpellForm::getFactory));
+        addSortOption("slots", Comparator.comparing(form -> form.getSpellSlots().size()));
+        addSortOption("available", Comparator.comparing(TemplateSpellForm::getAvailable));
+        addSortOption("total", Comparator.comparing(TemplateSpellForm::getTotal));
 
         build("SpellForm SpellBook", true);
     }

@@ -1,4 +1,4 @@
-package com.myrran.view.ui.sortabletable;
+package com.myrran.view.ui.widgets;
 
 /** @author Ivan Delgado Huerta */
 public interface DetailedActorI
