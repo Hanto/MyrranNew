@@ -58,7 +58,7 @@ public class SpellBookCustomFormView extends WidgetSortableTable<CustomSpellForm
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public Actor getIcon(CustomSpellForm model)
+    @Override public Actor getActor(CustomSpellForm model)
     {
         CustomFormView icon = new CustomFormView(controller, false);
         icon.setModel(model);

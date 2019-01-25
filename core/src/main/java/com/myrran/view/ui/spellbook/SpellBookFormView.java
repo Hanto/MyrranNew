@@ -58,7 +58,7 @@ public class SpellBookFormView extends WidgetSortableTable<TemplateSpellForm>
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public Actor getIcon(TemplateSpellForm template)
+    @Override public Actor getActor(TemplateSpellForm template)
     {
         TemplateFormView icon = new TemplateFormView(controller);
         icon.setModel(template);

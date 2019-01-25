@@ -58,7 +58,7 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public Actor getIcon(TemplateSpellDebuff template)
+    @Override public Actor getActor(TemplateSpellDebuff template)
     {
         TemplateDebuffView icon = new TemplateDebuffView(controller);
         icon.setModel(template);

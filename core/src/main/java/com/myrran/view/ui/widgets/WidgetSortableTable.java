@@ -121,8 +121,7 @@ public abstract class WidgetSortableTable<T> extends Table
 
     public void createLayout(Collection<T>data)
     {
-        for (T model: data)
-        {   modelActorMap.put(model, getIcon(model)); }
+        data.forEach(model -> modelActorMap.put(model, getActor(model)));
 
         sortModel();
         showDetails();
@@ -152,7 +151,7 @@ public abstract class WidgetSortableTable<T> extends Table
             .forEach(actor -> actor.showDetails(detailsVisible));
     }
 
-    public abstract Actor getIcon(T model);
+    public abstract Actor getActor(T model);
 
 
     // SORT COMPARATORS:
