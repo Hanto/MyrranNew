@@ -11,6 +11,7 @@ import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
@@ -38,6 +39,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     private List<CustomDebuffDetailsView> debuffStats;
     private List<CustomDebuffIcon> debuffIcons;
 
+    private boolean detailsVisible = true;
     private Cell<Actor>cellIcons;
     private Cell<Actor>cellStats;
 
@@ -64,6 +66,8 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
         if (movable)
             spellIcon.addListener(new ActorMoveListener(this));
+
+        name.addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
         createHeaderLayout();
@@ -189,18 +193,23 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public void showDetails(boolean showDetails)
+    public void showDetails(boolean visible)
     {
-        if (!showDetails)
+        if (!visible)
         {
             cellStats.setActor(null);
             cellIcons.setActor(null);
         }
         else
         {
-            //cellIcons.setActor(null);
+            cellIcons.setActor(tableIcons);
+            cellStats.setActor(tableStats);
         }
+        detailsVisible = !visible;
     }
+
+    public void showDetails()
+    {   showDetails(detailsVisible); }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------

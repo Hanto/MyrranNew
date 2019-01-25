@@ -9,6 +9,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
@@ -35,6 +36,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     private WidgetText cost;
 
     private TemplateStatsView statsView;
+    private boolean detailsVisible = true;
     private Cell<TemplateStatsView> cell;
 
     private static final int VPAD = -4;
@@ -61,6 +63,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
         statsView       = new TemplateStatsView(customSpellController);
 
         controller.getDadDebuff().addSource(dadSource);
+        name.addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
         createHeaderLayout();
@@ -153,11 +156,18 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public void showDetails(boolean showDetails)
+    public void showDetails(boolean visible)
     {
-        if (!showDetails)
+        if (!visible)
             cell.setActor(null);
+        else
+            cell.setActor(statsView);
+
+        detailsVisible = !visible;
     }
+
+    public void showDetails()
+    {   showDetails(detailsVisible); }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------
