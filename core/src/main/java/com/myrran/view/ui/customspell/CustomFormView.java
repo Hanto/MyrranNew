@@ -197,10 +197,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
             cellIcons.setActor(null);
         }
         else
-        {
-            cellStats.setActor(tableStats);
-            cellIcons.setActor(tableIcons);
-        }
+        {   cellIcons.setActor(null); }
     }
 
     // MVC:

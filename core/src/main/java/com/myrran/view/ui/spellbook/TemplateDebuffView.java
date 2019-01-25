@@ -131,7 +131,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI
     @Override
     public void showDetails(boolean showDetails)
     {
-        if (!showDetails) cell.setActor(null);
-        else cell.setActor(statsView);
+        if (!showDetails)
+            cell.setActor(null);
     }
 }
