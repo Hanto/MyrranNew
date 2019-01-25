@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.DadDebuffTarget;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.model.spell.generators.custom.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
@@ -197,7 +198,9 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
             cellIcons.setActor(null);
         }
         else
-        {   cellIcons.setActor(null); }
+        {
+            //cellIcons.setActor(null);
+        }
     }
 
     // MVC:

@@ -76,6 +76,21 @@ public class CustomSpellBook
             throw new InvalidIDException("SpellForm templates not available, templateID: %s", formTemplateID);
     }
 
+    public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID) throws InvalidIDException
+    {
+        if (debuffTemplatesLearned.isAvailable(debuffTemplateID))
+        {
+            if (!slot.hasDebuff())
+            {
+                TemplateSpellDebuff template = templateBook.getSpellDebuffTemplate(debuffTemplateID);
+                slot.setCustomSpellDebuff(template);
+                debuffTemplatesLearned.borrow(debuffTemplateID);
+            }
+        }
+        else
+            throw new InvalidIDException("SpellDebuffDeco templates not available, templateID: %s", debuffTemplateID);
+    }
+
     public void addCustomSpellDebuff(String customFormID, String slotID, String debuffTemplateID) throws InvalidIDException
     {
         if (debuffTemplatesLearned.isAvailable(debuffTemplateID))

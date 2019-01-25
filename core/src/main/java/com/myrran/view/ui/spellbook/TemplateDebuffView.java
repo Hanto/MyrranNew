@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.DadDebuffSource;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.DetailedActorI;
@@ -15,7 +17,7 @@ import com.myrran.view.ui.widgets.WidgetText;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateDebuffView extends Table implements DetailedActorI
+public class TemplateDebuffView extends Table implements DetailedActorI, Disposable
 {
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
@@ -23,6 +25,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI
     private WidgetGroup icon;
     private WidgetImage debuffIcon;
     private WidgetText availableTotal;
+    private DadDebuffSource dadSource;
 
     private Table tableHeader;
     private WidgetText keys;
@@ -47,6 +50,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI
         controller      = customSpellController;
         tableHeader     = new Table();
         icon            = new WidgetGroup();
+        dadSource       = new DadDebuffSource(icon);
         debuffIcon      = new WidgetImage();
         availableTotal  = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
         keys            = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
@@ -54,11 +58,16 @@ public class TemplateDebuffView extends Table implements DetailedActorI
         cost            = new WidgetText(font14, magenta, Color.BLACK, 1);
         statsView       = new TemplateStatsView(customSpellController);
 
+        controller.addSource(dadSource);
+
         createLayout();
         createHeaderLayout();
         createIconLayout();
         cell = getCell(statsView);
     }
+
+    @Override public void dispose()
+    {   controller.removeSource(dadSource); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -70,6 +79,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI
         else
         {
             model = templateSpellDebuff;
+            dadSource.setModel(model);
             update();
         }
     }

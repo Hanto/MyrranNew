@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.DadDebuffTarget;
 import com.myrran.model.spell.generators.custom.CustomSpellDebuff;
 import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
 import com.myrran.view.ui.Atlas;
@@ -18,8 +19,8 @@ import java.beans.PropertyChangeListener;
 /** @author Ivan Delgado Huerta */
 public class CustomDebuffIcon extends Table implements PropertyChangeListener, Disposable
 {
-    private CustomDebuffSlot debuffSlot;
-    private CustomSpellDebuff spellDebuff;
+    private CustomDebuffSlot modelSlot;
+    private CustomSpellDebuff modelDebuff;
     private CustomSpellController controller;
 
     private WidgetGroup icon;
@@ -28,6 +29,7 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
     private WidgetText debuffName;
     private WidgetText slotType;
     private WidgetText lock;
+    private DadDebuffTarget dadTarget;
 
     private static final BitmapFont font10 = Atlas.get().getFont("10");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
@@ -45,17 +47,26 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
         debuffName  = new WidgetText(font10, Color.ORANGE, Color.BLACK, 1);
         slotType    = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
         lock        = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
+        dadTarget   = new DadDebuffTarget(icon, controller);
+
+        controller.addTarget(dadTarget);
 
         createLayout();
     }
 
     @Override public void dispose()
     {
-        if (debuffSlot != null)
-            debuffSlot.removeObserver(this);
+        disposeObservers();
+        controller.removeTarget(dadTarget);
+    }
 
-        if (spellDebuff != null)
-            spellDebuff.removeObserver(this);
+    private void disposeObservers()
+    {
+        if (modelSlot != null)
+            modelSlot.removeObserver(this);
+
+        if (modelDebuff != null)
+            modelDebuff.removeObserver(this);
     }
 
     // UPDATE:
@@ -63,23 +74,24 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
 
     public void setModel(CustomDebuffSlot customDebuffSlot)
     {
-        dispose();
+        disposeObservers();
 
         if (customDebuffSlot == null)
             removeModel();
         else
         {
-            debuffSlot = customDebuffSlot;
-            spellDebuff = debuffSlot.getCustomSpellDebuff();
-            debuffSlot.addObserver(this);
-            spellDebuff.addObserver(this);
+            modelSlot = customDebuffSlot;
+            modelDebuff = modelSlot.getCustomSpellDebuff();
+            dadTarget.setModel(modelSlot);
+            modelSlot.addObserver(this);
+            modelDebuff.addObserver(this);
             update();
         }
     }
 
     private void removeModel()
     {
-        debuffSlot = null;
+        modelSlot = null;
         debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
         cost.setText(null);
         debuffName.setText(null);
@@ -89,14 +101,14 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
 
     private void update()
     {
-        slotType.setText(debuffSlot.getSlotType());
-        lock.setText(debuffSlot.getLock().toString().toLowerCase());
+        slotType.setText(modelSlot.getSlotType());
+        lock.setText(modelSlot.getLock().toString().toLowerCase());
 
-        if (debuffSlot.hasDebuff())
+        if (modelSlot.hasDebuff())
         {
             debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
-            cost.setText(spellDebuff.getTotalCost().toString());
-            debuffName.setText(spellDebuff.getName());
+            cost.setText(modelDebuff.getTotalCost().toString());
+            debuffName.setText(modelDebuff.getName());
         }
         else
         {
