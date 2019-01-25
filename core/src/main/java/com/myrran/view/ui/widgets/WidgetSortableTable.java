@@ -14,17 +14,23 @@ import java.util.stream.Collectors;
 /** @author Ivan Delgado Huerta */
 public abstract class WidgetSortableTable<T> extends Table
 {
+    // SORT OPTIONS:
+    //--------------------------------------------------------------------------------------------------------
+
     private Table optionsTable;
     private SortOptions options;
-    private boolean showDetails = false;
+    private boolean detailsVisible = false;
     private boolean reverseOrder = false;
     private WidgetText showDetailsText;
     private WidgetText reverseOrderText;
     private Map<String, SortOptions> sortMap = new HashMap<>();
 
+    // CONTENT:
+    //--------------------------------------------------------------------------------------------------------
+
     private WidgetText name;
-    private Collection<T>modelData;
-    private List<Actor> list;
+    private Map<T, Actor> modelActorMap = new HashMap<>();
+    private List<Actor> sortedActors;
 
     private static final String ASC = "Asc";
     private static final String DESC = "Desc";
@@ -66,9 +72,9 @@ public abstract class WidgetSortableTable<T> extends Table
 
     public void setShowDetails()
     {
-        showDetails = !showDetails;
-        showDetailsText.setText(showDetails? HIDE : SHOW);
-        createLayout();
+        detailsVisible = !detailsVisible;
+        showDetailsText.setText(detailsVisible ? HIDE : SHOW);
+        showDetails();
     }
 
     public void setSortOption(String optionName)
@@ -77,7 +83,7 @@ public abstract class WidgetSortableTable<T> extends Table
             setReverseOrder(!reverseOrder);
 
         setSortOption(sortMap.get(optionName));
-        createLayout();
+        sortModel();
     }
 
     private void setSortOption(SortOptions newOptions)
@@ -115,29 +121,35 @@ public abstract class WidgetSortableTable<T> extends Table
 
     public void createLayout(Collection<T>data)
     {
-        modelData = data;
-        createLayout();
+        for (T model: data)
+        {   modelActorMap.put(model, getIcon(model)); }
+
+        sortModel();
+        showDetails();
     }
 
-    private void createLayout()
+    private void sortModel()
     {
-        list = modelData.stream()
+        sortedActors = modelActorMap.keySet().stream()
             .sorted(reverseOrder ? options.comparator.reversed() : options.comparator)
-            .map(this::getIcon)
+            .map(t -> modelActorMap.get(t))
             .collect(Collectors.toList());
-
-        list.stream()
-            .filter(DetailedActorI.class::isInstance)
-            .map(DetailedActorI.class::cast)
-            .forEach(actor -> actor.showDetails(showDetails));
 
         clear();
         top().left();
         add(name).left().padBottom(-8).padTop(-8).row();
         add(optionsTable).left().row();
+        sortedActors.forEach(actor -> add(actor).left().row());
 
-        for (Actor icon: list)
-            add(icon).left().row();
+        showDetails();
+    }
+
+    private void showDetails()
+    {
+        sortedActors.stream()
+            .filter(DetailedActorI.class::isInstance)
+            .map(DetailedActorI.class::cast)
+            .forEach(actor -> actor.showDetails(detailsVisible));
     }
 
     public abstract Actor getIcon(T model);
