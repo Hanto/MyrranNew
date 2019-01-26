@@ -21,6 +21,7 @@ public class CustomSpellController
     {
         this.spellBook = spellBook;
         dadDebuff = new DragAndDrop();
+        //dadDebuff.setDragActorPosition(16, -16);
     }
 
     // DRAG AND DROP:

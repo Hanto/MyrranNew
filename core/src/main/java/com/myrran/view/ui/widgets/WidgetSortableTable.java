@@ -72,12 +72,12 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
 
     public void addSortOption(String text, Comparator<T>comparator)
     {
-        SortOptions options = new SortOptions(text, comparator);
+        SortOptions option = new SortOptions(text, comparator);
 
         if (sortMap.isEmpty())
-            setSortOption(options);
+            setSortOption(option);
 
-        sortMap.put(text, options);
+        sortMap.put(text, option);
     }
 
     public void setShowDetails()

@@ -58,8 +58,6 @@ public class ZMain extends ApplicationAdapter
 			formView2.setModel(spell);
 			formView2.setPosition(100, 200);
 
-			//book.addCustomSpellDebuff("Bolt_00", "Spot 3", "Slow");
-
 			SpellBookDebuffView spellBookView = new SpellBookDebuffView(controller);
 			spellBookView.setModel(book);
 			uiStage.addActor(spellBookView);
