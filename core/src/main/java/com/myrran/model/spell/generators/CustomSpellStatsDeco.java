@@ -1,4 +1,4 @@
-package com.myrran.model.spell.generators.custom;
+package com.myrran.model.spell.generators;
 
 import com.myrran.model.spell.parameters.SpellStatParams;
 import com.myrran.model.spell.templates.TemplateSpellStat;

@@ -1,7 +1,7 @@
 package com.myrran.model.spell.templates;
 
 import com.myrran.model.components.Identifiable;
-import com.myrran.model.spell.generators.custom.CustomSpellSlotKey;
+import com.myrran.model.spell.generators.CustomSpellSlotKey;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

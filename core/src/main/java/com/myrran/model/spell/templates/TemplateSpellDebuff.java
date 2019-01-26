@@ -6,7 +6,7 @@ import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.entities.debuff.SpellDebuffFactory;
-import com.myrran.model.spell.generators.custom.CustomSpellSlotKey;
+import com.myrran.model.spell.generators.CustomSpellSlotKey;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;

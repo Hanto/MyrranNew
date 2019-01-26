@@ -1,4 +1,4 @@
-package com.myrran.model.spell.generators.custom;
+package com.myrran.model.spell.generators;
 
 import com.myrran.model.components.Identifiable;
 import com.myrran.model.components.observable.Observable;
@@ -8,7 +8,6 @@ import com.myrran.model.spell.parameters.SpellFormParams;
 import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.model.spell.entities.form.SpellForm;
 import com.myrran.model.spell.entities.form.SpellFormFactory;
-import com.myrran.model.spell.generators.SpellFormGenerator;
 import com.myrran.misc.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;

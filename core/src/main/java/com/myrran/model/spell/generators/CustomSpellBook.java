@@ -1,4 +1,4 @@
-package com.myrran.model.spell.generators.custom;
+package com.myrran.model.spell.generators;
 
 import com.myrran.misc.InvalidIDException;
 import com.myrran.misc.dataestructures.quantitymap.QuantityMap;

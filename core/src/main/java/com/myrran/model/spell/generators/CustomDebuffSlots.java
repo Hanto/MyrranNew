@@ -1,4 +1,4 @@
-package com.myrran.model.spell.generators.custom;
+package com.myrran.model.spell.generators;
 
 import com.myrran.model.spell.parameters.SpellDebuffParams;
 import com.myrran.model.spell.templates.TemplateSpellDebuffSlot;

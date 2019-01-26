@@ -1,7 +1,7 @@
 package com.myrran.controller;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.myrran.model.spell.generators.custom.CustomDebuffSlot;
+import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -2,7 +2,7 @@ package com.myrran.controller;
 
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.myrran.misc.InvalidIDException;
-import com.myrran.model.spell.generators.custom.*;
+import com.myrran.model.spell.generators.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

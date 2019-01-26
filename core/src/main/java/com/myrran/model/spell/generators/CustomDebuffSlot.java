@@ -1,4 +1,4 @@
-package com.myrran.model.spell.generators.custom;
+package com.myrran.model.spell.generators;
 
 import com.myrran.model.components.Identifiable;
 import com.myrran.model.components.observable.Observable;

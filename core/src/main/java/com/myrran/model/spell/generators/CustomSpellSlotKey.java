@@ -1,4 +1,4 @@
-package com.myrran.model.spell.generators.custom;
+package com.myrran.model.spell.generators;
 
 /** @author Ivan Delgado Huerta */
 public enum CustomSpellSlotKey
