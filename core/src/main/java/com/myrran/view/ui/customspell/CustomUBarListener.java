@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /** @author Ivan Delgado Huerta */
-public class CustomUpgradeBarListener extends InputListener
+public class CustomUBarListener extends InputListener
 {
     private CustomSpellController controller;
     private CustomSpellStatsI stats;
@@ -22,7 +22,7 @@ public class CustomUpgradeBarListener extends InputListener
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomUpgradeBarListener(CustomSpellController controller, CustomSpellStatsI stats, String statID)
+    public CustomUBarListener(CustomSpellController controller, CustomSpellStatsI stats, String statID)
     {
         this.controller = controller;
         this.stats = stats;

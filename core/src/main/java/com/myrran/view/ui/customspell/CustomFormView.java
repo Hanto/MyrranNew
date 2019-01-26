@@ -36,8 +36,8 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     private WidgetText templateID;
     private WidgetText totalCost;
     private CustomStatsView stats;
-    private List<CustomDebuffDetailsView> debuffStats;
-    private List<CustomDebuffIcon> debuffIcons;
+    private List<CustomDebuffStatsView> debuffStats;
+    private List<CustomDebuffIconView> debuffIcons;
 
     private boolean detailsVisible = true;
     private Cell<Actor>cellIcons;
@@ -83,7 +83,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         stats.dispose();
 
         if (debuffStats != null)
-            debuffStats.forEach(CustomDebuffDetailsView::dispose);
+            debuffStats.forEach(CustomDebuffStatsView::dispose);
 
         if (model != null)
             model.removeObserver(this);
@@ -149,7 +149,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         tableHeader.bottom().left();
         tableHeader.add(templateID) .bottom().padTop(VPAD).padBottom(VPAD).left().row();
         tableHeader.add(name)       .bottom().padTop(VPAD).padBottom(VPAD).left();
-        tableHeader.add(totalCost)  .bottom().padTop(VPAD).padBottom(VPAD+2).left().row();
+        tableHeader.add(totalCost)  .bottom().padTop(VPAD).padBottom(VPAD+2f).left().row();
     }
 
     private void createStatsLayout()
@@ -175,16 +175,16 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         debuffIcons.forEach(debuffIcon -> tableIcons.add(debuffIcon).left().row());
     }
 
-    private CustomDebuffDetailsView addDebuffViews(CustomDebuffSlot slot)
+    private CustomDebuffStatsView addDebuffViews(CustomDebuffSlot slot)
     {
-        CustomDebuffDetailsView details = new CustomDebuffDetailsView(controller);
+        CustomDebuffStatsView details = new CustomDebuffStatsView(controller);
         details.setModel(slot);
         return details;
     }
 
-    private CustomDebuffIcon addDebuffSlotIcons(CustomDebuffSlot slot)
+    private CustomDebuffIconView addDebuffSlotIcons(CustomDebuffSlot slot)
     {
-        CustomDebuffIcon icon = new CustomDebuffIcon(controller);
+        CustomDebuffIconView icon = new CustomDebuffIconView(controller);
         icon.setModel(slot);
         return icon;
     }

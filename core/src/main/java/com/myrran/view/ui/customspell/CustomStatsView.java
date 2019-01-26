@@ -77,7 +77,7 @@ public class CustomStatsView extends Table implements Disposable
         for (CustomStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
-            view.getUpgradesView().addListener(new CustomUpgradeBarListener(controller, model, statID));
+            view.getUpgradesView().addListener(new CustomUBarListener(controller, model, statID));
         }
     }
 

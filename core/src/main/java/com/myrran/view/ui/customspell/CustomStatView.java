@@ -24,7 +24,7 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
     private WidgetText bonusPerUpgrade;
     private WidgetText maxUpgrades;
     private WidgetText gearBonus;
-    private CustomUpgradeBar upgradesView;
+    private CustomUBarView upgradesView;
 
     private static final BitmapFont font14 = Atlas.get().getFont("14");
     private static final BitmapFont font11 = Atlas.get().getFont("11");
@@ -48,7 +48,7 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
     @Override public WidgetText getBonusPerUpgrade()    { return bonusPerUpgrade; }
     @Override public WidgetText getMaxUpgrades()        { return maxUpgrades; }
     @Override public WidgetText getGearBonus()          { return gearBonus; }
-    @Override public CustomUpgradeBar getUpgradesView()  { return upgradesView; }
+    @Override public CustomUBarView getUpgradesView()  { return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
         bonusPerUpgrade = new WidgetText(font10, purpleL, black,1);
         maxUpgrades     = new WidgetText(font10, purpleL, black,1);
         gearBonus       = new WidgetText(font10, purpleL, black,1);
-        upgradesView    = new CustomUpgradeBar(model);
+        upgradesView    = new CustomUBarView(model);
 
         setModel(customSpellStat);
     }

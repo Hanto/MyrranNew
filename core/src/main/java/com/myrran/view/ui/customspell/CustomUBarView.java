@@ -8,7 +8,7 @@ import com.myrran.model.spell.generators.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
-public class CustomUpgradeBar extends Actor
+public class CustomUBarView extends Actor
 {
     private CustomSpellStat model;
 
@@ -20,7 +20,7 @@ public class CustomUpgradeBar extends Actor
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomUpgradeBar(CustomSpellStat customSpellStat)
+    public CustomUBarView(CustomSpellStat customSpellStat)
     {
         model = customSpellStat;
 

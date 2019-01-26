@@ -18,7 +18,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public class CustomDebuffIcon extends Table implements PropertyChangeListener, Disposable
+public class CustomDebuffIconView extends Table implements PropertyChangeListener, Disposable
 {
     private CustomDebuffSlot modelSlot;
     private CustomSpellDebuff modelDebuff;
@@ -39,7 +39,7 @@ public class CustomDebuffIcon extends Table implements PropertyChangeListener, D
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomDebuffIcon(CustomSpellController customSpellController)
+    public CustomDebuffIconView(CustomSpellController customSpellController)
     {
         controller  = customSpellController;
         icon        = new WidgetGroup();
