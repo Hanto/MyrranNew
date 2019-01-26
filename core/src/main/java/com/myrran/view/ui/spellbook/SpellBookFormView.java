@@ -34,8 +34,6 @@ public class SpellBookFormView extends WidgetSortableTable<TemplateSpellForm>
         build("SpellForm SpellBook", true);
     }
 
-    @Override public void dispose() {}
-
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 

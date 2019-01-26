@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
@@ -12,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public abstract class WidgetSortableTable<T> extends Table
+public abstract class WidgetSortableTable<T> extends Table implements Disposable
 {
     // SORT OPTIONS:
     //--------------------------------------------------------------------------------------------------------
@@ -29,7 +30,7 @@ public abstract class WidgetSortableTable<T> extends Table
     //--------------------------------------------------------------------------------------------------------
 
     private WidgetText name;
-    private Map<T, Actor> modelActorMap = new HashMap<>();
+    private Map<T, Actor> modelToActorMap = new HashMap<>();
     private List<Actor> sortedActors;
 
     private static final String ASC = "Asc";
@@ -55,6 +56,15 @@ public abstract class WidgetSortableTable<T> extends Table
             name.addListener(new ActorMoveListener(this));
 
         createOptionsLayout();
+    }
+
+    @Override public void dispose()
+    {
+        if (sortedActors != null)
+            sortedActors.stream()
+                .filter(Disposable.class::isInstance)
+                .map(Disposable.class::cast)
+                .forEach(Disposable::dispose);
     }
 
     // SORT OPTIONS:
@@ -109,8 +119,8 @@ public abstract class WidgetSortableTable<T> extends Table
         optionsTable.add(showDetailsText).minWidth(80).bottom().left();
 
         sortMap.values().stream()
-            .sorted(Comparator.comparing(options -> options.insertOrder))
-            .forEach(options -> optionsTable.add(options.widgetText));
+            .sorted(Comparator.comparing(sortOption -> sortOption.insertOrder))
+            .forEach(sortOption -> optionsTable.add(sortOption.widgetText));
 
         optionsTable.add(reverseOrderText);
         optionsTable.row();
@@ -121,7 +131,7 @@ public abstract class WidgetSortableTable<T> extends Table
 
     public void createLayout(Collection<T>data)
     {
-        data.forEach(model -> modelActorMap.put(model, getActor(model)));
+        data.forEach(model -> modelToActorMap.put(model, getActor(model)));
 
         sortModel();
         showDetails();
@@ -129,9 +139,9 @@ public abstract class WidgetSortableTable<T> extends Table
 
     private void sortModel()
     {
-        sortedActors = modelActorMap.keySet().stream()
+        sortedActors = modelToActorMap.keySet().stream()
             .sorted(reverseOrder ? options.comparator.reversed() : options.comparator)
-            .map(t -> modelActorMap.get(t))
+            .map(t -> modelToActorMap.get(t))
             .collect(Collectors.toList());
 
         clear();
@@ -152,7 +162,6 @@ public abstract class WidgetSortableTable<T> extends Table
     }
 
     public abstract Actor getActor(T model);
-
 
     // SORT COMPARATORS:
     //--------------------------------------------------------------------------------------------------------

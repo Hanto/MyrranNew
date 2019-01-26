@@ -34,8 +34,6 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
         build("Debuff SpellBook", true);
     }
 
-    @Override public void dispose() {}
-
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
