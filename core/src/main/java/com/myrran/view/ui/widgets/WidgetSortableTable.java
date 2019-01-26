@@ -19,7 +19,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
     //--------------------------------------------------------------------------------------------------------
 
     private Table optionsTable;
-    private SortOptions options;
+    private SortOptions actualSortOptions;
     private boolean detailsVisible = false;
     private boolean reverseOrder = false;
     private WidgetText showDetailsText;
@@ -49,7 +49,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 2);
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
-        reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(options.text)));
+        reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 
         if (movable)
@@ -89,7 +89,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
 
     public void setSortOption(String optionName)
     {
-        if (options.text.equals(optionName))
+        if (actualSortOptions.text.equals(optionName))
             setReverseOrder(!reverseOrder);
 
         setSortOption(sortMap.get(optionName));
@@ -98,10 +98,10 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
 
     private void setSortOption(SortOptions newOptions)
     {
-        if (options != null)
-            options.widgetText.setTextColor(unselectedSort);
-        options = newOptions;
-        options.widgetText.setTextColor(selectedSort);
+        if (actualSortOptions != null)
+            actualSortOptions.widgetText.setTextColor(unselectedSort);
+        actualSortOptions = newOptions;
+        actualSortOptions.widgetText.setTextColor(selectedSort);
     }
 
     private void setReverseOrder(boolean reverse)
@@ -140,7 +140,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
     private void sortModel()
     {
         sortedActors = modelToActorMap.keySet().stream()
-            .sorted(reverseOrder ? options.comparator.reversed() : options.comparator)
+            .sorted(reverseOrder ? actualSortOptions.comparator.reversed() : actualSortOptions.comparator)
             .map(t -> modelToActorMap.get(t))
             .collect(Collectors.toList());
 
@@ -173,14 +173,14 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         WidgetText widgetText;
         Comparator<T> comparator;
 
-        SortOptions(String text, Comparator<T>comparator)
+        SortOptions(String sortName, Comparator<T>sortComparator)
         {
-            this.text = text;
-            this.comparator = comparator;
-            this.insertOrder = sortMap.size();
+            text = sortName;
+            comparator = sortComparator;
+            insertOrder = sortMap.size();
 
-            widgetText = new WidgetText(text, Atlas.get().getFont("10"), unselectedSort, Color.BLACK, 1);
-            widgetText.addListener(new TouchDownListener( o -> setSortOption(text)));
+            widgetText = new WidgetText(sortName, Atlas.get().getFont("10"), unselectedSort, Color.BLACK, 1);
+            widgetText.addListener(new TouchDownListener( o -> setSortOption(sortName)));
         }
     }
 }
