@@ -29,6 +29,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
     // CONTENT:
     //--------------------------------------------------------------------------------------------------------
 
+    private Table contentTable;
     private WidgetText name;
     private Map<T, Actor> modelToActorMap = new HashMap<>();
     private List<Actor> sortedActors;
@@ -49,6 +50,8 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 2);
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
+
+        contentTable    = new Table();
         reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 
@@ -135,22 +138,23 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
 
         sortModel();
         showDetails();
+
+        clear();
+        top().left();
+        add(name).left().padBottom(-8).padTop(-8).row();
+        add(optionsTable).top().left().row();
+        add(contentTable).top().left().row();
     }
 
     private void sortModel()
     {
+        contentTable.clear();
         sortedActors = modelToActorMap.keySet().stream()
             .sorted(reverseOrder ? actualSortOptions.comparator.reversed() : actualSortOptions.comparator)
             .map(t -> modelToActorMap.get(t))
             .collect(Collectors.toList());
 
-        clear();
-        top().left();
-        add(name).left().padBottom(-8).padTop(-8).row();
-        add(optionsTable).left().row();
-        sortedActors.forEach(actor -> add(actor).left().row());
-
-        showDetails();
+        sortedActors.forEach(actor -> contentTable.add(actor).left().row());
     }
 
     private void showDetails()
