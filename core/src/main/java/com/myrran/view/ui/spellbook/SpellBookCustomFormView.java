@@ -46,7 +46,7 @@ public class SpellBookCustomFormView extends WidgetSortableTable<CustomSpellForm
         else
         {
             model = customSpellBook;
-            createLayout(model.getCustomSpellForms());
+            setModel(model.getCustomSpellForms());
         }
     }
 

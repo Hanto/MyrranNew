@@ -46,7 +46,7 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
         else
         {
             model = customSpellBook;
-            createLayout(model.getDebuffsTemplatesLearned());
+            setModel(model.getDebuffsTemplatesLearned());
         }
     }
 

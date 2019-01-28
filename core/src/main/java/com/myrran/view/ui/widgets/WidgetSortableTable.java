@@ -59,17 +59,20 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         contentTable    = new Table();
-        scrollPane      = new ScrollPane(contentTable);
 
-        scrollPane.setTouchable(Touchable.childrenOnly);
         reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 
+        if (width != 0 || height != 0)
+        {
+            scrollPane = new ScrollPane(contentTable);
+            scrollPane.setTouchable(Touchable.childrenOnly);
+            scrollPaneWidth = width;
+            scrollPaneHeight = height;
+        }
+
         if (movable)
             name.addListener(new ActorMoveListener(this));
-
-        scrollPaneWidth = width;
-        scrollPaneHeight = height;
 
         createOptionsLayout();
         createLayout();
@@ -143,17 +146,8 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         optionsTable.row();
     }
 
-    // GLOBAL LAYOUT:
+    // CONTENT LAYOUT:
     //--------------------------------------------------------------------------------------------------------
-
-    public void createLayout(Collection<T>data)
-    {
-        data.forEach(model -> modelToActorMap.put(model, getActor(model)));
-
-        sortModel();
-        showDetails();
-        //createLayout();
-    }
 
     public void createLayout()
     {
@@ -162,6 +156,17 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         add(name).top().left().padBottom(-8).padTop(-8).row();
         add(optionsTable).top().left().row();
         add(scrollPane == null ? contentTable : scrollPane).size(scrollPaneWidth, scrollPaneHeight).top().left().row();
+    }
+
+    // UPDATE:
+    //--------------------------------------------------------------------------------------------------------
+
+    public void setModel(Collection<T>data)
+    {
+        data.forEach(model -> modelToActorMap.put(model, getActor(model)));
+
+        sortModel();
+        showDetails();
     }
 
     private void sortModel()
