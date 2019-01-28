@@ -71,7 +71,7 @@ public class ZMain extends ApplicationAdapter
 			SpellBookCustomFormView bookCustomFormView = new SpellBookCustomFormView(controller);
 			bookCustomFormView.setModel(book);
 			uiStage.addActor(bookCustomFormView);
-			bookCustomFormView.setPosition(520, 590);
+			bookCustomFormView.setPosition(390, 590);
 
 			uiStage.addActor(fps);
 

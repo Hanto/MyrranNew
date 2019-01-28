@@ -3,6 +3,8 @@ package com.myrran.view.ui.widgets;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.view.ui.Atlas;
@@ -29,6 +31,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
     // CONTENT:
     //--------------------------------------------------------------------------------------------------------
 
+    private ScrollPane scrollPane;
     private Table contentTable;
     private WidgetText name;
     private Map<T, Actor> modelToActorMap = new HashMap<>();
@@ -52,6 +55,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
 
         contentTable    = new Table();
+        scrollPane      = new ScrollPane(contentTable);
         reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 
@@ -143,18 +147,20 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         top().left();
         add(name).left().padBottom(-8).padTop(-8).row();
         add(optionsTable).top().left().row();
-        add(contentTable).top().left().row();
+        add(scrollPane).size(500, 200).top().left().row();
+        scrollPane.setTouchable(Touchable.childrenOnly);
     }
 
     private void sortModel()
     {
         contentTable.clear();
+        contentTable.top().left();
         sortedActors = modelToActorMap.keySet().stream()
             .sorted(reverseOrder ? actualSortOptions.comparator.reversed() : actualSortOptions.comparator)
             .map(t -> modelToActorMap.get(t))
             .collect(Collectors.toList());
 
-        sortedActors.forEach(actor -> contentTable.add(actor).left().row());
+        sortedActors.forEach(actor -> contentTable.add(actor).fillX().expandX().top().row());
     }
 
     private void showDetails()
