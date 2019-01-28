@@ -32,6 +32,8 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
     //--------------------------------------------------------------------------------------------------------
 
     private ScrollPane scrollPane;
+    private float scrollPaneWidth = 0;
+    private float scrollPaneHeight = 0;
     private Table contentTable;
     private WidgetText name;
     private Map<T, Actor> modelToActorMap = new HashMap<>();
@@ -48,21 +50,29 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public void build(String text, boolean movable)
+    protected void build(String text, boolean movable)
+    {   build(text, movable, 0, 0); }
+
+    protected void build(String text, boolean movable, float width, float height)
     {
         name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 2);
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
-
         contentTable    = new Table();
         scrollPane      = new ScrollPane(contentTable);
+
+        scrollPane.setTouchable(Touchable.childrenOnly);
         reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 
         if (movable)
             name.addListener(new ActorMoveListener(this));
 
+        scrollPaneWidth = width;
+        scrollPaneHeight = height;
+
         createOptionsLayout();
+        createLayout();
     }
 
     @Override public void dispose()
@@ -77,7 +87,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
     // SORT OPTIONS:
     //--------------------------------------------------------------------------------------------------------
 
-    public void addSortOption(String text, Comparator<T>comparator)
+    protected void addSortOption(String text, Comparator<T>comparator)
     {
         SortOptions option = new SortOptions(text, comparator);
 
@@ -87,14 +97,14 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
         sortMap.put(text, option);
     }
 
-    public void setShowDetails()
+    private void setShowDetails()
     {
         detailsVisible = !detailsVisible;
         showDetailsText.setText(detailsVisible ? HIDE : SHOW);
         showDetails();
     }
 
-    public void setSortOption(String optionName)
+    private void setSortOption(String optionName)
     {
         if (actualSortOptions.text.equals(optionName))
             setReverseOrder(!reverseOrder);
@@ -142,13 +152,16 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
 
         sortModel();
         showDetails();
+        //createLayout();
+    }
 
+    public void createLayout()
+    {
         clear();
         top().left();
-        add(name).left().padBottom(-8).padTop(-8).row();
+        add(name).top().left().padBottom(-8).padTop(-8).row();
         add(optionsTable).top().left().row();
-        add(scrollPane).size(500, 200).top().left().row();
-        scrollPane.setTouchable(Touchable.childrenOnly);
+        add(scrollPane == null ? contentTable : scrollPane).size(scrollPaneWidth, scrollPaneHeight).top().left().row();
     }
 
     private void sortModel()
@@ -160,7 +173,7 @@ public abstract class WidgetSortableTable<T> extends Table implements Disposable
             .map(t -> modelToActorMap.get(t))
             .collect(Collectors.toList());
 
-        sortedActors.forEach(actor -> contentTable.add(actor).fillX().expandX().top().row());
+        sortedActors.forEach(actor -> contentTable.add(actor).fillX().expandX().row());
     }
 
     private void showDetails()
