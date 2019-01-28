@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellForm;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.WidgetSortableTable;
 
 import java.beans.PropertyChangeEvent;
@@ -32,6 +33,7 @@ public class SpellBookFormView extends WidgetSortableTable<TemplateSpellForm>
         addSortOption("total", Comparator.comparing(TemplateSpellForm::getTotal));
 
         build("SpellForm SpellBook", true);
+        addListener(new TouchDownListener(e -> this.toFront()));
     }
 
     // CREATE / UPDATE:

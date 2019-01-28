@@ -6,6 +6,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellStat;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +60,7 @@ public class TemplateStatsView extends Table implements Disposable
         statsViewList.clear();
 
         statsViewList = model.stream()
+            .sorted(Comparator.comparing(TemplateSpellStat::getName))
             .map(this::getView)
             .collect(Collectors.toList());
 
@@ -85,11 +87,12 @@ public class TemplateStatsView extends Table implements Disposable
         int vPad = -4;
         int hPad = +3;
 
-        add(row.getName()).left()             .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getBaseValue()).right()       .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getUpgradeCost()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getBonusPerUpgrade()).right() .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getMaxUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getName()).left()               .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getBaseValue()).right()         .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getMaxValue()).right()          .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getUpgradeCost()).right()       .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getBonusPerUpgrade()).right()   .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(row.getMaxUpgrades()).right()       .padRight(hPad).padTop(vPad).padBottom(vPad);
         row();
     }
 }

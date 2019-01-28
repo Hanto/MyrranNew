@@ -15,6 +15,7 @@ public class TemplateStatView
 
     private WidgetText name;
     private WidgetText baseValue;
+    private WidgetText maxValue;
     private WidgetText upgradeCost;
     private WidgetText bonusPerUpgrade;
     private WidgetText maxUpgrades;
@@ -32,11 +33,12 @@ public class TemplateStatView
     // GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public WidgetText getName()               { return name; }
-    public WidgetText getBaseValue()          { return baseValue; }
-    public WidgetText getUpgradeCost()        { return upgradeCost; }
-    public WidgetText getBonusPerUpgrade()    { return bonusPerUpgrade; }
-    public WidgetText getMaxUpgrades()        { return maxUpgrades; }
+    public WidgetText getName()                 { return name; }
+    public WidgetText getBaseValue()            { return baseValue; }
+    public WidgetText getMaxValue()             { return maxValue; }
+    public WidgetText getUpgradeCost()          { return upgradeCost; }
+    public WidgetText getBonusPerUpgrade()      { return bonusPerUpgrade; }
+    public WidgetText getMaxUpgrades()          { return maxUpgrades; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -45,6 +47,7 @@ public class TemplateStatView
     {
         name            = new WidgetText(font11, white,   black,1);
         baseValue       = new WidgetText(font14, orange,  black,1);
+        maxValue        = new WidgetText(font14, purpleH, black,1);
         upgradeCost     = new WidgetText(font10, purpleL, black,1);
         bonusPerUpgrade = new WidgetText(font10, purpleL, black,1);
         maxUpgrades     = new WidgetText(font10, purpleL, black,1);
@@ -77,6 +80,7 @@ public class TemplateStatView
     {
         name.setText(model.getName());
         baseValue.setText(df.format(model.getBaseValue()));;
+        maxValue.setText(df.format(model.getBaseValue() + model.getMaxUpgrades()));
         upgradeCost.setText(format(model.getUpgradeCost()));
         bonusPerUpgrade.setText(format(model.getBonusPerUpgrade()));
         maxUpgrades.setText(format(model.getMaxUpgrades()));

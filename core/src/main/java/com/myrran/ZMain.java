@@ -115,6 +115,12 @@ public class ZMain extends ApplicationAdapter
 		Atlas.get().dispose();
 	}
 
+	public void resize(int width, int height)
+	{
+		uiStage.getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+	}
+
+
 	@SuppressWarnings("unchecked")
 	private <T extends Object>T unmarshal(Class<T> classz) throws Exception
 	{

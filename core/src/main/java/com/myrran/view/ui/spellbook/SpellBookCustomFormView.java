@@ -6,6 +6,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.view.ui.customspell.CustomFormView;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.WidgetSortableTable;
 
 import java.beans.PropertyChangeEvent;
@@ -32,6 +33,7 @@ public class SpellBookCustomFormView extends WidgetSortableTable<CustomSpellForm
         addSortOption("cost", Comparator.comparing(CustomSpellForm::getTotalCost));
 
         build("Spells", true, 500, 400);
+        addListener(new TouchDownListener(e -> this.toFront()));
     }
 
     // CREATE / UPDATE:

@@ -7,6 +7,7 @@ import com.myrran.model.spell.generators.CustomSpellStat;
 import com.myrran.model.spell.generators.CustomSpellStatsI;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,7 @@ public class CustomStatsView extends Table implements Disposable
     {
         clear();
         statsViewList = model.values().stream()
+            .sorted(Comparator.comparing(CustomSpellStat::getName))
             .map(this::getView)
             .collect(Collectors.toList());
 

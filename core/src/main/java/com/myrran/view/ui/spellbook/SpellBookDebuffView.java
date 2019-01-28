@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.WidgetSortableTable;
 
 import java.beans.PropertyChangeEvent;
@@ -32,6 +33,7 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
         addSortOption("total", Comparator.comparing(TemplateSpellDebuff::getTotal));
 
         build("Debuff SpellBook", true);
+        addListener(new TouchDownListener(e -> this.toFront()));
     }
 
     // CREATE / UPDATE:
