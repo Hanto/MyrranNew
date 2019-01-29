@@ -9,5 +9,4 @@ import java.util.List;
 public interface SpellForm
 {
     void setSpellFormParams(SpellFormParams spellFormParams);
-    void setSpellEffectData(List<SpellDebuffParams> spellDebuffParamsList);
 }

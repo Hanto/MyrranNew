@@ -8,6 +8,8 @@ import com.myrran.misc.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import java.util.List;
 import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
@@ -15,9 +17,13 @@ import java.util.UUID;
 public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, CustomSpellStatsDeco
 {
     private String id = UUID.randomUUID().toString();
+    @XmlAttribute
     private String name;
+    @XmlAttribute
     private String templateID;
+    private int baseCost;
     private SpellSubformFactory factory;
+    private List<CustomSpellSlotKey> keys;
     private CustomSpellStats spellStats = new CustomSpellStats();
     private CustomDebuffSlots debuffSlots = new CustomDebuffSlots();
 
@@ -27,8 +33,10 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
     @Override public String getID()                     { return id; }
     public String getName()                             { return name; }
     public String getTemplateID()                       { return templateID; }
+    public Integer getBaseCost()                        { return baseCost; }
     @Override public CustomSpellStats getSpellStats()   { return spellStats; }
     @Override public CustomDebuffSlots getDebuffSlots() { return debuffSlots; }
+    public boolean hasData()                            { return templateID != null; }
     @Override public void setID(String id)              { this.id = id; }
     public void setName(String name)                    { this.name = name; }
 
@@ -41,12 +49,27 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
 
     public void setSpellSubformTemplate(TemplateSpellSubform template)
     {
-        name = template.getID();
-        templateID = template.getID();
-        factory = template.getFactory();
+        if (template != null)
+        {
+            name = template.getID();
+            templateID = template.getID();
+            baseCost = template.getBaseCost();
+            factory = template.getFactory();
+            keys = template.getKeys();
 
-        setSpellStatsTemplates(template.getSpellStats());
-        setDebuffSlotsTemplate(template.getSpellSlots());
+            setSpellStatsTemplates(template.getSpellStats());
+            setDebuffSlotsTemplate(template.getSpellSlots());
+        }
+        else
+        {
+            name = null;
+            templateID = null;
+            baseCost = 0;
+            factory = null;
+            keys = null;
+            spellStats.values().clear();
+            debuffSlots.values().clear();
+        }
     }
 
     // CUSTOM TO ENTITY DATA:
@@ -54,16 +77,19 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
 
     public SpellSubformParams getSpellFormData()
     {
+        getSpellEffectParams();
+
         return new SpellSubformParams()
             .setFactory(factory)
-            .setSpellStatParams(getSpellStatParams());
+            .setSpellStatParams(getSpellStatParams())
+            .setSpellDebuffParams(getSpellEffectParams());
     }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
     public Integer getTotalCost()
-    {   return getStatsTotalCost() + getDebuffSlotsTotalCost(); }
+    {   return getStatsTotalCost() + getDebuffSlotsTotalCost() + baseCost; }
 
     public Integer getStatCost()
     {   return getStatsTotalCost(); }

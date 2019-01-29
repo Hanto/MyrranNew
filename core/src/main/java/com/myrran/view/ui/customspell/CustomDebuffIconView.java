@@ -107,7 +107,7 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
         slotType.setText(modelSlot.getSlotType());
         lock.setText(modelSlot.getLock().toString().toLowerCase());
 
-        if (modelSlot.hasDebuff())
+        if (modelSlot.hasData())
         {
             debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
             cost.setText(modelDebuff.getTotalCost().toString());

@@ -79,7 +79,7 @@ public class CustomSpellBook
     {
         if (debuffTemplatesLearned.isAvailable(debuffTemplateID))
         {
-            if (!slot.hasDebuff())
+            if (!slot.hasData())
             {
                 TemplateSpellDebuff template = templateBook.getSpellDebuffTemplate(debuffTemplateID);
                 slot.setCustomSpellDebuff(template);
@@ -115,7 +115,7 @@ public class CustomSpellBook
 
     public void removeCustomSpellDebuff(CustomDebuffSlot slot)
     {
-        if (slot.hasDebuff())
+        if (slot.hasData())
         {
             CustomSpellDebuff spellDebuff = slot.getCustomSpellDebuff();
             String templateID = spellDebuff.getTemplateID();
@@ -155,7 +155,7 @@ public class CustomSpellBook
         for (CustomSpellForm form: customSpells.values())
         {
             if (form.getDebuffSlots().values().stream()
-                .filter(CustomDebuffSlot::hasDebuff)
+                .filter(CustomDebuffSlot::hasData)
                 .map(CustomDebuffSlot::getCustomSpellDebuff)
                 .map(CustomSpellDebuff::getID)
                 .collect(Collectors.toList())

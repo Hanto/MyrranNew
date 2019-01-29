@@ -22,8 +22,7 @@ public class SpellFormBolt implements SpellForm, ConsumableDeco
     private static final String GROUND = "ground";
 
     private SpellFormParams spellFormParams;
-    private MapListI<String, SpellDebuffParams> spellEffectsData
-        = new MapList<>(new HashMap<>(), ArrayList::new);
+
     private Consumable consumable = new Consumable();
 
     // SETTERS GETTERS:
@@ -37,13 +36,9 @@ public class SpellFormBolt implements SpellForm, ConsumableDeco
     @Override public void setSpellFormParams(SpellFormParams params)
     {
         this.spellFormParams = params;
-        setMaxDuration(spellFormParams.getStat(DURATION).getTotal());
-    }
-
-    @Override public void setSpellEffectData(List<SpellDebuffParams> spellDebuffParamsList)
-    {
-        for(SpellDebuffParams data : spellDebuffParamsList)
-            spellEffectsData.add(data.getSlotType(), data);
+        setMaxDuration(spellFormParams.getFormStatParams().get(DURATION).getTotal());
+        List<SpellDebuffParams> debuffsAppliedOnImpact = spellFormParams.getDebuffParams().get(IMPACTO);
+        List<SpellDebuffParams> debuffsAppliedOnAOE = spellFormParams.getDebuffParams().get(AOE);
     }
 
     // MAIN:

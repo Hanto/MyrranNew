@@ -40,7 +40,7 @@ public class DadDebuffTarget extends Target
     {
         TemplateSpellDebuff templadeDebuff = (TemplateSpellDebuff) payload.getObject();
 
-        if (model.opensLock(templadeDebuff.getKeys()) && !model.hasDebuff())
+        if (model.opensLock(templadeDebuff.getKeys()) && !model.hasData())
         { controller.addCustomSpellDebuff(model, templadeDebuff.getID()); }
     }
 }

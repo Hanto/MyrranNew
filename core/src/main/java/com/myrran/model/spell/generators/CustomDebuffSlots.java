@@ -1,15 +1,17 @@
 package com.myrran.model.spell.generators;
 
+import com.myrran.misc.dataestructures.maplist.MapList;
+import com.myrran.misc.dataestructures.maplist.MapListI;
 import com.myrran.model.spell.parameters.SpellDebuffParams;
-import com.myrran.model.spell.templates.TemplateSpellDebuffSlot;
+import com.myrran.model.spell.templates.TemplateSpellSlot;
 import com.myrran.misc.InvalidIDException;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -25,7 +27,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public void setDebuffSlotsTemplate(Collection<TemplateSpellDebuffSlot> templates)
+    public void setDebuffSlotsTemplate(Collection<TemplateSpellSlot> templates)
     {
         slots = templates.stream()
             .map(CustomDebuffSlot::new)
@@ -36,12 +38,16 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public List<SpellDebuffParams> getSpellEffectParams()
+    public MapListI<String, SpellDebuffParams> getSpellEffectParams()
     {
-        return slots.values().stream()
-            .filter(CustomDebuffSlot::hasDebuff)
-            .map(CustomDebuffSlot::getSpellEffectData)
-            .collect(Collectors.toList());
+        MapListI<String, SpellDebuffParams> mapList = new MapList<>(new HashMap<>(), ArrayList::new);
+
+        slots.values().stream()
+            .filter(CustomDebuffSlot::hasData)
+            .map(CustomDebuffSlot::getSpellDebuffParams)
+            .forEach(debuffParam -> mapList.add(debuffParam.getSlotType(), debuffParam));
+
+        return mapList;
     }
 
     // SPELL DEBUFF:

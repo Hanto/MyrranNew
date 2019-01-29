@@ -82,7 +82,7 @@ public class CustomDebuffStatsView extends Table implements PropertyChangeListen
 
     private void update()
     {
-        if (debuffSlot.hasDebuff())
+        if (debuffSlot.hasData())
         {
             stats.setModel(spellDebuff);
             name.setText(spellDebuff.getName());

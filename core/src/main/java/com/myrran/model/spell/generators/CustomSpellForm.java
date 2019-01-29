@@ -67,7 +67,8 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     {
         return new SpellFormParams()
             .setFactory(factory)
-            .setSpellStatParams(getSpellStatParams());
+            .setSpellStatParams(getSpellStatParams())
+            .setSpellDebuffParams(getSpellEffectParams());
     }
 
     // MAIN:
@@ -91,7 +92,6 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     {
         SpellForm entity = factory.getFormEntity();
         entity.setSpellFormParams(getSpellFormParams());
-        entity.setSpellEffectData(getSpellEffectParams());
         return entity;
     }
 

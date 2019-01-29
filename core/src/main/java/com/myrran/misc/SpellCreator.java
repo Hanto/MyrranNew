@@ -60,19 +60,19 @@ public class SpellCreator
         stat3.setUpgradeCost(2);
         stat3.setIsUpgradeable(true);
 
-        TemplateSpellDebuffSlot slot1 = new TemplateSpellDebuffSlot();
+        TemplateSpellSlot slot1 = new TemplateSpellSlot();
         slot1.setID("Slot1");
         slot1.setName("Slot1");
         slot1.setSlotType("impact");
         slot1.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.PUREDAMAGE);
 
-        TemplateSpellDebuffSlot slot2 = new TemplateSpellDebuffSlot();
+        TemplateSpellSlot slot2 = new TemplateSpellSlot();
         slot2.setID("Slot2");
         slot2.setName("Slot2");
         slot2.setSlotType("aoe");
         slot2.setLock(CustomSpellSlotKey.DEBUFF);
 
-        TemplateSpellDebuffSlot slot3 = new TemplateSpellDebuffSlot();
+        TemplateSpellSlot slot3 = new TemplateSpellSlot();
         slot3.setID("Slot3");
         slot3.setName("Slot3");
         slot3.setSlotType("ground");

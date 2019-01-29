@@ -4,9 +4,9 @@ import com.myrran.model.components.Identifiable;
 import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
-import com.myrran.model.spell.parameters.SpellDebuffParams;
+import com.myrran.model.spell.parameters.SpellSubformParams;
 import com.myrran.model.spell.templates.TemplateSpellSlot;
-import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.model.spell.templates.TemplateSpellSubform;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,7 +19,7 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomDebuffSlot implements ObservableDeco, Identifiable
+public class CustomSubformSlot implements ObservableDeco, Identifiable
 {
     @XmlAttribute
     private String id;
@@ -28,7 +28,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     @XmlAttribute
     private String type;
     private List<CustomSpellSlotKey> lock = new ArrayList<>();
-    private CustomSpellDebuff customSpellDebuff = new CustomSpellDebuff();
+    private CustomSpellSubform customSpellSubform = new CustomSpellSubform();
     @XmlTransient
     private ObservableI observable = new Observable(this);
 
@@ -39,8 +39,8 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return type; }
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
-    public CustomSpellDebuff getCustomSpellDebuff()             { return customSpellDebuff; }
-    public boolean hasData()                                    { return customSpellDebuff.hasData(); }
+    public CustomSpellSubform getCustomSpellSubform()           { return customSpellSubform; }
+    public boolean hasData()                                    { return customSpellSubform.hasData(); }
     @Override public void setID(String id)                      { this.id = id; }
     public void setName(String name)                            { this.name = name; notifyChanges(); }
     public void setType(String type)                            { this.type = type; notifyChanges(); }
@@ -50,11 +50,11 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomDebuffSlot() {}
-    public CustomDebuffSlot(TemplateSpellSlot template)
-    {   setDebuffSlotTemplate(template); }
+    public CustomSubformSlot() {}
+    public CustomSubformSlot(TemplateSpellSlot template)
+    {   setSubformSlotTemplate(template);}
 
-    public void setDebuffSlotTemplate(TemplateSpellSlot template)
+    public void setSubformSlotTemplate(TemplateSpellSlot template)
     {
         this.id = template.getID();
         this.name = template.getName();
@@ -65,9 +65,9 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     // CUSTOM TO ENTITY DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellDebuffParams getSpellDebuffParams()
+    public SpellSubformParams getSpellEffectData()
     {
-        SpellDebuffParams data = customSpellDebuff.getSpellEffectData();
+        SpellSubformParams data = customSpellSubform.getSpellFormData();
         data.setSlotType(type);
 
         return data;
@@ -80,22 +80,22 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     {   return !Collections.disjoint(keys, lock); }
 
     public int getTotalCost()
-    {   return customSpellDebuff.getTotalCost(); }
+    {   return customSpellSubform.getTotalCost(); }
 
-    public boolean setCustomSpellDebuff(TemplateSpellDebuff template)
+    public boolean setCustomSpellSubform(TemplateSpellSubform template)
     {
         if (opensLock(template.getKeys()))
         {
-            customSpellDebuff.setSpellDebuffTemplate(template);
+            customSpellSubform.setSpellSubformTemplate(template);
             notifyChanges();
             return true;
         }
-        else return false;
+        return false;
     }
 
-    public void removeCustomSpellDebuff()
+    public void removeCustomSpellSubform()
     {
-        customSpellDebuff.setSpellDebuffTemplate(null);
+        customSpellSubform.setSpellSubformTemplate(null);
         notifyChanges();
     }
 

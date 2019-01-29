@@ -27,7 +27,7 @@ public class TemplateSpellForm implements QuantifiableI, Identifiable
     @XmlAttribute
     private SpellFormFactory type;
     private List<TemplateSpellStat> spellStats;
-    private List<TemplateSpellDebuffSlot> spellSlots;
+    private List<TemplateSpellSlot> spellSlots;
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -38,7 +38,7 @@ public class TemplateSpellForm implements QuantifiableI, Identifiable
     @Override public Integer getAvailable()                     { return available; }
     public SpellFormFactory getFactory()                        { return type; }
     public List<TemplateSpellStat> getSpellStats()              { return spellStats; }
-    public List<TemplateSpellDebuffSlot> getSpellSlots()        { return spellSlots; }
+    public List<TemplateSpellSlot> getSpellSlots()        { return spellSlots; }
 
     @Override public void setID(String id)                      { this.id = id; }
     public void setName(String name)                            { this.name = name; }
@@ -46,5 +46,5 @@ public class TemplateSpellForm implements QuantifiableI, Identifiable
     @Override public void setTotal(Integer total)               { this.total = total; }
     public void setFactory(SpellFormFactory type)               { this.type = type; }
     public void setSpellStats(TemplateSpellStat...stats)        { this.spellStats = Arrays.asList(stats); }
-    public void setSpellSlots(TemplateSpellDebuffSlot...slots)  { this.spellSlots = Arrays.asList(slots); }
+    public void setSpellSlots(TemplateSpellSlot...slots)  { this.spellSlots = Arrays.asList(slots); }
 }
