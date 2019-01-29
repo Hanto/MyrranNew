@@ -8,12 +8,13 @@ import com.myrran.misc.InvalidIDException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, CustomSpellStatsDeco
 {
-    private String id;
+    private String id = UUID.randomUUID().toString();
     private String name;
     private String templateID;
     private SpellSubformFactory factory;
@@ -34,12 +35,12 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
+    public CustomSpellSubform() {}
     public CustomSpellSubform(TemplateSpellSubform template)
     {   setSpellSubformTemplate(template); }
 
     public void setSpellSubformTemplate(TemplateSpellSubform template)
     {
-        id = template.getID();
         name = template.getID();
         templateID = template.getID();
         factory = template.getFactory();
@@ -61,8 +62,11 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public int getTotalCost()
+    public Integer getTotalCost()
     {   return getStatsTotalCost() + getDebuffSlotsTotalCost(); }
+
+    public Integer getStatCost()
+    {   return getStatsTotalCost(); }
 
     @Override
     public void setNumUpgrades(String statID, int numUpgrades) throws InvalidIDException
