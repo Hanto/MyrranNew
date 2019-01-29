@@ -85,19 +85,19 @@ public class SpellCreator
         slotSubform1.setID("Slot1");
         slotSubform1.setName("Slot1");
         slotSubform1.setSlotType("impact");
-        slotSubform1.setLock(CustomSpellSlotKey.ROUNDAOE);
+        slotSubform1.setLock(CustomSpellSlotKey.CAOE);
 
         TemplateSpellSlot slotSubform2 = new TemplateSpellSlot();
         slotSubform2.setID("Slot2");
         slotSubform2.setName("Slot2");
         slotSubform2.setSlotType("impact");
-        slotSubform2.setLock(CustomSpellSlotKey.ROUNDAOE);
+        slotSubform2.setLock(CustomSpellSlotKey.CAOE);
 
         TemplateSpellSlot slotSubform3 = new TemplateSpellSlot();
         slotSubform3.setID("Slot3");
         slotSubform3.setName("Slot3");
         slotSubform3.setSlotType("impact");
-        slotSubform3.setLock(CustomSpellSlotKey.ROUNDAOE);
+        slotSubform3.setLock(CustomSpellSlotKey.CAOE);
 
         spellForm.setSpellStats(stat1, stat2, stat3);
         spellForm.setSpellDebuffs(slot1, slot2, slot3);
@@ -114,7 +114,7 @@ public class SpellCreator
         template.setName("AOE Explosion");
         template.setFactory(SpellSubformFactory.AOE);
         template.setBaseCost(20);
-        template.setKeys(CustomSpellSlotKey.ROUNDAOE);
+        template.setKeys(CustomSpellSlotKey.CAOE);
 
         TemplateSpellStat stat1 = new TemplateSpellStat();
         stat1.setID("Radius");

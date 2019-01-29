@@ -1,6 +1,9 @@
 package com.myrran.model.spell.generators;
 
 import com.myrran.model.components.Identifiable;
+import com.myrran.model.components.observable.Observable;
+import com.myrran.model.components.observable.ObservableDeco;
+import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.parameters.SpellSubformParams;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.model.spell.entities.subform.SpellSubformFactory;
@@ -9,12 +12,14 @@ import com.myrran.misc.InvalidIDException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, CustomSpellStatsDeco
+public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, CustomSpellStatsDeco,
+    ObservableDeco
 {
     private String id = UUID.randomUUID().toString();
     @XmlAttribute
@@ -26,6 +31,8 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
     private List<CustomSpellSlotKey> keys;
     private CustomSpellStats spellStats = new CustomSpellStats();
     private CustomDebuffSlots debuffSlots = new CustomDebuffSlots();
+    @XmlTransient
+    private ObservableI observable = new Observable(this);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -34,11 +41,12 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
     public String getName()                             { return name; }
     public String getTemplateID()                       { return templateID; }
     public Integer getBaseCost()                        { return baseCost; }
-    @Override public CustomSpellStatsI getSpellStats()   { return spellStats; }
+    @Override public CustomSpellStatsI getSpellStats()  { return spellStats; }
     @Override public CustomDebuffSlotsI getDebuffSlots(){ return debuffSlots; }
     public boolean hasData()                            { return templateID != null; }
     @Override public void setID(String id)              { this.id = id; }
     public void setName(String name)                    { this.name = name; }
+    @Override public ObservableI getObservable()        { return observable; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------

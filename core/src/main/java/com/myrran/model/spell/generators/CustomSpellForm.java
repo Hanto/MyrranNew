@@ -58,6 +58,7 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
 
         setSpellStatsTemplates(template.getSpellStats());
         setDebuffSlotsTemplate(template.getSpellDebuffs());
+        subformSlots.setSubformSlotsTemplate(template.getSpellSubforms());
         notifyChange();
     }
 

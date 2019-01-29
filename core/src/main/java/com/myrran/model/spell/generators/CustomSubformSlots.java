@@ -3,11 +3,12 @@ package com.myrran.model.spell.generators;
 import com.myrran.misc.InvalidIDException;
 import com.myrran.misc.dataestructures.maplist.MapList;
 import com.myrran.misc.dataestructures.maplist.MapListI;
-import com.myrran.model.spell.parameters.SpellDebuffParams;
 import com.myrran.model.spell.parameters.SpellSubformParams;
 import com.myrran.model.spell.templates.TemplateSpellSlot;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,11 +16,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSubformSlots
 {
     private Map<String, CustomSubformSlot> slots;
 
-    public Collection<CustomSubformSlot> values()   { return slots.values(); }
+    public Collection<CustomSubformSlot> getCustomSubformSlots()   { return slots.values(); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------

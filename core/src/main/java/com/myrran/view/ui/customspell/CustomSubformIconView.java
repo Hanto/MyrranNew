@@ -5,11 +5,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.controller.DadDebuffTarget;
-import com.myrran.model.spell.generators.CustomDebuffSlot;
-import com.myrran.model.spell.generators.CustomSpellDebuff;
+import com.myrran.model.spell.generators.CustomSpellSubform;
+import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.listeners.TouchDownRightListener;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
@@ -18,19 +16,18 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public class CustomDebuffIconView extends Table implements PropertyChangeListener, Disposable
+public class CustomSubformIconView extends Table implements PropertyChangeListener, Disposable
 {
-    private CustomDebuffSlot modelSlot;
-    private CustomSpellDebuff modelDebuff;
+    private CustomSubformSlot modelSlot;
+    private CustomSpellSubform modelSubform;
     private CustomSpellController controller;
 
     private WidgetGroup icon;
-    private WidgetImage debuffIcon;
+    private WidgetImage subformIcon;
     private WidgetText cost;
-    private WidgetText debuffName;
+    private WidgetText subformName;
     private WidgetText slotType;
     private WidgetText lock;
-    private DadDebuffTarget dadTarget;
 
     private static final BitmapFont font10 = Atlas.get().getFont("10");
     private static final BitmapFont font14 = Atlas.get().getFont("14");
@@ -39,20 +36,15 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomDebuffIconView(CustomSpellController customSpellController)
+    public CustomSubformIconView(CustomSpellController customSpellController)
     {
-        controller  = customSpellController;
+        controller = customSpellController;
         icon        = new WidgetGroup();
-        debuffIcon  = new WidgetImage();
+        subformIcon = new WidgetImage();
         cost        = new WidgetText(font14, magenta, Color.BLACK, 1);
-        debuffName  = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
+        subformName = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
         slotType    = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
         lock        = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
-        dadTarget   = new DadDebuffTarget(icon, controller);
-
-        controller.getDadDebuff().addTarget(dadTarget);
-        icon.addListener(new TouchDownRightListener(event ->
-            controller.removeCustomSpellDebuff(modelSlot)));
 
         createLayout();
     }
@@ -60,7 +52,6 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
     @Override public void dispose()
     {
         disposeObservers();
-        controller.getDadDebuff().removeTarget(dadTarget);
     }
 
     private void disposeObservers()
@@ -68,26 +59,25 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
         if (modelSlot != null)
             modelSlot.removeObserver(this);
 
-        if (modelDebuff != null)
-            modelDebuff.removeObserver(this);
+        if (modelSubform != null)
+            modelSubform.removeObserver(this);
     }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomDebuffSlot customDebuffSlot)
+    public void setModel(CustomSubformSlot customSubformSlot)
     {
         disposeObservers();
 
-        if (customDebuffSlot == null)
+        if (customSubformSlot == null)
             removeModel();
         else
         {
-            modelSlot = customDebuffSlot;
-            modelDebuff = modelSlot.getCustomSpellDebuff();
-            dadTarget.setModel(modelSlot);
+            modelSlot = customSubformSlot;
+            modelSubform = modelSlot.getCustomSpellSubform();
             modelSlot.addObserver(this);
-            modelDebuff.addObserver(this);
+            modelSubform.addObserver(this);
             update();
         }
     }
@@ -95,9 +85,9 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
     private void removeModel()
     {
         modelSlot = null;
-        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
+        subformIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
         cost.setText(null);
-        debuffName.setText(null);
+        subformName.setText(null);
         slotType.setText(null);
         lock.setText(null);
     }
@@ -109,15 +99,15 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
 
         if (modelSlot.hasData())
         {
-            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
-            cost.setText(modelDebuff.getTotalCost().toString());
-            debuffName.setText(modelDebuff.getName());
+            subformIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
+            cost.setText(modelSubform.getTotalCost().toString());
+            subformName.setText(modelSubform.getName());
         }
         else
         {
-            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
+            subformIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
             cost.setText(null);
-            debuffName.setText(null);
+            subformName.setText(null);
         }
     }
 
@@ -131,9 +121,9 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
         Table textTable = new Table().top().left();
         textTable.add(slotType).left()    .padTop(vPad).padBottom(vPad).row();
         textTable.add(lock).left()        .padTop(-2).padBottom(vPad).row();
-        textTable.add(debuffName).left()  .padTop(vPad).padBottom(vPad).row();
+        textTable.add(subformName).left()  .padTop(vPad).padBottom(vPad).row();
 
-        icon.addActor(debuffIcon);
+        icon.addActor(subformIcon);
         icon.addActor(cost);
         cost.setPosition(2, 0);
 

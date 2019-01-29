@@ -37,13 +37,13 @@
                     <lock>DEBUFF</lock>
                 </spellDebuffs>
                 <spellSubforms id="Slot1" name="Slot1" slotType="impact">
-                    <lock>ROUNDAOE</lock>
+                    <lock>CAOE</lock>
                 </spellSubforms>
                 <spellSubforms id="Slot2" name="Slot2" slotType="impact">
-                    <lock>ROUNDAOE</lock>
+                    <lock>CAOE</lock>
                 </spellSubforms>
                 <spellSubforms id="Slot3" name="Slot3" slotType="impact">
-                    <lock>ROUNDAOE</lock>
+                    <lock>CAOE</lock>
                 </spellSubforms>
             </value>
         </entry>
@@ -171,7 +171,7 @@
                     <lock>DEBUFF</lock>
                 </spellSlots>
                 <baseCost>20</baseCost>
-                <keys>ROUNDAOE</keys>
+                <keys>CAOE</keys>
             </value>
         </entry>
     </spellSubformTemplates>

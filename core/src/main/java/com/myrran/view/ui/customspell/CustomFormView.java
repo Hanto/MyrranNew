@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.generators.CustomSpellForm;
+import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
@@ -30,14 +31,16 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
     private WidgetImage spellIcon;
     private Table tableHeader;
-    private Table tableIcons;
     private Table tableStats;
+    private Table tableDebuffIcons;
+    private Table tableSubformIcons;
     private WidgetText name;
     private WidgetText templateID;
     private WidgetText totalCost;
     private CustomStatsView stats;
     private List<CustomDebuffStatsView> debuffStats;
     private List<CustomDebuffIconView> debuffIcons;
+    private List<CustomSubformIconView> subformIcons;
 
     private boolean detailsVisible = false;
     private Cell<Actor>cellIcons;
@@ -56,7 +59,8 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         controller  = spellController;
         tableHeader = new Table();
-        tableIcons  = new Table().top().left();
+        tableDebuffIcons = new Table().top().left();
+        tableSubformIcons= new Table();
         tableStats  = new Table().top().left();
         spellIcon   = new WidgetImage();
         stats       = new CustomStatsView(controller);
@@ -72,7 +76,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         createLayout();
         createHeaderLayout();
         cellStats = getCell(tableStats);
-        cellIcons = getCell(tableIcons);
+        cellIcons = getCell(tableDebuffIcons);
         showDetails();
     }
 
@@ -105,6 +109,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
             model.addObserver(this);
             createStatsLayout();
             createDebuffIconsLayout();
+            createSubformIconsLayout();
             update();
         }
     }
@@ -140,8 +145,10 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         add(tableHeader).bottom().left().row();
         add();
         add(tableStats).top().left().padRight(3);
-        add(tableIcons).top().left();
-        tableStats.padBottom(8);
+        add(tableDebuffIcons).top().left().row();
+        add();
+        add();
+        add(tableSubformIcons).top().left();
     }
 
     private void createHeaderLayout()
@@ -157,11 +164,12 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         debuffStats = model.getDebuffSlots().getCustomDebuffSlots().stream()
             .sorted(Comparator.comparing(CustomDebuffSlot::getID))
-            .map(this::addDebuffViews)
+            .map(this::addDebuffStats)
             .collect(Collectors.toList());
 
         tableStats.clear();
         tableStats.add(stats).left().row();
+        tableStats.padBottom(8);
         debuffStats.forEach(debuffDetails -> tableStats.add(debuffDetails).left().row());
     }
 
@@ -169,23 +177,42 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         debuffIcons = model.getDebuffSlots().getCustomDebuffSlots().stream()
             .sorted(Comparator.comparing(CustomDebuffSlot::getID))
-            .map(this::addDebuffSlotIcons)
+            .map(this::addDebuffIcons)
             .collect(Collectors.toList());
 
-        tableIcons.clear();
-        debuffIcons.forEach(debuffIcon -> tableIcons.add(debuffIcon).left().row());
+        tableDebuffIcons.clear();
+        debuffIcons.forEach(debuffIcon -> tableDebuffIcons.add(debuffIcon).left().row());
     }
 
-    private CustomDebuffStatsView addDebuffViews(CustomDebuffSlot slot)
+    private void createSubformIconsLayout()
+    {
+        subformIcons = model.getSubformSlots().getCustomSubformSlots().stream()
+            .sorted(Comparator.comparing(CustomSubformSlot::getID))
+            .map(this::addSubformIcons)
+            .collect(Collectors.toList());
+
+        tableSubformIcons.clear();
+        tableSubformIcons.top().left();
+        subformIcons.forEach(icon -> tableSubformIcons.add(icon).left().row());
+    }
+
+    private CustomDebuffStatsView addDebuffStats(CustomDebuffSlot slot)
     {
         CustomDebuffStatsView details = new CustomDebuffStatsView(controller);
         details.setModel(slot);
         return details;
     }
 
-    private CustomDebuffIconView addDebuffSlotIcons(CustomDebuffSlot slot)
+    private CustomDebuffIconView addDebuffIcons(CustomDebuffSlot slot)
     {
         CustomDebuffIconView icon = new CustomDebuffIconView(controller);
+        icon.setModel(slot);
+        return icon;
+    }
+
+    private CustomSubformIconView addSubformIcons(CustomSubformSlot slot)
+    {
+        CustomSubformIconView icon = new CustomSubformIconView(controller);
         icon.setModel(slot);
         return icon;
     }
@@ -203,7 +230,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         }
         else
         {
-            cellIcons.setActor(tableIcons);
+            cellIcons.setActor(tableDebuffIcons);
             cellStats.setActor(tableStats);
         }
         detailsVisible = !visible;

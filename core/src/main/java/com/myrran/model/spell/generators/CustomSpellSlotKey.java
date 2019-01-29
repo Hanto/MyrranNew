@@ -8,7 +8,7 @@ public enum CustomSpellSlotKey
     BUFF("Buff"),
     DD("Pure Damage"),
 
-    ROUNDAOE("Round Area of Effect");
+    CAOE("Round Area of Effect");
 
     private String name;
     public String getName()     { return name; }
