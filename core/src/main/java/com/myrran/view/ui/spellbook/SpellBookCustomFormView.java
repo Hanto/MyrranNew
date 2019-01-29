@@ -29,7 +29,7 @@ public class SpellBookCustomFormView extends WidgetSortableTable<CustomSpellForm
 
         addSortOption("name", Comparator.comparing(CustomSpellForm::getName));
         addSortOption("type", Comparator.comparing(CustomSpellForm::getTemplateID));
-        addSortOption("dslots", Comparator.comparing(form -> form.getDebuffSlots().values().size()));
+        addSortOption("dslots", Comparator.comparing(form -> form.getDebuffSlots().getCustomDebuffSlots().size()));
         addSortOption("cost", Comparator.comparing(CustomSpellForm::getTotalCost));
 
         build("Spells", true, 500, 400);

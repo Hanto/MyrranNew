@@ -13,6 +13,7 @@ import java.util.Map;
 /** @author Ivan Delgado Huerta */
 public interface CustomDebuffSlotsI
 {
+    public Collection<CustomDebuffSlot> getCustomDebuffSlots();
     void setDebuffSlotsTemplate(Collection<TemplateSpellSlot> templates);
     MapListI<String, SpellDebuffParams> getSpellEffectParams();
     CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException;

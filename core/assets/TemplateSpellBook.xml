@@ -40,6 +40,27 @@
     </spellFormTemplates>
     <spellDebuffTemplates>
         <entry>
+            <key>Silence</key>
+            <value id="Silence" name="Silence" available="0" total="0" type="BUFF">
+                <spellStats id="Cooldown" name="Cooldown">
+                    <baseValue>50.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <spellStats id="Duration" name="Duration">
+                    <baseValue>100.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <baseCost>30</baseCost>
+                <keys>DEBUFF</keys>
+            </value>
+        </entry>
+        <entry>
             <key>Slow</key>
             <value id="Slow" name="Slow" available="0" total="0" type="DOT">
                 <spellStats id="Cooldown" name="Cooldown">
@@ -77,20 +98,6 @@
         <entry>
             <key>Poison</key>
             <value id="Poison" name="Poison" available="0" total="0" type="DOT">
-                <spellStats id="Final Damage" name="Final Damage">
-                    <baseValue>100.0</baseValue>
-                    <isUpgradeable>true</isUpgradeable>
-                    <maxUpgrades>50</maxUpgrades>
-                    <upgradeCost>4</upgradeCost>
-                    <bonusPerUpgrade>5.0</bonusPerUpgrade>
-                </spellStats>
-                <spellStats id="Damage" name="Damage">
-                    <baseValue>50.0</baseValue>
-                    <isUpgradeable>true</isUpgradeable>
-                    <maxUpgrades>50</maxUpgrades>
-                    <upgradeCost>2</upgradeCost>
-                    <bonusPerUpgrade>3.0</bonusPerUpgrade>
-                </spellStats>
                 <spellStats id="Cooldown" name="Cooldown">
                     <baseValue>50.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>
@@ -99,6 +106,13 @@
                     <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 </spellStats>
                 <spellStats id="Speed" name="Speed">
+                    <baseValue>100.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                </spellStats>
+                <spellStats id="Damage Per Tick" name="Damage Per Tick">
                     <baseValue>100.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>
                     <maxUpgrades>50</maxUpgrades>
@@ -117,4 +131,5 @@
             </value>
         </entry>
     </spellDebuffTemplates>
+    <spellSubformTemplates/>
 </templateSpellBook>

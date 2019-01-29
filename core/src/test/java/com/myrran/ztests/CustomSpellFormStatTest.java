@@ -41,6 +41,7 @@ public class CustomSpellFormStatTest
             cbook.addSpellDebuffTemplate("Poison");
             cbook.addSpellDebuffTemplate("Poison");
             cbook.addSpellDebuffTemplate("Slow");
+            cbook.addSpellDebuffTemplate("Silence");
 
             cbook.addCustomSpellForm("Bolt");
             cbook.addCustomSpellForm("Bolt");
@@ -59,7 +60,7 @@ public class CustomSpellFormStatTest
 
 
     @SuppressWarnings("unchecked")
-    private <T extends Object>T unmarshal(Class<T> classz) throws JAXBException
+    private static <T extends Object>T unmarshal(Class<T> classz) throws JAXBException
     {
         JAXBContext context = JAXBContext.newInstance(classz);
         Unmarshaller unmarshaller = context.createUnmarshaller();

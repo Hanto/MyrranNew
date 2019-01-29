@@ -67,8 +67,8 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
             baseCost = 0;
             factory = null;
             keys = null;
-            spellStats.values().clear();
-            debuffSlots.values().clear();
+            spellStats.getCustomSpellStats().clear();
+            debuffSlots.getCustomDebuffSlots().clear();
         }
     }
 

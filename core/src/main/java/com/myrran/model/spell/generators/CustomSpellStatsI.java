@@ -14,7 +14,7 @@ public interface CustomSpellStatsI
     void setNumUpgrades(String statID, int numUpgrades) throws InvalidIDException;
 
     default String getID()  { return null; }
-    Collection<CustomSpellStat>values();
+    Collection<CustomSpellStat> getCustomSpellStats();
     Map<String, SpellStatParams> getSpellStatParams();
     CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException;
     int getStatsTotalCost();

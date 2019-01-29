@@ -57,7 +57,7 @@ public class CustomStatsView extends Table implements Disposable
     private void update()
     {
         clear();
-        statsViewList = model.values().stream()
+        statsViewList = model.getCustomSpellStats().stream()
             .sorted(Comparator.comparing(CustomSpellStat::getName))
             .map(this::getView)
             .collect(Collectors.toList());

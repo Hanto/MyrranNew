@@ -16,7 +16,7 @@ public class CustomSpellStats implements CustomSpellStatsI
 {
     private Map<String, CustomSpellStat> stats = new HashMap<>();
 
-    public Collection<CustomSpellStat> values() { return stats.values(); }
+    public Collection<CustomSpellStat> getCustomSpellStats() { return stats.values(); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------

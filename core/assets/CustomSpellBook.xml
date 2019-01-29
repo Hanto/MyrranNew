@@ -3,7 +3,7 @@
   <formTemplatesLearned>
     <entry>
       <key>Bolt</key>
-      <value available="0" id="Bolt" name="Super Bolt" total="5" type="BOLT">
+      <value available="0" id="Bolt" name="Super Bolt" total="3" type="BOLT">
         <spellStats id="Cooldown" name="Cooldown">
           <baseValue>50.0</baseValue>
           <isUpgradeable>true</isUpgradeable>
@@ -40,8 +40,29 @@
   </formTemplatesLearned>
   <debuffTemplatesLearned>
     <entry>
+      <key>Silence</key>
+      <value available="1" id="Silence" name="Silence" total="1" type="BUFF">
+        <spellStats id="Cooldown" name="Cooldown">
+          <baseValue>50.0</baseValue>
+          <isUpgradeable>true</isUpgradeable>
+          <maxUpgrades>50</maxUpgrades>
+          <upgradeCost>2</upgradeCost>
+          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+        </spellStats>
+        <spellStats id="Duration" name="Duration">
+          <baseValue>100.0</baseValue>
+          <isUpgradeable>true</isUpgradeable>
+          <maxUpgrades>50</maxUpgrades>
+          <upgradeCost>2</upgradeCost>
+          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+        </spellStats>
+        <baseCost>30</baseCost>
+        <keys>DEBUFF</keys>
+      </value>
+    </entry>
+    <entry>
       <key>Slow</key>
-      <value available="4" id="Slow" name="Slow" total="5" type="DOT">
+      <value available="0" id="Slow" name="Slow" total="1" type="DOT">
         <spellStats id="Cooldown" name="Cooldown">
           <baseValue>50.0</baseValue>
           <isUpgradeable>true</isUpgradeable>
@@ -63,27 +84,20 @@
           <upgradeCost>2</upgradeCost>
           <bonusPerUpgrade>2.0</bonusPerUpgrade>
         </spellStats>
+        <spellStats id="Duration" name="Duration">
+          <baseValue>100.0</baseValue>
+          <isUpgradeable>true</isUpgradeable>
+          <maxUpgrades>50</maxUpgrades>
+          <upgradeCost>2</upgradeCost>
+          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+        </spellStats>
         <baseCost>30</baseCost>
         <keys>DEBUFF</keys>
       </value>
     </entry>
     <entry>
       <key>Poison</key>
-      <value available="4" id="Poison" name="Poison" total="5" type="DOT">
-        <spellStats id="Final Damage" name="Final Damage">
-          <baseValue>100.0</baseValue>
-          <isUpgradeable>true</isUpgradeable>
-          <maxUpgrades>50</maxUpgrades>
-          <upgradeCost>4</upgradeCost>
-          <bonusPerUpgrade>5.0</bonusPerUpgrade>
-        </spellStats>
-        <spellStats id="Damage" name="Damage">
-          <baseValue>50.0</baseValue>
-          <isUpgradeable>true</isUpgradeable>
-          <maxUpgrades>50</maxUpgrades>
-          <upgradeCost>2</upgradeCost>
-          <bonusPerUpgrade>3.0</bonusPerUpgrade>
-        </spellStats>
+      <value available="2" id="Poison" name="Poison" total="3" type="DOT">
         <spellStats id="Cooldown" name="Cooldown">
           <baseValue>50.0</baseValue>
           <isUpgradeable>true</isUpgradeable>
@@ -92,6 +106,20 @@
           <bonusPerUpgrade>2.0</bonusPerUpgrade>
         </spellStats>
         <spellStats id="Speed" name="Speed">
+          <baseValue>100.0</baseValue>
+          <isUpgradeable>true</isUpgradeable>
+          <maxUpgrades>50</maxUpgrades>
+          <upgradeCost>2</upgradeCost>
+          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+        </spellStats>
+        <spellStats id="Damage Per Tick" name="Damage Per Tick">
+          <baseValue>100.0</baseValue>
+          <isUpgradeable>true</isUpgradeable>
+          <maxUpgrades>50</maxUpgrades>
+          <upgradeCost>2</upgradeCost>
+          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+        </spellStats>
+        <spellStats id="Duration" name="Duration">
           <baseValue>100.0</baseValue>
           <isUpgradeable>true</isUpgradeable>
           <maxUpgrades>50</maxUpgrades>
@@ -158,7 +186,7 @@
               <value id="Slot2" name="Slot2" type="aoe">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>24322daf-6823-4feb-b5c9-e5249cbed629</id>
+                  <id>be6cadd7-a7d8-4232-b23d-8c3f4e59252f</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -171,7 +199,7 @@
               <value id="Slot3" name="Slot3" type="ground">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>778e3c27-1630-4ab1-93b9-20abb581a06b</id>
+                  <id>09ee653d-0b8d-4e07-a1a6-d968003214df</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -185,7 +213,7 @@
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff>
-                  <id>1350b13a-5e83-4b42-9b37-41fb83ff3125</id>
+                  <id>6dd67007-a3e3-4d7b-8d1c-c7c1f103fa34</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -195,6 +223,7 @@
             </entry>
           </slots>
         </debuffSlots>
+        <subformSlots/>
       </value>
     </entry>
     <entry>
@@ -251,7 +280,7 @@
               <value id="Slot2" name="Slot2" type="aoe">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>9f11220b-07c5-4020-8b86-c74149a4380d</id>
+                  <id>5f7999ae-b043-4e03-81ed-84f4d8ecaf31</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -264,7 +293,7 @@
               <value id="Slot3" name="Slot3" type="ground">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>dfd96162-edcb-4c00-bb6e-6a6364e78aa9</id>
+                  <id>58107104-96f6-410e-9f9a-6c224919fd02</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -278,7 +307,7 @@
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff>
-                  <id>3573db47-813b-44ce-b2c7-0c90258a7dbb</id>
+                  <id>d491161d-98f9-43b6-a1ae-1451a893827f</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -288,6 +317,7 @@
             </entry>
           </slots>
         </debuffSlots>
+        <subformSlots/>
       </value>
     </entry>
     <entry>
@@ -344,7 +374,7 @@
               <value id="Slot2" name="Slot2" type="aoe">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff name="Poison" templateID="Poison">
-                  <id>316563d5-8f77-4979-ae37-b2493d87c759</id>
+                  <id>9e3e2881-a5cc-43c3-9c6e-45dbe835bae1</id>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>
                   <keys>DEBUFF</keys>
@@ -366,6 +396,30 @@
                         <key>Cooldown</key>
                         <value id="Cooldown" name="Cooldown">
                           <baseValue>50.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                      <entry>
+                        <key>Duration</key>
+                        <value id="Duration" name="Duration">
+                          <baseValue>100.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                      <entry>
+                        <key>Damage Per Tick</key>
+                        <value id="Damage Per Tick" name="Damage Per Tick">
+                          <baseValue>100.0</baseValue>
                           <isUpgradeable>true</isUpgradeable>
                           <maxUpgrades>50</maxUpgrades>
                           <upgradeCost>2</upgradeCost>
@@ -384,7 +438,7 @@
               <value id="Slot3" name="Slot3" type="ground">
                 <lock>DEBUFF</lock>
                 <customSpellDebuff>
-                  <id>d9d0c2f9-df1c-4f21-a0c0-a6559c408191</id>
+                  <id>6a21c279-12c3-4229-aa64-748c7a3ea02d</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -398,7 +452,7 @@
                 <lock>DEBUFF</lock>
                 <lock>PUREDAMAGE</lock>
                 <customSpellDebuff name="Slow" templateID="Slow">
-                  <id>68490a09-59ad-419c-8b9b-d229f1486bc7</id>
+                  <id>fde4648d-75ca-4d4b-a80d-502b26392157</id>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>
                   <keys>DEBUFF</keys>
@@ -420,6 +474,18 @@
                         <key>Cooldown</key>
                         <value id="Cooldown" name="Cooldown">
                           <baseValue>50.0</baseValue>
+                          <isUpgradeable>true</isUpgradeable>
+                          <maxUpgrades>50</maxUpgrades>
+                          <upgradeCost>2</upgradeCost>
+                          <bonusPerUpgrade>2.0</bonusPerUpgrade>
+                          <gearBonus>0.0</gearBonus>
+                          <numUpgrades>0</numUpgrades>
+                        </value>
+                      </entry>
+                      <entry>
+                        <key>Duration</key>
+                        <value id="Duration" name="Duration">
+                          <baseValue>100.0</baseValue>
                           <isUpgradeable>true</isUpgradeable>
                           <maxUpgrades>50</maxUpgrades>
                           <upgradeCost>2</upgradeCost>
@@ -447,6 +513,7 @@
             </entry>
           </slots>
         </debuffSlots>
+        <subformSlots/>
       </value>
     </entry>
   </customSpells>

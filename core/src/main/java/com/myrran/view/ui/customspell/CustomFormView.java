@@ -155,7 +155,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
     private void createStatsLayout()
     {
-        debuffStats = model.getDebuffSlots().values().stream()
+        debuffStats = model.getDebuffSlots().getCustomDebuffSlots().stream()
             .sorted(Comparator.comparing(CustomDebuffSlot::getID))
             .map(this::addDebuffViews)
             .collect(Collectors.toList());
@@ -167,7 +167,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
     private void createDebuffIconsLayout()
     {
-        debuffIcons = model.getDebuffSlots().values().stream()
+        debuffIcons = model.getDebuffSlots().getCustomDebuffSlots().stream()
             .sorted(Comparator.comparing(CustomDebuffSlot::getID))
             .map(this::addDebuffSlotIcons)
             .collect(Collectors.toList());

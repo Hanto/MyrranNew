@@ -21,7 +21,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
 {
     private Map<String, CustomDebuffSlot> slots;
 
-    public Collection<CustomDebuffSlot> values()        { return slots.values(); }
+    public Collection<CustomDebuffSlot> getCustomDebuffSlots()        { return slots.values(); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------

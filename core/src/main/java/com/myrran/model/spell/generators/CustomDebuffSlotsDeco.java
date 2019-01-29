@@ -7,8 +7,6 @@ import com.myrran.misc.InvalidIDException;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /** @author Ivan Delgado Huerta */
 public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
@@ -38,4 +36,7 @@ public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
 
     default CustomDebuffSlot getCustomDebuffSlot(String slotID) throws InvalidIDException
     {   return getDebuffSlots().getCustomDebuffSlot(slotID); }
+
+    default Collection<CustomDebuffSlot> getCustomDebuffSlots()
+    {   return getDebuffSlots().getCustomDebuffSlots(); }
 }

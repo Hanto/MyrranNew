@@ -106,7 +106,7 @@ public class CustomSpellBook
     {
         CustomSpellForm spellForm = getCustomSpellForm(customFormID);
 
-        for (CustomDebuffSlot slot: spellForm.getDebuffSlots().values())
+        for (CustomDebuffSlot slot: spellForm.getDebuffSlots().getCustomDebuffSlots())
             removeCustomSpellDebuff(customFormID, slot.getID());
 
         customSpells.remove(customFormID);
@@ -154,7 +154,7 @@ public class CustomSpellBook
 
         for (CustomSpellForm form: customSpells.values())
         {
-            if (form.getDebuffSlots().values().stream()
+            if (form.getDebuffSlots().getCustomDebuffSlots().stream()
                 .filter(CustomDebuffSlot::hasData)
                 .map(CustomDebuffSlot::getCustomSpellDebuff)
                 .map(CustomSpellDebuff::getID)

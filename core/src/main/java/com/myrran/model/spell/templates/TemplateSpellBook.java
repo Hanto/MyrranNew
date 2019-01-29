@@ -1,6 +1,7 @@
 package com.myrran.model.spell.templates;
 
 import com.myrran.misc.InvalidIDException;
+import org.omg.CORBA.DynAnyPackage.Invalid;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,6 +16,7 @@ public class TemplateSpellBook
 {
     private Map<String, TemplateSpellForm> spellFormTemplates = new HashMap<>();
     private Map<String, TemplateSpellDebuff> spellDebuffTemplates = new HashMap<>();
+    private Map<String, TemplateSpellSubform> spellSubformTemplates = new HashMap<>();
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -24,6 +26,9 @@ public class TemplateSpellBook
 
     public Map<String, TemplateSpellDebuff> getSpellDebuffTemplates()
     {   return spellDebuffTemplates; }
+
+    public Map<String, TemplateSpellSubform> getSpellSubformTemplates()
+    {   return spellSubformTemplates; }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
@@ -42,9 +47,19 @@ public class TemplateSpellBook
         else throw new InvalidIDException("A TemplateSpellDebuff with the following ID doesn't exist: %s", templateID);
     }
 
+    public TemplateSpellSubform getSpellSubformTemplate(String templateID) throws InvalidIDException
+    {
+        TemplateSpellSubform template = spellSubformTemplates.get(templateID);
+        if (template != null) return template;
+        else throw new InvalidIDException("A TempalteSpellSubform with the following ID doesn't exist: %s", templateID);
+    }
+
     public void addSpellFormTemplate(TemplateSpellForm spellFormTemplate)
     {   this.spellFormTemplates.put(spellFormTemplate.getID(), spellFormTemplate); }
 
     public void addSpellDebuffTemplate(TemplateSpellDebuff spellDebuffTemplate)
     {   this.spellDebuffTemplates.put(spellDebuffTemplate.getID(), spellDebuffTemplate); }
+
+    public void addSpellSubformTemplate(TemplateSpellSubform templateSpellSubform)
+    {   this.spellSubformTemplates.put(templateSpellSubform.getID(), templateSpellSubform); }
 }

@@ -74,7 +74,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
             baseCost = 0;
             factory = null;
             keys = null;
-            spellStats.values().clear();
+            spellStats.getCustomSpellStats().clear();
         }
     }
 

@@ -22,6 +22,8 @@ public class SpellCreator
         generateSpellForms();
         generateSpellDebuffs();
         generateSpellDebuffs2();
+        generateSpellDebuffs3();
+        generateSpellSubforms();
 
         marshal(book, TemplateSpellBook.class);
     }
@@ -110,7 +112,25 @@ public class SpellCreator
         stat2.setUpgradeCost(2);
         stat2.setIsUpgradeable(true);
 
-        debuff.setSpellStats(stat1, stat2);
+        TemplateSpellStat stat3 = new TemplateSpellStat();
+        stat3.setID("Damage Per Tick");
+        stat3.setName("Damage Per Tick");
+        stat3.setBaseValue(100);
+        stat3.setBonusPerUpgrade(2);
+        stat3.setMaxUpgrades(50);
+        stat3.setUpgradeCost(2);
+        stat3.setIsUpgradeable(true);
+
+        TemplateSpellStat stat4 = new TemplateSpellStat();
+        stat4.setID("Duration");
+        stat4.setName("Duration");
+        stat4.setBaseValue(100);
+        stat4.setBonusPerUpgrade(2);
+        stat4.setMaxUpgrades(50);
+        stat4.setUpgradeCost(2);
+        stat4.setIsUpgradeable(true);
+
+        debuff.setSpellStats(stat1, stat2, stat3, stat4);
         book.addSpellDebuffTemplate(debuff);
     }
 
@@ -150,16 +170,63 @@ public class SpellCreator
         stat3.setUpgradeCost(2);
         stat3.setIsUpgradeable(true);
 
-        debuff.setSpellStats(stat1, stat2, stat3);
+        TemplateSpellStat stat4 = new TemplateSpellStat();
+        stat4.setID("Duration");
+        stat4.setName("Duration");
+        stat4.setBaseValue(100);
+        stat4.setBonusPerUpgrade(2);
+        stat4.setMaxUpgrades(50);
+        stat4.setUpgradeCost(2);
+        stat4.setIsUpgradeable(true);
+
+        debuff.setSpellStats(stat1, stat2, stat3, stat4);
         book.addSpellDebuffTemplate(debuff);
+    }
+
+    public static void generateSpellDebuffs3()
+    {
+        TemplateSpellDebuff debuff = new TemplateSpellDebuff();
+        debuff.setID("Silence");
+        debuff.setName("Silence");
+        debuff.setFactory(SpellDebuffFactory.BUFF);
+        debuff.setBaseCost(30);
+        debuff.setKeys(CustomSpellSlotKey.DEBUFF);
+
+        TemplateSpellStat stat1 = new TemplateSpellStat();
+        stat1.setID(COOLDOWN);
+        stat1.setName(COOLDOWN);
+        stat1.setBaseValue(50);
+        stat1.setBonusPerUpgrade(2);
+        stat1.setMaxUpgrades(50);
+        stat1.setUpgradeCost(2);
+        stat1.setIsUpgradeable(true);
+
+        TemplateSpellStat stat2 = new TemplateSpellStat();
+        stat2.setID("Duration");
+        stat2.setName("Duration");
+        stat2.setBaseValue(100);
+        stat2.setBonusPerUpgrade(2);
+        stat2.setMaxUpgrades(50);
+        stat2.setUpgradeCost(2);
+        stat2.setIsUpgradeable(true);
+
+
+        debuff.setSpellStats(stat1, stat2);
+        book.addSpellDebuffTemplate(debuff);
+    }
+
+    public static void generateSpellSubforms()
+    {
+
     }
 
     private static void marshal(Object object, Class classz) throws JAXBException
     {
-        File file = new File("assets/"+classz.getSimpleName()+".xml");
+        File file = new File("core/Assets/" + classz.getSimpleName()+".xml");
         JAXBContext context = JAXBContext.newInstance(classz);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(object, file);
+
     }
 }
