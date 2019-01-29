@@ -70,6 +70,20 @@
     <entry>
       <key>Poison</key>
       <value available="4" id="Poison" name="Poison" total="5" type="DOT">
+        <spellStats id="Final Damage" name="Final Damage">
+          <baseValue>100.0</baseValue>
+          <isUpgradeable>true</isUpgradeable>
+          <maxUpgrades>50</maxUpgrades>
+          <upgradeCost>4</upgradeCost>
+          <bonusPerUpgrade>5.0</bonusPerUpgrade>
+        </spellStats>
+        <spellStats id="Damage" name="Damage">
+          <baseValue>50.0</baseValue>
+          <isUpgradeable>true</isUpgradeable>
+          <maxUpgrades>50</maxUpgrades>
+          <upgradeCost>2</upgradeCost>
+          <bonusPerUpgrade>3.0</bonusPerUpgrade>
+        </spellStats>
         <spellStats id="Cooldown" name="Cooldown">
           <baseValue>50.0</baseValue>
           <isUpgradeable>true</isUpgradeable>

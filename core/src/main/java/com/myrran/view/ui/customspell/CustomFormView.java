@@ -39,7 +39,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     private List<CustomDebuffStatsView> debuffStats;
     private List<CustomDebuffIconView> debuffIcons;
 
-    private boolean detailsVisible = true;
+    private boolean detailsVisible = false;
     private Cell<Actor>cellIcons;
     private Cell<Actor>cellStats;
 
@@ -73,6 +73,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         createHeaderLayout();
         cellStats = getCell(tableStats);
         cellIcons = getCell(tableIcons);
+        showDetails();
     }
 
     public CustomFormView(CustomSpellController spellController)
