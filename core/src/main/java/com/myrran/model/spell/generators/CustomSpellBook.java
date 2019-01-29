@@ -7,6 +7,7 @@ import com.myrran.model.components.Identifiable;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellForm;
+import com.myrran.model.spell.templates.TemplateSpellSubform;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,6 +25,7 @@ public class CustomSpellBook
 {
     private QuantityMapI<TemplateSpellForm> formTemplatesLearned = new QuantityMap<>(new HashMap<>());
     private QuantityMapI<TemplateSpellDebuff> debuffTemplatesLearned = new QuantityMap<>(new HashMap<>());
+    private QuantityMapI<TemplateSpellSubform> subformsLearned = new QuantityMap<>(new HashMap<>());
     private Map<String, CustomSpellForm> customSpells = new HashMap<>();
 
     @XmlTransient private TemplateSpellBook templateBook;
@@ -34,6 +36,7 @@ public class CustomSpellBook
     public void setSpellBookTemplates(TemplateSpellBook tBook)          { this.templateBook = tBook; }
     public Collection<TemplateSpellDebuff> getDebuffsTemplatesLearned() { return debuffTemplatesLearned.values(); }
     public Collection<TemplateSpellForm> getFormTemplatesLearned()      { return formTemplatesLearned.values(); }
+    public Collection<TemplateSpellSubform> getSubformTemplatesLearned(){ return subformsLearned.values(); }
     public Collection<CustomSpellForm> getCustomSpellForms()            { return customSpells.values(); }
 
     // TEMPLATES -> LEARNED
@@ -41,14 +44,20 @@ public class CustomSpellBook
 
     public void addSpellFormTemplate(String templateID) throws InvalidIDException
     {
-        TemplateSpellForm templateForm = templateBook.getSpellFormTemplate(templateID);
-        formTemplatesLearned.add(templateForm);
+        TemplateSpellForm template = templateBook.getSpellFormTemplate(templateID);
+        formTemplatesLearned.add(template);
     }
 
     public void addSpellDebuffTemplate(String templateID) throws InvalidIDException
     {
-        TemplateSpellDebuff templateDebuff = templateBook.getSpellDebuffTemplate(templateID);
-        debuffTemplatesLearned.add(templateDebuff);
+        TemplateSpellDebuff template = templateBook.getSpellDebuffTemplate(templateID);
+        debuffTemplatesLearned.add(template);
+    }
+
+    public void addSpellSubformTemplate(String templateID) throws InvalidIDException
+    {
+        TemplateSpellSubform template = templateBook.getSpellSubformTemplate(templateID);
+        subformsLearned.add(template);
     }
 
     public void removeSpellFormTemplate(String templateID)
@@ -56,6 +65,9 @@ public class CustomSpellBook
 
     public void removeSpellDebuffTemplate(String templateID)
     {   this.debuffTemplatesLearned.remove(templateID); }
+
+    public void removeSpellSubformTemplate(String templateID)
+    {   this.subformsLearned.remove(templateID); }
 
     // LEARNED -> CUSTOMSPELL:
     //--------------------------------------------------------------------------------------------------------
@@ -82,8 +94,9 @@ public class CustomSpellBook
             if (!slot.hasData())
             {
                 TemplateSpellDebuff template = templateBook.getSpellDebuffTemplate(debuffTemplateID);
-                slot.setCustomSpellDebuff(template);
-                debuffTemplatesLearned.borrow(debuffTemplateID);
+
+                if (slot.setCustomSpellDebuff(template))
+                    debuffTemplatesLearned.borrow(debuffTemplateID);
             }
         }
         else

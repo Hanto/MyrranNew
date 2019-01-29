@@ -1,9 +1,10 @@
 package com.myrran.misc;
 
-import com.myrran.model.spell.templates.*;
 import com.myrran.model.spell.entities.debuff.SpellDebuffFactory;
 import com.myrran.model.spell.entities.form.SpellFormFactory;
+import com.myrran.model.spell.entities.subform.SpellSubformFactory;
 import com.myrran.model.spell.generators.CustomSpellSlotKey;
+import com.myrran.model.spell.templates.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -66,13 +67,13 @@ public class SpellCreator
         slot1.setID("Slot1");
         slot1.setName("Slot1");
         slot1.setSlotType("impact");
-        slot1.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.PUREDAMAGE);
+        slot1.setLock(CustomSpellSlotKey.DOT, CustomSpellSlotKey.DD);
 
         TemplateSpellSlot slot2 = new TemplateSpellSlot();
         slot2.setID("Slot2");
         slot2.setName("Slot2");
         slot2.setSlotType("aoe");
-        slot2.setLock(CustomSpellSlotKey.DEBUFF);
+        slot2.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.DOT);
 
         TemplateSpellSlot slot3 = new TemplateSpellSlot();
         slot3.setID("Slot3");
@@ -80,10 +81,83 @@ public class SpellCreator
         slot3.setSlotType("ground");
         slot3.setLock(CustomSpellSlotKey.DEBUFF);
 
+        TemplateSpellSlot slotSubform1 = new TemplateSpellSlot();
+        slotSubform1.setID("Slot1");
+        slotSubform1.setName("Slot1");
+        slotSubform1.setSlotType("impact");
+        slotSubform1.setLock(CustomSpellSlotKey.ROUNDAOE);
+
+        TemplateSpellSlot slotSubform2 = new TemplateSpellSlot();
+        slotSubform2.setID("Slot2");
+        slotSubform2.setName("Slot2");
+        slotSubform2.setSlotType("impact");
+        slotSubform2.setLock(CustomSpellSlotKey.ROUNDAOE);
+
+        TemplateSpellSlot slotSubform3 = new TemplateSpellSlot();
+        slotSubform3.setID("Slot3");
+        slotSubform3.setName("Slot3");
+        slotSubform3.setSlotType("impact");
+        slotSubform3.setLock(CustomSpellSlotKey.ROUNDAOE);
+
         spellForm.setSpellStats(stat1, stat2, stat3);
-        spellForm.setSpellSlots(slot1, slot2, slot3);
+        spellForm.setSpellDebuffs(slot1, slot2, slot3);
+        spellForm.setSpellSubforms(slotSubform1, slotSubform2, slotSubform3);
+
         book.addSpellFormTemplate(spellForm);
     }
+
+
+    public static void generateSpellSubforms()
+    {
+        TemplateSpellSubform template = new TemplateSpellSubform();
+        template.setID("AOE");
+        template.setName("AOE Explosion");
+        template.setFactory(SpellSubformFactory.AOE);
+        template.setBaseCost(20);
+        template.setKeys(CustomSpellSlotKey.ROUNDAOE);
+
+        TemplateSpellStat stat1 = new TemplateSpellStat();
+        stat1.setID("Radius");
+        stat1.setName("Radius");
+        stat1.setBaseValue(1);
+        stat1.setBonusPerUpgrade(0.1f);
+        stat1.setMaxUpgrades(50);
+        stat1.setUpgradeCost(2);
+        stat1.setIsUpgradeable(true);
+
+        TemplateSpellStat stat2 = new TemplateSpellStat();
+        stat2.setID("Duration");
+        stat2.setName("Duration");
+        stat2.setBaseValue(1);
+        stat2.setBonusPerUpgrade(0.1f);
+        stat2.setMaxUpgrades(50);
+        stat2.setUpgradeCost(2);
+        stat2.setIsUpgradeable(true);
+
+        TemplateSpellSlot slot1 = new TemplateSpellSlot();
+        slot1.setID("Slot1");
+        slot1.setName("Slot1");
+        slot1.setSlotType("aoe");
+        slot1.setLock(CustomSpellSlotKey.DOT, CustomSpellSlotKey.DD);
+
+        TemplateSpellSlot slot2 = new TemplateSpellSlot();
+        slot2.setID("Slot2");
+        slot2.setName("Slot2");
+        slot2.setSlotType("aoe");
+        slot2.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.DOT);
+
+        TemplateSpellSlot slot3 = new TemplateSpellSlot();
+        slot3.setID("Slot3");
+        slot3.setName("Slot3");
+        slot3.setSlotType("aoe");
+        slot3.setLock(CustomSpellSlotKey.DEBUFF);
+
+        template.setSpellStats(stat1, stat2);
+        template.setSpellDebuffs(slot1, slot2, slot3);
+
+        book.addSpellSubformTemplate(template);
+    }
+
 
     public static void generateSpellDebuffs()
     {
@@ -92,7 +166,7 @@ public class SpellCreator
         debuff.setName("Poison");
         debuff.setFactory(SpellDebuffFactory.DOT);
         debuff.setBaseCost(30);
-        debuff.setKeys(CustomSpellSlotKey.DEBUFF);
+        debuff.setKeys(CustomSpellSlotKey.DOT);
 
         TemplateSpellStat stat1 = new TemplateSpellStat();
         stat1.setID(COOLDOWN);
@@ -215,14 +289,9 @@ public class SpellCreator
         book.addSpellDebuffTemplate(debuff);
     }
 
-    public static void generateSpellSubforms()
-    {
-
-    }
-
     private static void marshal(Object object, Class classz) throws JAXBException
     {
-        File file = new File("core/Assets/" + classz.getSimpleName()+".xml");
+        File file = new File("assets/"+classz.getSimpleName()+".xml");
         JAXBContext context = JAXBContext.newInstance(classz);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

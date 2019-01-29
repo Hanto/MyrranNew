@@ -28,7 +28,7 @@ public class SpellBookFormView extends WidgetSortableTable<TemplateSpellForm>
 
         addSortOption("name", Comparator.comparing(TemplateSpellForm::getName));
         addSortOption("type", Comparator.comparing(TemplateSpellForm::getFactory));
-        addSortOption("slots", Comparator.comparing(form -> form.getSpellSlots().size()));
+        addSortOption("slots", Comparator.comparing(form -> form.getSpellDebuffs().size()));
         addSortOption("available", Comparator.comparing(TemplateSpellForm::getAvailable));
         addSortOption("total", Comparator.comparing(TemplateSpellForm::getTotal));
 

@@ -105,7 +105,7 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
     private void update()
     {
         slotType.setText(modelSlot.getSlotType());
-        lock.setText(modelSlot.getLock().toString().toLowerCase());
+        lock.setText(modelSlot.getLock().toString());
 
         if (modelSlot.hasData())
         {
@@ -129,9 +129,9 @@ public class CustomDebuffIconView extends Table implements PropertyChangeListene
         int vPad = -4;
 
         Table textTable = new Table().top().left();
-        textTable.add(debuffName).left()  .padTop(vPad).padBottom(vPad).row();
         textTable.add(slotType).left()    .padTop(vPad).padBottom(vPad).row();
-        textTable.add(lock).left()        .padTop(vPad).padBottom(vPad).row();
+        textTable.add(lock).left()        .padTop(-2).padBottom(vPad).row();
+        textTable.add(debuffName).left()  .padTop(vPad).padBottom(vPad).row();
 
         icon.addActor(debuffIcon);
         icon.addActor(cost);

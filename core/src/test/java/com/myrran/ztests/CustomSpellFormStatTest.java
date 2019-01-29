@@ -40,17 +40,29 @@ public class CustomSpellFormStatTest
             cbook.addSpellDebuffTemplate("Poison");
             cbook.addSpellDebuffTemplate("Poison");
             cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Poison");
+            cbook.addSpellDebuffTemplate("Slow");
+            cbook.addSpellDebuffTemplate("Slow");
+            cbook.addSpellDebuffTemplate("Slow");
+            cbook.addSpellDebuffTemplate("Slow");
             cbook.addSpellDebuffTemplate("Slow");
             cbook.addSpellDebuffTemplate("Silence");
+            cbook.addSpellDebuffTemplate("Silence");
+            cbook.addSpellDebuffTemplate("Silence");
+            cbook.addSpellSubformTemplate("AOE");
 
             cbook.addCustomSpellForm("Bolt");
             cbook.addCustomSpellForm("Bolt");
             cbook.addCustomSpellForm("Bolt");
 
-            cbook.addCustomSpellDebuff("SpellForm_00", "Slot2", "Poison");
-            cbook.addCustomSpellDebuff("SpellForm_00", "Slot2", "Poison");
-            cbook.addCustomSpellDebuff("SpellForm_00", "Slot2", "Poison");
-            cbook.addCustomSpellDebuff("SpellForm_00", "Slot1", "Slow");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot1", "Poison");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot1", "Poison");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot1", "Poison");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot2", "Slow");
+            cbook.addCustomSpellDebuff("SpellForm_00", "Slot3", "Silence");
 
             marshal(cbook, CustomSpellBook.class);
 

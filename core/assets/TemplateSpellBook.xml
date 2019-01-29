@@ -3,7 +3,7 @@
     <spellFormTemplates>
         <entry>
             <key>Bolt</key>
-            <value id="Bolt" name="Super Bolt" available="0" total="0" type="BOLT">
+            <value id="Bolt" name="Super Bolt" available="0" total="0" factory="BOLT">
                 <spellStats id="Cooldown" name="Cooldown">
                     <baseValue>50.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>
@@ -25,16 +25,26 @@
                     <upgradeCost>2</upgradeCost>
                     <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 </spellStats>
-                <spellSlots id="Slot1" name="Slot1" slotType="impact">
+                <spellDebuffs id="Slot1" name="Slot1" slotType="impact">
+                    <lock>DOT</lock>
+                    <lock>DD</lock>
+                </spellDebuffs>
+                <spellDebuffs id="Slot2" name="Slot2" slotType="aoe">
                     <lock>DEBUFF</lock>
-                    <lock>PUREDAMAGE</lock>
-                </spellSlots>
-                <spellSlots id="Slot2" name="Slot2" slotType="aoe">
+                    <lock>DOT</lock>
+                </spellDebuffs>
+                <spellDebuffs id="Slot3" name="Slot3" slotType="ground">
                     <lock>DEBUFF</lock>
-                </spellSlots>
-                <spellSlots id="Slot3" name="Slot3" slotType="ground">
-                    <lock>DEBUFF</lock>
-                </spellSlots>
+                </spellDebuffs>
+                <spellSubforms id="Slot1" name="Slot1" slotType="impact">
+                    <lock>ROUNDAOE</lock>
+                </spellSubforms>
+                <spellSubforms id="Slot2" name="Slot2" slotType="impact">
+                    <lock>ROUNDAOE</lock>
+                </spellSubforms>
+                <spellSubforms id="Slot3" name="Slot3" slotType="impact">
+                    <lock>ROUNDAOE</lock>
+                </spellSubforms>
             </value>
         </entry>
     </spellFormTemplates>
@@ -127,9 +137,42 @@
                     <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 </spellStats>
                 <baseCost>30</baseCost>
-                <keys>DEBUFF</keys>
+                <keys>DOT</keys>
             </value>
         </entry>
     </spellDebuffTemplates>
-    <spellSubformTemplates/>
+    <spellSubformTemplates>
+        <entry>
+            <key>AOE</key>
+            <value id="AOE" name="AOE Explosion" available="0" total="0" factory="AOE">
+                <spellStats id="Radius" name="Radius">
+                    <baseValue>1.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>0.1</bonusPerUpgrade>
+                </spellStats>
+                <spellStats id="Duration" name="Duration">
+                    <baseValue>1.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>0.1</bonusPerUpgrade>
+                </spellStats>
+                <spellSlots id="Slot1" name="Slot1" slotType="aoe">
+                    <lock>DOT</lock>
+                    <lock>DD</lock>
+                </spellSlots>
+                <spellSlots id="Slot2" name="Slot2" slotType="aoe">
+                    <lock>DEBUFF</lock>
+                    <lock>DOT</lock>
+                </spellSlots>
+                <spellSlots id="Slot3" name="Slot3" slotType="aoe">
+                    <lock>DEBUFF</lock>
+                </spellSlots>
+                <baseCost>20</baseCost>
+                <keys>ROUNDAOE</keys>
+            </value>
+        </entry>
+    </spellSubformTemplates>
 </templateSpellBook>
