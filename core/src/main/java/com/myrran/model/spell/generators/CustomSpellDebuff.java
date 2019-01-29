@@ -43,7 +43,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     public SpellDebuffFactory getFactory()                      { return factory; }
     public List<CustomSpellSlotKey> getKeys()                   { return keys;  }
     public boolean hasData()                                    { return templateID != null; }
-    @Override public CustomSpellStats getSpellStats()           { return spellStats; }
+    @Override public CustomSpellStatsI getSpellStats()          { return spellStats; }
     @Override public void setID(String id)                      { this.id = id; }
     @Override public void setName(String name)                  { this.name = name; notifyChanges(); }
     public void setKeys(CustomSpellSlotKey... keys)             { this.keys = Arrays.asList(keys); notifyChanges(); }

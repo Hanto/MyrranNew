@@ -65,7 +65,7 @@ public class CustomSubformSlot implements ObservableDeco, Identifiable
     // CUSTOM TO ENTITY DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellSubformParams getSpellEffectData()
+    public SpellSubformParams getSpellDebuffParams()
     {
         SpellSubformParams data = customSpellSubform.getSpellFormData();
         data.setSlotType(type);

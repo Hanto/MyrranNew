@@ -19,14 +19,13 @@ import java.util.stream.Collectors;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomDebuffSlots implements CustomDebuffSlotsI
 {
-    private Map<String, CustomDebuffSlot> slots = new HashMap<>();
+    private Map<String, CustomDebuffSlot> slots;
 
     public Collection<CustomDebuffSlot> values()        { return slots.values(); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override
     public void setDebuffSlotsTemplate(Collection<TemplateSpellSlot> templates)
     {
         slots = templates.stream()
@@ -37,10 +36,9 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     // CUSTOM TO ENTITY PARAM:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override
     public MapListI<String, SpellDebuffParams> getSpellEffectParams()
     {
-        MapListI<String, SpellDebuffParams> mapList = new MapList<>(new HashMap<>(), ArrayList::new);
+        MapListI<String, SpellDebuffParams> mapList = new MapList<String, SpellDebuffParams>(HashMap::new, ArrayList::new);
 
         slots.values().stream()
             .filter(CustomDebuffSlot::hasData)
@@ -53,28 +51,24 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     // SPELL DEBUFF:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override
     public CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = getCustomDebuffSlot(slotID);
         return slot.getCustomSpellDebuff();
     }
 
-    @Override
     public boolean setCustomSpellDebuff(TemplateSpellDebuff template, String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = getCustomDebuffSlot(slotID);
         return slot.setCustomSpellDebuff(template);
     }
 
-    @Override
     public void removeCustomSpellDebuff(String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = getCustomDebuffSlot(slotID);
         slot.removeCustomSpellDebuff();
     }
 
-    @Override
     public CustomDebuffSlot getCustomDebuffSlot(String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = slots.get(slotID);
@@ -88,7 +82,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     public int getDebuffSlotsTotalCost()
     {
         return slots.values().stream()
-            .filter(customDebuffSlot -> customDebuffSlot.getCustomSpellDebuff() != null)
+            .filter(CustomDebuffSlot::hasData)
             .mapToInt(CustomDebuffSlot::getTotalCost)
             .sum();
     }

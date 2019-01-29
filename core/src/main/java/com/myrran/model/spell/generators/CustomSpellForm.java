@@ -26,6 +26,7 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     private SpellFormFactory factory;
     private CustomSpellStats spellStats = new CustomSpellStats();
     private CustomDebuffSlots debuffSlots = new CustomDebuffSlots();
+    private CustomSubformSlots subformSlots = new CustomSubformSlots();
     @XmlTransient private ObservableI observable = new Observable(this);
 
     // SETTERS GETTERS:
@@ -34,8 +35,9 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable, Custom
     @Override public String getID()                         { return id; }
     @Override public String getName()                       { return name; }
     public String getTemplateID()                           { return templateID; }
-    @Override public CustomSpellStats getSpellStats()       { return spellStats; }
-    @Override public CustomDebuffSlots getDebuffSlots()     { return debuffSlots; }
+    @Override public CustomSpellStatsI getSpellStats()      { return spellStats; }
+    @Override public CustomDebuffSlotsI getDebuffSlots()    { return debuffSlots; }
+    public CustomSubformSlots getSubformSlots()             { return subformSlots; }
     @Override public ObservableI getObservable()            { return observable; }
     @Override public void setID(String id)                  { this.id = id; }
     @Override public void setName(String name)              { this.name = name; notifyFieldChange();}

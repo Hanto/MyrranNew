@@ -16,6 +16,12 @@ public class MapList<K, V> implements MapListI<K, V>
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
+    public MapList(Supplier<Map<K, List<V>>> mapCreator, Supplier<List<V>> listCreator)
+    {
+        this.mapList = mapCreator.get();
+        this.listCreator = listCreator;
+    }
+
     public MapList(Map<K, List<V>> mapList, Supplier<List<V>> listCreator)
     {
         this.mapList = mapList;

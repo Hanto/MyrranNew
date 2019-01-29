@@ -34,8 +34,8 @@ public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, 
     public String getName()                             { return name; }
     public String getTemplateID()                       { return templateID; }
     public Integer getBaseCost()                        { return baseCost; }
-    @Override public CustomSpellStats getSpellStats()   { return spellStats; }
-    @Override public CustomDebuffSlots getDebuffSlots() { return debuffSlots; }
+    @Override public CustomSpellStatsI getSpellStats()   { return spellStats; }
+    @Override public CustomDebuffSlotsI getDebuffSlots(){ return debuffSlots; }
     public boolean hasData()                            { return templateID != null; }
     @Override public void setID(String id)              { this.id = id; }
     public void setName(String name)                    { this.name = name; }
