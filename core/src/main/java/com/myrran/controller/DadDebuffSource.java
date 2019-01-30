@@ -1,10 +1,11 @@
 package com.myrran.controller;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.widgets.WidgetText;
 
 import static com.myrran.view.ui.widgets.DaD.Payload;
 import static com.myrran.view.ui.widgets.DaD.Source;
@@ -33,7 +34,7 @@ public class DadDebuffSource extends Source
     @Override
     public Payload dragStart(InputEvent event, float x, float y, int pointer)
     {
-        Image dragActor = Atlas.get().getImage("TexturasIconos/IceBall");
+        WidgetText dragActor = new WidgetText(model.getName(), Atlas.get().getFont("20"), Color.ORANGE, Color.BLACK, 1);
         Payload payload = new Payload();
         payload.setObject(model);
         payload.setDragActor(dragActor);

@@ -61,6 +61,7 @@ public class Atlas implements Disposable
     {
         textureAtlas = new TextureAtlas(Gdx.files.internal("Atlas/Atlas.Atlas"));
 
+        addTexture("TexturasIconos/IconoVacio2");
         addTexture("TexturasIconos/FireBall2");
         addTexture("TexturasMisc/RebindOn");
         addTexture("TexturasIconos/IconoVacio");

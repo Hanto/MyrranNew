@@ -95,7 +95,7 @@ public class CustomDebuffIconView extends WidgetGroup implements PropertyChangeL
     private void removeModel()
     {
         modelSlot = null;
-        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
+        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio2")));
         cost.setText(null);
         debuffName.setText(null);
         slotType.setText(null);
@@ -116,7 +116,7 @@ public class CustomDebuffIconView extends WidgetGroup implements PropertyChangeL
         }
         else
         {
-            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
+            debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio2")));
             cost.setText(null);
             debuffName.setText(modelSlot.getLock().toString().toLowerCase());
             debuffName.setTextColor(Color.LIGHT_GRAY);

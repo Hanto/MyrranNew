@@ -53,15 +53,10 @@ public class ZMain extends ApplicationAdapter
 			spell = book.getCustomSpellForm("SpellForm_00");
 			controller = new CustomSpellController(book);
 
-			CustomFormView formView2 = new CustomFormView(controller);
-			uiStage.addActor(formView2);
-			formView2.setModel(spell);
-			formView2.setPosition(100, 200);
-
 			SpellBookDebuffView spellBookView = new SpellBookDebuffView(controller);
 			spellBookView.setModel(book);
 			uiStage.addActor(spellBookView);
-			spellBookView.setPosition(270, 590);
+			spellBookView.setPosition(10, 515);
 
 			SpellBookFormView spellBookForm = new SpellBookFormView(controller);
 			spellBookForm.setModel(book);
@@ -71,7 +66,12 @@ public class ZMain extends ApplicationAdapter
 			SpellBookCustomFormView bookCustomFormView = new SpellBookCustomFormView(controller);
 			bookCustomFormView.setModel(book);
 			uiStage.addActor(bookCustomFormView);
-			bookCustomFormView.setPosition(390, 590);
+			bookCustomFormView.setPosition(280, 590);
+
+			CustomFormView formView2 = new CustomFormView(controller);
+			uiStage.addActor(formView2);
+			formView2.setModel(spell);
+			formView2.setPosition(600, 597);
 
 			uiStage.addActor(fps);
 
