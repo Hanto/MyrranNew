@@ -239,27 +239,27 @@ BAK/Player Sprites/Sombra
   index: -1
 
 atlas7.png
-size: 128,512
+size: 512,256
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 PixieMobs/GlowingSpectre
   rotate: false
-  xy: 2, 262
+  xy: 2, 2
   size: 96, 128
   orig: 96, 128
   offset: 0, 0
   index: -1
 PixieMobs/GrimReaper
   rotate: false
-  xy: 2, 132
+  xy: 100, 2
   size: 96, 128
   orig: 96, 128
   offset: 0, 0
   index: -1
 PixieMobs/Momia
   rotate: false
-  xy: 2, 2
+  xy: 198, 2
   size: 96, 128
   orig: 96, 128
   offset: 0, 0
@@ -355,111 +355,111 @@ PixiePcSlots/PetoGolem01
   index: -1
 
 atlas10.png
-size: 512,64
+size: 256,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 TexturasIconos/Editar
   rotate: false
-  xy: 2, 2
+  xy: 68, 70
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/Editar.OLD
   rotate: false
-  xy: 36, 2
+  xy: 2, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/Espectro
   rotate: false
-  xy: 70, 2
+  xy: 68, 36
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/FireBall
   rotate: false
-  xy: 104, 2
+  xy: 102, 70
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/FireBall.OLD
   rotate: false
-  xy: 138, 2
+  xy: 36, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-TexturasIconos/FrostBolt
+TexturasIconos/FireBall2
   rotate: false
-  xy: 172, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 2, 70
+  size: 64, 32
+  orig: 64, 32
   offset: 0, 0
   index: -1
 TexturasIconos/IceBall
   rotate: false
-  xy: 206, 2
+  xy: 102, 36
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/IconoVacio
   rotate: false
-  xy: 240, 2
-  size: 32, 32
-  orig: 32, 32
+  xy: 2, 36
+  size: 64, 32
+  orig: 64, 32
   offset: 0, 0
   index: -1
 TexturasIconos/IrEste
   rotate: false
-  xy: 274, 2
+  xy: 136, 70
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/IrNorte
   rotate: false
-  xy: 308, 2
+  xy: 70, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/IrOeste
   rotate: false
-  xy: 342, 2
+  xy: 136, 36
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/IrSur
   rotate: false
-  xy: 376, 2
+  xy: 170, 70
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/Muros
   rotate: false
-  xy: 410, 2
+  xy: 104, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/Plantar
   rotate: false
-  xy: 444, 2
+  xy: 170, 36
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 TexturasIconos/PoisonBolt
   rotate: false
-  xy: 478, 2
+  xy: 204, 70
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

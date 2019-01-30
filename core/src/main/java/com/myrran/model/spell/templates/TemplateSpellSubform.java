@@ -50,7 +50,7 @@ public class TemplateSpellSubform implements QuantifiableI, Identifiable
     @Override public void setTotal(Integer total)           { this.total = total; }
     public void setFactory(SpellSubformFactory factory)     { this.factory = factory; }
     public void setSpellStats(TemplateSpellStat...stats)    { this.spellStats = Arrays.asList(stats); }
-    public void setSpellDebuffs(TemplateSpellSlot...slots)    { this.spellSlots = Arrays.asList(slots); }
+    public void setSpellDebuffs(TemplateSpellSlot...slots)  { this.spellSlots = Arrays.asList(slots); }
     public void setBaseCost(int baseCost)                   { this.baseCost = baseCost; }
     public void setKeys(CustomSpellSlotKey...keys)          { this.keys.addAll(Arrays.asList(keys)); }
 }

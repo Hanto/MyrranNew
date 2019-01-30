@@ -31,6 +31,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
     private WidgetImage spellIcon;
     private Table tableHeader;
+    private Table tableDetails;
     private Table tableStats;
     private Table tableDebuffIcons;
     private Table tableSubformIcons;
@@ -43,8 +44,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     private List<CustomSubformIconView> subformIcons;
 
     private boolean detailsVisible = false;
-    private Cell<Actor>cellIcons;
-    private Cell<Actor>cellStats;
+    private Cell<Actor> cellDetails;
 
     private static final int VPAD = -4;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
@@ -59,6 +59,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         controller  = spellController;
         tableHeader = new Table();
+        tableDetails= new Table();
         tableDebuffIcons = new Table().top().left();
         tableSubformIcons= new Table();
         tableStats  = new Table().top().left();
@@ -75,8 +76,8 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
         createLayout();
         createHeaderLayout();
-        cellStats = getCell(tableStats);
-        cellIcons = getCell(tableDebuffIcons);
+        createDetailsLayout();
+        cellDetails = getCell(tableDetails);
         showDetails();
     }
 
@@ -141,23 +142,36 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         clear();
         top().left();
-        add(spellIcon).bottom().left().padRight(3);
         add(tableHeader).bottom().left().row();
-        add();
-        add(tableStats).top().left().padRight(3);
-        add(tableDebuffIcons).top().left().row();
-        add();
-        add();
-        add(tableSubformIcons).top().left();
+        add(tableDetails).top().left();
     }
 
     private void createHeaderLayout()
     {
+        Table nameID = new Table().bottom().left();
+        nameID.add(templateID)      .bottom().left().padTop(VPAD).padBottom(VPAD).row();
+        nameID.add(name)            .bottom().left().padTop(VPAD).padBottom(VPAD).row();
+
         tableHeader.clear();
         tableHeader.bottom().left();
-        tableHeader.add(templateID) .bottom().padTop(VPAD).padBottom(VPAD).left().row();
-        tableHeader.add(name)       .bottom().padTop(VPAD).padBottom(VPAD).left();
-        tableHeader.add(totalCost)  .bottom().padTop(VPAD).padBottom(VPAD+2f).left().row();
+        tableHeader.add(spellIcon)  .bottom().left().padRight(3);
+        tableHeader.add(nameID)     .bottom().left().minWidth(100);
+        //tableHeader.add(totalCost)  .bottom().padTop(VPAD).padBottom(VPAD+2f).left();
+        //tableHeader.add(tableDebuffIcons).bottom().left();
+    }
+
+    private void createDetailsLayout()
+    {
+        tableDetails.clear();
+        tableDetails.top().left();
+        //tableDetails.add().size(32+3, 0);
+        tableDetails.add(tableDebuffIcons).bottom().left().row();
+        //tableDetails.add().size(32+3, 0);
+        tableDetails.add(tableStats).top().left().padRight(3);
+        //tableDetails.add(tableDebuffIcons).top().left().row();
+        tableDetails.add().size(32+3, 0);
+        tableDetails.add();
+        //tableDetails.add(tableSubformIcons).top().left().row();
     }
 
     private void createStatsLayout()
@@ -169,6 +183,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
         tableStats.clear();
         tableStats.add(stats).left().row();
+        tableStats.padTop(4);
         tableStats.padBottom(8);
         debuffStats.forEach(debuffDetails -> tableStats.add(debuffDetails).left().row());
     }
@@ -181,7 +196,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
             .collect(Collectors.toList());
 
         tableDebuffIcons.clear();
-        debuffIcons.forEach(debuffIcon -> tableDebuffIcons.add(debuffIcon).left().row());
+        debuffIcons.forEach(debuffIcon -> tableDebuffIcons.add(debuffIcon).left());
     }
 
     private void createSubformIconsLayout()
@@ -223,16 +238,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     @Override
     public void showDetails(boolean visible)
     {
-        if (!visible)
-        {
-            cellStats.setActor(null);
-            cellIcons.setActor(null);
-        }
-        else
-        {
-            cellIcons.setActor(tableDebuffIcons);
-            cellStats.setActor(tableStats);
-        }
+        cellDetails.setActor(visible ? tableDetails: null);
         detailsVisible = !visible;
     }
 

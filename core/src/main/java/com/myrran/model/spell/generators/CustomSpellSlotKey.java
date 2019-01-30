@@ -4,7 +4,7 @@ package com.myrran.model.spell.generators;
 public enum CustomSpellSlotKey
 {
     DOT("DOT"),
-    DEBUFF("Debuff"),
+    DFF("Debuff"),
     BUFF("Buff"),
     DD("Pure Damage"),
 

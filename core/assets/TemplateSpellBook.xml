@@ -30,11 +30,11 @@
                     <lock>DD</lock>
                 </spellDebuffs>
                 <spellDebuffs id="Slot2" name="Slot2" slotType="aoe">
-                    <lock>DEBUFF</lock>
+                    <lock>DFF</lock>
                     <lock>DOT</lock>
                 </spellDebuffs>
                 <spellDebuffs id="Slot3" name="Slot3" slotType="ground">
-                    <lock>DEBUFF</lock>
+                    <lock>DFF</lock>
                 </spellDebuffs>
                 <spellSubforms id="Slot1" name="Slot1" slotType="impact">
                     <lock>CAOE</lock>
@@ -67,7 +67,7 @@
                     <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 </spellStats>
                 <baseCost>30</baseCost>
-                <keys>DEBUFF</keys>
+                <keys>DFF</keys>
             </value>
         </entry>
         <entry>
@@ -102,7 +102,7 @@
                     <bonusPerUpgrade>2.0</bonusPerUpgrade>
                 </spellStats>
                 <baseCost>30</baseCost>
-                <keys>DEBUFF</keys>
+                <keys>DFF</keys>
             </value>
         </entry>
         <entry>
@@ -164,11 +164,11 @@
                     <lock>DD</lock>
                 </spellSlots>
                 <spellSlots id="Slot2" name="Slot2" slotType="aoe">
-                    <lock>DEBUFF</lock>
+                    <lock>DFF</lock>
                     <lock>DOT</lock>
                 </spellSlots>
                 <spellSlots id="Slot3" name="Slot3" slotType="aoe">
-                    <lock>DEBUFF</lock>
+                    <lock>DFF</lock>
                 </spellSlots>
                 <baseCost>20</baseCost>
                 <keys>CAOE</keys>

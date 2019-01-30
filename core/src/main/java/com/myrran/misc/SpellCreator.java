@@ -73,13 +73,13 @@ public class SpellCreator
         slot2.setID("Slot2");
         slot2.setName("Slot2");
         slot2.setSlotType("aoe");
-        slot2.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.DOT);
+        slot2.setLock(CustomSpellSlotKey.DFF, CustomSpellSlotKey.DOT);
 
         TemplateSpellSlot slot3 = new TemplateSpellSlot();
         slot3.setID("Slot3");
         slot3.setName("Slot3");
         slot3.setSlotType("ground");
-        slot3.setLock(CustomSpellSlotKey.DEBUFF);
+        slot3.setLock(CustomSpellSlotKey.DFF);
 
         TemplateSpellSlot slotSubform1 = new TemplateSpellSlot();
         slotSubform1.setID("Slot1");
@@ -144,13 +144,13 @@ public class SpellCreator
         slot2.setID("Slot2");
         slot2.setName("Slot2");
         slot2.setSlotType("aoe");
-        slot2.setLock(CustomSpellSlotKey.DEBUFF, CustomSpellSlotKey.DOT);
+        slot2.setLock(CustomSpellSlotKey.DFF, CustomSpellSlotKey.DOT);
 
         TemplateSpellSlot slot3 = new TemplateSpellSlot();
         slot3.setID("Slot3");
         slot3.setName("Slot3");
         slot3.setSlotType("aoe");
-        slot3.setLock(CustomSpellSlotKey.DEBUFF);
+        slot3.setLock(CustomSpellSlotKey.DFF);
 
         template.setSpellStats(stat1, stat2);
         template.setSpellDebuffs(slot1, slot2, slot3);
@@ -215,7 +215,7 @@ public class SpellCreator
         debuff.setName("Slow");
         debuff.setFactory(SpellDebuffFactory.DOT);
         debuff.setBaseCost(30);
-        debuff.setKeys(CustomSpellSlotKey.DEBUFF);
+        debuff.setKeys(CustomSpellSlotKey.DFF);
 
         TemplateSpellStat stat1 = new TemplateSpellStat();
         stat1.setID(COOLDOWN);
@@ -264,7 +264,7 @@ public class SpellCreator
         debuff.setName("Silence");
         debuff.setFactory(SpellDebuffFactory.BUFF);
         debuff.setBaseCost(30);
-        debuff.setKeys(CustomSpellSlotKey.DEBUFF);
+        debuff.setKeys(CustomSpellSlotKey.DFF);
 
         TemplateSpellStat stat1 = new TemplateSpellStat();
         stat1.setID(COOLDOWN);

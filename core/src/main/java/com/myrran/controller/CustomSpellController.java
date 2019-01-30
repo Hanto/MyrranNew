@@ -1,8 +1,8 @@
 package com.myrran.controller;
 
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import com.myrran.misc.InvalidIDException;
 import com.myrran.model.spell.generators.*;
+import com.myrran.view.ui.widgets.DaD;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class CustomSpellController
 {
     private CustomSpellBook spellBook;
-    private DragAndDrop dadDebuff;
+    private DaD dadDebuff;
 
     private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellController.class);
 
@@ -20,14 +20,14 @@ public class CustomSpellController
     public CustomSpellController(CustomSpellBook spellBook)
     {
         this.spellBook = spellBook;
-        dadDebuff = new DragAndDrop();
+        dadDebuff = new DaD();
         //dadDebuff.setDragActorPosition(16, -16);
     }
 
     // DRAG AND DROP:
     //--------------------------------------------------------------------------------------------------------
 
-    public DragAndDrop getDadDebuff()  { return dadDebuff; }
+    public DaD getDadDebuff()  { return dadDebuff; }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------

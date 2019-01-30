@@ -1,12 +1,14 @@
 package com.myrran.controller;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.graphics.Color;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.view.ui.customspell.CustomDebuffIconView;
+import com.myrran.view.ui.widgets.DaD.Payload;
+import com.myrran.view.ui.widgets.DaD.Source;
+import com.myrran.view.ui.widgets.DaD.Target;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import static com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop.*;
 
 /** @author Ivan Delgado Huerta */
 public class DadDebuffTarget extends Target
@@ -19,7 +21,7 @@ public class DadDebuffTarget extends Target
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public DadDebuffTarget(Actor actor, CustomSpellController spellController)
+    public DadDebuffTarget(CustomDebuffIconView actor, CustomSpellController spellController)
     {
         super(actor);
         controller = spellController;
@@ -40,7 +42,28 @@ public class DadDebuffTarget extends Target
     {
         TemplateSpellDebuff templadeDebuff = (TemplateSpellDebuff) payload.getObject();
 
-        if (model.opensLock(templadeDebuff.getKeys()) && !model.hasData())
-        { controller.addCustomSpellDebuff(model, templadeDebuff.getID()); }
+        if (model.opensLock(templadeDebuff.getKeys()))
+        {
+            if (model.hasData())
+                controller.removeCustomSpellDebuff(model);
+
+            controller.addCustomSpellDebuff(model, templadeDebuff.getID());
+        }
+    }
+
+    @Override
+    public void notifyNewPayload(Payload payload)
+    {
+        CustomDebuffIconView view = (CustomDebuffIconView)getActor();
+        TemplateSpellDebuff template = (TemplateSpellDebuff)payload.getObject();
+
+        view.setLockColor(model.opensLock(template.getKeys()) ? Color.GREEN : Color.RED);
+    }
+
+    @Override
+    public void notifyNoPayload()
+    {
+        CustomDebuffIconView view = (CustomDebuffIconView)getActor();
+        view.setDefaultLocColor();
     }
 }

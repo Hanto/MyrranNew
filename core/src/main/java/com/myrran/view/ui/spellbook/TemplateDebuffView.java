@@ -54,7 +54,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
         controller      = customSpellController;
         tableHeader     = new Table();
         icon            = new WidgetGroup();
-        dadSource       = new DadDebuffSource(icon);
+        dadSource       = new DadDebuffSource(icon, controller);
         debuffIcon      = new WidgetImage();
         availableTotal  = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
         keys            = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);

@@ -30,11 +30,11 @@
           <lock>DD</lock>
         </spellDebuffs>
         <spellDebuffs id="Slot2" name="Slot2" slotType="aoe">
-          <lock>DEBUFF</lock>
+          <lock>DFF</lock>
           <lock>DOT</lock>
         </spellDebuffs>
         <spellDebuffs id="Slot3" name="Slot3" slotType="ground">
-          <lock>DEBUFF</lock>
+          <lock>DFF</lock>
         </spellDebuffs>
         <spellSubforms id="Slot1" name="Slot1" slotType="impact">
           <lock>CAOE</lock>
@@ -67,7 +67,7 @@
           <bonusPerUpgrade>2.0</bonusPerUpgrade>
         </spellStats>
         <baseCost>30</baseCost>
-        <keys>DEBUFF</keys>
+        <keys>DFF</keys>
       </value>
     </entry>
     <entry>
@@ -102,7 +102,7 @@
           <bonusPerUpgrade>2.0</bonusPerUpgrade>
         </spellStats>
         <baseCost>30</baseCost>
-        <keys>DEBUFF</keys>
+        <keys>DFF</keys>
       </value>
     </entry>
     <entry>
@@ -164,11 +164,11 @@
           <lock>DD</lock>
         </spellSlots>
         <spellSlots id="Slot2" name="Slot2" slotType="aoe">
-          <lock>DEBUFF</lock>
+          <lock>DFF</lock>
           <lock>DOT</lock>
         </spellSlots>
         <spellSlots id="Slot3" name="Slot3" slotType="aoe">
-          <lock>DEBUFF</lock>
+          <lock>DFF</lock>
         </spellSlots>
         <baseCost>20</baseCost>
         <keys>CAOE</keys>
@@ -228,10 +228,10 @@
             <entry>
               <key>Slot2</key>
               <value id="Slot2" name="Slot2" type="aoe">
-                <lock>DEBUFF</lock>
+                <lock>DFF</lock>
                 <lock>DOT</lock>
                 <customSpellDebuff>
-                  <id>56f33a70-4e18-4d50-81ac-09719bdc04f4</id>
+                  <id>7963f37f-3fef-45db-83d6-b15d94e62409</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -242,9 +242,9 @@
             <entry>
               <key>Slot3</key>
               <value id="Slot3" name="Slot3" type="ground">
-                <lock>DEBUFF</lock>
+                <lock>DFF</lock>
                 <customSpellDebuff>
-                  <id>3d4dfb8e-c1a7-4464-8658-81137c195797</id>
+                  <id>262841ca-d9ae-430e-820a-f9cb7f9412a7</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -258,7 +258,7 @@
                 <lock>DOT</lock>
                 <lock>DD</lock>
                 <customSpellDebuff>
-                  <id>a9f1853d-e966-4e5b-8fa0-ca8d2d0b9fe0</id>
+                  <id>6a8e3a0f-c131-4a06-be0c-001851a09340</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -275,7 +275,7 @@
               <value id="Slot2" name="Slot2" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>c845af69-235a-4b85-a789-fb87b6ab26f5</id>
+                  <id>f19fb38c-8f59-4c1f-8cf8-e23df34deda4</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -289,7 +289,7 @@
               <value id="Slot3" name="Slot3" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>3a67283e-bc53-42eb-9496-1a38535731dd</id>
+                  <id>fb58862c-31ee-4617-a711-eb19cf31eecb</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -303,7 +303,7 @@
               <value id="Slot1" name="Slot1" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>56a81f2b-05a3-43e0-b80a-2498e1185f7c</id>
+                  <id>b453b73b-9a37-47b9-bd2c-69d74506c48e</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -368,10 +368,10 @@
             <entry>
               <key>Slot2</key>
               <value id="Slot2" name="Slot2" type="aoe">
-                <lock>DEBUFF</lock>
+                <lock>DFF</lock>
                 <lock>DOT</lock>
                 <customSpellDebuff>
-                  <id>c95fa0f3-5c27-44f4-9d06-93e9a769120e</id>
+                  <id>5cab382a-0011-44c2-a36f-00ae1dc6974b</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -382,9 +382,9 @@
             <entry>
               <key>Slot3</key>
               <value id="Slot3" name="Slot3" type="ground">
-                <lock>DEBUFF</lock>
+                <lock>DFF</lock>
                 <customSpellDebuff>
-                  <id>7a1455ae-00f4-4b18-bc20-900b9b92189c</id>
+                  <id>f8c6f070-6368-43ad-84e6-be18fabd15be</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -398,7 +398,7 @@
                 <lock>DOT</lock>
                 <lock>DD</lock>
                 <customSpellDebuff>
-                  <id>0028a552-3685-4252-8eb9-e1c3cc75ebe1</id>
+                  <id>7ab8135d-60c3-4a28-9e8b-d52408126c98</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -415,7 +415,7 @@
               <value id="Slot2" name="Slot2" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>a3afccfa-33fc-493b-86b0-aa6ed241e103</id>
+                  <id>2ce672b6-97ee-4066-b651-753f57bd82b0</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -429,7 +429,7 @@
               <value id="Slot3" name="Slot3" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>1243ed49-f647-430a-b765-3418f42f0792</id>
+                  <id>f9d8ca6f-d484-4be1-bc2c-163f68b9ca2f</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -443,7 +443,7 @@
               <value id="Slot1" name="Slot1" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>f2fda8e7-724b-4fb8-b509-eb736fae7733</id>
+                  <id>b9ca40e7-9d98-4166-9d2b-3c641393452a</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -508,13 +508,13 @@
             <entry>
               <key>Slot2</key>
               <value id="Slot2" name="Slot2" type="aoe">
-                <lock>DEBUFF</lock>
+                <lock>DFF</lock>
                 <lock>DOT</lock>
                 <customSpellDebuff name="Slow" templateID="Slow">
-                  <id>023ebb23-515c-4251-85b2-c4279aa971ab</id>
+                  <id>b526e509-8904-45bc-99f2-aa0b7fa862d1</id>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>
-                  <keys>DEBUFF</keys>
+                  <keys>DFF</keys>
                   <spellStats>
                     <stats>
                       <entry>
@@ -573,12 +573,12 @@
             <entry>
               <key>Slot3</key>
               <value id="Slot3" name="Slot3" type="ground">
-                <lock>DEBUFF</lock>
+                <lock>DFF</lock>
                 <customSpellDebuff name="Silence" templateID="Silence">
-                  <id>0c84ee64-b3ed-4d43-bc32-2e0da4a1c5f7</id>
+                  <id>d4ce1d48-1601-4756-992e-41b66408a3f1</id>
                   <baseCost>30</baseCost>
                   <factory>BUFF</factory>
-                  <keys>DEBUFF</keys>
+                  <keys>DFF</keys>
                   <spellStats>
                     <stats>
                       <entry>
@@ -616,7 +616,7 @@
                 <lock>DOT</lock>
                 <lock>DD</lock>
                 <customSpellDebuff name="Poison" templateID="Poison">
-                  <id>d2414347-5835-4b4a-b8a6-86e503759bd7</id>
+                  <id>6b2b6dde-c54e-4674-a9d1-582e0550df46</id>
                   <baseCost>30</baseCost>
                   <factory>DOT</factory>
                   <keys>DOT</keys>
@@ -684,7 +684,7 @@
               <value id="Slot2" name="Slot2" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>d8b9c955-efed-413e-80e9-f5157f921654</id>
+                  <id>d6db9e48-a72d-43dc-a313-29f32e4ac796</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -698,7 +698,7 @@
               <value id="Slot3" name="Slot3" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>5382cfb9-2160-47a3-bb25-b6cd2e3f7565</id>
+                  <id>0dc7b50b-cf2a-4cf1-bdf3-6bfb5d815b50</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>
@@ -712,7 +712,7 @@
               <value id="Slot1" name="Slot1" type="impact">
                 <lock>CAOE</lock>
                 <customSpellSubform>
-                  <id>2a984b75-3676-41bb-9d7c-9aebac666423</id>
+                  <id>a19544b8-a0d4-4843-9257-9b2c1d3ebf0d</id>
                   <baseCost>0</baseCost>
                   <spellStats>
                     <stats/>

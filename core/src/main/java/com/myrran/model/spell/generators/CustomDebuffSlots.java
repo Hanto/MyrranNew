@@ -48,7 +48,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
         return mapList;
     }
 
-    // SPELL DEBUFF:
+    // SPELL DFF:
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
