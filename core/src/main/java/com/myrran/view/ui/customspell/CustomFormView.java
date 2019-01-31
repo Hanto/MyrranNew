@@ -13,9 +13,8 @@ import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.spellbook.TemplateHeaderView;
+import com.myrran.view.ui.spellbook.SpellHeaderView;
 import com.myrran.view.ui.widgets.DetailedActorI;
-import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
@@ -30,7 +29,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private TemplateHeaderView header;
+    private SpellHeaderView header;
 
     private Table tableDetails;
     private Table tableStats;
@@ -57,7 +56,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     public CustomFormView(CustomSpellController spellController, boolean movable)
     {
         controller  = spellController;
-        header      = new TemplateHeaderView();
+        header      = new SpellHeaderView();
         tableDetails= new Table();
         tableDebuffIcons = new Table().top().left();
         tableSubformIcons= new Table();

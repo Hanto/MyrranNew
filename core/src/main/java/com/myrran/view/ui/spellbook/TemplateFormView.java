@@ -2,16 +2,11 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.DetailedActorI;
-import com.myrran.view.ui.widgets.WidgetGroup;
-import com.myrran.view.ui.widgets.WidgetImage;
-import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
 public class TemplateFormView extends Table implements DetailedActorI
@@ -19,7 +14,7 @@ public class TemplateFormView extends Table implements DetailedActorI
     private TemplateSpellForm model;
     private CustomSpellController controller;
 
-    private TemplateHeaderView header;
+    private SpellHeaderView header;
 
     private static final int VPAD = -4;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
@@ -33,7 +28,7 @@ public class TemplateFormView extends Table implements DetailedActorI
     public TemplateFormView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        header          = new TemplateHeaderView();
+        header          = new SpellHeaderView();
 
         createLayout();
     }

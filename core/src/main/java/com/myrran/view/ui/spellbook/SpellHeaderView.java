@@ -10,7 +10,7 @@ import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateHeaderView extends Table
+public class SpellHeaderView extends Table
 {
     private WidgetGroup icon;
 
@@ -28,7 +28,7 @@ public class TemplateHeaderView extends Table
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public TemplateHeaderView()
+    public SpellHeaderView()
     {
         icon            = new WidgetGroup();
         iconBackground  = new WidgetImage();

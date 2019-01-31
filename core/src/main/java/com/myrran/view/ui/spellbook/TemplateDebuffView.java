@@ -12,9 +12,6 @@ import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
-import com.myrran.view.ui.widgets.WidgetGroup;
-import com.myrran.view.ui.widgets.WidgetImage;
-import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -26,7 +23,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
 
-    private TemplateHeaderView header;
+    private SpellHeaderView header;
     private DadDebuffSource dadSource;
 
     private Table details;
@@ -47,7 +44,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     public TemplateDebuffView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        header          = new TemplateHeaderView();
+        header          = new SpellHeaderView();
         dadSource       = new DadDebuffSource(header.getIcon(), controller);
         details         = new Table();
         statsView       = new TemplateStatsView(customSpellController);

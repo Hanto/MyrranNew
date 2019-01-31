@@ -16,7 +16,7 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
 {
     private TemplateSpellSubform model;
     private CustomSpellController controller;
-    private TemplateHeaderView header;
+    private SpellHeaderView header;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
     public TemplateSubformView(CustomSpellController customSpellController)
     {
         controller  = customSpellController;
-        header      = new TemplateHeaderView();
+        header      = new SpellHeaderView();
 
         createLayout();
     }
