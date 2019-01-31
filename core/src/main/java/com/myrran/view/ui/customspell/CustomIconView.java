@@ -62,7 +62,7 @@ public class CustomIconView extends WidgetGroup
 
     private void createLayout()
     {
-        int pad = -4;
+        float pad = -4;
 
         Table table = new Table().bottom().left().padLeft(5).padBottom(8);
         table.setWidth(64);
