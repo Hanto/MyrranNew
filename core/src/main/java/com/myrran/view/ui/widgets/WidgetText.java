@@ -59,7 +59,7 @@ public class WidgetText extends Widget
     public void setShadowColor(Color color)
     {
         shadowStyle.fontColor = color;
-        textLabel.setStyle(shadowStyle);
+        shadowLabel.setStyle(shadowStyle);
     }
 
     private void updateSize()

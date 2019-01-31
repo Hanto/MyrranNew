@@ -13,6 +13,7 @@ import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
+import com.myrran.view.ui.spellbook.TemplateHeaderView;
 import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
@@ -29,14 +30,12 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private WidgetImage spellIcon;
-    private Table tableHeader;
+    private TemplateHeaderView header;
+
     private Table tableDetails;
     private Table tableStats;
     private Table tableDebuffIcons;
     private Table tableSubformIcons;
-    private WidgetText name;
-    private WidgetText templateID;
     private WidgetText totalCost;
     private CustomStatsView stats;
     private List<CustomDebuffStatsView> debuffStats;
@@ -58,24 +57,20 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     public CustomFormView(CustomSpellController spellController, boolean movable)
     {
         controller  = spellController;
-        tableHeader = new Table();
+        header      = new TemplateHeaderView();
         tableDetails= new Table();
         tableDebuffIcons = new Table().top().left();
         tableSubformIcons= new Table();
         tableStats  = new Table().top().left();
-        spellIcon   = new WidgetImage();
         stats       = new CustomStatsView(controller);
-        name        = new WidgetText(font20, Color.ORANGE, Color.BLACK, 2);
-        templateID  = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
         totalCost   = new WidgetText(font14, magenta, Color.BLACK, 1);
 
         if (movable)
-            spellIcon.addListener(new ActorMoveListener(this));
+            header.getIcon().addListener(new ActorMoveListener(this));
 
-        name.addListener(new TouchDownListener(o -> showDetails()));
+        header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
-        createHeaderLayout();
         createDetailsLayout();
         cellDetails = getCell(tableDetails);
         showDetails();
@@ -118,20 +113,19 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     private void removeModel()
     {
         clear();
+        header.removeAll();
         model = null;
-        spellIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
         stats.setModel(null);
-        name.setText(null);
-        templateID.setText(null);
         totalCost.setText(null);
     }
 
     private void update()
     {
-        spellIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
+        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
+        header.setIconName(model.getName());
+        header.setKeys(model.getTemplateID().toUpperCase());
+        header.setCost(model.getTotalCost().toString());
         stats.setModel(model);
-        name.setText(model.getName());
-        templateID.setText(model.getTemplateID().toUpperCase());
         totalCost.setText(String.format("%s(%s)", model.getStatsCost(), model.getTotalCost()));
     }
 
@@ -142,22 +136,8 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         clear();
         top().left();
-        add(tableHeader).bottom().left().row();
+        add(header).bottom().left().row();
         add(tableDetails).top().left();
-    }
-
-    private void createHeaderLayout()
-    {
-        Table nameID = new Table().bottom().left();
-        nameID.add(templateID)      .bottom().left().padTop(VPAD).padBottom(VPAD).row();
-        nameID.add(name)            .bottom().left().padTop(VPAD).padBottom(VPAD).row();
-
-        tableHeader.clear();
-        tableHeader.bottom().left();
-        tableHeader.add(spellIcon)  .bottom().left().padRight(3);
-        tableHeader.add(nameID)     .bottom().left().minWidth(100);
-        //tableHeader.add(totalCost)  .bottom().padTop(VPAD).padBottom(VPAD+2f).left();
-        //tableHeader.add(tableDebuffIcons).bottom().left();
     }
 
     private void createDetailsLayout()
