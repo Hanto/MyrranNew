@@ -2,19 +2,23 @@ package com.myrran.model.spell.templates;
 
 import com.myrran.misc.dataestructures.quantitymap.QuantifiableI;
 import com.myrran.model.components.Identifiable;
+import com.myrran.model.components.observable.Observable;
+import com.myrran.model.components.observable.ObservableDeco;
+import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.entities.subform.SpellSubformFactory;
 import com.myrran.model.spell.generators.CustomSpellSlotKey;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TemplateSpellSubform implements QuantifiableI, Identifiable
+public class TemplateSpellSubform implements QuantifiableI, Identifiable, ObservableDeco
 {
     @XmlAttribute
     private String id;
@@ -30,6 +34,7 @@ public class TemplateSpellSubform implements QuantifiableI, Identifiable
     private List<TemplateSpellSlot> spellSlots;
     private int baseCost;
     private List<CustomSpellSlotKey> keys = new ArrayList<>();
+    @XmlTransient private ObservableI observable = new Observable(this);
 
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
@@ -53,4 +58,5 @@ public class TemplateSpellSubform implements QuantifiableI, Identifiable
     public void setSpellDebuffs(TemplateSpellSlot...slots)  { this.spellSlots = Arrays.asList(slots); }
     public void setBaseCost(int baseCost)                   { this.baseCost = baseCost; }
     public void setKeys(CustomSpellSlotKey...keys)          { this.keys.addAll(Arrays.asList(keys)); }
+    @Override public ObservableI getObservable()            { return observable; }
 }

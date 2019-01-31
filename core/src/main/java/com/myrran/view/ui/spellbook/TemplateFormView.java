@@ -2,6 +2,7 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.controller.CustomSpellController;
@@ -18,15 +19,7 @@ public class TemplateFormView extends Table implements DetailedActorI
     private TemplateSpellForm model;
     private CustomSpellController controller;
 
-    private WidgetGroup icon;
-    private WidgetImage debuffIcon;
-    private WidgetText availableTotal;
-
-    private Table tableHeader;
-    private WidgetText name;
-    private WidgetText cost;
-
-    private Cell<TemplateStatsView> cell;
+    private TemplateHeaderView header;
 
     private static final int VPAD = -4;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
@@ -40,15 +33,9 @@ public class TemplateFormView extends Table implements DetailedActorI
     public TemplateFormView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        tableHeader     = new Table();
-        icon            = new WidgetGroup();
-        debuffIcon      = new WidgetImage();
-        availableTotal  = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
-        name            = new WidgetText(font20, Color.ORANGE, Color.BLACK, 1);
+        header          = new TemplateHeaderView();
 
         createLayout();
-        createHeaderLayout();
-        createIconLayout();
     }
 
     // UPDATE:
@@ -66,19 +53,15 @@ public class TemplateFormView extends Table implements DetailedActorI
     }
 
     private void removeModel()
-    {
-        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
-        availableTotal.setText(null);
-        name.setText(null);
-        cost.setText(null);
-    }
+    {   header.removeAll(); }
 
     private void update()
     {
-        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
-        availableTotal.setText(String.format("%s/%s", model.getAvailable(), model.getTotal()));
-        availableTotal.setTextColor(model.getAvailable() > 0 ? Color.GREEN : Color.RED);
-        name.setText(model.getName());
+        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
+        header.setAvailableTotal(String.format("%s/%s", model.getAvailable(), model.getTotal()));
+        header.setrAvailableTotalColor(model.getAvailable() > 0 ? Color.GREEN : Color.RED);
+        header.setKeys(model.getFactory().getName().toUpperCase());
+        header.setIconName(model.getName());
     }
 
     // CREATE LAYOUTS:
@@ -88,26 +71,7 @@ public class TemplateFormView extends Table implements DetailedActorI
     {
         clear();
         top().left();
-        add(icon).top().left();
-        add(tableHeader).left().row();
-        add();
-        add().left().padBottom(8);
-    }
-
-    private void createHeaderLayout()
-    {
-        tableHeader.clear();
-        tableHeader.bottom().left();
-        tableHeader.add().bottom().padTop(VPAD).padBottom(VPAD).left().row();
-        tableHeader.add(name).bottom().padTop(VPAD).padBottom(VPAD).left();
-        tableHeader.add(cost).bottom().padTop(VPAD).padBottom(VPAD+2).left().row();
-    }
-
-    private void createIconLayout()
-    {
-        icon.addActor(debuffIcon);
-        icon.addActor(availableTotal);
-        availableTotal.setPosition(2, 0);
+        add(header).top().left();
     }
 
     // MISC:

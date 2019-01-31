@@ -56,10 +56,9 @@ public class CustomDebuffIconView extends CustomIconView implements PropertyChan
         disposeObservers();
 
         if (customDebuffSlot == null)
-            setVisible(false);
+            removeAll();
         else
         {
-            setVisible(true);
             modelSlot = customDebuffSlot;
             modelDebuff = modelSlot.getCustomSpellDebuff();
             dadTarget.setModel(modelSlot);

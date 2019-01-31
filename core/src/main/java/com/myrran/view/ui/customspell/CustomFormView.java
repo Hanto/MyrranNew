@@ -164,13 +164,10 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         tableDetails.clear();
         tableDetails.top().left();
-        //tableDetails.add().size(32+3, 0);
-        tableDetails.add(tableDebuffIcons).bottom().left().row();
-        //tableDetails.add().size(32+3, 0);
-        tableDetails.add(tableStats).top().left().padRight(3);
-        //tableDetails.add(tableDebuffIcons).top().left().row();
         tableDetails.add().size(32+3, 0);
-        tableDetails.add();
+        tableDetails.add(tableDebuffIcons).bottom().left().row();
+        tableDetails.add().size(32+3, 0);
+        tableDetails.add(tableStats).top().left().padRight(3);
         //tableDetails.add(tableSubformIcons).top().left().row();
     }
 

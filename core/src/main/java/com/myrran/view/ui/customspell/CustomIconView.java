@@ -33,31 +33,26 @@ public class CustomIconView extends WidgetGroup
         createLayout();
     }
 
-    // SETTERS - GETTERS:
+    // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomIconView setBackground(TextureRegion texture)
-    {   background.setTexureRegion(texture); return this; }
+    public void setBackground(TextureRegion texture)    { background.setTexureRegion(texture); }
+    public void setName1(String text)                   { name1.setText(text); }
+    public void setName2(String text)                   { name2.setText(text); }
+    public void setCorner(String text)                  { corner.setText(text); }
+    public void setName1Color(Color color)              { name1.setTextColor(color); }
+    public void setName2Color(Color color)              { name2.setTextColor(color); }
+    public void setCornerColor(Color color)             { corner.setTextColor(color); }
 
-    public CustomIconView setName1(String name)
-    {   name1.setText(name); return this; }
+    public void removeAll()
+    {
+        background.setTexureRegion(null);
+        name1.setText(null);
+        name2.setText(null);
+        corner.setText(null);
+    }
 
-    public CustomIconView setName2(String name)
-    {   name2.setText(name); return this; }
-
-    public CustomIconView setCorner(String name)
-    {   corner.setText(name); return this; }
-
-    public CustomIconView setName1Color(Color color)
-    {   name1.setTextColor(color); return this; }
-
-    public CustomIconView setName2Color(Color color)
-    {   name2.setTextColor(color); return this; }
-
-    public CustomIconView setCornerColor(Color color)
-    {   corner.setTextColor(color); return this; }
-
-    // MAIN:
+    // CREATE LAYOUT:
     //--------------------------------------------------------------------------------------------------------
 
     private void createLayout()

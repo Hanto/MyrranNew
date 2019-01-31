@@ -108,11 +108,11 @@ public class WidgetGroup extends Group implements Layout
         setSize(parentWidth, parentHeight);
     }
 
-    private void setSize()
+    public void setSize()
     {
         SnapshotArray<Actor> actorsList = getChildren();
 
-        List<Actor> list= Arrays.stream(actorsList.begin())
+        List<Actor> list = Arrays.stream(actorsList.begin())
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
 

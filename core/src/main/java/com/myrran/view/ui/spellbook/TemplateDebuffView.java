@@ -2,6 +2,7 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
@@ -25,19 +26,13 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
 
-    private WidgetGroup icon;
-    private WidgetImage debuffIcon;
-    private WidgetText availableTotal;
+    private TemplateHeaderView header;
     private DadDebuffSource dadSource;
 
-    private Table tableHeader;
-    private WidgetText keys;
-    private WidgetText name;
-    private WidgetText cost;
-
+    private Table details;
     private TemplateStatsView statsView;
     private boolean detailsVisible = true;
-    private Cell<TemplateStatsView> cell;
+    private Cell<Actor> cell;
 
     private static final int VPAD = -4;
     private static final BitmapFont font20 = Atlas.get().getFont("20");
@@ -52,23 +47,16 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     public TemplateDebuffView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        tableHeader     = new Table();
-        icon            = new WidgetGroup();
-        dadSource       = new DadDebuffSource(icon, controller);
-        debuffIcon      = new WidgetImage();
-        availableTotal  = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
-        keys            = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
-        name            = new WidgetText(font20, Color.ORANGE, Color.BLACK, 1);
-        cost            = new WidgetText(font14, magenta, Color.BLACK, 1);
+        header          = new TemplateHeaderView();
+        dadSource       = new DadDebuffSource(header.getIcon(), controller);
+        details         = new Table();
         statsView       = new TemplateStatsView(customSpellController);
 
         controller.getDadDebuff().addSource(dadSource);
-        name.addListener(new TouchDownListener(o -> showDetails()));
+        header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
-        createHeaderLayout();
-        createIconLayout();
-        cell = getCell(statsView);
+        cell = getCell(details);
     }
 
     @Override public void dispose()
@@ -103,22 +91,18 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
 
     private void removeModel()
     {
-        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/IconoVacio")));
-        availableTotal.setText(null);
-        keys.setText(null);
-        name.setText(null);
-        cost.setText(null);
+        header.removeAll();
         statsView.setModel(null);
     }
 
     private void update()
     {
-        debuffIcon.setTexureRegion((Atlas.get().getTexture("TexturasIconos/FireBall")));
-        availableTotal.setText(String.format("%s/%s", model.getAvailable(), model.getTotal()));
-        availableTotal.setTextColor(model.getAvailable() > 0 ? Color.GREEN : Color.RED);
-        keys.setText(model.getKeys().toString());
-        name.setText(model.getName());
-        cost.setText(model.getBaseCost().toString());
+        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
+        header.setAvailableTotal(String.format("%s/%s", model.getAvailable(), model.getTotal()));
+        header.setrAvailableTotalColor(model.getAvailable() > 0 ? Color.GREEN : Color.RED);
+        header.setKeys(model.getKeys().toString());
+        header.setIconName(model.getName());
+        header.setCost(model.getBaseCost().toString());
         statsView.setModel(model.getSpellStats());
     }
 
@@ -129,27 +113,14 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     {
         clear();
         top().left();
-        add(icon).top().left();
-        add(tableHeader).left().row();
-        add();
-        add(statsView).left();
-        statsView.padBottom(8);
-    }
+        add(header).bottom().left().row();
+        add(details).top().left().row();
 
-    private void createHeaderLayout()
-    {
-        tableHeader.clear();
-        tableHeader.bottom().left();
-        tableHeader.add(keys).bottom().padTop(VPAD).padBottom(VPAD).left().row();
-        tableHeader.add(name).bottom().padTop(VPAD).padBottom(VPAD).left();
-        tableHeader.add(cost).bottom().padTop(VPAD).padBottom(VPAD+2).left().row();
-    }
-
-    private void createIconLayout()
-    {
-        icon.addActor(debuffIcon);
-        icon.addActor(availableTotal);
-        availableTotal.setPosition(2, 0);
+        details.clear();
+        details.top().left();
+        details.padBottom(8);
+        details.add().size(32, 0);
+        details.add(statsView).top().left().row();
     }
 
     // MISC:
@@ -161,7 +132,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
         if (!visible)
             cell.setActor(null);
         else
-            cell.setActor(statsView);
+            cell.setActor(details);
 
         detailsVisible = !visible;
     }
