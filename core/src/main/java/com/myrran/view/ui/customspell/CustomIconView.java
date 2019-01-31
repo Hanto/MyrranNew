@@ -26,9 +26,9 @@ public class CustomIconView extends WidgetGroup
     public CustomIconView()
     {
         background  = new WidgetImage();
-        name1       = new WidgetText(font10, Color.ORANGE, Color.BLACK, 1);
-        name2       = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
-        corner      = new WidgetText(font10, magenta, Color.BLACK, 1);
+        name1       = new WidgetText(font10, Color.ORANGE, Color.BLACK, 0);
+        name2       = new WidgetText(font10, Color.WHITE, Color.BLACK, 0);
+        corner      = new WidgetText(font10, magenta, Color.BLACK, 0);
 
         createLayout();
     }
@@ -66,7 +66,7 @@ public class CustomIconView extends WidgetGroup
 
         Table table = new Table().bottom().left().padLeft(5).padBottom(8);
         table.setWidth(64);
-        table.add(name1).left().padTop(pad).padBottom(pad).row();
+        table.add(name1).left().padTop(pad).padBottom(pad+1).row();
         table.add(name2).left().padTop(pad).padBottom(pad+1);
         table.add(corner).expand().fillX().right().padTop(pad).padBottom(pad-6).padRight(2);
 
