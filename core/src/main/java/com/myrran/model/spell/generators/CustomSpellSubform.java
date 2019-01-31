@@ -18,8 +18,8 @@ import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellSubform implements Identifiable, CustomDebuffSlotsDeco, CustomSpellStatsDeco,
-    ObservableDeco
+public class CustomSpellSubform implements Identifiable,
+    CustomDebuffSlotsDeco, CustomSpellStatsDeco, ObservableDeco
 {
     private String id = UUID.randomUUID().toString();
     @XmlAttribute

@@ -17,8 +17,8 @@ import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellForm implements SpellFormGenerator, Identifiable, CustomDebuffSlotsDeco,
-    CustomSpellStatsDeco, ObservableDeco
+public class CustomSpellForm implements SpellFormGenerator, Identifiable,
+    CustomDebuffSlotsDeco, CustomSpellStatsDeco, ObservableDeco
 {
     private String id = UUID.randomUUID().toString();
     private String name;
