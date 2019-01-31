@@ -27,6 +27,6 @@ public interface CustomSpellStatsDeco extends CustomSpellStatsI
     default CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException
     {   return getSpellStats().getCustomSpellStat(statID); }
 
-    default int getStatsTotalCost()
+    default Integer getStatsTotalCost()
     {   return getSpellStats().getStatsTotalCost(); }
 }

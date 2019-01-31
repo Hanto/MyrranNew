@@ -1,21 +1,15 @@
 package com.myrran.view.ui.customspell;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
-import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.model.spell.generators.CustomSubformSlot;
-import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.listeners.ActorMoveListener;
+import com.myrran.model.spell.generators.CustomFormI;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.spellbook.SpellHeaderView;
 import com.myrran.view.ui.widgets.DetailedActorI;
-import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -26,165 +20,121 @@ import java.util.stream.Collectors;
 /** @author Ivan Delgado Huerta */
 public class CustomFormView extends Table implements PropertyChangeListener, Disposable, DetailedActorI
 {
-    private CustomSpellForm model;
+    private CustomFormI model;
     private CustomSpellController controller;
 
-    private SpellHeaderView header;
-
-    private Table tableDetails;
-    private Table tableStats;
-    private Table tableDebuffIcons;
-    private Table tableSubformIcons;
-    private WidgetText totalCost;
-    private CustomStatsView stats;
-    private List<CustomDebuffStatsView> debuffStats;
-    private List<CustomDebuffIconView> debuffIcons;
-    private List<CustomSubformIconView> subformIcons;
+    private Actor icon;
+    private CustomStatsView formStats;
+    private Table slots;
+    private Table stats;
+    private List<CustomDebuffIconView> slotList;
+    private List<CustomDebuffStatsView> statList;
 
     private boolean detailsVisible = false;
-    private Cell<Actor> cellDetails;
-
-    private static final int VPAD = -4;
-    private static final BitmapFont font20 = Atlas.get().getFont("20");
-    private static final BitmapFont font14 = Atlas.get().getFont("14");
-    private static final BitmapFont font10 = Atlas.get().getFont("10");
-    private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
+    private Cell<Actor> detailsCell;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomFormView(CustomSpellController spellController, boolean movable)
+    public CustomFormView(CustomSpellController spellController, Actor actor)
     {
         controller  = spellController;
-        header      = new SpellHeaderView();
-        tableDetails= new Table();
-        tableDebuffIcons = new Table().top().left();
-        tableSubformIcons= new Table();
-        tableStats  = new Table().top().left();
-        stats       = new CustomStatsView(controller);
-        totalCost   = new WidgetText(font14, magenta, Color.BLACK, 1);
-
-        if (movable)
-            header.getIcon().addListener(new ActorMoveListener(this));
-
-        header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
+        icon        = actor;
+        formStats   = new CustomStatsView(controller);
+        slots       = new Table();
+        stats       = new Table();
 
         createLayout();
-        createDetailsLayout();
-        cellDetails = getCell(tableDetails);
+        detailsCell = getCell(stats);
         showDetails();
+
+        addListener(new TouchDownListener(o -> {if (o.getButton() == Input.Buttons.LEFT) showDetails();}));
     }
 
-    public CustomFormView(CustomSpellController spellController)
-    {   this(spellController, true); }
+    private void disposeObservers()
+    {
+        if (model != null)
+            model.removeObserver(this);
+
+        if (slotList != null)
+            slotList.forEach(CustomDebuffIconView::dispose);
+
+        if (statList != null)
+            statList.forEach(CustomDebuffStatsView::dispose);
+    }
 
     @Override public void dispose()
     {
-        stats.dispose();
-
-        if (debuffStats != null)
-            debuffStats.forEach(CustomDebuffStatsView::dispose);
-
-        if (model != null)
-            model.removeObserver(this);
+        disposeObservers();
+        formStats.dispose();
     }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSpellForm customSpellForm)
+    public void setModel(CustomFormI customForm)
     {
-        dispose();
+        disposeObservers();
 
-        if (customSpellForm == null)
+        if (customForm == null)
             removeModel();
         else
         {
-            model = customSpellForm;
+            model = customForm;
             model.addObserver(this);
-            createStatsLayout();
-            createDebuffIconsLayout();
-            createSubformIconsLayout();
             update();
+            createSlotsLayout();
+            createStatsLayout();
         }
     }
 
     private void removeModel()
     {
         clear();
-        header.removeAll();
-        model = null;
-        stats.setModel(null);
-        totalCost.setText(null);
+        formStats.setModel(null);
     }
 
     private void update()
-    {
-        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
-        header.setIconName(model.getName());
-        header.setKeys(model.getTemplateID().toUpperCase());
-        header.setCost(model.getTotalCost().toString());
-        stats.setModel(model);
-        totalCost.setText(String.format("%s(%s)", model.getStatsCost(), model.getTotalCost()));
-    }
+    {  formStats.setModel(model); }
 
-    // CREATE LAYOUTS:
+    // CREATE LAYOUT:
     //--------------------------------------------------------------------------------------------------------
 
     private void createLayout()
     {
         clear();
         top().left();
-        add(header).bottom().left().row();
-        add(tableDetails).top().left();
+        add(slots).left().bottom().row();
+        add(stats).left().row();
     }
 
-    private void createDetailsLayout()
+    private void createSlotsLayout()
     {
-        tableDetails.clear();
-        tableDetails.top().left();
-        tableDetails.add().size(32+3, 0);
-        tableDetails.add(tableDebuffIcons).bottom().left().row();
-        tableDetails.add().size(32+3, 0);
-        tableDetails.add(tableStats).top().left().padRight(3);
-        //tableDetails.add(tableSubformIcons).top().left().row();
-    }
+        slots.clear();
+        slots.top().left();
 
-    private void createStatsLayout()
-    {
-        debuffStats = model.getDebuffSlots().getCustomDebuffSlots().stream()
-            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
-            .map(this::addDebuffStats)
-            .collect(Collectors.toList());
-
-        tableStats.clear();
-        tableStats.add(stats).left().row();
-        tableStats.padTop(4);
-        tableStats.padBottom(8);
-        debuffStats.forEach(debuffDetails -> tableStats.add(debuffDetails).left().row());
-    }
-
-    private void createDebuffIconsLayout()
-    {
-        debuffIcons = model.getDebuffSlots().getCustomDebuffSlots().stream()
+        slotList =model.getCustomDebuffSlots().stream()
             .sorted(Comparator.comparing(CustomDebuffSlot::getID))
             .map(this::addDebuffIcons)
             .collect(Collectors.toList());
 
-        tableDebuffIcons.clear();
-        debuffIcons.forEach(debuffIcon -> tableDebuffIcons.add(debuffIcon).left());
+        slots.add(icon).left().bottom();
+        slotList.forEach(icon -> slots.add(icon).left());
     }
 
-    private void createSubformIconsLayout()
+    private void createStatsLayout()
     {
-        subformIcons = model.getSubformSlots().getCustomSubformSlots().stream()
-            .sorted(Comparator.comparing(CustomSubformSlot::getID))
-            .map(this::addSubformIcons)
+        stats.clear();
+        stats.top().left();
+        stats.padBottom(4).padLeft(4).padTop(2);
+
+        statList = model.getCustomDebuffSlots().stream()
+            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
+            .map(this::addDebuffStats)
             .collect(Collectors.toList());
 
-        tableSubformIcons.clear();
-        tableSubformIcons.top().left();
-        subformIcons.forEach(icon -> tableSubformIcons.add(icon).left().row());
+        stats.add(formStats).left().bottom().row();
+        statList.forEach(debuff -> stats.add(debuff).left().row());
     }
 
     private CustomDebuffStatsView addDebuffStats(CustomDebuffSlot slot)
@@ -201,20 +151,13 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         return icon;
     }
 
-    private CustomSubformIconView addSubformIcons(CustomSubformSlot slot)
-    {
-        CustomSubformIconView icon = new CustomSubformIconView(controller);
-        icon.setModel(slot);
-        return icon;
-    }
-
     // MISC:
     //--------------------------------------------------------------------------------------------------------
 
     @Override
     public void showDetails(boolean visible)
     {
-        cellDetails.setActor(visible ? tableDetails: null);
+        detailsCell.setActor(visible ? stats : null);
         detailsVisible = !visible;
     }
 
@@ -226,4 +169,5 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
     @Override public void propertyChange(PropertyChangeEvent evt)
     {   update(); }
+
 }

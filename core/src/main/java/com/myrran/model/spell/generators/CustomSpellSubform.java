@@ -19,7 +19,7 @@ import java.util.UUID;
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellSubform implements Identifiable,
-    CustomDebuffSlotsDeco, CustomSpellStatsDeco, ObservableDeco
+    CustomDebuffSlotsDeco, CustomSpellStatsDeco, ObservableDeco, CustomFormI
 {
     private String id = UUID.randomUUID().toString();
     @XmlAttribute
@@ -45,7 +45,7 @@ public class CustomSpellSubform implements Identifiable,
     @Override public CustomDebuffSlotsI getDebuffSlots(){ return debuffSlots; }
     public boolean hasData()                            { return templateID != null; }
     @Override public void setID(String id)              { this.id = id; }
-    public void setName(String name)                    { this.name = name; }
+    public void setName(String name)                    { this.name = name; notifyFieldChange(); }
     @Override public ObservableI getObservable()        { return observable; }
 
     // TEMPLATE TO CUSTOM:
@@ -104,5 +104,15 @@ public class CustomSpellSubform implements Identifiable,
 
     @Override
     public void setNumUpgrades(String statID, int numUpgrades) throws InvalidIDException
-    {   spellStats.setNumUpgrades(statID, numUpgrades); }
+    {
+        spellStats.setNumUpgrades(statID, numUpgrades);
+        notifyFieldChange();
+    }
+
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    private void notifyFieldChange()
+    {   notify("fieldChange", null, null); }
 }

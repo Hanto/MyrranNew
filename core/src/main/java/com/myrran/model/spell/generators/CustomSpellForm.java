@@ -18,7 +18,7 @@ import java.util.UUID;
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class CustomSpellForm implements SpellFormGenerator, Identifiable,
-    CustomDebuffSlotsDeco, CustomSpellStatsDeco, ObservableDeco
+    CustomDebuffSlotsDeco, CustomSpellStatsDeco, ObservableDeco, CustomFormI
 {
     private String id = UUID.randomUUID().toString();
     private String name;
@@ -78,7 +78,7 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable,
     //--------------------------------------------------------------------------------------------------------
 
     public Integer getTotalCost()
-    {   return getStatsTotalCost() + getDebuffSlotsTotalCost(); }
+    {   return getStatsTotalCost() + getDebuffSlotsTotalCost() + subformSlots.getSubFormsTotalCost(); }
 
     public Integer getStatsCost()
     {   return getStatsTotalCost(); }

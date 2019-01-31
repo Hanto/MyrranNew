@@ -62,7 +62,7 @@ public class CustomSpellStats implements CustomSpellStatsI
     //--------------------------------------------------------------------------------------------------------
 
     @Override
-    public int getStatsTotalCost()
+    public Integer getStatsTotalCost()
     {
         return stats.values().stream()
             .mapToInt(CustomSpellStat::getTotalCost)

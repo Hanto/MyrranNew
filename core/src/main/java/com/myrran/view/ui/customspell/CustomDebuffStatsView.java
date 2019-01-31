@@ -26,7 +26,7 @@ public class CustomDebuffStatsView extends Table implements PropertyChangeListen
     private WidgetText totalCost;
 
     private static final BitmapFont font14 = Atlas.get().getFont("14");
-    private static final BitmapFont font11 = Atlas.get().getFont("11");
+    private static final BitmapFont font10 = Atlas.get().getFont("10");
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
     // CONSTRUCTOR:
@@ -36,7 +36,7 @@ public class CustomDebuffStatsView extends Table implements PropertyChangeListen
     {
         controller      = customSpellController;
         name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
-        totalCost       = new WidgetText(font14, magenta, Color.BLACK, 1);
+        totalCost       = new WidgetText(font10, magenta, Color.BLACK, 1);
         stats           = new CustomStatsView(controller);
 
         createLayout();
@@ -86,7 +86,7 @@ public class CustomDebuffStatsView extends Table implements PropertyChangeListen
         {
             stats.setModel(spellDebuff);
             name.setText(spellDebuff.getName());
-            totalCost.setText(String.format("%s(%s)", spellDebuff.getStatsCost(), spellDebuff.getTotalCost()));
+            totalCost.setText(spellDebuff.getTotalCost().toString());
         }
         else
         {

@@ -115,7 +115,8 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
 
         details.clear();
         details.top().left();
-        details.padBottom(8);
+        details.padBottom(8).padLeft(4);
+
         details.add().size(32, 0);
         details.add(statsView).top().left().row();
     }

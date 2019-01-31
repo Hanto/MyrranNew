@@ -12,7 +12,7 @@ import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspell.CustomFormView;
+import com.myrran.view.ui.customspell.CustomSpellView;
 import com.myrran.view.ui.spellbook.SpellBookCustomFormView;
 import com.myrran.view.ui.spellbook.SpellBookDebuffView;
 import com.myrran.view.ui.spellbook.SpellBookFormView;
@@ -75,7 +75,7 @@ public class ZMain extends ApplicationAdapter
 			bookSpells.setPosition(280, 590);
 
 
-			CustomFormView formView2 = new CustomFormView(controller);
+			CustomSpellView formView2 = new CustomSpellView(controller);
 			uiStage.addActor(formView2);
 			formView2.setModel(spell);
 			formView2.setPosition(600, 597);

@@ -53,10 +53,15 @@ public class CustomSpellFormStatTest
             cbook.addSpellDebuffTemplate("Silence");
             cbook.addSpellDebuffTemplate("Silence");
             cbook.addSpellSubformTemplate("AOE");
+            cbook.addSpellSubformTemplate("AOE");
 
             cbook.addCustomSpellForm("Bolt");
             cbook.addCustomSpellForm("Bolt");
             cbook.addCustomSpellForm("Bolt");
+
+
+            cbook.addCustomSpellSubform("SpellForm_00", "Slot1", "AOE");
+
 
             cbook.addCustomSpellDebuff("SpellForm_00", "Slot1", "Poison");
             cbook.addCustomSpellDebuff("SpellForm_00", "Slot1", "Poison");

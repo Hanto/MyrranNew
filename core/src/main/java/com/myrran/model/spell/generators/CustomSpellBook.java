@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -85,6 +86,34 @@ public class CustomSpellBook
         }
         else
             throw new InvalidIDException("SpellForm templates not available, templateID: %s", formTemplateID);
+    }
+
+    public void addCustomSpellSubform(CustomSubformSlot slot, String subformTemplateID) throws InvalidIDException
+    {
+        if (subformsLearned.isAvailable(subformTemplateID))
+        {
+            if (!slot.hasData())
+            {
+                TemplateSpellSubform template = templateBook.getSpellSubformTemplate(subformTemplateID);
+
+                if (slot.setCustomSpellSubform(template))
+                    subformsLearned.borrow(subformTemplateID);
+            }
+        }
+        else
+            throw new InvalidIDException("SpellSubForm template not available, templateID: %s", subformTemplateID);
+    }
+
+    public void addCustomSpellSubform(String customFormID, String slotID, String subformTemplateID) throws InvalidIDException
+    {
+        if (subformsLearned.isAvailable(subformTemplateID))
+        {
+            CustomSpellForm spellForm = getCustomSpellForm(customFormID);
+            CustomSubformSlot slot = spellForm.getSubformSlots().getCustomSubformSlot(slotID);
+            addCustomSpellSubform(slot, subformTemplateID);
+        }
+        else
+            throw new InvalidIDException("SpellSubForm template not available, templateID: %s", subformTemplateID);
     }
 
     public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID) throws InvalidIDException
@@ -175,6 +204,27 @@ public class CustomSpellBook
                 .contains(customSpellStatsID))
 
                 return form;
+
+            List<CustomSpellSubform> subforms = form.getSubformSlots().getCustomSubformSlots().stream()
+                .filter(CustomSubformSlot::hasData)
+                .map(CustomSubformSlot::getCustomSpellSubform)
+                .collect(Collectors.toList());
+
+            for (CustomSpellSubform subform : subforms)
+            {
+                if (subform.getID().equals(customSpellStatsID))
+                    return form;
+
+                if (subform.getDebuffSlots().getCustomDebuffSlots().stream()
+                    .filter(CustomDebuffSlot::hasData)
+                    .map(CustomDebuffSlot::getCustomSpellDebuff)
+                    .map(CustomSpellDebuff::getID)
+                    .collect(Collectors.toList())
+                    .contains(customSpellStatsID))
+
+                    return form;
+            }
+
         }
 
         throw new InvalidIDException("The following ID isn't assigned to any SpellForm: %s", customSpellStatsID);

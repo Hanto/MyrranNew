@@ -17,5 +17,5 @@ public interface CustomSpellStatsI
     Collection<CustomSpellStat> getCustomSpellStats();
     Map<String, SpellStatParams> getSpellStatParams();
     CustomSpellStat getCustomSpellStat(String statID) throws InvalidIDException;
-    int getStatsTotalCost();
+    Integer getStatsTotalCost();
 }
