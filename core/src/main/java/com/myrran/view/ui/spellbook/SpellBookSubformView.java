@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.WidgetSortableTable;
 
@@ -12,8 +13,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 
-/** @author Ivan Delgado Huerta */
-public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff>
+public class SpellBookSubformView extends WidgetSortableTable<TemplateSpellSubform>
     implements PropertyChangeListener
 {
     private CustomSpellBook model;
@@ -22,17 +22,17 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellBookDebuffView(CustomSpellController spellController)
+    public SpellBookSubformView(CustomSpellController spellController)
     {
-        controller  = spellController;
+        controller = spellController;
 
-        addSortOption("name", Comparator.comparing(TemplateSpellDebuff::getName));
-        addSortOption("type", Comparator.comparing(TemplateSpellDebuff::getFactory));
-        addSortOption("cost", Comparator.comparing(TemplateSpellDebuff::getBaseCost));
-        addSortOption("available", Comparator.comparing(TemplateSpellDebuff::getAvailable));
-        addSortOption("total", Comparator.comparing(TemplateSpellDebuff::getTotal));
+        addSortOption("name", Comparator.comparing(TemplateSpellSubform::getName));
+        addSortOption("type", Comparator.comparing(TemplateSpellSubform::getFactory));
+        addSortOption("cost", Comparator.comparing(TemplateSpellSubform::getBaseCost));
+        addSortOption("available", Comparator.comparing(TemplateSpellSubform::getAvailable));
+        addSortOption("total", Comparator.comparing(TemplateSpellSubform::getTotal));
 
-        build("Debuff SpellBook", true);
+        build("Subform SpellBook", true);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 
@@ -48,7 +48,7 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
         else
         {
             model = customSpellBook;
-            setModel(model.getDebuffsTemplatesLearned());
+            setModel(model.getSubformTemplatesLearned());
         }
     }
 
@@ -58,9 +58,9 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public Actor getActor(TemplateSpellDebuff template)
+    @Override public Actor getActor(TemplateSpellSubform template)
     {
-        TemplateDebuffView icon = new TemplateDebuffView(controller);
+        TemplateSubformView icon = new TemplateSubformView(controller);
         icon.setModel(template);
         return icon;
     }

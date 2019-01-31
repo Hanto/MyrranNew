@@ -16,6 +16,7 @@ import com.myrran.view.ui.customspell.CustomFormView;
 import com.myrran.view.ui.spellbook.SpellBookCustomFormView;
 import com.myrran.view.ui.spellbook.SpellBookDebuffView;
 import com.myrran.view.ui.spellbook.SpellBookFormView;
+import com.myrran.view.ui.spellbook.SpellBookSubformView;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -53,20 +54,26 @@ public class ZMain extends ApplicationAdapter
 			spell = book.getCustomSpellForm("SpellForm_00");
 			controller = new CustomSpellController(book);
 
-			SpellBookDebuffView spellBookView = new SpellBookDebuffView(controller);
-			spellBookView.setModel(book);
-			uiStage.addActor(spellBookView);
-			spellBookView.setPosition(10, 515);
+			SpellBookDebuffView bookDebuff = new SpellBookDebuffView(controller);
+			bookDebuff.setModel(book);
+			uiStage.addActor(bookDebuff);
+			bookDebuff.setPosition(10, 515);
 
-			SpellBookFormView spellBookForm = new SpellBookFormView(controller);
-			spellBookForm.setModel(book);
-			uiStage.addActor(spellBookForm);
-			spellBookForm.setPosition(10, 590);
+			SpellBookFormView bookForm = new SpellBookFormView(controller);
+			bookForm.setModel(book);
+			uiStage.addActor(bookForm);
+			bookForm.setPosition(10, 590);
 
-			SpellBookCustomFormView bookCustomFormView = new SpellBookCustomFormView(controller);
-			bookCustomFormView.setModel(book);
-			uiStage.addActor(bookCustomFormView);
-			bookCustomFormView.setPosition(280, 590);
+			SpellBookSubformView bookSubform = new SpellBookSubformView(controller);
+			bookSubform.setModel(book);
+			uiStage.addActor(bookSubform);
+			bookSubform.setPosition(10, 350);
+
+			SpellBookCustomFormView bookSpells = new SpellBookCustomFormView(controller);
+			bookSpells.setModel(book);
+			uiStage.addActor(bookSpells);
+			bookSpells.setPosition(280, 590);
+
 
 			CustomFormView formView2 = new CustomFormView(controller);
 			uiStage.addActor(formView2);

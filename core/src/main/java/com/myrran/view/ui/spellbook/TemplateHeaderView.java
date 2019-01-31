@@ -80,7 +80,7 @@ public class TemplateHeaderView extends Table
         table.padLeft(3);
         table.add(keys).bottom().padTop(pad).padBottom(pad).left().row();
         table.add(name).bottom().padTop(pad).padBottom(pad).left();
-        table.add(cost).bottom().padTop(pad).padBottom(pad+2).left().row();
+        table.add(cost).bottom().padTop(pad).padBottom(pad+1).left().row();
 
         top().left();
         add(icon).top().left();
