@@ -48,7 +48,8 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         detailsCell = getCell(stats);
         showDetails();
 
-        addListener(new TouchDownListener(o -> {if (o.getButton() == Input.Buttons.LEFT) showDetails();}));
+        icon.addListener(new TouchDownListener(event ->
+        {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));
     }
 
     private void disposeObservers()
@@ -113,7 +114,7 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         slots.clear();
         slots.top().left();
 
-        slotList =model.getCustomDebuffSlots().stream()
+        slotList = model.getCustomDebuffSlots().stream()
             .sorted(Comparator.comparing(CustomDebuffSlot::getID))
             .map(this::addDebuffIcons)
             .collect(Collectors.toList());
