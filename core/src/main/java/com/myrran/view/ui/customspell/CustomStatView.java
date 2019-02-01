@@ -56,7 +56,6 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
     public CustomStatView(CustomSpellStat customSpellStat)
     {
         model = customSpellStat;
-        model.addObserver(this);
 
         name            = new WidgetText(font11, white,   black,1);
         baseValue       = new WidgetText(font14, orange,  black,1);
@@ -86,6 +85,7 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
         else
         {
             model = customSpellStat;
+            model.addObserver(this);
             update();
         }
     }

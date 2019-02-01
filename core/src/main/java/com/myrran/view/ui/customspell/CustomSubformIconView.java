@@ -61,7 +61,8 @@ public class CustomSubformIconView extends CustomIconView implements PropertyCha
         if (modelSlot.hasData())
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/FireBall2"));
-            setCorner(modelSubform.getTotalCost().toString());
+            Integer baseAndStats = modelSubform.getStatCost() + modelSubform.getBaseCost();
+            setCorner(baseAndStats.toString());
             setName1(modelSubform.getName());
             setName1Color(Color.ORANGE);
         }

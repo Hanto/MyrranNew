@@ -31,7 +31,7 @@ public class CustomSpellView extends Table implements PropertyChangeListener, Di
 
     private Table tableDetails;
     private Table tableSubformIcons;
-    private List<CustomSubformSlotView> subformIcons;
+    private List<CustomSubFormSlotView> subForms;
 
     private boolean detailsVisible = false;
     private Cell<Actor> cellDetails;
@@ -134,19 +134,19 @@ public class CustomSpellView extends Table implements PropertyChangeListener, Di
 
     private void createSubformIconsLayout()
     {
-        subformIcons = model.getSubformSlots().getCustomSubformSlots().stream()
+        subForms = model.getSubformSlots().getCustomSubformSlots().stream()
             .sorted(Comparator.comparing(CustomSubformSlot::getID))
             .map(this::addSubformIcons)
             .collect(Collectors.toList());
 
         tableSubformIcons.clear();
         tableSubformIcons.top().left();
-        subformIcons.forEach(icon -> tableSubformIcons.add(icon.debuffsView).left().row());
+        subForms.forEach(icon -> tableSubformIcons.add(icon).left().row());
     }
 
-    private CustomSubformSlotView addSubformIcons(CustomSubformSlot slot)
+    private CustomSubFormSlotView addSubformIcons(CustomSubformSlot slot)
     {
-        CustomSubformSlotView view = new CustomSubformSlotView(controller);
+        CustomSubFormSlotView view = new CustomSubFormSlotView(controller);
         view.setModel(slot);
         return view;
     }
