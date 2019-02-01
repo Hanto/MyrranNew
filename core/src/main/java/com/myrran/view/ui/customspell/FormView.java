@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CustomFormView2 implements Disposable
+public class FormView implements Disposable
 {
     private CustomFormI model;
     private CustomSpellController controller;
@@ -28,7 +28,7 @@ public class CustomFormView2 implements Disposable
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomFormView2(CustomSpellController spellController)
+    public FormView(CustomSpellController spellController)
     {
         controller  = spellController;
         formStats   = new CustomStatsView(controller);

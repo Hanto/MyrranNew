@@ -13,25 +13,22 @@ import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.SpellHeaderView;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CustomSpellView extends Table implements PropertyChangeListener, Disposable, DetailedActorI
+public class CustomSpellView extends Table implements Disposable, DetailedActorI
 {
     private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private SpellHeaderView header;
+    private CustomFormHeaderView header;
     private CustomFormView formView;
-    private CustomFormIconView icon;
+    private List<CustomSubFormSlotView> subForms;
 
     private Table tableDetails;
-    private Table tableSubformIcons;
-    private List<CustomSubFormSlotView> subForms;
+    private Table tableSubforms;
 
     private boolean detailsVisible = false;
     private Cell<Actor> cellDetails;
@@ -41,14 +38,11 @@ public class CustomSpellView extends Table implements PropertyChangeListener, Di
 
     public CustomSpellView(CustomSpellController spellController, boolean movable)
     {
-        controller  = spellController;
-        header      = new SpellHeaderView();
-        icon        = new CustomFormIconView(controller);
-        formView    = new CustomFormView(controller, icon);
-
-
-        tableDetails= new Table();
-        tableSubformIcons= new Table();
+        controller      = spellController;
+        header          = new CustomFormHeaderView();
+        formView        = new CustomFormView(controller);
+        tableDetails    = new Table();
+        tableSubforms   = new Table();
 
         if (movable)
             header.getIcon().addListener(new ActorMoveListener(this));
@@ -66,11 +60,11 @@ public class CustomSpellView extends Table implements PropertyChangeListener, Di
 
     @Override public void dispose()
     {
-        if (model != null)
-            model.removeObserver(this);
+        header.dispose();
+        formView.dispose();
 
-        if (icon != null)
-            icon.dispose();
+        if (subForms != null)
+            subForms.forEach(CustomSubFormSlotView::dispose);
     }
 
     // UPDATE:
@@ -85,28 +79,17 @@ public class CustomSpellView extends Table implements PropertyChangeListener, Di
         else
         {
             model = customSpellForm;
-            model.addObserver(this);
             formView.setModel(model);
-            createSubformIconsLayout();
-            update();
+            header.setModel(model);
+            createSubformsLayout();
         }
     }
 
     private void removeModel()
     {
         clear();
-        icon.setModel(null);
         header.removeAll();
         model = null;
-    }
-
-    private void update()
-    {
-        icon.setModel(model);
-        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
-        header.setIconName(model.getName());
-        header.setKeys(model.getTemplateID().toUpperCase());
-        header.setCost(model.getTotalCost().toString());
     }
 
     // CREATE LAYOUTS:
@@ -129,19 +112,19 @@ public class CustomSpellView extends Table implements PropertyChangeListener, Di
         tableDetails.add().size(32+3, 0);
         tableDetails.add(formView).top().left().row();
         tableDetails.add().size(32+3, 0);
-        tableDetails.add(tableSubformIcons).top().left().row();
+        tableDetails.add(tableSubforms).top().left().row();
     }
 
-    private void createSubformIconsLayout()
+    private void createSubformsLayout()
     {
         subForms = model.getSubformSlots().getCustomSubformSlots().stream()
             .sorted(Comparator.comparing(CustomSubformSlot::getID))
             .map(this::addSubformIcons)
             .collect(Collectors.toList());
 
-        tableSubformIcons.clear();
-        tableSubformIcons.top().left();
-        subForms.forEach(icon -> tableSubformIcons.add(icon).left().row());
+        tableSubforms.clear();
+        tableSubforms.top().left();
+        subForms.forEach(icon -> tableSubforms.add(icon).left().row());
     }
 
     private CustomSubFormSlotView addSubformIcons(CustomSubformSlot slot)
@@ -163,10 +146,4 @@ public class CustomSpellView extends Table implements PropertyChangeListener, Di
 
     public void showDetails()
     {   showDetails(detailsVisible); }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
 }

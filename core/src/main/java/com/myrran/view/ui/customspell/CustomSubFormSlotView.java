@@ -22,7 +22,7 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
     private CustomSpellController controller;
 
     private CustomSubformIconView icon;
-    private CustomFormView2 debuffs;
+    private FormView formView;
 
     private Table slots;
     private Table stats;
@@ -36,7 +36,7 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
     public CustomSubFormSlotView(CustomSpellController spellController)
     {
         controller  = spellController;
-        debuffs     = new CustomFormView2(controller);
+        formView    = new FormView(controller);
         icon        = new CustomSubformIconView(controller);
         slots       = new Table();
         stats       = new Table();
@@ -57,7 +57,8 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
 
     @Override public void dispose()
     {
-        debuffs.dispose();
+        disposeObservers();
+        formView.dispose();
         icon.dispose();
     }
 
@@ -80,10 +81,7 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
     }
 
     private void removeModel()
-    {
-        clear();
-        dispose();
-    }
+    {   clear(); }
 
     private void update()
     {
@@ -94,18 +92,18 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
         stats.clear();
         stats.top().left();
         stats.padBottom(4).padLeft(4).padTop(2);
-        stats.add(debuffs.getFormStats()).row();
+        stats.add(formView.getFormStats()).row();
 
         icon.setModel(modelSlot);
 
         if (modelSlot.hasData())
         {
-            debuffs.setModel(modelSubform);
-            debuffs.getDebuffIcons().forEach(icon -> slots.add(icon).left());
-            debuffs.getDebuffStats().forEach(debuff -> stats.add(debuff).left().row());
+            formView.setModel(modelSubform);
+            formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
+            formView.getDebuffStats().forEach(debuff -> stats.add(debuff).left().row());
         }
         else
-            debuffs.setModel(null);
+            formView.setModel(null);
     }
 
     // CREATE LAYOUT:

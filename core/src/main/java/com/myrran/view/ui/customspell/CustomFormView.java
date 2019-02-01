@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.generators.CustomFormI;
+import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
@@ -18,17 +19,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CustomFormView extends Table implements PropertyChangeListener, Disposable, DetailedActorI
+public class CustomFormView extends Table implements Disposable, DetailedActorI
 {
-    private CustomFormI model;
+    private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private Actor icon;
-    private CustomStatsView formStats;
+    private CustomFormIconView icon;
+    private FormView formView;
+
     private Table slots;
     private Table stats;
-    private List<CustomDebuffIconView> slotList;
-    private List<CustomDebuffStatsView> statList;
 
     private boolean detailsVisible = false;
     private Cell<Actor> detailsCell;
@@ -36,44 +36,33 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomFormView(CustomSpellController spellController, Actor actor)
+    public CustomFormView(CustomSpellController spellController)
     {
         controller  = spellController;
-        icon        = actor;
-        formStats   = new CustomStatsView(controller);
+        formView    = new FormView(controller);
+        icon        = new CustomFormIconView(controller);
         slots       = new Table();
         stats       = new Table();
+
+        icon.addListener(new TouchDownListener(event ->
+        {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));
 
         createLayout();
         detailsCell = getCell(stats);
         showDetails();
-
-        icon.addListener(new TouchDownListener(event ->
-        {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));
     }
 
-    private void disposeObservers()
-    {
-        if (model != null)
-            model.removeObserver(this);
-
-        if (slotList != null)
-            slotList.forEach(CustomDebuffIconView::dispose);
-
-        if (statList != null)
-            statList.forEach(CustomDebuffStatsView::dispose);
-    }
-
+    private void disposeObservers() {}
     @Override public void dispose()
     {
-        disposeObservers();
-        formStats.dispose();
+        formView.dispose();
+        icon.dispose();
     }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomFormI customForm)
+    public void setModel(CustomSpellForm customForm)
     {
         disposeObservers();
 
@@ -82,21 +71,30 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
         else
         {
             model = customForm;
-            model.addObserver(this);
             update();
-            createSlotsLayout();
-            createStatsLayout();
         }
     }
 
     private void removeModel()
-    {
-        clear();
-        formStats.setModel(null);
-    }
+    {   clear(); }
 
     private void update()
-    {  formStats.setModel(model); }
+    {
+        slots.clear();
+        slots.top().left();
+        slots.add(icon).left().bottom();
+
+        stats.clear();
+        stats.top().left();
+        stats.padBottom(4).padLeft(4).padTop(2);
+        stats.add(formView.getFormStats()).row();
+
+        formView.setModel(model);
+        icon.setModel(model);
+
+        formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
+        formView.getDebuffStats().forEach(debuff -> stats.add(debuff).left().row());
+    }
 
     // CREATE LAYOUT:
     //--------------------------------------------------------------------------------------------------------
@@ -105,51 +103,8 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
     {
         clear();
         top().left();
-        add(slots).left().bottom().row();
+        add(slots).left().row();
         add(stats).left().row();
-    }
-
-    private void createSlotsLayout()
-    {
-        slots.clear();
-        slots.top().left();
-
-        slotList = model.getCustomDebuffSlots().stream()
-            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
-            .map(this::addDebuffIcons)
-            .collect(Collectors.toList());
-
-        slots.add(icon).left().bottom();
-        slotList.forEach(icon -> slots.add(icon).left());
-    }
-
-    private void createStatsLayout()
-    {
-        stats.clear();
-        stats.top().left();
-        stats.padBottom(4).padLeft(4).padTop(2);
-
-        statList = model.getCustomDebuffSlots().stream()
-            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
-            .map(this::addDebuffStats)
-            .collect(Collectors.toList());
-
-        stats.add(formStats).left().bottom().row();
-        statList.forEach(debuff -> stats.add(debuff).left().row());
-    }
-
-    private CustomDebuffStatsView addDebuffStats(CustomDebuffSlot slot)
-    {
-        CustomDebuffStatsView details = new CustomDebuffStatsView(controller);
-        details.setModel(slot);
-        return details;
-    }
-
-    private CustomDebuffIconView addDebuffIcons(CustomDebuffSlot slot)
-    {
-        CustomDebuffIconView icon = new CustomDebuffIconView(controller);
-        icon.setModel(slot);
-        return icon;
     }
 
     // MISC:
@@ -164,11 +119,4 @@ public class CustomFormView extends Table implements PropertyChangeListener, Dis
 
     public void showDetails()
     {   showDetails(detailsVisible); }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
-
 }
