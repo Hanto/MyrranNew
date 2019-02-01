@@ -89,7 +89,7 @@ public class CustomStatsView extends Table implements Disposable
     private CustomStatView getView(CustomSpellStat customSpellStat)
     {   return new CustomStatView(customSpellStat); }
 
-    private void tableAddRow(SpellStatRow row)
+    private void tableAddRow(CustomStatView row)
     {
         int vPad = -4;
         int hPad = +3;

@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.iconslot;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,7 +10,7 @@ import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
-public class CustomIconView extends WidgetGroup
+public abstract class SpellIconView extends WidgetGroup
 {
     private WidgetImage background;
     private WidgetText name1;
@@ -23,7 +23,7 @@ public class CustomIconView extends WidgetGroup
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomIconView()
+    public SpellIconView()
     {
         background  = new WidgetImage();
         name1       = new WidgetText(font10, Color.ORANGE, Color.BLACK, 0);
@@ -44,6 +44,9 @@ public class CustomIconView extends WidgetGroup
     public void setName2Color(Color color)              { name2.setTextColor(color); }
     public void setCornerColor(Color color)             { corner.setTextColor(color); }
 
+    // UPDATE:
+    //--------------------------------------------------------------------------------------------------------
+
     public void removeAll()
     {
         background.setTexureRegion(null);
@@ -59,11 +62,14 @@ public class CustomIconView extends WidgetGroup
     {
         float pad = -4;
 
+        Table tableRow2 = new Table().bottom().left();
+        tableRow2.add(name2).left().padTop(pad).padBottom(pad+1);
+        tableRow2.add(corner).expand().fillX().right().padTop(pad).padBottom(pad-6).padRight(2);
+
         Table table = new Table().bottom().left().padLeft(5).padBottom(8);
         table.setWidth(64);
         table.add(name1).left().padTop(pad).padBottom(pad+1).row();
-        table.add(name2).left().padTop(pad).padBottom(pad+1);
-        table.add(corner).expand().fillX().right().padTop(pad).padBottom(pad-6).padRight(2);
+        table.add(tableRow2).expand().fillX();
 
         addActor(background);
         addActor(table);

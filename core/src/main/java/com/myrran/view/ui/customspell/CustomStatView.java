@@ -12,7 +12,7 @@ import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class CustomStatView implements PropertyChangeListener, SpellStatRow, Disposable
+public class CustomStatView implements PropertyChangeListener, Disposable
 {
     private CustomSpellStat model;
 
@@ -39,16 +39,16 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
     // GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellStat getModel()                   { return model; }
-    @Override public WidgetText getName()               { return name; }
-    @Override public WidgetText getBaseValue()          { return baseValue; }
-    @Override public WidgetText getTotal()              { return total; }
-    @Override public WidgetText getNumUpgrades()        { return numUpgrades; }
-    @Override public WidgetText getUpgradeCost()        { return upgradeCost; }
-    @Override public WidgetText getBonusPerUpgrade()    { return bonusPerUpgrade; }
-    @Override public WidgetText getMaxUpgrades()        { return maxUpgrades; }
-    @Override public WidgetText getGearBonus()          { return gearBonus; }
-    @Override public CustomUBarView getUpgradesView()  { return upgradesView; }
+    public CustomSpellStat getModel()       { return model; }
+    public WidgetText getName()             { return name; }
+    public WidgetText getBaseValue()        { return baseValue; }
+    public WidgetText getTotal()            { return total; }
+    public WidgetText getNumUpgrades()      { return numUpgrades; }
+    public WidgetText getUpgradeCost()      { return upgradeCost; }
+    public WidgetText getBonusPerUpgrade()  { return bonusPerUpgrade; }
+    public WidgetText getMaxUpgrades()      { return maxUpgrades; }
+    public WidgetText getGearBonus()        { return gearBonus; }
+    public CustomUBarView getUpgradesView() { return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
         setModel(customSpellStat);
     }
 
-    @Override public void dispose()
+    public void dispose()
     {   model.removeObserver(this); }
 
     // CREATE / UPDATE:
@@ -115,6 +115,6 @@ public class CustomStatView implements PropertyChangeListener, SpellStatRow, Dis
     // MVC:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public void propertyChange(PropertyChangeEvent evt)
+    public void propertyChange(PropertyChangeEvent evt)
     {   update(); }
 }

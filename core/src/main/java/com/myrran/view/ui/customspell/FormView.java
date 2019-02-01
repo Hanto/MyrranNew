@@ -4,9 +4,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.generators.CustomFormI;
+import com.myrran.view.ui.customspell.iconslot.CDebuffSlotView;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,11 +17,11 @@ public class FormView implements Disposable
     private CustomSpellController controller;
 
     private CustomStatsView formStats;
-    private List<CustomDebuffIconView> slotList;
+    private List<CDebuffSlotView> slotList;
     private List<CustomDebuffStatsView> statList;
 
     public CustomStatsView getFormStats()                   { return formStats; }
-    public List<CustomDebuffIconView>getDebuffIcons()       { return slotList; }
+    public List<CDebuffSlotView>getDebuffIcons()       { return slotList; }
     public List<CustomDebuffStatsView>getDebuffStats()      { return statList; }
 
     // CONSTRUCTOR:
@@ -37,7 +36,7 @@ public class FormView implements Disposable
     private void disposeObservers()
     {
         if (slotList != null)
-            slotList.forEach(CustomDebuffIconView::dispose);
+            slotList.forEach(CDebuffSlotView::dispose);
 
         if (statList != null)
             statList.forEach(CustomDebuffStatsView::dispose);
@@ -85,9 +84,9 @@ public class FormView implements Disposable
             .collect(Collectors.toList());
     }
 
-    private CustomDebuffIconView addDebuffIcons(CustomDebuffSlot slot)
+    private CDebuffSlotView addDebuffIcons(CustomDebuffSlot slot)
     {
-        CustomDebuffIconView icon = new CustomDebuffIconView(controller);
+        CDebuffSlotView icon = new CDebuffSlotView(controller);
         icon.setModel(slot);
         return icon;
     }

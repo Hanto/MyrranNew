@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.iconslot;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
@@ -11,7 +11,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public class CustomSubformIconView extends CustomIconView implements PropertyChangeListener, Disposable
+public class CSubformSlotView extends SpellIconView implements PropertyChangeListener, Disposable
 {
     private CustomSubformSlot modelSlot;
     private CustomSpellSubform modelSubform;
@@ -20,11 +20,8 @@ public class CustomSubformIconView extends CustomIconView implements PropertyCha
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSubformIconView(CustomSpellController customSpellController)
+    public CSubformSlotView(CustomSpellController customSpellController)
     {   controller = customSpellController; }
-
-    @Override public void dispose()
-    {   disposeObservers(); }
 
     private void disposeObservers()
     {
@@ -34,6 +31,9 @@ public class CustomSubformIconView extends CustomIconView implements PropertyCha
         if (modelSubform != null)
             modelSubform.removeObserver(this);
     }
+
+    @Override public void dispose()
+    {   disposeObservers(); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------

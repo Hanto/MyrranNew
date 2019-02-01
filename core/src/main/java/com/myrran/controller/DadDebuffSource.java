@@ -34,10 +34,14 @@ public class DadDebuffSource extends Source
     @Override
     public Payload dragStart(InputEvent event, float x, float y, int pointer)
     {
-        WidgetText dragActor = new WidgetText(model.getName(), Atlas.get().getFont("20"), Color.ORANGE, Color.BLACK, 1);
-        Payload payload = new Payload();
-        payload.setObject(model);
-        payload.setDragActor(dragActor);
-        return payload;
+        if (model != null)
+        {
+            WidgetText dragActor = new WidgetText(model.getName(), Atlas.get().getFont("20"), Color.ORANGE, Color.BLACK, 1);
+            Payload payload = new Payload();
+            payload.setObject(model);
+            payload.setDragActor(dragActor);
+            return payload;
+        }
+        else return null;
     }
 }

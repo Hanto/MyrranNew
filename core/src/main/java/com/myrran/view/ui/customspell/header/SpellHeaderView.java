@@ -1,4 +1,4 @@
-package com.myrran.view.ui.spellbook;
+package com.myrran.view.ui.customspell.header;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,12 +10,12 @@ import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
-public class SpellHeaderView extends Table
+public abstract class SpellHeaderView extends Table
 {
     private WidgetGroup icon;
-
     private WidgetImage iconBackground;
     private WidgetText availableTotal;
+
     private WidgetText keys;
     private WidgetText name;
     private WidgetText cost;

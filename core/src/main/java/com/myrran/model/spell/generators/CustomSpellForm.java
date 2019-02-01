@@ -17,7 +17,7 @@ import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellForm implements SpellFormGenerator, Identifiable,
+public class CustomSpellForm implements Identifiable,
     CustomDebuffSlotsDeco, CustomSpellStatsDeco, ObservableDeco, CustomFormI
 {
     private String id = UUID.randomUUID().toString();
@@ -33,14 +33,15 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable,
     //--------------------------------------------------------------------------------------------------------
 
     @Override public String getID()                         { return id; }
-    @Override public String getName()                       { return name; }
+    public String getName()                                 { return name; }
     public String getTemplateID()                           { return templateID; }
     @Override public CustomSpellStatsI getSpellStats()      { return spellStats; }
     @Override public CustomDebuffSlotsI getDebuffSlots()    { return debuffSlots; }
     public CustomSubformSlots getSubformSlots()             { return subformSlots; }
-    @Override public ObservableI getObservable()            { return observable; }
     @Override public void setID(String id)                  { this.id = id; }
-    @Override public void setName(String name)              { this.name = name; notifyFieldChange();}
+    public void setName(String name)                        { this.name = name; notifyFieldChange();}
+
+    @Override public ObservableI getObservable()            { return observable; }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -49,7 +50,6 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable,
     public CustomSpellForm(TemplateSpellForm template)
     {   setSpellFormTemplate(template); }
 
-    @Override
     public void setSpellFormTemplate(TemplateSpellForm template)
     {
         name = template.getName();
@@ -65,7 +65,6 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable,
     // CUSTOM TO ENTITY PARAMS:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override
     public SpellFormParams getSpellFormParams()
     {
         return new SpellFormParams()
@@ -90,7 +89,6 @@ public class CustomSpellForm implements SpellFormGenerator, Identifiable,
         notifyFieldChange();
     }
 
-    @Override
     public SpellForm cast()
     {
         SpellForm entity = factory.getFormEntity();

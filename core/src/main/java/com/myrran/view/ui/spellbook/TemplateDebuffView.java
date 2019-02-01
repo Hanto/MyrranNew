@@ -1,7 +1,5 @@
 package com.myrran.view.ui.spellbook;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -9,34 +7,24 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.customspell.header.TDebuffHeaderView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.DecimalFormat;
-
 /** @author Ivan Delgado Huerta */
-public class TemplateDebuffView extends Table implements DetailedActorI, Disposable, PropertyChangeListener
+public class TemplateDebuffView extends Table implements DetailedActorI, Disposable
 {
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
 
-    private SpellHeaderView header;
+    private TDebuffHeaderView header;
     private DadDebuffSource dadSource;
+    private TemplateStatsView statsView;
 
     private Table details;
-    private TemplateStatsView statsView;
-    private boolean detailsVisible = true;
-    private Cell<Actor> cell;
 
-    private static final int VPAD = -4;
-    private static final BitmapFont font20 = Atlas.get().getFont("20");
-    private static final BitmapFont font14 = Atlas.get().getFont("14");
-    private static final BitmapFont font10 = Atlas.get().getFont("10");
-    private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
-    private static final DecimalFormat df = Atlas.get().getFormater();
+    private boolean detailsVisible = true;
+    private Cell<Actor> detailsCell;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -44,28 +32,23 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     public TemplateDebuffView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        header          = new SpellHeaderView();
+        header          = new TDebuffHeaderView();
         dadSource       = new DadDebuffSource(header.getIcon(), controller);
-        details         = new Table();
         statsView       = new TemplateStatsView(customSpellController);
+        details         = new Table();
 
         controller.getDadDebuff().addSource(dadSource);
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
-        cell = getCell(details);
+        detailsCell = getCell(details);
     }
 
     @Override public void dispose()
     {
-        disposeObservers();
         controller.getDadDebuff().removeSource(dadSource);
-    }
-
-    private void disposeObservers()
-    {
-        if (model != null)
-            model.removeObserver(this);
+        header.dispose();
+        statsView.dispose();
     }
 
     // UPDATE:
@@ -73,34 +56,22 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
 
     public void setModel(TemplateSpellDebuff templateSpellDebuff)
     {
-        disposeObservers();
-
         if (templateSpellDebuff == null)
             removeModel();
         else
         {
             model = templateSpellDebuff;
-            model.addObserver(this);
             dadSource.setModel(model);
-            update();
+            header.setModel(model);
+            statsView.setModel(model.getSpellStats());
         }
     }
 
     private void removeModel()
     {
+        dadSource.setModel(null);
         header.removeAll();
         statsView.setModel(null);
-    }
-
-    private void update()
-    {
-        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
-        header.setAvailableTotal(String.format("%s/%s", model.getAvailable(), model.getTotal()));
-        header.setrAvailableTotalColor(model.getAvailable() > 0 ? Color.GREEN : Color.RED);
-        header.setKeys(model.getKeys().toString());
-        header.setIconName(model.getName());
-        header.setCost(model.getBaseCost().toString());
-        statsView.setModel(model.getSpellStats());
     }
 
     // CREATE LAYOUTS:
@@ -127,20 +98,10 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     @Override
     public void showDetails(boolean visible)
     {
-        if (!visible)
-            cell.setActor(null);
-        else
-            cell.setActor(details);
-
+        detailsCell.setActor(visible ? details : null);
         detailsVisible = !visible;
     }
 
     public void showDetails()
     {   showDetails(detailsVisible); }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
 }

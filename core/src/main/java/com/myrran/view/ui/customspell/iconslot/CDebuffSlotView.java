@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.iconslot;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
@@ -13,7 +13,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public class CustomDebuffIconView extends CustomIconView implements PropertyChangeListener, Disposable
+public class CDebuffSlotView extends SpellIconView implements PropertyChangeListener, Disposable
 {
     private CustomDebuffSlot modelSlot;
     private CustomSpellDebuff modelDebuff;
@@ -23,20 +23,15 @@ public class CustomDebuffIconView extends CustomIconView implements PropertyChan
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomDebuffIconView(CustomSpellController customSpellController)
+    public CDebuffSlotView(CustomSpellController customSpellController)
     {
         controller  = customSpellController;
         dadTarget   = new DadDebuffTarget(this, controller);
 
         controller.getDadDebuff().addTarget(dadTarget);
+
         addListener(new TouchDownRightListener(event ->
             controller.removeCustomSpellDebuff(modelSlot)));
-    }
-
-    @Override public void dispose()
-    {
-        disposeObservers();
-        controller.getDadDebuff().removeTarget(dadTarget);
     }
 
     private void disposeObservers()
@@ -46,6 +41,12 @@ public class CustomDebuffIconView extends CustomIconView implements PropertyChan
 
         if (modelDebuff != null)
             modelDebuff.removeObserver(this);
+    }
+
+    @Override public void dispose()
+    {
+        disposeObservers();
+        controller.getDadDebuff().removeTarget(dadTarget);
     }
 
     // UPDATE:

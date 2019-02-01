@@ -1,22 +1,18 @@
 package com.myrran.view.ui.spellbook;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.customspell.header.TSubformHeaderView;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 /** @author Ivan Delgado Huerta */
-public class TemplateSubformView extends Table implements DetailedActorI, Disposable, PropertyChangeListener
+public class TemplateSubformView extends Table implements DetailedActorI, Disposable
 {
     private TemplateSpellSubform model;
     private CustomSpellController controller;
-    private SpellHeaderView header;
+    private TSubformHeaderView header;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -24,53 +20,34 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
     public TemplateSubformView(CustomSpellController customSpellController)
     {
         controller  = customSpellController;
-        header      = new SpellHeaderView();
+        header      = new TSubformHeaderView();
 
         createLayout();
     }
 
 
     @Override public void dispose()
-    {
-        disposeObservers();
-   }
-
-    private void disposeObservers()
-    {
-        if (model != null)
-            model.removeObserver(this);
-    }
+    {   header.dispose(); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
     public void setModel(TemplateSpellSubform templateSpellSubform)
     {
-        disposeObservers();
-
         if (templateSpellSubform == null)
             removeModel();
         else
         {
             model = templateSpellSubform;
-            model.addObserver(this);
-            update();
+            header.setModel(model);
         }
-
     }
 
     private void removeModel()
     {   header.removeAll(); }
 
-    private void update()
-    {
-        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
-        header.setAvailableTotal(String.format("%s/%s", model.getAvailable(), model.getTotal()));
-        header.setrAvailableTotalColor(model.getAvailable() > 0 ? Color.GREEN : Color.RED);
-        header.setKeys(model.getKeys().toString());
-        header.setIconName(model.getName());
-        header.setCost(model.getBaseCost().toString());
-    }
+    // CREATE LAYOUTS:
+    //--------------------------------------------------------------------------------------------------------
 
     private void createLayout()
     {
@@ -87,10 +64,4 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
     {
 
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
 }

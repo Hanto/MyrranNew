@@ -1,26 +1,19 @@
 package com.myrran.view.ui.spellbook;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellForm;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.customspell.header.TFormHeaderView;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateFormView extends Table implements DetailedActorI
+public class TemplateFormView extends Table implements DetailedActorI, Disposable
 {
     private TemplateSpellForm model;
     private CustomSpellController controller;
 
-    private SpellHeaderView header;
-
-    private static final int VPAD = -4;
-    private static final BitmapFont font20 = Atlas.get().getFont("20");
-    private static final BitmapFont font14 = Atlas.get().getFont("14");
-    private static final BitmapFont font11 = Atlas.get().getFont("10");
-    private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
+    private TFormHeaderView header;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -28,10 +21,13 @@ public class TemplateFormView extends Table implements DetailedActorI
     public TemplateFormView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        header          = new SpellHeaderView();
+        header          = new TFormHeaderView();
 
         createLayout();
     }
+
+    @Override public void dispose()
+    {   header.dispose(); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -43,21 +39,12 @@ public class TemplateFormView extends Table implements DetailedActorI
         else
         {
             model = templateSpellForm;
-            update();
+            header.setModel(model);
         }
     }
 
     private void removeModel()
     {   header.removeAll(); }
-
-    private void update()
-    {
-        header.setIcon(Atlas.get().getTexture("TexturasIconos/FireBall"));
-        header.setAvailableTotal(String.format("%s/%s", model.getAvailable(), model.getTotal()));
-        header.setrAvailableTotalColor(model.getAvailable() > 0 ? Color.GREEN : Color.RED);
-        header.setKeys(model.getFactory().getName().toUpperCase());
-        header.setIconName(model.getName());
-    }
 
     // CREATE LAYOUTS:
     //--------------------------------------------------------------------------------------------------------
@@ -75,8 +62,6 @@ public class TemplateFormView extends Table implements DetailedActorI
     @Override
     public void showDetails(boolean showDetails)
     {
-        //if (!showDetails) cell.setActor(null);
-        //else cell.setActor(null);
-    }
 
+    }
 }

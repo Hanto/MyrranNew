@@ -6,17 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomDebuffSlot;
-import com.myrran.model.spell.generators.CustomFormI;
 import com.myrran.model.spell.generators.CustomSpellForm;
+import com.myrran.view.ui.customspell.iconslot.CFormIconView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 public class CustomFormView extends Table implements Disposable, DetailedActorI
@@ -24,7 +17,7 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
     private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private CustomFormIconView icon;
+    private CFormIconView icon;
     private FormView formView;
 
     private Table slots;
@@ -40,7 +33,7 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
     {
         controller  = spellController;
         formView    = new FormView(controller);
-        icon        = new CustomFormIconView(controller);
+        icon        = new CFormIconView(controller);
         slots       = new Table();
         stats       = new Table();
 
@@ -87,7 +80,7 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
         stats.clear();
         stats.top().left();
         stats.padBottom(4).padLeft(4).padTop(2);
-        stats.add(formView.getFormStats()).row();
+        stats.add(formView.getFormStats()).left().row();
 
         formView.setModel(model);
         icon.setModel(model);

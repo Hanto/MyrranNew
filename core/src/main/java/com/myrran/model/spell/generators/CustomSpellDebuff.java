@@ -19,7 +19,7 @@ import java.util.UUID;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, CustomSpellStatsDeco, Identifiable
+public class CustomSpellDebuff implements ObservableDeco, CustomSpellStatsDeco, Identifiable
 {
     private String id = UUID.randomUUID().toString();
     @XmlAttribute
@@ -37,7 +37,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     //--------------------------------------------------------------------------------------------------------
 
     @Override public String getID()                             { return id; }
-    @Override public String getName()                           { return name; }
+    public String getName()                                     { return name; }
     public Integer getBaseCost()                                { return baseCost; }
     public String getTemplateID()                               { return templateID; }
     public SpellDebuffFactory getFactory()                      { return factory; }
@@ -45,7 +45,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     public boolean hasData()                                    { return templateID != null; }
     @Override public CustomSpellStatsI getSpellStats()          { return spellStats; }
     @Override public void setID(String id)                      { this.id = id; }
-    @Override public void setName(String name)                  { this.name = name; notifyChanges(); }
+    public void setName(String name)                            { this.name = name; notifyChanges(); }
     public void setKeys(CustomSpellSlotKey... keys)             { this.keys = Arrays.asList(keys); notifyChanges(); }
     @Override public ObservableI getObservable()                { return observable; }
 
@@ -56,7 +56,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     public CustomSpellDebuff(TemplateSpellDebuff template)
     {   setSpellDebuffTemplate(template); }
 
-    @Override public void setSpellDebuffTemplate(TemplateSpellDebuff template)
+    public void setSpellDebuffTemplate(TemplateSpellDebuff template)
     {
         if (template != null)
         {
@@ -81,7 +81,7 @@ public class CustomSpellDebuff implements ObservableDeco, SpellDebuffGenerator, 
     // CUSTOM TO ENTITY DATA:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public SpellDebuffParams getSpellEffectData()
+    public SpellDebuffParams getSpellEffectData()
     {
         return new SpellDebuffParams()
             .setFactory(factory)
