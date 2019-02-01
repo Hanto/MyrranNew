@@ -1,7 +1,6 @@
 package com.myrran.view.ui.customspell.iconslot;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffTarget;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
@@ -9,13 +8,9 @@ import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.TouchDownRightListener;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 /** @author Ivan Delgado Huerta */
-public class CDebuffSlotView extends SpellIconView implements PropertyChangeListener, Disposable
+public class CDebuffSlotView extends SpellIconView<CustomDebuffSlot>
 {
-    private CustomDebuffSlot modelSlot;
     private CustomSpellDebuff modelDebuff;
     private CustomSpellController controller;
     private DadDebuffTarget dadTarget;
@@ -31,13 +26,13 @@ public class CDebuffSlotView extends SpellIconView implements PropertyChangeList
         controller.getDadDebuff().addTarget(dadTarget);
 
         addListener(new TouchDownRightListener(event ->
-            controller.removeCustomSpellDebuff(modelSlot)));
+            controller.removeCustomSpellDebuff(model)));
     }
 
-    private void disposeObservers()
+    @Override protected void disposeObservers()
     {
-        if (modelSlot != null)
-            modelSlot.removeObserver(this);
+        if (model != null)
+            model.removeObserver(this);
 
         if (modelDebuff != null)
             modelDebuff.removeObserver(this);
@@ -57,23 +52,24 @@ public class CDebuffSlotView extends SpellIconView implements PropertyChangeList
         disposeObservers();
 
         if (customDebuffSlot == null)
-            removeAll();
+            removeModel();
         else
         {
-            modelSlot = customDebuffSlot;
-            modelDebuff = modelSlot.getCustomSpellDebuff();
-            dadTarget.setModel(modelSlot);
-            modelSlot.addObserver(this);
+            model = customDebuffSlot;
+            modelDebuff = model.getCustomSpellDebuff();
+            dadTarget.setModel(model);
+            model.addObserver(this);
             modelDebuff.addObserver(this);
             update();
         }
     }
 
-    private void update()
+    @Override
+    protected void update()
     {
-        setName2(modelSlot.getSlotType());
+        setName2(model.getSlotType());
 
-        if (modelSlot.hasData())
+        if (model.hasData())
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/FireBall2"));
             setCorner(modelDebuff.getTotalCost().toString());
@@ -84,7 +80,7 @@ public class CDebuffSlotView extends SpellIconView implements PropertyChangeList
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/IconoVacio2"));
             setCorner(null);
-            setName1(modelSlot.getLock().toString().toLowerCase());
+            setName1(model.getLock().toString().toLowerCase());
             setName1Color(Color.LIGHT_GRAY);
         }
     }
@@ -94,10 +90,4 @@ public class CDebuffSlotView extends SpellIconView implements PropertyChangeList
 
     public void setDefaultLocColor()
     {   setName1Color(modelDebuff.hasData() ? Color.ORANGE : Color.LIGHT_GRAY); }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
 }

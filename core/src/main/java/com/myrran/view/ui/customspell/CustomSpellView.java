@@ -87,7 +87,7 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
     private void removeModel()
     {
         clear();
-        header.removeAll();
+        header.removeModel();
         model = null;
     }
 

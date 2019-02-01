@@ -44,7 +44,7 @@ public class TemplateFormView extends Table implements DetailedActorI, Disposabl
     }
 
     private void removeModel()
-    {   header.removeAll(); }
+    {   header.removeModel(); }
 
     // CREATE LAYOUTS:
     //--------------------------------------------------------------------------------------------------------

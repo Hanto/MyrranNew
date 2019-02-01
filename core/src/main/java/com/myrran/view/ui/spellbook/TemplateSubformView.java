@@ -44,7 +44,7 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
     }
 
     private void removeModel()
-    {   header.removeAll(); }
+    {   header.removeModel(); }
 
     // CREATE LAYOUTS:
     //--------------------------------------------------------------------------------------------------------

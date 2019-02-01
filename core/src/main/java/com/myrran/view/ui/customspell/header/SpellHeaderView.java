@@ -63,21 +63,24 @@ public abstract class SpellHeaderView<T extends ObservableI> extends Table imple
         createLayout();
     }
 
-    @Override public void dispose()
+    private void disposeObservers()
     {
         if (model != null)
             model.removeObserver(this);
     }
+
+    @Override public void dispose()
+    {   disposeObservers(); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
     public void setModel(T spellForm)
     {
-        dispose();
+        disposeObservers();
 
         if (spellForm == null)
-            removeAll();
+            removeModel();
         else
         {
             model = spellForm;
@@ -86,7 +89,7 @@ public abstract class SpellHeaderView<T extends ObservableI> extends Table imple
         }
     }
 
-    public void removeAll()
+    public void removeModel()
     {
         iconBackground.setTexureRegion(null);
         availableTotal.setText(null);

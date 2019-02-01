@@ -1,19 +1,14 @@
 package com.myrran.view.ui.customspell.iconslot;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellSubform;
 import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.Atlas;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 /** @author Ivan Delgado Huerta */
-public class CSubformSlotView extends SpellIconView implements PropertyChangeListener, Disposable
+public class CSubformSlotView extends SpellIconView<CustomSubformSlot>
 {
-    private CustomSubformSlot modelSlot;
     private CustomSpellSubform modelSubform;
     private CustomSpellController controller;
 
@@ -23,17 +18,14 @@ public class CSubformSlotView extends SpellIconView implements PropertyChangeLis
     public CSubformSlotView(CustomSpellController customSpellController)
     {   controller = customSpellController; }
 
-    private void disposeObservers()
+    @Override protected void disposeObservers()
     {
-        if (modelSlot != null)
-            modelSlot.removeObserver(this);
+        if (model != null)
+            model.removeObserver(this);
 
         if (modelSubform != null)
             modelSubform.removeObserver(this);
     }
-
-    @Override public void dispose()
-    {   disposeObservers(); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -43,22 +35,23 @@ public class CSubformSlotView extends SpellIconView implements PropertyChangeLis
         disposeObservers();
 
         if (customSubformSlot == null)
-            removeAll();
+            removeModel();
         else
         {
-            modelSlot = customSubformSlot;
-            modelSubform = modelSlot.getCustomSpellSubform();
-            modelSlot.addObserver(this);
+            model = customSubformSlot;
+            modelSubform = model.getCustomSpellSubform();
+            model.addObserver(this);
             modelSubform.addObserver(this);
             update();
         }
     }
 
-    private void update()
+    @Override
+    protected void update()
     {
-        setName2(modelSlot.getSlotType());
+        setName2(model.getSlotType());
 
-        if (modelSlot.hasData())
+        if (model.hasData())
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/FireBall2"));
             Integer baseAndStats = modelSubform.getStatCost() + modelSubform.getBaseCost();
@@ -70,14 +63,8 @@ public class CSubformSlotView extends SpellIconView implements PropertyChangeLis
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/IconoVacio2"));
             setCorner("0");
-            setName1(modelSlot.getLock().toString().toLowerCase());
+            setName1(model.getLock().toString().toLowerCase());
             setName1Color(Color.LIGHT_GRAY);
         }
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
 }

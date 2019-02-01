@@ -33,7 +33,7 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
     {
         controller  = spellController;
         formView    = new FormView(controller);
-        icon        = new CFormIconView(controller);
+        icon        = new CFormIconView();
         slots       = new Table();
         stats       = new Table();
 

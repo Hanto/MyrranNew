@@ -7,6 +7,9 @@ import com.myrran.view.ui.Atlas;
 /** @author Ivan Delgado Huerta */
 public class TDebuffHeaderView extends SpellHeaderView<TemplateSpellDebuff>
 {
+    // UPDATE:
+    //--------------------------------------------------------------------------------------------------------
+
     @Override
     protected void update()
     {

@@ -70,7 +70,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     private void removeModel()
     {
         dadSource.setModel(null);
-        header.removeAll();
+        header.removeModel();
         statsView.setModel(null);
     }
 
