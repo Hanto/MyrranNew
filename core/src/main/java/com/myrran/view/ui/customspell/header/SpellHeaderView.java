@@ -4,14 +4,21 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
+import com.myrran.model.components.observable.ObservableI;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.WidgetGroup;
 import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /** @author Ivan Delgado Huerta */
-public abstract class SpellHeaderView extends Table
+public abstract class SpellHeaderView<T extends ObservableI> extends Table implements PropertyChangeListener, Disposable
 {
+    protected T model;
+
     private WidgetGroup icon;
     private WidgetImage iconBackground;
     private WidgetText availableTotal;
@@ -24,6 +31,22 @@ public abstract class SpellHeaderView extends Table
     private static final BitmapFont font14 = Atlas.get().getFont("14");
     private static final BitmapFont font20 = Atlas.get().getFont("20");
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
+
+    // SETTERS - GETTERS:
+    //--------------------------------------------------------------------------------------------------------
+
+    public WidgetGroup getIcon()                        { return icon; }
+    public WidgetText getIconName()                     { return name; }
+
+    public void setIcon(TextureRegion texture)          { iconBackground.setTexureRegion(texture); }
+    public void setAvailableTotal(String text)          { availableTotal.setText(text); }
+    public void setKeys(String text)                    { keys.setText(text); }
+    public void setIconName(String text)                { name.setText(text); }
+    public void setCost(String text)                    { cost.setText(text);}
+    public void setrAvailableTotalColor(Color color)    { availableTotal.setTextColor(color); }
+    public void setKeysColor(Color color)               { keys.setTextColor(color); }
+    public void setNameColor(Color color)               { name.setTextColor(color); }
+    public void setCostColor(Color color)               { cost.setTextColor(color); }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -40,21 +63,28 @@ public abstract class SpellHeaderView extends Table
         createLayout();
     }
 
-    // MAIN:
+    @Override public void dispose()
+    {
+        if (model != null)
+            model.removeObserver(this);
+    }
+
+    // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public WidgetGroup getIcon()                        { return icon; }
-    public WidgetText getIconName()                     { return name; }
+    public void setModel(T spellForm)
+    {
+        dispose();
 
-    public void setIcon(TextureRegion texture)          { iconBackground.setTexureRegion(texture); }
-    public void setAvailableTotal(String text)          { availableTotal.setText(text); }
-    public void setKeys(String text)                    { keys.setText(text); }
-    public void setIconName(String text)                { name.setText(text); }
-    public void setCost(String text)                    { cost.setText(text);}
-    public void setrAvailableTotalColor(Color color)    { availableTotal.setTextColor(color); }
-    public void setKeysColor(Color color)               { keys.setTextColor(color); }
-    public void setNameColor(Color color)               { name.setTextColor(color); }
-    public void setCostColor(Color color)               { cost.setTextColor(color); }
+        if (spellForm == null)
+            removeAll();
+        else
+        {
+            model = spellForm;
+            model.addObserver(this);
+            update();
+        }
+    }
 
     public void removeAll()
     {
@@ -64,6 +94,8 @@ public abstract class SpellHeaderView extends Table
         name.setText(null);
         cost.setText(null);
     }
+
+    protected abstract void update();
 
     // CREATE LAYOUT:
     //--------------------------------------------------------------------------------------------------------
@@ -86,4 +118,10 @@ public abstract class SpellHeaderView extends Table
         add(icon).top().left();
         add(table).left().row();
     }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {   update(); }
 }
