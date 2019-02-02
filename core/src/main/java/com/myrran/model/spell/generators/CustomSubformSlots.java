@@ -54,7 +54,7 @@ public class CustomSubformSlots
     public CustomSpellSubform getCustomSpellSubform(String slotID) throws InvalidIDException
     {
         CustomSubformSlot slot = getCustomSubformSlot(slotID);
-        return slot.getCustomSpellSubform();
+        return slot.getContent();
     }
 
     public boolean setCustomSpellSubform(TemplateSpellSubform template, String slotID) throws InvalidIDException

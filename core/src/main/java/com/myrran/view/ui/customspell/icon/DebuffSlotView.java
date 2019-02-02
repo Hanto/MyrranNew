@@ -55,7 +55,7 @@ public class DebuffSlotView extends AbstractSpellIconView<CustomDebuffSlot>
         else
         {
             model = customDebuffSlot;
-            modelDebuff = model.getCustomSpellDebuff();
+            modelDebuff = model.getContent();
             dadTarget.setModel(model);
             model.addObserver(this);
             modelDebuff.addObserver(this);

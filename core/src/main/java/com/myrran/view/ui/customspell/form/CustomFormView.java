@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.form;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -6,23 +6,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomSpellSubform;
-import com.myrran.model.spell.generators.CustomSubformSlot;
-import com.myrran.view.ui.customspell.icon.SubformSlotView;
+import com.myrran.model.spell.generators.CustomSpellForm;
+import com.myrran.view.ui.customspell.icon.FormIconView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 /** @author Ivan Delgado Huerta */
-public class CustomSubFormSlotView extends Table implements Disposable, DetailedActorI, PropertyChangeListener
+public class CustomFormView extends Table implements Disposable, DetailedActorI
 {
-    private CustomSubformSlot modelSlot;
-    private CustomSpellSubform modelSubform;
+    private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private SubformSlotView icon;
+    private FormIconView icon;
     private FormView formView;
 
     private Table slots;
@@ -34,11 +29,11 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSubFormSlotView(CustomSpellController spellController)
+    public CustomFormView(CustomSpellController spellController)
     {
         controller  = spellController;
         formView    = new FormView(controller);
-        icon        = new SubformSlotView(controller);
+        icon        = new FormIconView();
         slots       = new Table();
         stats       = new Table();
 
@@ -50,15 +45,9 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
         showDetails();
     }
 
-    private void disposeObservers()
-    {
-        if (modelSlot != null)
-            modelSlot.removeObserver(this);
-    }
-
+    private void disposeObservers() {}
     @Override public void dispose()
     {
-        disposeObservers();
         formView.dispose();
         icon.dispose();
     }
@@ -66,17 +55,15 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSubformSlot subformSlot)
+    public void setModel(CustomSpellForm customForm)
     {
         disposeObservers();
 
-        if (subformSlot == null)
+        if (customForm == null)
             removeModel();
         else
         {
-            modelSlot = subformSlot;
-            modelSlot.addObserver(this);
-            modelSubform = modelSlot.getCustomSpellSubform();
+            model = customForm;
             update();
         }
     }
@@ -93,18 +80,13 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
         stats.clear();
         stats.top().left();
         stats.padBottom(4).padLeft(4).padTop(2);
-        stats.add(formView.getFormStats()).row();
+        stats.add(formView.getFormStats()).left().row();
 
-        icon.setModel(modelSlot);
+        formView.setModel(model);
+        icon.setModel(model);
 
-        if (modelSlot.hasData())
-        {
-            formView.setModel(modelSubform);
-            formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
-            formView.getDebuffStats().forEach(debuff -> stats.add(debuff).left().row());
-        }
-        else
-            formView.setModel(null);
+        formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
+        formView.getDebuffStats().forEach(stat -> stats.add(stat).left().row());
     }
 
     // CREATE LAYOUT:
@@ -130,10 +112,4 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
 
     public void showDetails()
     {   showDetails(detailsVisible); }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
 }

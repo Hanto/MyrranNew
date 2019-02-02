@@ -57,7 +57,7 @@ public class CustomSpellController
         try
         {
             spellBook.addCustomSpellSubform(slot, subformTemplateID);
-            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellSubform());
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getContent());
             notifyForm(form);
         }
         catch (InvalidIDException e)
@@ -68,7 +68,7 @@ public class CustomSpellController
     {
         try
         {
-            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellSubform());
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getContent());
             spellBook.removeCustomSpellSubform(slot);
             notifyForm(form);
         }
@@ -81,7 +81,7 @@ public class CustomSpellController
         try
         {
             spellBook.addCustomSpellDebuff(slot, debuffTemplateID);
-            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellDebuff());
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getContent());
             notifyForm(form);
         }
         catch (InvalidIDException e)
@@ -92,7 +92,7 @@ public class CustomSpellController
     {
         try
         {
-            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellDebuff());
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getContent());
             spellBook.removeCustomSpellDebuff(slot);
             notifyForm(form);
         }

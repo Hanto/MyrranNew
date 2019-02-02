@@ -55,7 +55,7 @@ public class SubformSlotView extends AbstractSpellIconView<CustomSubformSlot>
         else
         {
             model = customSubformSlot;
-            modelSubform = model.getCustomSpellSubform();
+            modelSubform = model.getContent();
             dadTarget.setModel(model);
             model.addObserver(this);
             modelSubform.addObserver(this);

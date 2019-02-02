@@ -1,9 +1,10 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.form;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.generators.CustomFormI;
+import com.myrran.view.ui.customspell.CDebuffStatsView;
 import com.myrran.view.ui.customspell.icon.DebuffSlotView;
 import com.myrran.view.ui.customspell.stats.CStatsView;
 
@@ -21,9 +22,9 @@ public class FormView implements Disposable
     private List<DebuffSlotView> slotList;
     private List<CDebuffStatsView> statList;
 
-    public CStatsView getFormStats()                   { return formStats; }
-    public List<DebuffSlotView>getDebuffIcons()       { return slotList; }
-    public List<CDebuffStatsView>getDebuffStats()      { return statList; }
+    public CStatsView getFormStats()                { return formStats; }
+    public List<DebuffSlotView>getDebuffIcons()     { return slotList; }
+    public List<CDebuffStatsView>getDebuffStats()   { return statList; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------

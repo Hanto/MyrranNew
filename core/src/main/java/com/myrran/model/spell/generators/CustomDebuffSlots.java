@@ -54,7 +54,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     public CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
     {
         CustomDebuffSlot slot = getCustomDebuffSlot(slotID);
-        return slot.getCustomSpellDebuff();
+        return slot.getContent();
     }
 
     public boolean setCustomSpellDebuff(TemplateSpellDebuff template, String slotID) throws InvalidIDException

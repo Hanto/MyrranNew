@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.form;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -6,18 +6,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.customspell.icon.FormIconView;
+import com.myrran.model.spell.generators.CustomSpellSubform;
+import com.myrran.model.spell.generators.CustomSubformSlot;
+import com.myrran.view.ui.customspell.icon.SubformSlotView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /** @author Ivan Delgado Huerta */
-public class CustomFormView extends Table implements Disposable, DetailedActorI
+public class CustomSubFormSlotView extends Table implements Disposable, DetailedActorI, PropertyChangeListener
 {
-    private CustomSpellForm model;
+    private CustomSubformSlot modelSlot;
+    private CustomSpellSubform modelSubform;
     private CustomSpellController controller;
 
-    private FormIconView icon;
+    private SubformSlotView icon;
     private FormView formView;
 
     private Table slots;
@@ -29,11 +34,11 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomFormView(CustomSpellController spellController)
+    public CustomSubFormSlotView(CustomSpellController spellController)
     {
         controller  = spellController;
         formView    = new FormView(controller);
-        icon        = new FormIconView();
+        icon        = new SubformSlotView(controller);
         slots       = new Table();
         stats       = new Table();
 
@@ -45,9 +50,15 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
         showDetails();
     }
 
-    private void disposeObservers() {}
+    private void disposeObservers()
+    {
+        if (modelSlot != null)
+            modelSlot.removeObserver(this);
+    }
+
     @Override public void dispose()
     {
+        disposeObservers();
         formView.dispose();
         icon.dispose();
     }
@@ -55,15 +66,17 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSpellForm customForm)
+    public void setModel(CustomSubformSlot subformSlot)
     {
         disposeObservers();
 
-        if (customForm == null)
+        if (subformSlot == null)
             removeModel();
         else
         {
-            model = customForm;
+            modelSlot = subformSlot;
+            modelSlot.addObserver(this);
+            modelSubform = modelSlot.getContent();
             update();
         }
     }
@@ -80,13 +93,18 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
         stats.clear();
         stats.top().left();
         stats.padBottom(4).padLeft(4).padTop(2);
-        stats.add(formView.getFormStats()).left().row();
+        stats.add(formView.getFormStats()).row();
 
-        formView.setModel(model);
-        icon.setModel(model);
+        icon.setModel(modelSlot);
 
-        formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
-        formView.getDebuffStats().forEach(stat -> stats.add(stat).left().row());
+        if (modelSlot.hasData())
+        {
+            formView.setModel(modelSubform);
+            formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
+            formView.getDebuffStats().forEach(debuff -> stats.add(debuff).left().row());
+        }
+        else
+            formView.setModel(null);
     }
 
     // CREATE LAYOUT:
@@ -112,4 +130,10 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
 
     public void showDetails()
     {   showDetails(detailsVisible); }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {   update(); }
 }

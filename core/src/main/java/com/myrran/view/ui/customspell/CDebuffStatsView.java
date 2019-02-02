@@ -66,7 +66,7 @@ public class CDebuffStatsView extends Table implements PropertyChangeListener, D
         else
         {
             debuffSlot = customDebuffSlot;
-            spellDebuff = debuffSlot.getCustomSpellDebuff();
+            spellDebuff = debuffSlot.getContent();
             debuffSlot.addObserver(this);
             spellDebuff.addObserver(this);
             update();

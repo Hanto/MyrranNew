@@ -39,7 +39,7 @@ public class CustomSubformSlot implements ObservableDeco, Identifiable
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return type; }
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
-    public CustomSpellSubform getCustomSpellSubform()           { return customSpellSubform; }
+    public CustomSpellSubform getContent()           { return customSpellSubform; }
     public boolean hasData()                                    { return customSpellSubform.hasData(); }
     @Override public void setID(String id)                      { this.id = id; }
     public void setName(String name)                            { this.name = name; notifyChanges(); }

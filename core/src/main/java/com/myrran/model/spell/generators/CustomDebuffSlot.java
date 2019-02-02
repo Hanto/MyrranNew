@@ -5,8 +5,9 @@ import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.parameters.SpellDebuffParams;
-import com.myrran.model.spell.templates.TemplateSpellSlot;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.model.spell.templates.TemplateSpellSlot;
+import com.myrran.view.ui.customspell.form.SpellSlotI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,7 +20,7 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomDebuffSlot implements ObservableDeco, Identifiable
+public class CustomDebuffSlot implements ObservableDeco, Identifiable, SpellSlotI<CustomSpellDebuff>
 {
     @XmlAttribute
     private String id;
@@ -39,7 +40,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return type; }
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
-    public CustomSpellDebuff getCustomSpellDebuff()             { return customSpellDebuff; }
+    public CustomSpellDebuff getContent()                       { return customSpellDebuff; }
     public boolean hasData()                                    { return customSpellDebuff.hasData(); }
     @Override public void setID(String id)                      { this.id = id; }
     public void setName(String name)                            { this.name = name; notifyChanges(); }

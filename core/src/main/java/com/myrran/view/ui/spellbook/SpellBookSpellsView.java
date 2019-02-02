@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.customspell.CustomSpellView;
+import com.myrran.view.ui.customspell.form.CustomSpellView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.WidgetSortableTable;
 

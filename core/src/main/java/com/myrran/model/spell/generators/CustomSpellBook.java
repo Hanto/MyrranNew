@@ -120,7 +120,7 @@ public class CustomSpellBook
     {
         if (slot.hasData())
         {
-            CustomSpellSubform spellSubform = slot.getCustomSpellSubform();
+            CustomSpellSubform spellSubform = slot.getContent();
 
             for (CustomDebuffSlot debuffSlot: spellSubform.getDebuffSlots().getCustomDebuffSlots())
                 removeCustomSpellDebuff(debuffSlot);
@@ -174,7 +174,7 @@ public class CustomSpellBook
     {
         if (slot.hasData())
         {
-            CustomSpellDebuff spellDebuff = slot.getCustomSpellDebuff();
+            CustomSpellDebuff spellDebuff = slot.getContent();
             String templateID = spellDebuff.getTemplateID();
             slot.removeCustomSpellDebuff();
             debuffTemplatesLearned.returnBack(templateID);
@@ -213,7 +213,7 @@ public class CustomSpellBook
         {
             if (form.getDebuffSlots().getCustomDebuffSlots().stream()
                 .filter(CustomDebuffSlot::hasData)
-                .map(CustomDebuffSlot::getCustomSpellDebuff)
+                .map(CustomDebuffSlot::getContent)
                 .map(CustomSpellDebuff::getID)
                 .collect(Collectors.toList())
                 .contains(customSpellStatsID))
@@ -222,7 +222,7 @@ public class CustomSpellBook
 
             List<CustomSpellSubform> subforms = form.getSubformSlots().getCustomSubformSlots().stream()
                 .filter(CustomSubformSlot::hasData)
-                .map(CustomSubformSlot::getCustomSpellSubform)
+                .map(CustomSubformSlot::getContent)
                 .collect(Collectors.toList());
 
             for (CustomSpellSubform subform : subforms)
@@ -232,7 +232,7 @@ public class CustomSpellBook
 
                 if (subform.getDebuffSlots().getCustomDebuffSlots().stream()
                     .filter(CustomDebuffSlot::hasData)
-                    .map(CustomDebuffSlot::getCustomSpellDebuff)
+                    .map(CustomDebuffSlot::getContent)
                     .map(CustomSpellDebuff::getID)
                     .collect(Collectors.toList())
                     .contains(customSpellStatsID))
