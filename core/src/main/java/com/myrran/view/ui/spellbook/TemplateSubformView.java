@@ -1,14 +1,21 @@
 package com.myrran.view.ui.spellbook;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.DadSubformSource;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.customspell.header.SubformHeaderView;
+import com.myrran.view.ui.customspell.icon.AbstractSpellIconView;
 import com.myrran.view.ui.customspell.icon.DebuffIconView;
+import com.myrran.view.ui.customspell.stats.TStatsView;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 public class TemplateSubformView extends Table implements DetailedActorI, Disposable
@@ -16,25 +23,42 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
     private TemplateSpellSubform model;
     private CustomSpellController controller;
 
+    private DadSubformSource dadSource;
     private SubformHeaderView header;
-    private Table details;
+    private Table tableDetails;
 
     private List<DebuffIconView> debuffs;
+    private TStatsView subformStats;
+
+    private boolean detailsVisible = false;
+    private Cell<Actor> cellDetails;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
     public TemplateSubformView(CustomSpellController customSpellController)
     {
-        controller  = customSpellController;
-        header      = new SubformHeaderView();
-        details     = new Table();
+        controller      = customSpellController;
+        header          = new SubformHeaderView();
+        dadSource       = new DadSubformSource(header.getIcon(), controller);
+        tableDetails    = new Table();
+        subformStats    = new TStatsView();
+
+        controller.getDadSubform().addSource(dadSource);
+        header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
+        cellDetails = getCell(tableDetails);
     }
 
     @Override public void dispose()
-    {   header.dispose(); }
+    {
+        controller.getDadDebuff().removeSource(dadSource);
+        header.dispose();
+
+        if (debuffs != null)
+            debuffs.forEach(AbstractSpellIconView::dispose);
+    }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -46,7 +70,9 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
         else
         {
             model = templateSpellSubform;
+            dadSource.setModel(model);
             header.setModel(model);
+            subformStats.setModel(model.getSpellStats());
             update();
         }
     }
@@ -56,12 +82,18 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
 
     private void update()
     {
-        details.clear();
-        details.add().size(32+3);
-
-        model.getSpellSlots().stream()
+        Table slots = new Table().top().left();
+        debuffs = model.getSpellSlots().stream()
             .map(DebuffIconView::new)
-            .forEach(o -> details.add(o));
+            .collect(Collectors.toList());
+
+        debuffs.forEach(o -> slots.add(o).top().left());
+
+        tableDetails.clear();
+        tableDetails.add().size(32);
+        tableDetails.add(slots).row();
+        tableDetails.add().size(32);
+        tableDetails.add(subformStats);
     }
 
     // CREATE LAYOUTS:
@@ -72,7 +104,7 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
         clear();
         top().left();
         add(header).bottom().left().row();
-        add(details).bottom().left().row();
+        add(tableDetails).bottom().left().row();
     }
 
     // MISC:
@@ -81,6 +113,10 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
     @Override
     public void showDetails(boolean visible)
     {
-
+        cellDetails.setActor(visible ? tableDetails : null);
+        detailsVisible = !visible;
     }
+
+    public void showDetails()
+    {   showDetails(detailsVisible); }
 }

@@ -49,14 +49,17 @@ public class TemplateSpellSubform implements QuantifiableI, Identifiable, Observ
     public Integer getBaseCost()                            { return baseCost; }
     public List<CustomSpellSlotKey> getKeys()               { return keys; }
 
-    @Override public void setID(String id)                  { this.id = id; }
-    public void setName(String name)                        { this.name = name; }
-    @Override public void setAvailable(Integer available)   { this.available = available; }
-    @Override public void setTotal(Integer total)           { this.total = total; }
-    public void setFactory(SpellSubformFactory factory)     { this.factory = factory; }
-    public void setSpellStats(TemplateSpellStat...stats)    { this.spellStats = Arrays.asList(stats); }
-    public void setSpellDebuffs(TemplateSpellSlot...slots)  { this.spellSlots = Arrays.asList(slots); }
-    public void setBaseCost(int baseCost)                   { this.baseCost = baseCost; }
-    public void setKeys(CustomSpellSlotKey...keys)          { this.keys.addAll(Arrays.asList(keys)); }
+    @Override public void setID(String id)                  { this.id = id; notifyChange(); }
+    public void setName(String name)                        { this.name = name; notifyChange(); }
+    @Override public void setAvailable(Integer available)   { this.available = available; notifyChange(); }
+    @Override public void setTotal(Integer total)           { this.total = total; notifyChange(); }
+    public void setFactory(SpellSubformFactory factory)     { this.factory = factory; notifyChange(); }
+    public void setSpellStats(TemplateSpellStat...stats)    { this.spellStats = Arrays.asList(stats); notifyChange(); }
+    public void setSpellDebuffs(TemplateSpellSlot...slots)  { this.spellSlots = Arrays.asList(slots); notifyChange(); }
+    public void setBaseCost(int baseCost)                   { this.baseCost = baseCost; notifyChange(); }
+    public void setKeys(CustomSpellSlotKey...keys)          { this.keys.addAll(Arrays.asList(keys)); notifyChange(); }
     @Override public ObservableI getObservable()            { return observable; }
+
+    private void notifyChange()
+    {   notify("debuffTemplate", null, null); }
 }

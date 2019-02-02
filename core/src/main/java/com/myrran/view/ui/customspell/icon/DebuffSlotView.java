@@ -24,7 +24,6 @@ public class DebuffSlotView extends AbstractSpellIconView<CustomDebuffSlot>
         dadTarget   = new DadDebuffTarget(this, controller);
 
         controller.getDadDebuff().addTarget(dadTarget);
-
         addListener(new TouchDownRightListener(event ->
             controller.removeCustomSpellDebuff(model)));
     }

@@ -116,6 +116,21 @@ public class CustomSpellBook
             throw new InvalidIDException("SpellSubForm template not available, templateID: %s", subformTemplateID);
     }
 
+    public void removeCustomSpellSubform(CustomSubformSlot slot)
+    {
+        if (slot.hasData())
+        {
+            CustomSpellSubform spellSubform = slot.getCustomSpellSubform();
+
+            for (CustomDebuffSlot debuffSlot: spellSubform.getDebuffSlots().getCustomDebuffSlots())
+                removeCustomSpellDebuff(debuffSlot);
+
+            String templateID = spellSubform.getTemplateID();
+            slot.removeCustomSpellSubform();
+            subformsLearned.returnBack(templateID);
+        }
+    }
+
     public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID) throws InvalidIDException
     {
         if (debuffTemplatesLearned.isAvailable(debuffTemplateID))

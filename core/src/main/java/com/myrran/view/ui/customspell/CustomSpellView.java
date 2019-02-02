@@ -45,7 +45,6 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
 
         if (movable)
             header.getIcon().addListener(new ActorMoveListener(this));
-
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
@@ -108,9 +107,9 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
         tableDetails.top().left();
         tableDetails.padBottom(8);
 
-        tableDetails.add().size(32+3, 0);
+        tableDetails.add().size(32, 0);
         tableDetails.add(formView).top().left().row();
-        tableDetails.add().size(32+3, 0);
+        tableDetails.add().size(32, 0);
         tableDetails.add(tableSubforms).top().left().row();
     }
 

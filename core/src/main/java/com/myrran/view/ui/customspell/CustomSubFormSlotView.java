@@ -92,6 +92,7 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
 
         stats.clear();
         stats.top().left();
+        stats.padBottom(4).padLeft(4).padTop(2);
         stats.add(formView.getFormStats()).row();
 
         icon.setModel(modelSlot);

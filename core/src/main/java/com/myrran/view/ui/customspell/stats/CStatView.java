@@ -112,15 +112,15 @@ public class CStatView extends Table implements PropertyChangeListener, Disposab
         int vPad = -4;
         int hPad = +3;
 
-        add(name).left()            .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(baseValue).right()      .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(upgradesView).center()  .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(total).right()          .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(numUpgrades).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(upgradeCost).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(bonusPerUpgrade).right().padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(maxUpgrades).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(gearBonus).right()      .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(name).left()            .minWidth(80)   .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(baseValue).right()      .minWidth(30)   .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(upgradesView).center()                  .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(total).right()          .minWidth(30)   .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(numUpgrades).right()                    .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(upgradeCost).right()                    .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(bonusPerUpgrade).right()                .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(maxUpgrades).right()                    .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(gearBonus).right()                      .padRight(hPad).padTop(vPad).padBottom(vPad);
         row();
     }
 

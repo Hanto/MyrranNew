@@ -18,8 +18,8 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
 
-    private DebuffHeaderView header;
     private DadDebuffSource dadSource;
+    private DebuffHeaderView header;
     private TStatsView statsView;
 
     private Table details;

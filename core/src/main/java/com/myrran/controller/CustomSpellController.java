@@ -11,6 +11,7 @@ public class CustomSpellController
 {
     private CustomSpellBook spellBook;
     private DaD dadDebuff;
+    private DaD dadSubform;
 
     private static final Logger LOG = LogManager.getFormatterLogger(CustomSpellController.class);
 
@@ -21,13 +22,15 @@ public class CustomSpellController
     {
         this.spellBook = spellBook;
         dadDebuff = new DaD();
+        dadSubform = new DaD();
         //dadDebuff.setDragActorPosition(16, -16);
     }
 
     // DRAG AND DROP:
     //--------------------------------------------------------------------------------------------------------
 
-    public DaD getDadDebuff()  { return dadDebuff; }
+    public DaD getDadDebuff()   { return dadDebuff; }
+    public DaD getDadSubform()  { return dadSubform; }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
@@ -47,6 +50,30 @@ public class CustomSpellController
         {   stats.setNumUpgrades(statID, upgrades); }
 
         notifyForm(form);
+    }
+
+    public void addCustomSpellSubform(CustomSubformSlot slot, String subformTemplateID)
+    {
+        try
+        {
+            spellBook.addCustomSpellSubform(slot, subformTemplateID);
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellSubform());
+            notifyForm(form);
+        }
+        catch (InvalidIDException e)
+        {   LOG.warn("Cannot add subform: %S into %S", subformTemplateID, slot.getName());}
+    }
+
+    public void removeCustomSpellSubform(CustomSubformSlot slot)
+    {
+        try
+        {
+            CustomSpellForm form = spellBook.getSpellFormWithTheStats(slot.getCustomSpellSubform());
+            spellBook.removeCustomSpellSubform(slot);
+            notifyForm(form);
+        }
+        catch (InvalidIDException e)
+        {   LOG.warn("Cannot remove subform from slot", slot.getName());}
     }
 
     public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID)
