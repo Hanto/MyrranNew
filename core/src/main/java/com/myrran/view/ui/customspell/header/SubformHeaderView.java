@@ -5,7 +5,7 @@ import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
-public class TSubformHeaderView extends SpellHeaderView<TemplateSpellSubform>
+public class SubformHeaderView extends AbstractSpellHeaderView<TemplateSpellSubform>
 {
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------

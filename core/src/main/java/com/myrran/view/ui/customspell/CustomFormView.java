@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.customspell.iconslot.CFormIconView;
+import com.myrran.view.ui.customspell.icon.FormIconView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
@@ -17,7 +17,7 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
     private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private CFormIconView icon;
+    private FormIconView icon;
     private FormView formView;
 
     private Table slots;
@@ -33,7 +33,7 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
     {
         controller  = spellController;
         formView    = new FormView(controller);
-        icon        = new CFormIconView();
+        icon        = new FormIconView();
         slots       = new Table();
         stats       = new Table();
 
@@ -86,7 +86,7 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
         icon.setModel(model);
 
         formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
-        formView.getDebuffStats().forEach(debuff -> stats.add(debuff).left().row());
+        formView.getDebuffStats().forEach(stat -> stats.add(stat).left().row());
     }
 
     // CREATE LAYOUT:

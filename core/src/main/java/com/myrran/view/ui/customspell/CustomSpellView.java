@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.generators.CustomSubformSlot;
-import com.myrran.view.ui.customspell.header.CFormHeaderView;
+import com.myrran.view.ui.customspell.header.SpellHeaderView;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
@@ -22,7 +22,7 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
     private CustomSpellForm model;
     private CustomSpellController controller;
 
-    private CFormHeaderView header;
+    private SpellHeaderView header;
     private CustomFormView formView;
     private List<CustomSubFormSlotView> subForms;
 
@@ -38,7 +38,7 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
     public CustomSpellView(CustomSpellController spellController, boolean movable)
     {
         controller      = spellController;
-        header          = new CFormHeaderView();
+        header          = new SpellHeaderView();
         formView        = new CustomFormView(controller);
         tableDetails    = new Table();
         tableSubforms   = new Table();

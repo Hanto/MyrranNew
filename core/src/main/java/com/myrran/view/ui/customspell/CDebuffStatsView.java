@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
+import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.customspell.stats.CStatsView;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
@@ -15,13 +16,13 @@ import java.beans.PropertyChangeListener;
 
 
 /** @author Ivan Delgado Huerta */
-public class CustomDebuffStatsView extends Table implements PropertyChangeListener, Disposable
+public class CDebuffStatsView extends Table implements PropertyChangeListener, Disposable
 {
     private CustomDebuffSlot debuffSlot;
     private CustomSpellDebuff spellDebuff;
     private CustomSpellController controller;
 
-    private CustomStatsView stats;
+    private CStatsView stats;
     private WidgetText name;
     private WidgetText totalCost;
 
@@ -32,12 +33,12 @@ public class CustomDebuffStatsView extends Table implements PropertyChangeListen
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomDebuffStatsView(CustomSpellController customSpellController)
+    public CDebuffStatsView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
         name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
         totalCost       = new WidgetText(font10, magenta, Color.BLACK, 1);
-        stats           = new CustomStatsView(controller);
+        stats           = new CStatsView(controller);
 
         createLayout();
     }

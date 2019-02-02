@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellForm;
-import com.myrran.view.ui.customspell.header.TFormHeaderView;
+import com.myrran.view.ui.customspell.header.FormHeaderView;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
 /** @author Ivan Delgado Huerta */
@@ -13,7 +13,7 @@ public class TemplateFormView extends Table implements DetailedActorI, Disposabl
     private TemplateSpellForm model;
     private CustomSpellController controller;
 
-    private TFormHeaderView header;
+    private FormHeaderView header;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ public class TemplateFormView extends Table implements DetailedActorI, Disposabl
     public TemplateFormView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        header          = new TFormHeaderView();
+        header          = new FormHeaderView();
 
         createLayout();
     }

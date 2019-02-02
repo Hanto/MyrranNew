@@ -13,7 +13,7 @@ import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.customspell.CustomSpellView;
-import com.myrran.view.ui.spellbook.SpellBookCustomFormView;
+import com.myrran.view.ui.spellbook.SpellBookSpellsView;
 import com.myrran.view.ui.spellbook.SpellBookDebuffView;
 import com.myrran.view.ui.spellbook.SpellBookFormView;
 import com.myrran.view.ui.spellbook.SpellBookSubformView;
@@ -69,7 +69,7 @@ public class ZMain extends ApplicationAdapter
 			uiStage.addActor(bookSubform);
 			bookSubform.setPosition(10, 350);
 
-			SpellBookCustomFormView bookSpells = new SpellBookCustomFormView(controller);
+			SpellBookSpellsView bookSpells = new SpellBookSpellsView(controller);
 			bookSpells.setModel(book);
 			uiStage.addActor(bookSpells);
 			bookSpells.setPosition(280, 590);

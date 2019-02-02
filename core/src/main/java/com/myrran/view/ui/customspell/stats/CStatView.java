@@ -1,10 +1,12 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.stats;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.spell.generators.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.customspell.CustomUBarView;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
@@ -12,7 +14,7 @@ import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class CustomStatView implements PropertyChangeListener, Disposable
+public class CStatView extends Table implements PropertyChangeListener, Disposable
 {
     private CustomSpellStat model;
 
@@ -26,36 +28,27 @@ public class CustomStatView implements PropertyChangeListener, Disposable
     private WidgetText gearBonus;
     private CustomUBarView upgradesView;
 
-    private static final BitmapFont font14 = Atlas.get().getFont("14");
-    private static final BitmapFont font11 = Atlas.get().getFont("11");
-    private static final BitmapFont font10 = Atlas.get().getFont("10");
-    private static final Color white = Color.WHITE;
-    private static final Color orange = Color.ORANGE;
-    private static final Color purpleL = new Color(163/255f, 170/255f, 255/255f, 1);
-    private static final Color purpleH = new Color(110/255f, 110/255f, 211/255f, 1);
-    private static final Color black = Color.BLACK;
     private static final DecimalFormat df = Atlas.get().getFormater();
 
     // GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellStat getModel()       { return model; }
-    public WidgetText getName()             { return name; }
-    public WidgetText getBaseValue()        { return baseValue; }
-    public WidgetText getTotal()            { return total; }
-    public WidgetText getNumUpgrades()      { return numUpgrades; }
-    public WidgetText getUpgradeCost()      { return upgradeCost; }
-    public WidgetText getBonusPerUpgrade()  { return bonusPerUpgrade; }
-    public WidgetText getMaxUpgrades()      { return maxUpgrades; }
-    public WidgetText getGearBonus()        { return gearBonus; }
     public CustomUBarView getUpgradesView() { return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomStatView(CustomSpellStat customSpellStat)
+    public CStatView(CustomSpellStat customSpellStat)
     {
-        model = customSpellStat;
+        BitmapFont font14 = Atlas.get().getFont("14");
+        BitmapFont font11 = Atlas.get().getFont("11");
+        BitmapFont font10 = Atlas.get().getFont("10");
+        Color white = Color.WHITE;
+        Color orange = Color.ORANGE;
+        Color purpleL = new Color(163/255f, 170/255f, 255/255f, 1);
+        Color purpleH = new Color(110/255f, 110/255f, 211/255f, 1);
+        Color black = Color.BLACK;
 
         name            = new WidgetText(font11, white,   black,1);
         baseValue       = new WidgetText(font14, orange,  black,1);
@@ -65,13 +58,17 @@ public class CustomStatView implements PropertyChangeListener, Disposable
         bonusPerUpgrade = new WidgetText(font10, purpleL, black,1);
         maxUpgrades     = new WidgetText(font10, purpleL, black,1);
         gearBonus       = new WidgetText(font10, purpleL, black,1);
-        upgradesView    = new CustomUBarView(model);
+        upgradesView    = new CustomUBarView();
 
+        createLayout();
         setModel(customSpellStat);
     }
 
     public void dispose()
-    {   model.removeObserver(this); }
+    {
+        if (model != null)
+            model.removeObserver(this);
+    }
 
     // CREATE / UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -86,12 +83,13 @@ public class CustomStatView implements PropertyChangeListener, Disposable
         {
             model = customSpellStat;
             model.addObserver(this);
+            upgradesView.setModel(model);
             update();
         }
     }
 
     public void removeModel()
-    { }
+    {   clear(); }
 
     public void update()
     {
@@ -103,7 +101,27 @@ public class CustomStatView implements PropertyChangeListener, Disposable
         bonusPerUpgrade.setText(format(model.getBonusPerUpgrade()));
         maxUpgrades.setText(format(model.getMaxUpgrades()));
         gearBonus.setText(df.format(model.getGearBonus()));
-        upgradesView.updateView();
+        upgradesView.update();
+    }
+
+    // CREATE LAYOUT:
+    //--------------------------------------------------------------------------------------------------------
+
+    private void createLayout()
+    {
+        int vPad = -4;
+        int hPad = +3;
+
+        add(name).left()            .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(baseValue).right()      .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(upgradesView).center()  .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(total).right()          .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(numUpgrades).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(upgradeCost).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(bonusPerUpgrade).right().padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(maxUpgrades).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(gearBonus).right()      .padRight(hPad).padTop(vPad).padBottom(vPad);
+        row();
     }
 
     private String format(Float rawData)

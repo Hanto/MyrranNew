@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.iconslot;
+package com.myrran.view.ui.customspell.icon;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.controller.CustomSpellController;
@@ -7,7 +7,7 @@ import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
-public class CSubformSlotView extends SpellIconView<CustomSubformSlot>
+public class SubformSlotView extends AbstractSpellIconView<CustomSubformSlot>
 {
     private CustomSpellSubform modelSubform;
     private CustomSpellController controller;
@@ -15,7 +15,7 @@ public class CSubformSlotView extends SpellIconView<CustomSubformSlot>
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CSubformSlotView(CustomSpellController customSpellController)
+    public SubformSlotView(CustomSpellController customSpellController)
     {   controller = customSpellController; }
 
     @Override protected void disposeObservers()

@@ -1,6 +1,7 @@
 package com.myrran.model.spell.templates;
 
 import com.myrran.model.components.Identifiable;
+import com.myrran.model.spell.generators.SpellStatI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,7 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class TemplateSpellStat implements Identifiable
+public class TemplateSpellStat implements Identifiable, SpellStatI
 {
     @XmlAttribute
     private String id;
@@ -24,12 +25,12 @@ public class TemplateSpellStat implements Identifiable
     //--------------------------------------------------------------------------------------------------------
 
     @Override public String getID()                         { return id;}
-    public String getName()                                 { return name; }
-    public float getBaseValue()                             { return baseValue; }
-    public boolean getIsUpgradeable()                       { return isUpgradeable; }
-    public int getMaxUpgrades()                             { return maxUpgrades; }
-    public int getUpgradeCost()                             { return upgradeCost; }
-    public float getBonusPerUpgrade()                       { return bonusPerUpgrade; }
+    @Override public String getName()                       { return name; }
+    @Override public Float getBaseValue()                   { return baseValue; }
+    @Override public boolean getIsUpgradeable()             { return isUpgradeable; }
+    @Override public Integer getMaxUpgrades()               { return maxUpgrades; }
+    @Override public Integer getUpgradeCost()               { return upgradeCost; }
+    @Override public Float getBonusPerUpgrade()             { return bonusPerUpgrade; }
 
     @Override public void setID(String id)                  { this.id = id; }
     public void setName(String name)                        { this.name = name; }

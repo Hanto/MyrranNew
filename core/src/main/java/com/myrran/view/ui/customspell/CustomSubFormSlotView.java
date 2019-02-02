@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellSubform;
 import com.myrran.model.spell.generators.CustomSubformSlot;
-import com.myrran.view.ui.customspell.iconslot.CSubformSlotView;
+import com.myrran.view.ui.customspell.icon.SubformSlotView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
@@ -22,7 +22,7 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
     private CustomSpellSubform modelSubform;
     private CustomSpellController controller;
 
-    private CSubformSlotView icon;
+    private SubformSlotView icon;
     private FormView formView;
 
     private Table slots;
@@ -38,7 +38,7 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
     {
         controller  = spellController;
         formView    = new FormView(controller);
-        icon        = new CSubformSlotView(controller);
+        icon        = new SubformSlotView(controller);
         slots       = new Table();
         stats       = new Table();
 
@@ -92,7 +92,6 @@ public class CustomSubFormSlotView extends Table implements Disposable, Detailed
 
         stats.clear();
         stats.top().left();
-        stats.padBottom(4).padLeft(4).padTop(2);
         stats.add(formView.getFormStats()).row();
 
         icon.setModel(modelSlot);

@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.iconslot;
+package com.myrran.view.ui.customspell.icon;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.controller.CustomSpellController;
@@ -9,7 +9,7 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.TouchDownRightListener;
 
 /** @author Ivan Delgado Huerta */
-public class CDebuffSlotView extends SpellIconView<CustomDebuffSlot>
+public class DebuffSlotView extends AbstractSpellIconView<CustomDebuffSlot>
 {
     private CustomSpellDebuff modelDebuff;
     private CustomSpellController controller;
@@ -18,7 +18,7 @@ public class CDebuffSlotView extends SpellIconView<CustomDebuffSlot>
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CDebuffSlotView(CustomSpellController customSpellController)
+    public DebuffSlotView(CustomSpellController customSpellController)
     {
         controller  = customSpellController;
         dadTarget   = new DadDebuffTarget(this, controller);

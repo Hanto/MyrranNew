@@ -14,7 +14,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
-public class SpellBookCustomFormView extends WidgetSortableTable<CustomSpellForm>
+public class SpellBookSpellsView extends WidgetSortableTable<CustomSpellForm>
     implements PropertyChangeListener, Disposable
 {
     private CustomSpellBook model;
@@ -23,7 +23,7 @@ public class SpellBookCustomFormView extends WidgetSortableTable<CustomSpellForm
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellBookCustomFormView(CustomSpellController spellController)
+    public SpellBookSpellsView(CustomSpellController spellController)
     {
         controller = spellController;
 

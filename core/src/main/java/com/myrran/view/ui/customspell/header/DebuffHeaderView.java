@@ -5,7 +5,7 @@ import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
-public class TDebuffHeaderView extends SpellHeaderView<TemplateSpellDebuff>
+public class DebuffHeaderView extends AbstractSpellHeaderView<TemplateSpellDebuff>
 {
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------

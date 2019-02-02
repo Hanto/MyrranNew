@@ -7,7 +7,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.customspell.header.TDebuffHeaderView;
+import com.myrran.view.ui.customspell.header.DebuffHeaderView;
+import com.myrran.view.ui.customspell.stats.TStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
@@ -17,9 +18,9 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
 
-    private TDebuffHeaderView header;
+    private DebuffHeaderView header;
     private DadDebuffSource dadSource;
-    private TemplateStatsView statsView;
+    private TStatsView statsView;
 
     private Table details;
 
@@ -32,9 +33,9 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     public TemplateDebuffView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        header          = new TDebuffHeaderView();
+        header          = new DebuffHeaderView();
         dadSource       = new DadDebuffSource(header.getIcon(), controller);
-        statsView       = new TemplateStatsView(customSpellController);
+        statsView       = new TStatsView();
         details         = new Table();
 
         controller.getDadDebuff().addSource(dadSource);
@@ -48,7 +49,6 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     {
         controller.getDadDebuff().removeSource(dadSource);
         header.dispose();
-        statsView.dispose();
     }
 
     // UPDATE:

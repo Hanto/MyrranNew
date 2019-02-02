@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSpellStat implements Identifiable, ObservableDeco
+public class CustomSpellStat implements Identifiable, ObservableDeco, SpellStatI
 {
     @XmlAttribute
     private String id;
@@ -33,15 +33,15 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
     // SETTERS GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public String getID()                                   { return id;}
-    public String getName()                                 { return name; }
-    public Float getBaseValue()                             { return baseValue; }
-    public boolean getIsUpgradeable()                       { return isUpgradeable; }
-    public Integer getMaxUpgrades()                         { return maxUpgrades; }
-    public Integer getUpgradeCost()                         { return upgradeCost; }
-    public Float getBonusPerUpgrade()                       { return bonusPerUpgrade; }
-    public Float getGearBonus()                             { return gearBonus; }
-    public Integer getNumUpgrades()                         { return numUpgrades; }
+    @Override public String getID()                         { return id;}
+    @Override public String getName()                       { return name; }
+    @Override public Float getBaseValue()                   { return baseValue; }
+    @Override public boolean getIsUpgradeable()             { return isUpgradeable; }
+    @Override public Integer getMaxUpgrades()               { return maxUpgrades; }
+    @Override public Integer getUpgradeCost()               { return upgradeCost; }
+    @Override public Float getBonusPerUpgrade()             { return bonusPerUpgrade; }
+    @Override public Float getGearBonus()                   { return gearBonus; }
+    @Override public Integer getNumUpgrades()               { return numUpgrades; }
 
     public void setID(String id)                            { this.id = id; }
     public void setName(String name)                        { this.name = name; notifyChanges();}
@@ -86,7 +86,7 @@ public class CustomSpellStat implements Identifiable, ObservableDeco
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public float getTotal()
+    public Float getTotal()
     {   return baseValue + (numUpgrades * bonusPerUpgrade) + gearBonus; }
 
     public int getTotalCost()

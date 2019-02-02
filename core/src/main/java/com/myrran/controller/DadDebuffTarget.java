@@ -3,7 +3,7 @@ package com.myrran.controller;
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.customspell.iconslot.CDebuffSlotView;
+import com.myrran.view.ui.customspell.icon.DebuffSlotView;
 import com.myrran.view.ui.widgets.DaD.Payload;
 import com.myrran.view.ui.widgets.DaD.Source;
 import com.myrran.view.ui.widgets.DaD.Target;
@@ -21,7 +21,7 @@ public class DadDebuffTarget extends Target
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public DadDebuffTarget(CDebuffSlotView actor, CustomSpellController spellController)
+    public DadDebuffTarget(DebuffSlotView actor, CustomSpellController spellController)
     {
         super(actor);
         controller = spellController;
@@ -54,7 +54,7 @@ public class DadDebuffTarget extends Target
     @Override
     public void notifyNewPayload(Payload payload)
     {
-        CDebuffSlotView view = (CDebuffSlotView)getActor();
+        DebuffSlotView view = (DebuffSlotView)getActor();
         TemplateSpellDebuff template = (TemplateSpellDebuff)payload.getObject();
 
         view.setLockColor(model.opensLock(template.getKeys()) ? Color.GREEN : Color.RED);
@@ -63,7 +63,7 @@ public class DadDebuffTarget extends Target
     @Override
     public void notifyNoPayload()
     {
-        CDebuffSlotView view = (CDebuffSlotView)getActor();
+        DebuffSlotView view = (DebuffSlotView)getActor();
         view.setDefaultLocColor();
     }
 }

@@ -4,7 +4,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.generators.CustomFormI;
-import com.myrran.view.ui.customspell.iconslot.CDebuffSlotView;
+import com.myrran.view.ui.customspell.icon.DebuffSlotView;
+import com.myrran.view.ui.customspell.stats.CStatsView;
 
 import java.util.Comparator;
 import java.util.List;
@@ -16,13 +17,13 @@ public class FormView implements Disposable
     private CustomFormI model;
     private CustomSpellController controller;
 
-    private CustomStatsView formStats;
-    private List<CDebuffSlotView> slotList;
-    private List<CustomDebuffStatsView> statList;
+    private CStatsView formStats;
+    private List<DebuffSlotView> slotList;
+    private List<CDebuffStatsView> statList;
 
-    public CustomStatsView getFormStats()                   { return formStats; }
-    public List<CDebuffSlotView>getDebuffIcons()       { return slotList; }
-    public List<CustomDebuffStatsView>getDebuffStats()      { return statList; }
+    public CStatsView getFormStats()                   { return formStats; }
+    public List<DebuffSlotView>getDebuffIcons()       { return slotList; }
+    public List<CDebuffStatsView>getDebuffStats()      { return statList; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -30,16 +31,16 @@ public class FormView implements Disposable
     public FormView(CustomSpellController spellController)
     {
         controller  = spellController;
-        formStats   = new CustomStatsView(controller);
+        formStats   = new CStatsView(controller);
     }
 
     private void disposeObservers()
     {
         if (slotList != null)
-            slotList.forEach(CDebuffSlotView::dispose);
+            slotList.forEach(DebuffSlotView::dispose);
 
         if (statList != null)
-            statList.forEach(CustomDebuffStatsView::dispose);
+            statList.forEach(CDebuffStatsView::dispose);
     }
 
     @Override public void dispose()
@@ -84,16 +85,16 @@ public class FormView implements Disposable
             .collect(Collectors.toList());
     }
 
-    private CDebuffSlotView addDebuffIcons(CustomDebuffSlot slot)
+    private DebuffSlotView addDebuffIcons(CustomDebuffSlot slot)
     {
-        CDebuffSlotView icon = new CDebuffSlotView(controller);
+        DebuffSlotView icon = new DebuffSlotView(controller);
         icon.setModel(slot);
         return icon;
     }
 
-    private CustomDebuffStatsView addDebuffStats(CustomDebuffSlot slot)
+    private CDebuffStatsView addDebuffStats(CustomDebuffSlot slot)
     {
-        CustomDebuffStatsView details = new CustomDebuffStatsView(controller);
+        CDebuffStatsView details = new CDebuffStatsView(controller);
         details.setModel(slot);
         return details;
     }

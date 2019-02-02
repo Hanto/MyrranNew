@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.iconslot;
+package com.myrran.view.ui.customspell.icon;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,7 +15,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public abstract class SpellIconView<T extends ObservableI> extends WidgetGroup implements PropertyChangeListener, Disposable
+public abstract class AbstractSpellIconView<T extends ObservableI> extends WidgetGroup implements PropertyChangeListener, Disposable
 {
     protected T model;
 
@@ -41,7 +41,7 @@ public abstract class SpellIconView<T extends ObservableI> extends WidgetGroup i
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellIconView()
+    public AbstractSpellIconView()
     {
         background  = new WidgetImage();
         name1       = new WidgetText(font10, Color.ORANGE, Color.BLACK, 0);

@@ -1,10 +1,11 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.stats;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellStat;
 import com.myrran.model.spell.generators.CustomSpellStatsI;
+import com.myrran.view.ui.customspell.CustomUBarListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,24 +13,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CustomStatsView extends Table implements Disposable
+public class CStatsView extends Table implements Disposable
 {
     private CustomSpellStatsI model;
     private CustomSpellController controller;
 
-    private List<CustomStatView> statsViewList = new ArrayList<>();
+    private List<CStatView> statsViewList = new ArrayList<>();
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomStatsView(CustomSpellController spellController)
+    public CStatsView(CustomSpellController spellController)
     {
         controller = spellController;
         createLayout();
     }
 
     @Override public void dispose()
-    {   statsViewList.forEach(CustomStatView::dispose); }
+    {   statsViewList.forEach(CStatView::dispose); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -59,10 +60,10 @@ public class CustomStatsView extends Table implements Disposable
         clear();
         statsViewList = model.getCustomSpellStats().stream()
             .sorted(Comparator.comparing(CustomSpellStat::getName))
-            .map(this::getView)
+            .map(CStatView::new)
             .collect(Collectors.toList());
 
-        statsViewList.forEach(this::tableAddRow);
+        statsViewList.forEach(row -> add(row).left().bottom().row());
         createListeners();
     }
 
@@ -76,33 +77,10 @@ public class CustomStatsView extends Table implements Disposable
 
     public void createListeners()
     {
-        for (CustomStatView view: statsViewList)
+        for (CStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
             view.getUpgradesView().addListener(new CustomUBarListener(controller, model, statID));
         }
-    }
-
-    // MISC:
-    //--------------------------------------------------------------------------------------------------------
-
-    private CustomStatView getView(CustomSpellStat customSpellStat)
-    {   return new CustomStatView(customSpellStat); }
-
-    private void tableAddRow(CustomStatView row)
-    {
-        int vPad = -4;
-        int hPad = +3;
-
-        add(row.getName()).left()             .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getBaseValue()).right()       .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getUpgradesView()).center()   .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getTotal()).right()           .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getNumUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getUpgradeCost()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getBonusPerUpgrade()).right() .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getMaxUpgrades()).right()     .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(row.getGearBonus()).right()       .padRight(hPad).padTop(vPad).padBottom(vPad);
-        row();
     }
 }

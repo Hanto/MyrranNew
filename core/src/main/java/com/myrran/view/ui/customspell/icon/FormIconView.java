@@ -1,11 +1,11 @@
-package com.myrran.view.ui.customspell.iconslot;
+package com.myrran.view.ui.customspell.icon;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
-public class CFormIconView extends SpellIconView<CustomSpellForm>
+public class FormIconView extends AbstractSpellIconView<CustomSpellForm>
 {
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
