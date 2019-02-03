@@ -26,7 +26,7 @@ public class DebuffIconsView extends Table implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(List<TemplateSpellSlot> models)
+    public void setModel(Collection<TemplateSpellSlot> models)
     {
         dispose();
 

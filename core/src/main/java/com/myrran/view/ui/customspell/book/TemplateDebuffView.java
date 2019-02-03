@@ -7,10 +7,9 @@ import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.customspell.header.DebuffHeaderView;
 import com.myrran.view.ui.customspell.stats.TemplateStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.widgets.DetailedActorI;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateDebuffView extends DetailsTable implements DetailedActorI, Disposable
+public class TemplateDebuffView extends DetailsTable implements Disposable
 {
     private TemplateSpellDebuff model;
     private CustomSpellController controller;

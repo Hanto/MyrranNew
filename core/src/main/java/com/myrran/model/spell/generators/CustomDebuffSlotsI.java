@@ -11,7 +11,7 @@ import java.util.Collection;
 /** @author Ivan Delgado Huerta */
 public interface CustomDebuffSlotsI
 {
-    Collection<? extends SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff>> getCustomDebuffSlots();
+    Collection<CustomDebuffSlot> getCustomDebuffSlots();
     void setDebuffSlotsTemplate(Collection<TemplateSpellSlot> templates);
     MapListI<String, SpellDebuffParams> getSpellEffectParams();
     CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException;

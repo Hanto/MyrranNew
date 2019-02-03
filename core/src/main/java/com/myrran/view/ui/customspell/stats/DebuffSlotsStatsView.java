@@ -35,7 +35,7 @@ public class DebuffSlotsStatsView extends Table implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(List<CustomDebuffSlot> models)
+    public void setModel(Collection<CustomDebuffSlot> models)
     {
         dispose();
 
@@ -56,7 +56,7 @@ public class DebuffSlotsStatsView extends Table implements Disposable
             .map(this::addDebuffStats)
             .collect(Collectors.toList());
 
-        views.forEach(view -> add(view).bottom().left());
+        views.forEach(view -> add(view).bottom().left().row());
     }
 
     private DebuffSlotStatsView addDebuffStats(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)

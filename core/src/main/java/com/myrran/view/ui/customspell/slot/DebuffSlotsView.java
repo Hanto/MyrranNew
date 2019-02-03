@@ -35,7 +35,7 @@ public class DebuffSlotsView extends Table implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(List<CustomDebuffSlot> models)
+    public void setModel(Collection<CustomDebuffSlot> models)
     {
         dispose();
 

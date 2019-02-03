@@ -1,55 +1,50 @@
 package com.myrran.view.ui.customspell.book.customform;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
+import com.myrran.view.ui.customspell.book.DetailsTable;
 import com.myrran.view.ui.customspell.icon.FormIconView;
+import com.myrran.view.ui.customspell.slot.DebuffSlotsView;
+import com.myrran.view.ui.customspell.stats.CustomStatsView;
+import com.myrran.view.ui.customspell.stats.DebuffSlotsStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.widgets.DetailedActorI;
 
 /** @author Ivan Delgado Huerta */
-public class CustomFormView extends Table implements Disposable, DetailedActorI
+public class CustomFormView extends DetailsTable implements Disposable
 {
     private CustomSpellForm model;
     private CustomSpellController controller;
 
     private FormIconView icon;
-    private FormView formView;
-
-    private Table slots;
-    private Table stats;
-
-    private boolean detailsVisible = false;
-    private Cell<Actor> detailsCell;
+    private CustomStatsView formStats;
+    private DebuffSlotsStatsView debuffsStatsView;
+    private DebuffSlotsView debuffsSlotsView;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
     public CustomFormView(CustomSpellController spellController)
     {
-        controller  = spellController;
-        formView    = new FormView(controller);
-        icon        = new FormIconView();
-        slots       = new Table();
-        stats       = new Table();
+        controller      = spellController;
+        icon            = new FormIconView();
+        formStats       = new CustomStatsView(controller);
+        debuffsStatsView= new DebuffSlotsStatsView(controller);
+        debuffsSlotsView= new DebuffSlotsView(controller);
 
         icon.addListener(new TouchDownListener(event ->
         {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));
 
         createLayout();
-        detailsCell = getCell(stats);
-        showDetails();
     }
 
-    private void disposeObservers() {}
     @Override public void dispose()
     {
-        formView.dispose();
         icon.dispose();
+        formStats.dispose();
+        debuffsStatsView.dispose();
+        debuffsSlotsView.dispose();
     }
 
     // UPDATE:
@@ -57,59 +52,37 @@ public class CustomFormView extends Table implements Disposable, DetailedActorI
 
     public void setModel(CustomSpellForm customForm)
     {
-        disposeObservers();
-
         if (customForm == null)
-            removeModel();
+        {
+            icon.setModel(null);
+            formStats.setModel(null);
+            debuffsStatsView.setModel(null);
+            debuffsSlotsView.setModel(null);
+            clear();
+        }
         else
         {
             model = customForm;
+            icon.setModel(model);
+            formStats.setModel(model);
+            debuffsStatsView.setModel(model.getCustomDebuffSlots());
+            debuffsSlotsView.setModel(model.getCustomDebuffSlots());
             update();
         }
     }
 
-    private void removeModel()
-    {   clear(); }
+    // CREATE LAYOUTS:
+    //--------------------------------------------------------------------------------------------------------
 
     private void update()
     {
-        slots.clear();
-        slots.top().left();
-        slots.add(icon).left().bottom();
+        tableHeader.clear();
+        tableHeader.add(icon).left().bottom();
+        tableHeader.add(debuffsSlotsView).left().row();
 
-        stats.clear();
-        stats.top().left();
-        stats.padBottom(4).padLeft(4).padTop(2);
-        stats.add(formView.getFormStats()).left().row();
-
-        formView.setModel(model);
-        icon.setModel(model);
-
-        formView.getDebuffIcons().forEach(icon -> slots.add(icon).left());
-        formView.getDebuffStats().forEach(stat -> stats.add(stat).left().row());
+        tableDetails.clear();
+        tableDetails.padBottom(4).padLeft(4).padTop(2);
+        tableDetails.add(formStats).left().row();
+        tableDetails.add(debuffsStatsView).left().row();
     }
-
-    // CREATE LAYOUT:
-    //--------------------------------------------------------------------------------------------------------
-
-    private void createLayout()
-    {
-        clear();
-        top().left();
-        add(slots).left().row();
-        add(stats).left().row();
-    }
-
-    // MISC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override
-    public void showDetails(boolean visible)
-    {
-        detailsCell.setActor(visible ? stats : null);
-        detailsVisible = !visible;
-    }
-
-    public void showDetails()
-    {   showDetails(detailsVisible); }
 }

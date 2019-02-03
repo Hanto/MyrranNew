@@ -21,7 +21,7 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
 {
     private Map<String, CustomDebuffSlot> slots;
 
-    public Collection<? extends SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff>> getCustomDebuffSlots()
+    public Collection<CustomDebuffSlot> getCustomDebuffSlots()
     {   return slots.values(); }
 
     // TEMPLATE TO CUSTOM:
