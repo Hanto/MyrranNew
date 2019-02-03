@@ -73,6 +73,9 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
         }
     }
 
+    // CREATE LAYOUTS:
+    //--------------------------------------------------------------------------------------------------------
+
     private void update()
     {
         tableHeader.clear();

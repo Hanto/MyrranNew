@@ -55,5 +55,4 @@ public class TemplateFormView extends DetailsTable implements DetailedActorI, Di
 
         tableDetails.clear();
     }
-
 }
