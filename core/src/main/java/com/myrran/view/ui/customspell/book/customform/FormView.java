@@ -1,4 +1,4 @@
-package com.myrran.view.ui.spellbook.customform;
+package com.myrran.view.ui.customspell.book.customform;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
@@ -6,7 +6,7 @@ import com.myrran.model.spell.generators.CustomFormI;
 import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.model.spell.generators.SpellSlotI;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.customspell.stats.SlotStatsView;
+import com.myrran.view.ui.customspell.stats.DebuffSlotStatsView;
 import com.myrran.view.ui.customspell.slot.DebuffSlotView;
 import com.myrran.view.ui.customspell.stats.CustomStatsView;
 
@@ -22,11 +22,11 @@ public class FormView implements Disposable
 
     private CustomStatsView formStats;
     private List<DebuffSlotView> slotList;
-    private List<SlotStatsView> statList;
+    private List<DebuffSlotStatsView> statList;
 
-    public CustomStatsView getFormStats()                { return formStats; }
-    public List<DebuffSlotView>getDebuffIcons()     { return slotList; }
-    public List<SlotStatsView>getDebuffStats()   { return statList; }
+    public CustomStatsView getFormStats()               { return formStats; }
+    public List<DebuffSlotView>getDebuffIcons()         { return slotList; }
+    public List<DebuffSlotStatsView>getDebuffStats()    { return statList; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ public class FormView implements Disposable
             slotList.forEach(DebuffSlotView::dispose);
 
         if (statList != null)
-            statList.forEach(SlotStatsView::dispose);
+            statList.forEach(DebuffSlotStatsView::dispose);
     }
 
     @Override public void dispose()
@@ -95,9 +95,9 @@ public class FormView implements Disposable
         return icon;
     }
 
-    private SlotStatsView addDebuffStats(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
+    private DebuffSlotStatsView addDebuffStats(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
-        SlotStatsView details = new SlotStatsView(controller);
+        DebuffSlotStatsView details = new DebuffSlotStatsView(controller);
         details.setModel(slot);
         return details;
     }

@@ -12,7 +12,7 @@ import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.spellbook.customform.CustomSpellView;
+import com.myrran.view.ui.customspell.book.customform.CustomSpellView;
 import com.myrran.view.ui.customspell.spellbook.SpellBookSpellsView;
 import com.myrran.view.ui.customspell.spellbook.SpellBookDebuffView;
 import com.myrran.view.ui.customspell.spellbook.SpellBookFormView;

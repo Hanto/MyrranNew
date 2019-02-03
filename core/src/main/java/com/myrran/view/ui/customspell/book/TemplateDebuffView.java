@@ -1,4 +1,4 @@
-package com.myrran.view.ui.spellbook;
+package com.myrran.view.ui.customspell.book;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;

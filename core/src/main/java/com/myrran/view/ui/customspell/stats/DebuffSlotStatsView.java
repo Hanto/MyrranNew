@@ -16,7 +16,7 @@ import java.beans.PropertyChangeListener;
 
 
 /** @author Ivan Delgado Huerta */
-public class SlotStatsView extends Table implements PropertyChangeListener, Disposable
+public class DebuffSlotStatsView extends Table implements PropertyChangeListener, Disposable
 {
     private SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> debuffSlot;
     private CustomSpellDebuff spellDebuff;
@@ -33,7 +33,7 @@ public class SlotStatsView extends Table implements PropertyChangeListener, Disp
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SlotStatsView(CustomSpellController customSpellController)
+    public DebuffSlotStatsView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
         name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);

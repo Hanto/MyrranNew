@@ -4,13 +4,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.spell.templates.TemplateSpellSlot;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 public class DebuffIconsView extends Table implements Disposable
 {
-    private List<TemplateSpellSlot> model;
+    private Collection<TemplateSpellSlot> model;
     private List<DebuffIconView> views;
 
     // CONSTRUCTOR:

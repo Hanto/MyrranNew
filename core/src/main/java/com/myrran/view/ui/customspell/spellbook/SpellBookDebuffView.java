@@ -5,7 +5,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.spellbook.TemplateDebuffView;
+import com.myrran.view.ui.customspell.book.TemplateDebuffView;
 
 import java.util.Comparator;
 
