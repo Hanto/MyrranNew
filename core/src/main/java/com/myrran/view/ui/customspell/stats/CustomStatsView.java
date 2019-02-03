@@ -13,24 +13,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class CStatsView extends Table implements Disposable
+public class CustomStatsView extends Table implements Disposable
 {
     private CustomSpellStatsI model;
     private CustomSpellController controller;
 
-    private List<CStatView> statsViewList = new ArrayList<>();
+    private List<CustomStatView> statsViewList = new ArrayList<>();
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CStatsView(CustomSpellController spellController)
+    public CustomStatsView(CustomSpellController spellController)
     {
         controller = spellController;
         createLayout();
     }
 
     @Override public void dispose()
-    {   statsViewList.forEach(CStatView::dispose); }
+    {   statsViewList.forEach(CustomStatView::dispose); }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ public class CStatsView extends Table implements Disposable
         clear();
         statsViewList = model.getCustomSpellStats().stream()
             .sorted(Comparator.comparing(CustomSpellStat::getName))
-            .map(CStatView::new)
+            .map(CustomStatView::new)
             .collect(Collectors.toList());
 
         statsViewList.forEach(row -> add(row).left().bottom().row());
@@ -77,7 +77,7 @@ public class CStatsView extends Table implements Disposable
 
     public void createListeners()
     {
-        for (CStatView view: statsViewList)
+        for (CustomStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
             view.getUpgradesView().addListener(new CustomUBarListener(controller, model, statID));

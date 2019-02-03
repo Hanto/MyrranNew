@@ -8,7 +8,7 @@ import com.myrran.model.spell.generators.SpellSlotI;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.customspell.CDebuffStatsView;
 import com.myrran.view.ui.customspell.slot.DebuffSlotView;
-import com.myrran.view.ui.customspell.stats.CStatsView;
+import com.myrran.view.ui.customspell.stats.CustomStatsView;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,11 +20,11 @@ public class FormView implements Disposable
     private CustomFormI model;
     private CustomSpellController controller;
 
-    private CStatsView formStats;
+    private CustomStatsView formStats;
     private List<DebuffSlotView> slotList;
     private List<CDebuffStatsView> statList;
 
-    public CStatsView getFormStats()                { return formStats; }
+    public CustomStatsView getFormStats()                { return formStats; }
     public List<DebuffSlotView>getDebuffIcons()     { return slotList; }
     public List<CDebuffStatsView>getDebuffStats()   { return statList; }
 
@@ -34,7 +34,7 @@ public class FormView implements Disposable
     public FormView(CustomSpellController spellController)
     {
         controller  = spellController;
-        formStats   = new CStatsView(controller);
+        formStats   = new CustomStatsView(controller);
     }
 
     private void disposeObservers()

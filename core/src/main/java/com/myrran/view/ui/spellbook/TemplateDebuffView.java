@@ -8,7 +8,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.customspell.header.DebuffHeaderView;
-import com.myrran.view.ui.customspell.stats.TStatsView;
+import com.myrran.view.ui.customspell.stats.TemplateStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
@@ -20,7 +20,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
 
     private DadDebuffSource dadSource;
     private DebuffHeaderView header;
-    private TStatsView statsView;
+    private TemplateStatsView statsView;
 
     private Table details;
 
@@ -35,7 +35,7 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
         controller      = customSpellController;
         header          = new DebuffHeaderView();
         dadSource       = new DadDebuffSource(header.getIcon(), controller);
-        statsView       = new TStatsView();
+        statsView       = new TemplateStatsView();
         details         = new Table();
 
         controller.getDadDebuff().addSource(dadSource);

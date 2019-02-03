@@ -9,7 +9,7 @@ import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 import com.myrran.model.spell.generators.SpellSlotI;
-import com.myrran.view.ui.customspell.stats.CStatsView;
+import com.myrran.view.ui.customspell.stats.CustomStatsView;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
@@ -23,7 +23,7 @@ public class CDebuffStatsView extends Table implements PropertyChangeListener, D
     private CustomSpellDebuff spellDebuff;
     private CustomSpellController controller;
 
-    private CStatsView stats;
+    private CustomStatsView stats;
     private WidgetText name;
     private WidgetText totalCost;
 
@@ -39,7 +39,7 @@ public class CDebuffStatsView extends Table implements PropertyChangeListener, D
         controller      = customSpellController;
         name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
         totalCost       = new WidgetText(font10, magenta, Color.BLACK, 1);
-        stats           = new CStatsView(controller);
+        stats           = new CustomStatsView(controller);
 
         createLayout();
     }

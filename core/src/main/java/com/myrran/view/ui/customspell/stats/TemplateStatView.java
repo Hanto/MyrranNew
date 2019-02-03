@@ -3,20 +3,17 @@ package com.myrran.view.ui.customspell.stats;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Disposable;
-import com.myrran.model.spell.generators.CustomSpellStat;
+import com.myrran.model.spell.generators.SpellStatI;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.customspell.CustomUBarView;
 import com.myrran.view.ui.widgets.WidgetText;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 
 /** @author Ivan Delgado Huerta */
-public class CStatView extends Table implements PropertyChangeListener, Disposable
+public class TemplateStatView extends Table
 {
-    private CustomSpellStat model;
+    private SpellStatI model;
 
     private WidgetText name;
     private WidgetText baseValue;
@@ -30,16 +27,16 @@ public class CStatView extends Table implements PropertyChangeListener, Disposab
 
     private static final DecimalFormat df = Atlas.get().getFormater();
 
-    // GETTERS:
-    //--------------------------------------------------------------------------------------------------------
-
-    public CustomSpellStat getModel()       { return model; }
-    public CustomUBarView getUpgradesView() { return upgradesView; }
-
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CStatView(CustomSpellStat customSpellStat)
+    public TemplateStatView(SpellStatI model)
+    {
+        this();
+        setModel(model);
+    }
+
+    public TemplateStatView()
     {
         BitmapFont font14 = Atlas.get().getFont("14");
         BitmapFont font11 = Atlas.get().getFont("11");
@@ -61,47 +58,39 @@ public class CStatView extends Table implements PropertyChangeListener, Disposab
         upgradesView    = new CustomUBarView();
 
         createLayout();
-        setModel(customSpellStat);
     }
 
-    public void dispose()
-    {
-        if (model != null)
-            model.removeObserver(this);
-    }
-
-    // CREATE / UPDATE:
+    // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSpellStat customSpellStat)
+    public void setModel(SpellStatI templateSpellStat)
     {
-        dispose();
-
-        if (customSpellStat == null)
+        if (templateSpellStat == null)
             removeModel();
         else
         {
-            model = customSpellStat;
-            model.addObserver(this);
-            upgradesView.setModel(model);
+            model = templateSpellStat;
             update();
         }
     }
 
-    public void removeModel()
-    {   clear(); }
+    private void removeModel()
+    {
+        name.setText(null);
+        baseValue.setText(null);
+        upgradeCost.setText(null);
+        bonusPerUpgrade.setText(null);
+        maxUpgrades.setText(null);
+    }
 
     public void update()
     {
         name.setText(model.getName());
-        baseValue.setText(df.format(model.getBaseValue()));
-        total.setText(df.format(model.getTotal()));
-        numUpgrades.setText(format(model.getNumUpgrades()));
+        baseValue.setText(df.format(model.getBaseValue()));;
+        total.setText(df.format(model.getBaseValue() + model.getMaxUpgrades() * model.getBonusPerUpgrade()));
         upgradeCost.setText(format(model.getUpgradeCost()));
         bonusPerUpgrade.setText(format(model.getBonusPerUpgrade()));
         maxUpgrades.setText(format(model.getMaxUpgrades()));
-        gearBonus.setText(df.format(model.getGearBonus()));
-        upgradesView.update();
     }
 
     // CREATE LAYOUT:
@@ -112,15 +101,12 @@ public class CStatView extends Table implements PropertyChangeListener, Disposab
         int vPad = -4;
         int hPad = +3;
 
-        add(name).left()            .minWidth(80)   .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(baseValue).right()      .minWidth(30)   .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(upgradesView).center()                  .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(total).right()          .minWidth(30)   .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(numUpgrades).right()                    .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(upgradeCost).right()                    .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(bonusPerUpgrade).right()                .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(maxUpgrades).right()                    .padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(gearBonus).right()                      .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(name).left()            .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(baseValue).right()      .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(total).right()          .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(upgradeCost).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(bonusPerUpgrade).right().padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(maxUpgrades).right()    .padRight(hPad).padTop(vPad).padBottom(vPad);
         row();
     }
 
@@ -129,10 +115,5 @@ public class CStatView extends Table implements PropertyChangeListener, Disposab
 
     private String format(Integer rawData)
     {   return model.getIsUpgradeable() ? rawData.toString() : "-"; }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    public void propertyChange(PropertyChangeEvent evt)
-    {   update(); }
 }
+

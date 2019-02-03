@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /** @author Ivan Delgado Huerta */
-public class TStatsView extends Table
+public class TemplateStatsView extends Table
 {
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ public class TStatsView extends Table
         top().left();
         model.stream()
             .sorted(Comparator.comparing(TemplateSpellStat::getName))
-            .map(TStatView::new)
+            .map(TemplateStatView::new)
             .forEach(row -> add(row).left().bottom().row());
     }
 }

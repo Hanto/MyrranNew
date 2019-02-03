@@ -10,7 +10,7 @@ import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.customspell.header.SubformHeaderView;
 import com.myrran.view.ui.customspell.icon.AbstractSpellIconView;
 import com.myrran.view.ui.customspell.icon.DebuffIconView;
-import com.myrran.view.ui.customspell.stats.TStatsView;
+import com.myrran.view.ui.customspell.stats.TemplateStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
@@ -28,7 +28,7 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
     private Table tableDetails;
 
     private List<DebuffIconView> debuffs;
-    private TStatsView subformStats;
+    private TemplateStatsView subformStats;
 
     private boolean detailsVisible = false;
     private Cell<Actor> cellDetails;
@@ -42,7 +42,7 @@ public class TemplateSubformView extends Table implements DetailedActorI, Dispos
         header          = new SubformHeaderView();
         dadSource       = new DadSubformSource(header.getIcon(), controller);
         tableDetails    = new Table();
-        subformStats    = new TStatsView();
+        subformStats    = new TemplateStatsView();
 
         controller.getDadSubform().addSource(dadSource);
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
