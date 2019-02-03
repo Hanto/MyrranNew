@@ -1,20 +1,16 @@
-package com.myrran.view.ui.spellbook;
+package com.myrran.view.ui.customspell.spellbook;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.widgets.WidgetSortableTable;
+import com.myrran.view.ui.spellbook.TemplateDebuffView;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
-public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff>
-    implements PropertyChangeListener
+public class SpellBookDebuffView extends SortableTable<TemplateSpellDebuff>
 {
     private CustomSpellBook model;
     private CustomSpellController controller;
@@ -24,7 +20,7 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
 
     public SpellBookDebuffView(CustomSpellController spellController)
     {
-        controller  = spellController;
+        controller = spellController;
 
         addSortOption("name", Comparator.comparing(TemplateSpellDebuff::getName));
         addSortOption("type", Comparator.comparing(TemplateSpellDebuff::getFactory));
@@ -58,16 +54,11 @@ public class SpellBookDebuffView extends WidgetSortableTable<TemplateSpellDebuff
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public Actor getActor(TemplateSpellDebuff template)
+    @Override
+    public Actor getActor(TemplateSpellDebuff model)
     {
         TemplateDebuffView icon = new TemplateDebuffView(controller);
-        icon.setModel(template);
+        icon.setModel(model);
         return icon;
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-    { }
 }

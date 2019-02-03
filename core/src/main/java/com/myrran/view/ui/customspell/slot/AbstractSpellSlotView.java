@@ -54,7 +54,7 @@ public abstract class AbstractSpellSlotView<U extends ObservableI, V> extends Sp
         }
     }
 
-    public void removeModel()
+    protected void removeModel()
     {
         background.setTexureRegion(null);
         name1.setText(null);

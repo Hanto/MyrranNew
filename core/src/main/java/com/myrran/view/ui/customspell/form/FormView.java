@@ -6,7 +6,7 @@ import com.myrran.model.spell.generators.CustomFormI;
 import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.model.spell.generators.SpellSlotI;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.customspell.CDebuffStatsView;
+import com.myrran.view.ui.customspell.stats.SlotStatsView;
 import com.myrran.view.ui.customspell.slot.DebuffSlotView;
 import com.myrran.view.ui.customspell.stats.CustomStatsView;
 
@@ -22,11 +22,11 @@ public class FormView implements Disposable
 
     private CustomStatsView formStats;
     private List<DebuffSlotView> slotList;
-    private List<CDebuffStatsView> statList;
+    private List<SlotStatsView> statList;
 
     public CustomStatsView getFormStats()                { return formStats; }
     public List<DebuffSlotView>getDebuffIcons()     { return slotList; }
-    public List<CDebuffStatsView>getDebuffStats()   { return statList; }
+    public List<SlotStatsView>getDebuffStats()   { return statList; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ public class FormView implements Disposable
             slotList.forEach(DebuffSlotView::dispose);
 
         if (statList != null)
-            statList.forEach(CDebuffStatsView::dispose);
+            statList.forEach(SlotStatsView::dispose);
     }
 
     @Override public void dispose()
@@ -95,9 +95,9 @@ public class FormView implements Disposable
         return icon;
     }
 
-    private CDebuffStatsView addDebuffStats(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
+    private SlotStatsView addDebuffStats(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
-        CDebuffStatsView details = new CDebuffStatsView(controller);
+        SlotStatsView details = new SlotStatsView(controller);
         details.setModel(slot);
         return details;
     }

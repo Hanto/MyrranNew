@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.spell.generators.CustomSpellStat;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspell.CustomUBarView;
+import com.myrran.view.ui.customspell.stats.bar.UpgradeBarView;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
@@ -26,7 +26,7 @@ public class CustomStatView extends Table implements PropertyChangeListener, Dis
     private WidgetText bonusPerUpgrade;
     private WidgetText maxUpgrades;
     private WidgetText gearBonus;
-    private CustomUBarView upgradesView;
+    private UpgradeBarView upgradesView;
 
     private static final DecimalFormat df = Atlas.get().getFormater();
 
@@ -34,7 +34,7 @@ public class CustomStatView extends Table implements PropertyChangeListener, Dis
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSpellStat getModel()       { return model; }
-    public CustomUBarView getUpgradesView() { return upgradesView; }
+    public UpgradeBarView getUpgradesView() { return upgradesView; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ public class CustomStatView extends Table implements PropertyChangeListener, Dis
         bonusPerUpgrade = new WidgetText(font10, purpleL, black,1);
         maxUpgrades     = new WidgetText(font10, purpleL, black,1);
         gearBonus       = new WidgetText(font10, purpleL, black,1);
-        upgradesView    = new CustomUBarView();
+        upgradesView    = new UpgradeBarView();
 
         createLayout();
         setModel(customSpellStat);

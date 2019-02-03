@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellStat;
 import com.myrran.model.spell.generators.CustomSpellStatsI;
-import com.myrran.view.ui.customspell.CustomUBarListener;
+import com.myrran.view.ui.customspell.stats.bar.UpgradeBarListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -80,7 +80,7 @@ public class CustomStatsView extends Table implements Disposable
         for (CustomStatView view: statsViewList)
         {
             String statID = view.getModel().getID();
-            view.getUpgradesView().addListener(new CustomUBarListener(controller, model, statID));
+            view.getUpgradesView().addListener(new UpgradeBarListener(controller, model, statID));
         }
     }
 }

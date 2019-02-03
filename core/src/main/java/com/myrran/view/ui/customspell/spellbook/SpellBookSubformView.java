@@ -1,20 +1,15 @@
-package com.myrran.view.ui.spellbook;
+package com.myrran.view.ui.customspell.spellbook;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
-import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.widgets.WidgetSortableTable;
+import com.myrran.view.ui.spellbook.TemplateSubformView;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Comparator;
 
-public class SpellBookSubformView extends WidgetSortableTable<TemplateSpellSubform>
-    implements PropertyChangeListener
+public class SpellBookSubformView extends SortableTable<TemplateSpellSubform>
 {
     private CustomSpellBook model;
     private CustomSpellController controller;
@@ -58,16 +53,10 @@ public class SpellBookSubformView extends WidgetSortableTable<TemplateSpellSubfo
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override public Actor getActor(TemplateSpellSubform template)
+    @Override public Actor getActor(TemplateSpellSubform model)
     {
         TemplateSubformView icon = new TemplateSubformView(controller);
-        icon.setModel(template);
+        icon.setModel(model);
         return icon;
     }
-
-    // MVC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override public void propertyChange(PropertyChangeEvent propertyChangeEvent)
-    { }
 }

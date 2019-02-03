@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.stats;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -6,10 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellDebuff;
+import com.myrran.model.spell.generators.SpellSlotI;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
-import com.myrran.model.spell.generators.SpellSlotI;
-import com.myrran.view.ui.customspell.stats.CustomStatsView;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.beans.PropertyChangeEvent;
@@ -17,7 +16,7 @@ import java.beans.PropertyChangeListener;
 
 
 /** @author Ivan Delgado Huerta */
-public class CDebuffStatsView extends Table implements PropertyChangeListener, Disposable
+public class SlotStatsView extends Table implements PropertyChangeListener, Disposable
 {
     private SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> debuffSlot;
     private CustomSpellDebuff spellDebuff;
@@ -34,7 +33,7 @@ public class CDebuffStatsView extends Table implements PropertyChangeListener, D
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CDebuffStatsView(CustomSpellController customSpellController)
+    public SlotStatsView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
         name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);

@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell;
+package com.myrran.view.ui.customspell.stats.bar;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /** @author Ivan Delgado Huerta */
-public class CustomUBarListener extends InputListener
+public class UpgradeBarListener extends InputListener
 {
     private CustomSpellController controller;
     private CustomSpellStatsI stats;
@@ -22,7 +22,7 @@ public class CustomUBarListener extends InputListener
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomUBarListener(CustomSpellController controller, CustomSpellStatsI stats, String statID)
+    public UpgradeBarListener(CustomSpellController controller, CustomSpellStatsI stats, String statID)
     {
         this.controller = controller;
         this.stats = stats;

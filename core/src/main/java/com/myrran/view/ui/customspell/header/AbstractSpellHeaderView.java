@@ -15,7 +15,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public abstract class AbstractSpellHeaderView<T extends ObservableI> extends Table implements PropertyChangeListener, Disposable
+public abstract class AbstractSpellHeaderView<T extends ObservableI>
+    extends Table implements PropertyChangeListener, Disposable
 {
     protected T model;
 

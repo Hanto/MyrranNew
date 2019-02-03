@@ -1,4 +1,4 @@
-package com.myrran.view.ui.widgets;
+package com.myrran.view.ui.customspell.spellbook;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,12 +10,14 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
+import com.myrran.view.ui.widgets.DetailedActorI;
+import com.myrran.view.ui.widgets.WidgetText;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public abstract class WidgetSortableTable<T> extends Table implements Disposable
+public abstract class SortableTable<T> extends Table implements Disposable
 {
     // SORT OPTIONS:
     //--------------------------------------------------------------------------------------------------------

@@ -1,8 +1,5 @@
 package com.myrran.view.ui.spellbook;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
@@ -13,7 +10,7 @@ import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
 /** @author Ivan Delgado Huerta */
-public class TemplateDebuffView extends Table implements DetailedActorI, Disposable
+public class TemplateDebuffView extends DetailsTable implements DetailedActorI, Disposable
 {
     private TemplateSpellDebuff model;
     private CustomSpellController controller;
@@ -21,11 +18,6 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     private DadDebuffSource dadSource;
     private DebuffHeaderView header;
     private TemplateStatsView statsView;
-
-    private Table details;
-
-    private boolean detailsVisible = true;
-    private Cell<Actor> detailsCell;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -36,13 +28,11 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
         header          = new DebuffHeaderView();
         dadSource       = new DadDebuffSource(header.getIcon(), controller);
         statsView       = new TemplateStatsView();
-        details         = new Table();
 
         controller.getDadDebuff().addSource(dadSource);
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         createLayout();
-        detailsCell = getCell(details);
     }
 
     @Override public void dispose()
@@ -57,51 +47,31 @@ public class TemplateDebuffView extends Table implements DetailedActorI, Disposa
     public void setModel(TemplateSpellDebuff templateSpellDebuff)
     {
         if (templateSpellDebuff == null)
-            removeModel();
+        {
+            dadSource.setModel(null);
+            header.setModel(null);
+            statsView.setModel(null);
+        }
         else
         {
             model = templateSpellDebuff;
             dadSource.setModel(model);
             header.setModel(model);
             statsView.setModel(model.getSpellStats());
+            update();
         }
-    }
-
-    private void removeModel()
-    {
-        dadSource.setModel(null);
-        header.removeModel();
-        statsView.setModel(null);
     }
 
     // CREATE LAYOUTS:
     //--------------------------------------------------------------------------------------------------------
 
-    private void createLayout()
+    private void update()
     {
-        clear();
-        top().left();
-        add(header).bottom().left().row();
-        add(details).top().left().row();
+        tableHeader.clear();
+        tableHeader.add(header);
 
-        details.clear();
-        details.top().left();
-        details.padBottom(8).padLeft(4);
-
-        details.add().size(32, 0);
-        details.add(statsView).top().left().row();
+        tableDetails.clear();
+        tableDetails.add().size(32, 0);
+        tableDetails.add(statsView).top().left().row();
     }
-
-    // MISC:
-    //--------------------------------------------------------------------------------------------------------
-
-    @Override
-    public void showDetails(boolean visible)
-    {
-        detailsCell.setActor(visible ? details : null);
-        detailsVisible = !visible;
-    }
-
-    public void showDetails()
-    {   showDetails(detailsVisible); }
 }
