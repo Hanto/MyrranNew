@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellSubform;
 import com.myrran.model.spell.generators.CustomSubformSlot;
-import com.myrran.view.ui.customspell.icon.SubformSlotView;
+import com.myrran.view.ui.customspell.slot.SubformSlotView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
 

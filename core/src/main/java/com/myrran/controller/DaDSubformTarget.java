@@ -2,9 +2,10 @@ package com.myrran.controller;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.myrran.model.spell.generators.CustomSubformSlot;
+import com.myrran.model.spell.generators.CustomSpellSubform;
+import com.myrran.model.spell.generators.SpellSlotI;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.customspell.icon.SubformSlotView;
+import com.myrran.view.ui.customspell.slot.SubformSlotView;
 import com.myrran.view.ui.widgets.DaD;
 import com.myrran.view.ui.widgets.DaD.Payload;
 import com.myrran.view.ui.widgets.DaD.Source;
@@ -13,7 +14,7 @@ import com.myrran.view.ui.widgets.DaD.Target;
 /** @author Ivan Delgado Huerta */
 public class DaDSubformTarget extends Target
 {
-    private CustomSubformSlot model;
+    private SpellSlotI<CustomSpellSubform, TemplateSpellSubform> model;
     private CustomSpellController controller;
 
     // CONSTRUCTOR:
@@ -28,7 +29,7 @@ public class DaDSubformTarget extends Target
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSubformSlot subformSlot)
+    public void setModel(SpellSlotI<CustomSpellSubform, TemplateSpellSubform> subformSlot)
     {   model = subformSlot; }
 
     @Override
@@ -62,6 +63,6 @@ public class DaDSubformTarget extends Target
     public void notifyNoPayload()
     {
         SubformSlotView view = (SubformSlotView)getActor();
-        view.setDefaultLocColor();
+        view.setDefaultLockColor();
     }
 }

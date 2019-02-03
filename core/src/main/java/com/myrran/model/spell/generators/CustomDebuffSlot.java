@@ -7,7 +7,6 @@ import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.parameters.SpellDebuffParams;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellSlot;
-import com.myrran.view.ui.customspell.form.SpellSlotI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,7 +19,8 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomDebuffSlot implements ObservableDeco, Identifiable, SpellSlotI<CustomSpellDebuff>
+public class CustomDebuffSlot implements ObservableDeco, Identifiable,
+    SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff>
 {
     @XmlAttribute
     private String id;
@@ -83,7 +83,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable, SpellSlot
     public int getTotalCost()
     {   return customSpellDebuff.getTotalCost(); }
 
-    public boolean setCustomSpellDebuff(TemplateSpellDebuff template)
+    public boolean setContent(TemplateSpellDebuff template)
     {
         if (opensLock(template.getKeys()))
         {
@@ -94,7 +94,7 @@ public class CustomDebuffSlot implements ObservableDeco, Identifiable, SpellSlot
         else return false;
     }
 
-    public void removeCustomSpellDebuff()
+    public void removeContent()
     {
         customSpellDebuff.setSpellDebuffTemplate(null);
         notifyChanges();

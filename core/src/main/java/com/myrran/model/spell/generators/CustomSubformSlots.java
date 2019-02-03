@@ -60,13 +60,13 @@ public class CustomSubformSlots
     public boolean setCustomSpellSubform(TemplateSpellSubform template, String slotID) throws InvalidIDException
     {
         CustomSubformSlot slot = getCustomSubformSlot(slotID);
-        return slot.setCustomSpellSubform(template);
+        return slot.setContent(template);
     }
 
     public void removeCustomSpellSubform(String slotID) throws InvalidIDException
     {
         CustomSubformSlot slot = getCustomSubformSlot(slotID);
-        slot.removeCustomSpellSubform();
+        slot.removeContent();
     }
 
     public CustomSubformSlot getCustomSubformSlot(String slotID) throws InvalidIDException

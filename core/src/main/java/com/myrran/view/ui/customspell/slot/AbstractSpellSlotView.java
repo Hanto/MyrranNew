@@ -1,40 +1,55 @@
-package com.myrran.view.ui.customspell.icon;
+package com.myrran.view.ui.customspell.slot;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.components.observable.ObservableI;
+import com.myrran.model.spell.generators.SpellSlotI;
+import com.myrran.view.ui.customspell.icon.SpellIcon;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public abstract class AbstractSpellIconView<T extends ObservableI> extends SpellIcon
+public abstract class AbstractSpellSlotView<U extends ObservableI, V> extends SpellIcon
     implements PropertyChangeListener, Disposable
 {
-    protected T model;
+    protected SpellSlotI<U, V> model;
+    protected U contentModel;
+
+    // CONSTRUCTOR:
+    //--------------------------------------------------------------------------------------------------------
 
     protected void disposeObservers()
     {
         if (model != null)
             model.removeObserver(this);
+
+        if (contentModel != null)
+            contentModel.removeObserver(this);
     }
 
     @Override public void dispose()
-    {   disposeObservers(); }
+    {
+        disposeObservers();
+        disposeImp();
+    }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(T spellForm)
+    public void setModel(SpellSlotI<U, V> spellSlot)
     {
         disposeObservers();
 
-        if (spellForm == null)
+        if (spellSlot == null)
             removeModel();
         else
         {
-            model = spellForm;
+            model = spellSlot;
+            contentModel = spellSlot.getContent();
             model.addObserver(this);
+            contentModel.addObserver(this);
+            setModelImp();
             update();
         }
     }
@@ -47,25 +62,14 @@ public abstract class AbstractSpellIconView<T extends ObservableI> extends Spell
         corner.setText(null);
     }
 
-    // CREATE LAYOUT:
+    // DRAG AND DROP COLOR:
     //--------------------------------------------------------------------------------------------------------
 
-    private void createLayout()
-    {
-        float pad = -4;
+    public void setLockColor(Color color)
+    {   setName1Color(color); }
 
-        Table tableRow2 = new Table().bottom().left();
-        tableRow2.add(name2).left().padTop(pad).padBottom(pad+1);
-        tableRow2.add(corner).expand().fillX().right().padTop(pad).padBottom(pad-6).padRight(2);
-
-        Table table = new Table().bottom().left().padLeft(5).padBottom(8);
-        table.setWidth(64);
-        table.add(name1).left().padTop(pad).padBottom(pad+1).row();
-        table.add(tableRow2).expand().fillX();
-
-        addActor(background);
-        addActor(table);
-    }
+    public void setDefaultLockColor()
+    {   setName1Color(model.hasData() ? Color.ORANGE : Color.LIGHT_GRAY); }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------

@@ -19,7 +19,8 @@ import java.util.List;
 
 /** @author Ivan Delgado Huerta */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class CustomSubformSlot implements ObservableDeco, Identifiable
+public class CustomSubformSlot implements ObservableDeco, Identifiable,
+    SpellSlotI<CustomSpellSubform, TemplateSpellSubform>
 {
     @XmlAttribute
     private String id;
@@ -39,7 +40,7 @@ public class CustomSubformSlot implements ObservableDeco, Identifiable
     public String getName()                                     { return name; }
     public String getSlotType()                                 { return type; }
     public List<CustomSpellSlotKey>getLock()                    { return lock; }
-    public CustomSpellSubform getContent()           { return customSpellSubform; }
+    public CustomSpellSubform getContent()                      { return customSpellSubform; }
     public boolean hasData()                                    { return customSpellSubform.hasData(); }
     @Override public void setID(String id)                      { this.id = id; }
     public void setName(String name)                            { this.name = name; notifyChanges(); }
@@ -82,7 +83,7 @@ public class CustomSubformSlot implements ObservableDeco, Identifiable
     public int getTotalCost()
     {   return customSpellSubform.getTotalCost(); }
 
-    public boolean setCustomSpellSubform(TemplateSpellSubform template)
+    public boolean setContent(TemplateSpellSubform template)
     {
         if (opensLock(template.getKeys()))
         {
@@ -93,7 +94,7 @@ public class CustomSubformSlot implements ObservableDeco, Identifiable
         return false;
     }
 
-    public void removeCustomSpellSubform()
+    public void removeContent()
     {
         customSpellSubform.setSpellSubformTemplate(null);
         notifyChanges();

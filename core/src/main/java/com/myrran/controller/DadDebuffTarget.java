@@ -1,9 +1,10 @@
 package com.myrran.controller;
 
 import com.badlogic.gdx.graphics.Color;
-import com.myrran.model.spell.generators.CustomDebuffSlot;
+import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.customspell.icon.DebuffSlotView;
+import com.myrran.model.spell.generators.SpellSlotI;
+import com.myrran.view.ui.customspell.slot.DebuffSlotView;
 import com.myrran.view.ui.widgets.DaD.Payload;
 import com.myrran.view.ui.widgets.DaD.Source;
 import com.myrran.view.ui.widgets.DaD.Target;
@@ -13,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 /** @author Ivan Delgado Huerta */
 public class DadDebuffTarget extends Target
 {
-    private CustomDebuffSlot model;
+    private SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> model;
     private CustomSpellController controller;
 
     private static Logger LOG = LogManager.getFormatterLogger(DadDebuffTarget.class);
@@ -30,7 +31,7 @@ public class DadDebuffTarget extends Target
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomDebuffSlot customDebuffSlot)
+    public void setModel(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> customDebuffSlot)
     {   model = customDebuffSlot; }
 
     @Override
@@ -64,6 +65,6 @@ public class DadDebuffTarget extends Target
     public void notifyNoPayload()
     {
         DebuffSlotView view = (DebuffSlotView)getActor();
-        view.setDefaultLocColor();
+        view.setDefaultLockColor();
     }
 }

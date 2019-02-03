@@ -34,9 +34,9 @@ public interface CustomDebuffSlotsDeco extends CustomDebuffSlotsI
     default int getDebuffSlotsTotalCost()
     {   return getDebuffSlots().getDebuffSlotsTotalCost(); }
 
-    default CustomDebuffSlot getCustomDebuffSlot(String slotID) throws InvalidIDException
+    default SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> getCustomDebuffSlot(String slotID) throws InvalidIDException
     {   return getDebuffSlots().getCustomDebuffSlot(slotID); }
 
-    default Collection<CustomDebuffSlot> getCustomDebuffSlots()
+    default Collection<? extends SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff>> getCustomDebuffSlots()
     {   return getDebuffSlots().getCustomDebuffSlots(); }
 }

@@ -2,10 +2,12 @@ package com.myrran.view.ui.customspell.form;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.generators.CustomFormI;
+import com.myrran.model.spell.generators.CustomSpellDebuff;
+import com.myrran.model.spell.generators.SpellSlotI;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.customspell.CDebuffStatsView;
-import com.myrran.view.ui.customspell.icon.DebuffSlotView;
+import com.myrran.view.ui.customspell.slot.DebuffSlotView;
 import com.myrran.view.ui.customspell.stats.CStatsView;
 
 import java.util.Comparator;
@@ -76,24 +78,24 @@ public class FormView implements Disposable
         formStats.setModel(model);
 
         slotList = model.getCustomDebuffSlots().stream()
-            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
+            .sorted(Comparator.comparing(SpellSlotI::getID))
             .map(this::addDebuffIcons)
             .collect(Collectors.toList());
 
         statList = model.getCustomDebuffSlots().stream()
-            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
+            .sorted(Comparator.comparing(SpellSlotI::getID))
             .map(this::addDebuffStats)
             .collect(Collectors.toList());
     }
 
-    private DebuffSlotView addDebuffIcons(CustomDebuffSlot slot)
+    private DebuffSlotView addDebuffIcons(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
         DebuffSlotView icon = new DebuffSlotView(controller);
         icon.setModel(slot);
         return icon;
     }
 
-    private CDebuffStatsView addDebuffStats(CustomDebuffSlot slot)
+    private CDebuffStatsView addDebuffStats(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
         CDebuffStatsView details = new CDebuffStatsView(controller);
         details.setModel(slot);

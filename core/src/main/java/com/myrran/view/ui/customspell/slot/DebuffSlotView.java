@@ -1,17 +1,16 @@
-package com.myrran.view.ui.customspell.icon;
+package com.myrran.view.ui.customspell.slot;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffTarget;
-import com.myrran.model.spell.generators.CustomDebuffSlot;
 import com.myrran.model.spell.generators.CustomSpellDebuff;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.TouchDownRightListener;
 
 /** @author Ivan Delgado Huerta */
-public class DebuffSlotView extends AbstractSpellIconView<CustomDebuffSlot>
+public class DebuffSlotView extends AbstractSpellSlotView<CustomSpellDebuff, TemplateSpellDebuff>
 {
-    private CustomSpellDebuff modelDebuff;
     private CustomSpellController controller;
     private DadDebuffTarget dadTarget;
 
@@ -28,40 +27,14 @@ public class DebuffSlotView extends AbstractSpellIconView<CustomDebuffSlot>
             controller.removeCustomSpellDebuff(model)));
     }
 
-    @Override protected void disposeObservers()
-    {
-        if (model != null)
-            model.removeObserver(this);
-
-        if (modelDebuff != null)
-            modelDebuff.removeObserver(this);
-    }
-
-    @Override public void dispose()
-    {
-        disposeObservers();
-        controller.getDadDebuff().removeTarget(dadTarget);
-    }
-
-    // UPDATE:
+    // ABSTRACT IMPLEMENTATIONS:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomDebuffSlot customDebuffSlot)
-    {
-        disposeObservers();
+    @Override protected void disposeImp()
+    {   controller.getDadDebuff().removeTarget(dadTarget); }
 
-        if (customDebuffSlot == null)
-            removeModel();
-        else
-        {
-            model = customDebuffSlot;
-            modelDebuff = model.getContent();
-            dadTarget.setModel(model);
-            model.addObserver(this);
-            modelDebuff.addObserver(this);
-            update();
-        }
-    }
+    @Override protected void setModelImp()
+    {   dadTarget.setModel(model); }
 
     @Override
     protected void update()
@@ -71,8 +44,8 @@ public class DebuffSlotView extends AbstractSpellIconView<CustomDebuffSlot>
         if (model.hasData())
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/FireBall2"));
-            setCorner(modelDebuff.getTotalCost().toString());
-            setName1(modelDebuff.getName());
+            setCorner(contentModel.getTotalCost().toString());
+            setName1(contentModel.getName());
             setName1Color(Color.ORANGE);
         }
         else
@@ -83,10 +56,4 @@ public class DebuffSlotView extends AbstractSpellIconView<CustomDebuffSlot>
             setName1Color(Color.LIGHT_GRAY);
         }
     }
-
-    public void setLockColor(Color color)
-    {   setName1Color(color); }
-
-    public void setDefaultLocColor()
-    {   setName1Color(modelDebuff.hasData() ? Color.ORANGE : Color.LIGHT_GRAY); }
 }

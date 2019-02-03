@@ -12,8 +12,9 @@ public class DebuffIconView extends AbstractSpellIconView<TemplateSpellSlot>
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    @Override
-    protected void update()
+    @Override protected void setModelImp() {}
+    @Override protected void disposeImp() {}
+    @Override protected void update()
     {
         setBackground(Atlas.get().getTexture("TexturasIconos/IconoVacio2"));
         setCorner(null);
@@ -21,4 +22,6 @@ public class DebuffIconView extends AbstractSpellIconView<TemplateSpellSlot>
         setName1Color(Color.LIGHT_GRAY);
         setName2(model.getSlotType());
     }
+
+
 }

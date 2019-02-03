@@ -2,6 +2,9 @@ package com.myrran.controller;
 
 import com.myrran.misc.InvalidIDException;
 import com.myrran.model.spell.generators.*;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
+import com.myrran.model.spell.generators.SpellSlotI;
+import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.widgets.DaD;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,7 +55,7 @@ public class CustomSpellController
         notifyForm(form);
     }
 
-    public void addCustomSpellSubform(CustomSubformSlot slot, String subformTemplateID)
+    public void addCustomSpellSubform(SpellSlotI<CustomSpellSubform, TemplateSpellSubform> slot, String subformTemplateID)
     {
         try
         {
@@ -64,7 +67,7 @@ public class CustomSpellController
         {   LOG.warn("Cannot add subform: %S into %S", subformTemplateID, slot.getName());}
     }
 
-    public void removeCustomSpellSubform(CustomSubformSlot slot)
+    public void removeCustomSpellSubform(SpellSlotI<CustomSpellSubform, TemplateSpellSubform> slot)
     {
         try
         {
@@ -76,7 +79,7 @@ public class CustomSpellController
         {   LOG.warn("Cannot remove subform from slot", slot.getName());}
     }
 
-    public void addCustomSpellDebuff(CustomDebuffSlot slot, String debuffTemplateID)
+    public void addCustomSpellDebuff(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot, String debuffTemplateID)
     {
         try
         {
@@ -88,7 +91,7 @@ public class CustomSpellController
         {   LOG.warn("Cannot add debuf: %S into %S", debuffTemplateID, slot.getName());}
     }
 
-    public void removeCustomSpellDebuff(CustomDebuffSlot slot)
+    public void removeCustomSpellDebuff(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
         try
         {

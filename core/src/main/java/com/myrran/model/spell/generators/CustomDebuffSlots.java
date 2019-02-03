@@ -21,7 +21,8 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
 {
     private Map<String, CustomDebuffSlot> slots;
 
-    public Collection<CustomDebuffSlot> getCustomDebuffSlots()        { return slots.values(); }
+    public Collection<? extends SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff>> getCustomDebuffSlots()
+    {   return slots.values(); }
 
     // TEMPLATE TO CUSTOM:
     //--------------------------------------------------------------------------------------------------------
@@ -53,25 +54,25 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
 
     public CustomSpellDebuff getCustomSpellDebuff(String slotID) throws InvalidIDException
     {
-        CustomDebuffSlot slot = getCustomDebuffSlot(slotID);
+        SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot = getCustomDebuffSlot(slotID);
         return slot.getContent();
     }
 
     public boolean setCustomSpellDebuff(TemplateSpellDebuff template, String slotID) throws InvalidIDException
     {
-        CustomDebuffSlot slot = getCustomDebuffSlot(slotID);
-        return slot.setCustomSpellDebuff(template);
+        SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot = getCustomDebuffSlot(slotID);
+        return slot.setContent(template);
     }
 
     public void removeCustomSpellDebuff(String slotID) throws InvalidIDException
     {
-        CustomDebuffSlot slot = getCustomDebuffSlot(slotID);
-        slot.removeCustomSpellDebuff();
+        SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot = getCustomDebuffSlot(slotID);
+        slot.removeContent();
     }
 
-    public CustomDebuffSlot getCustomDebuffSlot(String slotID) throws InvalidIDException
+    public SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> getCustomDebuffSlot(String slotID) throws InvalidIDException
     {
-        CustomDebuffSlot slot = slots.get(slotID);
+        SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot = slots.get(slotID);
         if (slot != null) return slot;
         else throw new  InvalidIDException("SpellSlot with the following ID doesn't exist: %s", slotID);
     }
@@ -82,8 +83,8 @@ public class CustomDebuffSlots implements CustomDebuffSlotsI
     public int getDebuffSlotsTotalCost()
     {
         return slots.values().stream()
-            .filter(CustomDebuffSlot::hasData)
-            .mapToInt(CustomDebuffSlot::getTotalCost)
+            .filter(SpellSlotI::hasData)
+            .mapToInt(SpellSlotI::getTotalCost)
             .sum();
     }
 }
