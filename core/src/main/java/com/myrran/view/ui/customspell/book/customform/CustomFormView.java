@@ -14,24 +14,20 @@ import com.myrran.view.ui.listeners.TouchDownListener;
 /** @author Ivan Delgado Huerta */
 public class CustomFormView extends DetailsTable implements Disposable
 {
-    private CustomSpellForm model;
-    private CustomSpellController controller;
-
     private FormIconView icon;
     private CustomStatsView formStats;
-    private DebuffSlotsStatsView debuffsStatsView;
+    private DebuffSlotsStatsView debuffsSlotsStatsView;
     private DebuffSlotsView debuffsSlotsView;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomFormView(CustomSpellController spellController)
+    public CustomFormView(CustomSpellController controller)
     {
-        controller      = spellController;
-        icon            = new FormIconView();
-        formStats       = new CustomStatsView(controller);
-        debuffsStatsView= new DebuffSlotsStatsView(controller);
-        debuffsSlotsView= new DebuffSlotsView(controller);
+        icon                    = new FormIconView();
+        formStats               = new CustomStatsView(controller);
+        debuffsSlotsStatsView   = new DebuffSlotsStatsView(controller);
+        debuffsSlotsView        = new DebuffSlotsView(controller);
 
         icon.addListener(new TouchDownListener(event ->
         {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));
@@ -43,29 +39,28 @@ public class CustomFormView extends DetailsTable implements Disposable
     {
         icon.dispose();
         formStats.dispose();
-        debuffsStatsView.dispose();
+        debuffsSlotsStatsView.dispose();
         debuffsSlotsView.dispose();
     }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSpellForm customForm)
+    public void setModel(CustomSpellForm model)
     {
-        if (customForm == null)
+        if (model == null)
         {
             icon.setModel(null);
             formStats.setModel(null);
-            debuffsStatsView.setModel(null);
+            debuffsSlotsStatsView.setModel(null);
             debuffsSlotsView.setModel(null);
             clear();
         }
         else
         {
-            model = customForm;
             icon.setModel(model);
             formStats.setModel(model);
-            debuffsStatsView.setModel(model.getCustomDebuffSlots());
+            debuffsSlotsStatsView.setModel(model.getCustomDebuffSlots());
             debuffsSlotsView.setModel(model.getCustomDebuffSlots());
             update();
         }
@@ -83,6 +78,6 @@ public class CustomFormView extends DetailsTable implements Disposable
         tableDetails.clear();
         tableDetails.padBottom(4).padLeft(4).padTop(2);
         tableDetails.add(formStats).left().row();
-        tableDetails.add(debuffsStatsView).left().row();
+        tableDetails.add(debuffsSlotsStatsView).left().row();
     }
 }
