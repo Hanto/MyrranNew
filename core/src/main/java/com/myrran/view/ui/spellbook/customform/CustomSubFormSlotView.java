@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.form;
+package com.myrran.view.ui.spellbook.customform;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;

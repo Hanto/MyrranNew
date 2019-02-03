@@ -191,7 +191,7 @@ public class CustomSpellBook
     // RELOAD TEMPLATES:
     //--------------------------------------------------------------------------------------------------------
 
-    public void reloadAll() throws InvalidIDException
+    public void reloadAll()
     {
         customSpells.clear();
         formTemplatesLearned.values().forEach(template -> template.setAvailable(template.getTotal()));

@@ -6,14 +6,10 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadSubformSource;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.customspell.header.SubformHeaderView;
-import com.myrran.view.ui.customspell.icon.AbstractSpellIconView;
-import com.myrran.view.ui.customspell.icon.DebuffIconView;
+import com.myrran.view.ui.customspell.icon.DebuffIconsView;
 import com.myrran.view.ui.customspell.stats.TemplateStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 public class TemplateSubformView extends DetailsTable implements DetailedActorI, Disposable
@@ -24,7 +20,7 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
     private DadSubformSource dadSource;
     private SubformHeaderView header;
     private TemplateStatsView subformStats;
-    private List<DebuffIconView> debuffs;
+    private DebuffIconsView debuffIcons;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -36,6 +32,7 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
         dadSource       = new DadSubformSource(header.getIcon(), controller);
         tableDetails    = new Table();
         subformStats    = new TemplateStatsView();
+        debuffIcons     = new DebuffIconsView();
 
         controller.getDadSubform().addSource(dadSource);
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
@@ -47,9 +44,7 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
     {
         controller.getDadDebuff().removeSource(dadSource);
         header.dispose();
-
-        if (debuffs != null)
-            debuffs.forEach(AbstractSpellIconView::dispose);
+        debuffIcons.dispose();
     }
 
     // UPDATE:
@@ -62,6 +57,7 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
             dadSource.setModel(null);
             header.setModel(null);
             subformStats.setModel(null);
+            debuffIcons.setModel(null);
         }
         else
         {
@@ -69,6 +65,7 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
             dadSource.setModel(model);
             header.setModel(model);
             subformStats.setModel(model.getSpellStats());
+            debuffIcons.setModel(model.getSpellSlots());
             update();
         }
     }
@@ -81,16 +78,9 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
         tableHeader.clear();
         tableHeader.add(header);
 
-        Table slots = new Table().top().left();
-        debuffs = model.getSpellSlots().stream()
-            .map(DebuffIconView::new)
-            .collect(Collectors.toList());
-
-        debuffs.forEach(o -> slots.add(o).top().left());
-
         tableDetails.clear();
         tableDetails.add().size(32);
-        tableDetails.add(slots).row();
+        tableDetails.add(debuffIcons).row();
         tableDetails.add().size(32);
         tableDetails.add(subformStats);
     }
