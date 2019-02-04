@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <graphicSettings>
     <horizontalRes>900</horizontalRes>
-    <verticalRes>600</verticalRes>
+    <verticalRes>700</verticalRes>
     <tittle>application</tittle>
     <fullScreen>false</fullScreen>
     <vsync>false</vsync>

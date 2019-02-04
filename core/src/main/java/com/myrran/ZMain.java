@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
@@ -57,17 +58,17 @@ public class ZMain extends ApplicationAdapter
             TemplateDebuffsView bookDebuff = new TemplateDebuffsView(controller);
             bookDebuff.setModel(book.getDebuffsTemplatesLearned());
             uiStage.addActor(bookDebuff);
-            bookDebuff.setPosition(10, 590);
+            bookDebuff.setPosition(10, 690);
 
             TemplateSubformsView bookSubform = new TemplateSubformsView(controller);
             bookSubform.setModel(book.getSubformTemplatesLearned());
             uiStage.addActor(bookSubform);
-            bookSubform.setPosition(10, 342);
+            bookSubform.setPosition(10, 425);
 
             TemplateFormsView bookForm = new TemplateFormsView(controller);
             bookForm.setModel(book.getFormTemplatesLearned());
             uiStage.addActor(bookForm);
-            bookForm.setPosition(10, 210);
+            bookForm.setPosition(10, 200);
 
             CustomSpellsView bookSpells = new CustomSpellsView(controller);
             bookSpells.setModel(book.getCustomSpellForms());
