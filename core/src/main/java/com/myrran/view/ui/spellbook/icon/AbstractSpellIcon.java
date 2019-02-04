@@ -10,7 +10,7 @@ import com.myrran.view.ui.widgets.WidgetImage;
 import com.myrran.view.ui.widgets.WidgetText;
 
 /** @author Ivan Delgado Huerta */
-public abstract class AbstractSpellGroup extends WidgetGroup
+public abstract class AbstractSpellIcon extends WidgetGroup
 {
     protected WidgetImage background;
     protected WidgetText name1;
@@ -31,7 +31,7 @@ public abstract class AbstractSpellGroup extends WidgetGroup
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public AbstractSpellGroup()
+    public AbstractSpellIcon()
     {
         BitmapFont font10 = Atlas.get().getFont("10");
         Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);

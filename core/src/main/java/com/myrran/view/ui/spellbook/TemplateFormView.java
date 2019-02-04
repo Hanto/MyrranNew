@@ -5,7 +5,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.header.FormHeaderView;
-import com.myrran.view.ui.spellbook.icon.SlotIconsView;
+import com.myrran.view.ui.spellbook.icon.iconview.SlotIconsView;
 import com.myrran.view.ui.spellbook.stats.TemplateStatsView;
 import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.DetailedTable;

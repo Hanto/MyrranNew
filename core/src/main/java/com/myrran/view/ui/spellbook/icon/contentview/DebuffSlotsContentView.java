@@ -1,4 +1,4 @@
-package com.myrran.view.ui.spellbook.slot;
+package com.myrran.view.ui.spellbook.icon.contentview;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
@@ -11,21 +11,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
-public class DebuffSlotsView extends Table implements Disposable
+public class DebuffSlotsContentView extends Table implements Disposable
 {
     private CustomSpellController controller;
-    private List<DebuffSlotView> views;
+    private List<DebuffSlotContentView> views;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public DebuffSlotsView(CustomSpellController spellController)
+    public DebuffSlotsContentView(CustomSpellController spellController)
     {   controller = spellController; }
 
     @Override public void dispose()
     {
         if (views != null)
-            views.forEach(DebuffSlotView::dispose);
+            views.forEach(DebuffSlotContentView::dispose);
     }
 
     // UPDATE:
@@ -51,9 +51,9 @@ public class DebuffSlotsView extends Table implements Disposable
     // HELPER:
     //--------------------------------------------------------------------------------------------------------
 
-    private DebuffSlotView addDebuffSlotView(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
+    private DebuffSlotContentView addDebuffSlotView(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
-        DebuffSlotView icon = new DebuffSlotView(controller);
+        DebuffSlotContentView icon = new DebuffSlotContentView(controller);
         icon.setModel(slot);
         return icon;
     }

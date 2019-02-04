@@ -1,57 +1,57 @@
-package com.myrran.view.ui.spellbook.slot;
+package com.myrran.view.ui.spellbook.icon.contentview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.controller.DaDSubformTarget;
-import com.myrran.model.spell.generators.CustomSpellSubform;
-import com.myrran.model.spell.templates.TemplateSpellSubform;
+import com.myrran.controller.DadDebuffTarget;
+import com.myrran.model.spell.generators.CustomSpellDebuff;
+import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.TouchDownRightListener;
 
 /** @author Ivan Delgado Huerta */
-public class SubformSlotView extends AbstractSpellSlotView<CustomSpellSubform, TemplateSpellSubform>
+public class DebuffSlotContentView extends AbstractSlotContentView<CustomSpellDebuff, TemplateSpellDebuff>
 {
     private CustomSpellController controller;
-    private DaDSubformTarget dadTarget;
+    private DadDebuffTarget dadTarget;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SubformSlotView(CustomSpellController customSpellController)
+    public DebuffSlotContentView(CustomSpellController customSpellController)
     {
         controller  = customSpellController;
-        dadTarget   = new DaDSubformTarget(this, controller);
+        dadTarget   = new DadDebuffTarget(this, controller);
 
-        controller.getDadSubform().addTarget(dadTarget);
+        controller.getDadDebuff().addTarget(dadTarget);
         addListener(new TouchDownRightListener(event ->
-            controller.removeCustomSpellSubform(model)));
+            controller.removeCustomSpellDebuff(model)));
     }
 
     // ABSTRACT IMPLEMENTATIONS:
     //--------------------------------------------------------------------------------------------------------
 
     @Override protected void disposeImp()
-    {   controller.getDadSubform().removeTarget(dadTarget); }
+    {   controller.getDadDebuff().removeTarget(dadTarget); }
 
     @Override protected void setModelImp()
     {   dadTarget.setModel(model); }
 
-    @Override protected void update()
+    @Override
+    protected void update()
     {
         setName2(model.getSlotType());
 
         if (model.hasData())
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/FireBall2"));
-            Integer baseAndStats = contentModel.getStatCost() + contentModel.getBaseCost();
-            setCorner(baseAndStats.toString());
+            setCorner(contentModel.getTotalCost().toString());
             setName1(contentModel.getName());
             setName1Color(Color.ORANGE);
         }
         else
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/IconoVacio2"));
-            setCorner("0");
+            setCorner(null);
             setName1(model.getLock().toString().toLowerCase());
             setName1Color(Color.LIGHT_GRAY);
         }

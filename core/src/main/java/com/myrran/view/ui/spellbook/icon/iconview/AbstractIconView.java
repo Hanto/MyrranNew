@@ -1,13 +1,14 @@
-package com.myrran.view.ui.spellbook.icon;
+package com.myrran.view.ui.spellbook.icon.iconview;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.components.observable.ObservableI;
+import com.myrran.view.ui.spellbook.icon.AbstractSpellIcon;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public abstract class AbstractSpellIconView<T extends ObservableI> extends AbstractSpellGroup
+public abstract class AbstractIconView<T extends ObservableI> extends AbstractSpellIcon
     implements PropertyChangeListener, Disposable
 {
     protected T model;

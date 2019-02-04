@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.myrran.model.spell.generators.CustomSpellSubform;
 import com.myrran.model.spell.generators.SpellSlotI;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.spellbook.slot.SubformSlotView;
+import com.myrran.view.ui.spellbook.icon.contentview.SubformSlotContentView;
 import com.myrran.view.ui.widgets.DaD;
 import com.myrran.view.ui.widgets.DaD.Payload;
 import com.myrran.view.ui.widgets.DaD.Source;
@@ -53,7 +53,7 @@ public class DaDSubformTarget extends Target
     @Override
     public void notifyNewPayload(Payload payload)
     {
-        SubformSlotView view = (SubformSlotView)getActor();
+        SubformSlotContentView view = (SubformSlotContentView)getActor();
         TemplateSpellSubform template = (TemplateSpellSubform)payload.getObject();
 
         view.setLockColor(model.opensLock(template.getKeys()) ? Color.GREEN : Color.RED);
@@ -62,7 +62,7 @@ public class DaDSubformTarget extends Target
     @Override
     public void notifyNoPayload()
     {
-        SubformSlotView view = (SubformSlotView)getActor();
+        SubformSlotContentView view = (SubformSlotContentView)getActor();
         view.setDefaultLockColor();
     }
 }

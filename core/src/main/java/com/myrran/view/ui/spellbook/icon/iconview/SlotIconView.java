@@ -1,11 +1,11 @@
-package com.myrran.view.ui.spellbook.icon;
+package com.myrran.view.ui.spellbook.icon.iconview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.model.spell.templates.TemplateSpellSlot;
 import com.myrran.view.ui.Atlas;
 
 /** @author Ivan Delgado Huerta */
-public class SlotIconView extends AbstractSpellIconView<TemplateSpellSlot>
+public class SlotIconView extends AbstractIconView<TemplateSpellSlot>
 {
     public SlotIconView(TemplateSpellSlot model)
     {   setModel(model); }

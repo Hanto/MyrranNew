@@ -4,11 +4,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.spellbook.icon.FormIconView;
+import com.myrran.view.ui.spellbook.icon.iconview.FormIconView;
 import com.myrran.view.ui.spellbook.stats.CustomStatsView;
 import com.myrran.view.ui.spellbook.stats.DebuffSlotsStatsView;
 import com.myrran.view.ui.widgets.DetailedTable;
-import com.myrran.view.ui.spellbook.slot.DebuffSlotsView;
+import com.myrran.view.ui.spellbook.icon.contentview.DebuffSlotsContentView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 
 /** @author Ivan Delgado Huerta */
@@ -17,7 +17,7 @@ public class CustomFormView extends DetailedTable implements Disposable
     private FormIconView icon;
     private CustomStatsView formStats;
     private DebuffSlotsStatsView debuffsSlotsStatsView;
-    private DebuffSlotsView debuffsSlotsView;
+    private DebuffSlotsContentView debuffsSlotsView;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ public class CustomFormView extends DetailedTable implements Disposable
         icon                    = new FormIconView(controller);
         formStats               = new CustomStatsView(controller);
         debuffsSlotsStatsView   = new DebuffSlotsStatsView(controller);
-        debuffsSlotsView        = new DebuffSlotsView(controller);
+        debuffsSlotsView        = new DebuffSlotsContentView(controller);
 
         icon.addListener(new TouchDownListener(event ->
         {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));

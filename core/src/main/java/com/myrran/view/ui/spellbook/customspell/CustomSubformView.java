@@ -7,8 +7,8 @@ import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.spellbook.stats.CustomStatsView;
 import com.myrran.view.ui.spellbook.stats.DebuffSlotsStatsView;
 import com.myrran.view.ui.widgets.DetailedTable;
-import com.myrran.view.ui.spellbook.slot.DebuffSlotsView;
-import com.myrran.view.ui.spellbook.slot.SubformSlotView;
+import com.myrran.view.ui.spellbook.icon.contentview.DebuffSlotsContentView;
+import com.myrran.view.ui.spellbook.icon.contentview.SubformSlotContentView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 
 import java.beans.PropertyChangeEvent;
@@ -19,20 +19,20 @@ public class CustomSubformView extends DetailedTable implements Disposable, Prop
 {
     private CustomSubformSlot model;
 
-    private SubformSlotView icon;
+    private SubformSlotContentView icon;
     private CustomStatsView formStats;
     private DebuffSlotsStatsView debuffsSlotsStatsView;
-    private DebuffSlotsView debuffsSlotsView;
+    private DebuffSlotsContentView debuffsSlotsView;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
     public CustomSubformView(CustomSpellController controller)
     {
-        icon                    = new SubformSlotView(controller);
+        icon                    = new SubformSlotContentView(controller);
         formStats               = new CustomStatsView(controller);
         debuffsSlotsStatsView   = new DebuffSlotsStatsView(controller);
-        debuffsSlotsView        = new DebuffSlotsView(controller);
+        debuffsSlotsView        = new DebuffSlotsContentView(controller);
 
         icon.addListener(new TouchDownListener(event ->
         {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));

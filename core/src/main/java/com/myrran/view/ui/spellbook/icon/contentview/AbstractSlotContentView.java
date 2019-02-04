@@ -1,16 +1,16 @@
-package com.myrran.view.ui.spellbook.slot;
+package com.myrran.view.ui.spellbook.icon.contentview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.generators.SpellSlotI;
-import com.myrran.view.ui.spellbook.icon.AbstractSpellGroup;
+import com.myrran.view.ui.spellbook.icon.AbstractSpellIcon;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public abstract class AbstractSpellSlotView<U extends ObservableI, V> extends AbstractSpellGroup
+public abstract class AbstractSlotContentView<U extends ObservableI, V> extends AbstractSpellIcon
     implements PropertyChangeListener, Disposable
 {
     protected SpellSlotI<U, V> model;
