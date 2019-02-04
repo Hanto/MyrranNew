@@ -12,7 +12,6 @@ import com.myrran.view.ui.widgets.DetailedTable;
 /** @author Ivan Delgado Huerta */
 public class TemplateDebuffView extends DetailedTable implements Disposable
 {
-    private TemplateSpellDebuff model;
     private CustomSpellController controller;
 
     private DadDebuffSource dadSource;
@@ -44,9 +43,9 @@ public class TemplateDebuffView extends DetailedTable implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(TemplateSpellDebuff templateSpellDebuff)
+    public void setModel(TemplateSpellDebuff model)
     {
-        if (templateSpellDebuff == null)
+        if (model == null)
         {
             dadSource.setModel(null);
             header.setModel(null);
@@ -54,7 +53,6 @@ public class TemplateDebuffView extends DetailedTable implements Disposable
         }
         else
         {
-            model = templateSpellDebuff;
             dadSource.setModel(model);
             header.setModel(model);
             statsView.setModel(model.getSpellStats());

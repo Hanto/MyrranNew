@@ -144,7 +144,7 @@
   <subformsLearned>
     <entry>
       <key>AOE</key>
-      <value available="1" factory="AOE" id="AOE" name="AOE Explosion" total="2">
+      <value available="3" factory="AOE" id="AOE" name="AOE Explosion" total="4">
         <spellStats id="Radius" name="Radius">
           <baseValue>1.0</baseValue>
           <isUpgradeable>true</isUpgradeable>

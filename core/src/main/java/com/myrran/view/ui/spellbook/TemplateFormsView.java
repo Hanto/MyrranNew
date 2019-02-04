@@ -12,7 +12,6 @@ import java.util.Comparator;
 /** @author Ivan Delgado Huerta */
 public class TemplateFormsView extends SortableTable<TemplateSpellForm>
 {
-    private CustomSpellBook model;
     private CustomSpellController controller;
 
     // CONSTRUCTOR:

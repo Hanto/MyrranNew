@@ -187,7 +187,7 @@ public abstract class SortableTable<T> extends Table implements Disposable
         sortedActors.forEach(actor -> contentTable.add(actor).fillX().expandX().row());
     }
 
-    private void showDetails()
+    public void showDetails()
     {
         sortedActors.stream()
             .filter(DetailedActorI.class::isInstance)

@@ -13,7 +13,6 @@ import com.myrran.view.ui.widgets.DetailedTable;
 /** @author Ivan Delgado Huerta */
 public class CustomSpellView extends DetailedTable implements Disposable
 {
-    private CustomSpellController controller;
     private SpellHeaderView header;
     private CustomFormView formView;
     private CustomSubformsView subForms;
@@ -21,9 +20,8 @@ public class CustomSpellView extends DetailedTable implements Disposable
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSpellView(CustomSpellController spellController, boolean movable)
+    public CustomSpellView(CustomSpellController controller, boolean movable)
     {
-        controller      = spellController;
         header          = new SpellHeaderView();
         formView        = new CustomFormView(controller);
         subForms        = new CustomSubformsView(controller);

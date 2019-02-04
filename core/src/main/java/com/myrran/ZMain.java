@@ -57,23 +57,22 @@ public class ZMain extends ApplicationAdapter
             TemplateDebuffsView bookDebuff = new TemplateDebuffsView(controller);
             bookDebuff.setModel(book.getDebuffsTemplatesLearned());
             uiStage.addActor(bookDebuff);
-            bookDebuff.setPosition(10, 515);
-
-            TemplateFormsView bookForm = new TemplateFormsView(controller);
-            bookForm.setModel(book.getFormTemplatesLearned());
-            uiStage.addActor(bookForm);
-            bookForm.setPosition(10, 590);
+            bookDebuff.setPosition(10, 590);
 
             TemplateSubformsView bookSubform = new TemplateSubformsView(controller);
             bookSubform.setModel(book.getSubformTemplatesLearned());
             uiStage.addActor(bookSubform);
-            bookSubform.setPosition(10, 350);
+            bookSubform.setPosition(10, 342);
+
+            TemplateFormsView bookForm = new TemplateFormsView(controller);
+            bookForm.setModel(book.getFormTemplatesLearned());
+            uiStage.addActor(bookForm);
+            bookForm.setPosition(10, 210);
 
             CustomSpellsView bookSpells = new CustomSpellsView(controller);
             bookSpells.setModel(book.getCustomSpellForms());
             uiStage.addActor(bookSpells);
             bookSpells.setPosition(280, 590);
-
 
             CustomSpellView formView2 = new CustomSpellView(controller);
             uiStage.addActor(formView2);
