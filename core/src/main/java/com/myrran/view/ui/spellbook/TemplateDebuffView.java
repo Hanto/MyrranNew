@@ -70,6 +70,6 @@ public class TemplateDebuffView extends DetailedTable implements Disposable
 
         tableDetails.clear();
         tableDetails.add().size(32, 0);
-        tableDetails.add(statsView).top().left().row();
+        tableDetails.add(statsView).top().left().padBottom(4).row();
     }
 }

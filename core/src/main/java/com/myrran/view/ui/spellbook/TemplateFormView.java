@@ -18,7 +18,6 @@ public class TemplateFormView extends DetailedTable implements DetailedActorI, D
     private SlotIconsView debuffIcons;
     private SlotIconsView subformIcons;
 
-
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 

@@ -7,17 +7,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.spellbook.CustomSpellView;
-import com.myrran.view.ui.spellbook.CustomSpellsView;
-import com.myrran.view.ui.spellbook.TemplateDebuffsView;
-import com.myrran.view.ui.spellbook.TemplateFormsView;
-import com.myrran.view.ui.spellbook.TemplateSubformsView;
+import com.myrran.view.ui.spellbook.*;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -93,7 +88,7 @@ public class ZMain extends ApplicationAdapter
     {
         try
         {
-            Gdx.gl.glClearColor(0, 0, 0, 1);
+            Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
             //batch.begin();
