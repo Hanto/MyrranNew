@@ -40,10 +40,7 @@
                     <lock>CAOE</lock>
                 </spellSubforms>
                 <spellSubforms id="Slot2" name="Slot2" slotType="impact">
-                    <lock>CAOE</lock>
-                </spellSubforms>
-                <spellSubforms id="Slot3" name="Slot3" slotType="impact">
-                    <lock>CAOE</lock>
+                    <lock>GAOE</lock>
                 </spellSubforms>
             </value>
         </entry>
@@ -143,8 +140,8 @@
     </spellDebuffTemplates>
     <spellSubformTemplates>
         <entry>
-            <key>AOE</key>
-            <value id="AOE" name="AOE Explosion" available="0" total="0" factory="AOE">
+            <key>Volcano</key>
+            <value id="Volcano" name="Volcano" available="0" total="0" factory="AOE">
                 <spellStats id="Radius" name="Radius">
                     <baseValue>1.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>
@@ -153,6 +150,31 @@
                     <bonusPerUpgrade>0.1</bonusPerUpgrade>
                 </spellStats>
                 <spellStats id="Duration" name="Duration">
+                    <baseValue>1.0</baseValue>
+                    <isUpgradeable>true</isUpgradeable>
+                    <maxUpgrades>50</maxUpgrades>
+                    <upgradeCost>2</upgradeCost>
+                    <bonusPerUpgrade>0.1</bonusPerUpgrade>
+                </spellStats>
+                <spellSlots id="Slot1" name="Slot1" slotType="aoe">
+                    <lock>DOT</lock>
+                    <lock>DD</lock>
+                </spellSlots>
+                <spellSlots id="Slot2" name="Slot2" slotType="aoe">
+                    <lock>DFF</lock>
+                    <lock>DOT</lock>
+                </spellSlots>
+                <spellSlots id="Slot3" name="Slot3" slotType="aoe">
+                    <lock>DFF</lock>
+                </spellSlots>
+                <baseCost>20</baseCost>
+                <keys>GAOE</keys>
+            </value>
+        </entry>
+        <entry>
+            <key>Explosion</key>
+            <value id="Explosion" name="Explosion" available="0" total="0" factory="AOE">
+                <spellStats id="Radius" name="Radius">
                     <baseValue>1.0</baseValue>
                     <isUpgradeable>true</isUpgradeable>
                     <maxUpgrades>50</maxUpgrades>

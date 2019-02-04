@@ -73,8 +73,8 @@ public class TemplateFormView extends DetailedTable implements DetailedActorI, D
         tableDetails.add().size(32, 0);
         tableDetails.add(subformStats).padBottom(4).row();
         tableDetails.add().size(32, 0);
-        tableDetails.add(debuffIcons).row();
+        tableDetails.add(debuffIcons).left().row();
         tableDetails.add().size(32, 0);
-        tableDetails.add(subformIcons).row();
+        tableDetails.add(subformIcons).left().row();
     }
 }
