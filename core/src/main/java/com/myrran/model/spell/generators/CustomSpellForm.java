@@ -57,7 +57,7 @@ public class CustomSpellForm implements Identifiable,
         factory = template.getFactory();
 
         setSpellStatsTemplates(template.getSpellStats());
-        setDebuffSlotsTemplate(template.getSpellDebuffs());
+        setDebuffSlotsTemplate(template.getSpellSlots());
         subformSlots.setSubformSlotsTemplate(template.getSpellSubforms());
         notifyChange();
     }

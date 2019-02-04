@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.model.spell.generators.SpellSlotI;
-import com.myrran.view.ui.customspell.slot.DebuffSlotView;
+import com.myrran.view.ui.spellbook.slot.DebuffSlotView;
 import com.myrran.view.ui.widgets.DaD.Payload;
 import com.myrran.view.ui.widgets.DaD.Source;
 import com.myrran.view.ui.widgets.DaD.Target;

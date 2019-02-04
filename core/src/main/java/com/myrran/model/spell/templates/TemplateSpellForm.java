@@ -40,7 +40,7 @@ public class TemplateSpellForm implements QuantifiableI, Identifiable, Observabl
     @Override public Integer getAvailable()                     { return available; }
     public SpellFormFactory getFactory()                        { return factory; }
     public List<TemplateSpellStat> getSpellStats()              { return spellStats; }
-    public List<TemplateSpellSlot> getSpellDebuffs()            { return spellDebuffs; }
+    public List<TemplateSpellSlot> getSpellSlots()            { return spellDebuffs; }
     public List<TemplateSpellSlot> getSpellSubforms()           { return spellSubforms; }
 
     @Override public void setID(String id)                      { this.id = id; }

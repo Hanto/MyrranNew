@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.myrran.model.spell.generators.CustomSpellSubform;
 import com.myrran.model.spell.generators.SpellSlotI;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.customspell.slot.SubformSlotView;
+import com.myrran.view.ui.spellbook.slot.SubformSlotView;
 import com.myrran.view.ui.widgets.DaD;
 import com.myrran.view.ui.widgets.DaD.Payload;
 import com.myrran.view.ui.widgets.DaD.Source;
