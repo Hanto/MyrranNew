@@ -3,18 +3,23 @@ package com.myrran.view.ui.customspell.book.customform;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomSpellForm;
+import com.myrran.model.spell.generators.CustomSubformSlot;
 import com.myrran.view.ui.customspell.book.DetailsTable;
-import com.myrran.view.ui.customspell.icon.FormIconView;
 import com.myrran.view.ui.customspell.slot.DebuffSlotsView;
+import com.myrran.view.ui.customspell.slot.SubformSlotView;
 import com.myrran.view.ui.customspell.stats.CustomStatsView;
 import com.myrran.view.ui.customspell.stats.DebuffSlotsStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 /** @author Ivan Delgado Huerta */
-public class CustomFormView extends DetailsTable implements Disposable
+public class CustomSubformSlotView extends DetailsTable implements Disposable, PropertyChangeListener
 {
-    private FormIconView icon;
+    private CustomSubformSlot model;
+
+    private SubformSlotView icon;
     private CustomStatsView formStats;
     private DebuffSlotsStatsView debuffsSlotsStatsView;
     private DebuffSlotsView debuffsSlotsView;
@@ -22,9 +27,9 @@ public class CustomFormView extends DetailsTable implements Disposable
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomFormView(CustomSpellController controller)
+    public CustomSubformSlotView(CustomSpellController controller)
     {
-        icon                    = new FormIconView();
+        icon                    = new SubformSlotView(controller);
         formStats               = new CustomStatsView(controller);
         debuffsSlotsStatsView   = new DebuffSlotsStatsView(controller);
         debuffsSlotsView        = new DebuffSlotsView(controller);
@@ -36,8 +41,15 @@ public class CustomFormView extends DetailsTable implements Disposable
         createLayoutImp();
     }
 
+    private void disposeObservers()
+    {
+        if (model != null)
+            model.removeObserver(this);
+    }
+
     @Override public void dispose()
     {
+        disposeObservers();
         icon.dispose();
         formStats.dispose();
         debuffsSlotsStatsView.dispose();
@@ -47,9 +59,11 @@ public class CustomFormView extends DetailsTable implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSpellForm model)
+    public void setModel(CustomSubformSlot customSubformSlot)
     {
-        if (model == null)
+        disposeObservers();
+
+        if (customSubformSlot == null)
         {
             icon.setModel(null);
             formStats.setModel(null);
@@ -59,10 +73,27 @@ public class CustomFormView extends DetailsTable implements Disposable
         }
         else
         {
-            icon.setModel(model);
-            formStats.setModel(model);
-            debuffsSlotsStatsView.setModel(model.getCustomDebuffSlots());
-            debuffsSlotsView.setModel(model.getCustomDebuffSlots());
+            model = customSubformSlot;
+            model.addObserver(this);
+            update();
+        }
+    }
+
+    private void update()
+    {
+        icon.setModel(model);
+
+        if (model.hasData())
+        {
+            formStats.setModel(model.getContent());
+            debuffsSlotsStatsView.setModel(model.getContent().getCustomDebuffSlots());
+            debuffsSlotsView.setModel(model.getContent().getCustomDebuffSlots());
+        }
+        else
+        {
+            formStats.setModel(null);
+            debuffsSlotsStatsView.setModel(null);
+            debuffsSlotsView.setModel(null);
         }
     }
 
@@ -76,8 +107,14 @@ public class CustomFormView extends DetailsTable implements Disposable
         tableHeader.add(debuffsSlotsView).left().row();
 
         tableDetails.clear();
-        tableDetails.padBottom(4).padLeft(4).padTop(2);
+        tableDetails.padBottom(4).padLeft(4).padBottom(2);
         tableDetails.add(formStats).left().row();
         tableDetails.add(debuffsSlotsStatsView).left().row();
     }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {   update(); }
 }

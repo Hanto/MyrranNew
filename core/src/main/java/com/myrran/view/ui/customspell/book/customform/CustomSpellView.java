@@ -24,7 +24,7 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
 
     private SpellHeaderView header;
     private CustomFormView formView;
-    private List<CustomSubFormSlotView> subForms;
+    private List<CustomSubformSlotView> subForms;
 
     private Table tableDetails;
     private Table tableSubforms;
@@ -62,7 +62,7 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
         formView.dispose();
 
         if (subForms != null)
-            subForms.forEach(CustomSubFormSlotView::dispose);
+            subForms.forEach(CustomSubformSlotView::dispose);
     }
 
     // UPDATE:
@@ -125,9 +125,9 @@ public class CustomSpellView extends Table implements Disposable, DetailedActorI
         subForms.forEach(icon -> tableSubforms.add(icon).left().row());
     }
 
-    private CustomSubFormSlotView addSubformIcons(CustomSubformSlot slot)
+    private CustomSubformSlotView addSubformIcons(CustomSubformSlot slot)
     {
-        CustomSubFormSlotView view = new CustomSubFormSlotView(controller);
+        CustomSubformSlotView view = new CustomSubformSlotView(controller);
         view.setModel(slot);
         return view;
     }

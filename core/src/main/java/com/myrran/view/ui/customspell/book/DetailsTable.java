@@ -31,6 +31,7 @@ public abstract class DetailsTable extends Table implements DetailedActorI
         add(tableHeader).bottom().left().row();
         add(tableDetails).bottom().left().row();
         cellDetails = getCell(tableDetails);
+        showDetails();
     }
 
     // DETAILS:
