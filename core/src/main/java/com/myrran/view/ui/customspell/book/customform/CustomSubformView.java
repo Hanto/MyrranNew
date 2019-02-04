@@ -15,7 +15,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /** @author Ivan Delgado Huerta */
-public class CustomSubformSlotView extends DetailsTable implements Disposable, PropertyChangeListener
+public class CustomSubformView extends DetailsTable implements Disposable, PropertyChangeListener
 {
     private CustomSubformSlot model;
 
@@ -27,7 +27,7 @@ public class CustomSubformSlotView extends DetailsTable implements Disposable, P
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public CustomSubformSlotView(CustomSpellController controller)
+    public CustomSubformView(CustomSpellController controller)
     {
         icon                    = new SubformSlotView(controller);
         formStats               = new CustomStatsView(controller);
@@ -87,7 +87,7 @@ public class CustomSubformSlotView extends DetailsTable implements Disposable, P
         {
             formStats.setModel(model.getContent());
             debuffsSlotsStatsView.setModel(model.getContent().getCustomDebuffSlots());
-            debuffsSlotsView.setModel(model.getContent().getCustomDebuffSlots());
+            debuffsSlotsView.setModel(model.getContent().getDebuffSlots());
         }
         else
         {

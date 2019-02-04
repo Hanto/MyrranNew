@@ -18,7 +18,6 @@ public abstract class DetailsTable extends Table implements DetailedActorI
     {
         tableHeader     = new Table().top().left();
         tableDetails    = new Table().top().left();
-        tableDetails.padBottom(8).padLeft(4);
     }
 
     // CONSTRUCTOR:
@@ -29,7 +28,7 @@ public abstract class DetailsTable extends Table implements DetailedActorI
         clear();
         top().left();
         add(tableHeader).bottom().left().row();
-        add(tableDetails).bottom().left().row();
+        add(tableDetails).top().left().row();
         cellDetails = getCell(tableDetails);
         showDetails();
     }

@@ -14,7 +14,6 @@ import com.myrran.view.ui.widgets.DetailedActorI;
 /** @author Ivan Delgado Huerta */
 public class TemplateSubformView extends DetailsTable implements DetailedActorI, Disposable
 {
-    private TemplateSpellSubform model;
     private CustomSpellController controller;
 
     private DadSubformSource dadSource;
@@ -50,9 +49,9 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(TemplateSpellSubform templateSpellSubform)
+    public void setModel(TemplateSpellSubform model)
     {
-        if (templateSpellSubform == null)
+        if (model == null)
         {
             dadSource.setModel(null);
             header.setModel(null);
@@ -61,7 +60,6 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
         }
         else
         {
-            model = templateSpellSubform;
             dadSource.setModel(model);
             header.setModel(model);
             subformStats.setModel(model.getSpellStats());
@@ -79,9 +77,9 @@ public class TemplateSubformView extends DetailsTable implements DetailedActorI,
         tableHeader.add(header);
 
         tableDetails.clear();
-        tableDetails.add().size(32);
+        tableDetails.add().size(32, 0);
         tableDetails.add(debuffIcons).row();
-        tableDetails.add().size(32);
+        tableDetails.add().size(32, 0);
         tableDetails.add(subformStats);
     }
 }

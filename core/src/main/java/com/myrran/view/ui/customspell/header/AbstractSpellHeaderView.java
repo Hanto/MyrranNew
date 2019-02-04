@@ -76,15 +76,15 @@ public abstract class AbstractSpellHeaderView<T extends ObservableI>
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(T spellForm)
+    public void setModel(T newModel)
     {
         disposeObservers();
 
-        if (spellForm == null)
+        if (newModel == null)
             removeModel();
         else
         {
-            model = spellForm;
+            model = newModel;
             model.addObserver(this);
             update();
         }

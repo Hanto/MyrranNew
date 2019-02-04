@@ -47,26 +47,6 @@ public abstract class AbstractSpellIconView<T extends ObservableI> extends Spell
         corner.setText(null);
     }
 
-    // CREATE LAYOUT:
-    //--------------------------------------------------------------------------------------------------------
-
-    private void createLayout()
-    {
-        float pad = -4;
-
-        Table tableRow2 = new Table().bottom().left();
-        tableRow2.add(name2).left().padTop(pad).padBottom(pad+1);
-        tableRow2.add(corner).expand().fillX().right().padTop(pad).padBottom(pad-6).padRight(2);
-
-        Table table = new Table().bottom().left().padLeft(5).padBottom(8);
-        table.setWidth(64);
-        table.add(name1).left().padTop(pad).padBottom(pad+1).row();
-        table.add(tableRow2).expand().fillX();
-
-        addActor(background);
-        addActor(table);
-    }
-
     // MVC:
     //--------------------------------------------------------------------------------------------------------
 

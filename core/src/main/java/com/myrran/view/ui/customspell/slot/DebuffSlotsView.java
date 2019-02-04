@@ -3,9 +3,7 @@ package com.myrran.view.ui.customspell.slot;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomDebuffSlot;
-import com.myrran.model.spell.generators.CustomSpellDebuff;
-import com.myrran.model.spell.generators.SpellSlotI;
+import com.myrran.model.spell.generators.*;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
 import java.util.Collection;
@@ -17,8 +15,6 @@ import java.util.stream.Collectors;
 public class DebuffSlotsView extends Table implements Disposable
 {
     private CustomSpellController controller;
-
-    private Collection<CustomDebuffSlot> model;
     private List<DebuffSlotView> views;
 
     // CONSTRUCTOR:
@@ -36,29 +32,22 @@ public class DebuffSlotsView extends Table implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(Collection<CustomDebuffSlot> models)
+    public void setModel(CustomDebuffSlotsI model)
     {
         dispose();
 
-        if (models == null)
+        if (model == null)
             clear();
         else
         {
-            model = models;
-            update();
+            clear();
+            views = model.getCustomDebuffSlots().stream()
+                .sorted(Comparator.comparing(CustomDebuffSlot::getID))
+                .map(this::addDebuffIcons)
+                .collect(Collectors.toList());
+
+            views.forEach(view -> add(view).bottom().left());
         }
-    }
-
-    private void update()
-    {
-        clear();
-        top().left();
-        views = model.stream()
-            .sorted(Comparator.comparing(CustomDebuffSlot::getID))
-            .map(this::addDebuffIcons)
-            .collect(Collectors.toList());
-
-        views.forEach(view -> add(view).bottom().left());
     }
 
     private DebuffSlotView addDebuffIcons(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
