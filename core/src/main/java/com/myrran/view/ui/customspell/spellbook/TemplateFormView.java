@@ -1,9 +1,10 @@
-package com.myrran.view.ui.customspell.book;
+package com.myrran.view.ui.customspell.spellbook;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.view.ui.customspell.header.FormHeaderView;
+import com.myrran.view.ui.customspell.spellbook.DetailsTable;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
 /** @author Ivan Delgado Huerta */

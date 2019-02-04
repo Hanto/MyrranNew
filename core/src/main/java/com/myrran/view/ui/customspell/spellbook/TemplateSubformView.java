@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.book;
+package com.myrran.view.ui.customspell.spellbook;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
@@ -7,6 +7,7 @@ import com.myrran.controller.DadSubformSource;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
 import com.myrran.view.ui.customspell.header.SubformHeaderView;
 import com.myrran.view.ui.customspell.icon.DebuffIconsView;
+import com.myrran.view.ui.customspell.spellbook.DetailsTable;
 import com.myrran.view.ui.customspell.stats.TemplateStatsView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedActorI;

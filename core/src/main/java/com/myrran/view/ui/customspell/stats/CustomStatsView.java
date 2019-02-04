@@ -7,7 +7,6 @@ import com.myrran.model.spell.generators.CustomSpellStat;
 import com.myrran.model.spell.generators.CustomSpellStatsI;
 import com.myrran.view.ui.customspell.stats.bar.UpgradeBarListener;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,69 +14,49 @@ import java.util.stream.Collectors;
 /** @author Ivan Delgado Huerta */
 public class CustomStatsView extends Table implements Disposable
 {
-    private CustomSpellStatsI model;
     private CustomSpellController controller;
-
-    private List<CustomStatView> statsViewList = new ArrayList<>();
+    private List<CustomStatView> views;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
     public CustomStatsView(CustomSpellController spellController)
-    {
-        controller = spellController;
-        createLayout();
-    }
+    {   controller = spellController; }
 
     @Override public void dispose()
-    {   statsViewList.forEach(CustomStatView::dispose); }
+    {
+        if (views != null)
+            views.forEach(CustomStatView::dispose);
+    }
 
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomSpellStatsI customSpellStats)
+    public void setModel(CustomSpellStatsI model)
     {
         dispose();
+        clear();
 
-        if (customSpellStats == null)
-            removeModel();
-        else
+        if (model != null)
         {
-            model = customSpellStats;
-            update();
+            clear();
+            views = model.getCustomSpellStats().stream()
+                .sorted(Comparator.comparing(CustomSpellStat::getName))
+                .map(CustomStatView::new)
+                .collect(Collectors.toList());
+
+            views.forEach(row -> add(row).left().bottom().row());
+
+            createListeners(model);
         }
-    }
-
-    private void removeModel()
-    {
-        clear();
-        model = null;
-        statsViewList.clear();
-    }
-
-    private void update()
-    {
-        clear();
-        statsViewList = model.getCustomSpellStats().stream()
-            .sorted(Comparator.comparing(CustomSpellStat::getName))
-            .map(CustomStatView::new)
-            .collect(Collectors.toList());
-
-        statsViewList.forEach(row -> add(row).left().bottom().row());
-        createListeners();
-    }
-
-    private void createLayout()
-    {
-        top().left();
     }
 
     // LISTENERS:
     //--------------------------------------------------------------------------------------------------------
 
-    public void createListeners()
+    private void createListeners(CustomSpellStatsI model)
     {
-        for (CustomStatView view: statsViewList)
+        for (CustomStatView view: views)
         {
             String statID = view.getModel().getID();
             view.getUpgradesView().addListener(new UpgradeBarListener(controller, model, statID));

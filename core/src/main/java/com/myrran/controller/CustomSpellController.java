@@ -103,6 +103,12 @@ public class CustomSpellController
         {   LOG.warn("Cannot remove debuf from slot: %s", slot.getName());}
     }
 
+    public void removeCustomSpellDebuffs(CustomSpellForm customSpellForm)
+    {
+        spellBook.removeCustomSpellDebuffs(customSpellForm);
+        notifyForm(customSpellForm);
+    }
+
     // NOTIFY FORM:
     //--------------------------------------------------------------------------------------------------------
 

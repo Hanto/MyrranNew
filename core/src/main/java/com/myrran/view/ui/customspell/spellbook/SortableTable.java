@@ -165,7 +165,11 @@ public abstract class SortableTable<T> extends Table implements Disposable
 
     public void setModel(Collection<T>data)
     {
-        data.forEach(model -> modelToActorMap.put(model, getActor(model)));
+        dispose();
+        modelToActorMap.clear();
+
+        if (data != null)
+            data.forEach(model -> modelToActorMap.put(model, getActor(model)));
 
         sortModel();
         showDetails();

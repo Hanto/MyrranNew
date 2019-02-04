@@ -35,16 +35,15 @@ public class DebuffSlotsStatsView extends Table implements Disposable
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
-    public void setModel(CustomDebuffSlotsI models)
+    public void setModel(CustomDebuffSlotsI model)
     {
         dispose();
+        clear();
 
-        if (models == null)
-            clear();
-        else
+        if (model != null)
         {
             clear();
-            views = models.getCustomDebuffSlots().stream()
+            views = model.getCustomDebuffSlots().stream()
                 .sorted(Comparator.comparing(CustomDebuffSlot::getID))
                 .map(this::addDebuffSlotStatsView)
                 .collect(Collectors.toList());
@@ -52,6 +51,9 @@ public class DebuffSlotsStatsView extends Table implements Disposable
             views.forEach(view -> add(view).bottom().left().row());
         }
     }
+
+    // HELPER:
+    //--------------------------------------------------------------------------------------------------------
 
     private DebuffSlotStatsView addDebuffSlotStatsView(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {

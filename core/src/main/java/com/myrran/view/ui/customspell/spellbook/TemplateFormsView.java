@@ -5,12 +5,11 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.customspell.book.TemplateFormView;
 
 import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
-public class SpellBookFormView extends SortableTable<TemplateSpellForm>
+public class TemplateFormsView extends SortableTable<TemplateSpellForm>
 {
     private CustomSpellBook model;
     private CustomSpellController controller;
@@ -18,7 +17,7 @@ public class SpellBookFormView extends SortableTable<TemplateSpellForm>
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellBookFormView(CustomSpellController spellController)
+    public TemplateFormsView(CustomSpellController spellController)
     {
         controller  = spellController;
 
@@ -31,25 +30,6 @@ public class SpellBookFormView extends SortableTable<TemplateSpellForm>
         build("SpellForm SpellBook", true);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
-
-    // CREATE / UPDATE:
-    //--------------------------------------------------------------------------------------------------------
-
-    public void setModel(CustomSpellBook customSpellBook)
-    {
-        dispose();
-
-        if (customSpellBook == null)
-            removeModel();
-        else
-        {
-            model = customSpellBook;
-            setModel(model.getFormTemplatesLearned());
-        }
-    }
-
-    private void removeModel() {}
-    private void update() {}
 
     // HELPER:
     //--------------------------------------------------------------------------------------------------------

@@ -12,11 +12,11 @@ import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.customspell.book.CustomSpellView;
-import com.myrran.view.ui.customspell.spellbook.SpellBookSpellsView;
-import com.myrran.view.ui.customspell.spellbook.SpellBookDebuffView;
-import com.myrran.view.ui.customspell.spellbook.SpellBookFormView;
-import com.myrran.view.ui.customspell.spellbook.SpellBookSubformView;
+import com.myrran.view.ui.customspell.spellbook.CustomSpellView;
+import com.myrran.view.ui.customspell.spellbook.CustomSpellsView;
+import com.myrran.view.ui.customspell.spellbook.TemplateDebuffsView;
+import com.myrran.view.ui.customspell.spellbook.TemplateFormsView;
+import com.myrran.view.ui.customspell.spellbook.TemplateSubformsView;
 import com.myrran.view.ui.widgets.WidgetText;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,23 +54,23 @@ public class ZMain extends ApplicationAdapter
 			spell = book.getCustomSpellForm("SpellForm_00");
 			controller = new CustomSpellController(book);
 
-			SpellBookDebuffView bookDebuff = new SpellBookDebuffView(controller);
-			bookDebuff.setModel(book);
+			TemplateDebuffsView bookDebuff = new TemplateDebuffsView(controller);
+			bookDebuff.setModel(book.getDebuffsTemplatesLearned());
 			uiStage.addActor(bookDebuff);
 			bookDebuff.setPosition(10, 515);
 
-			SpellBookFormView bookForm = new SpellBookFormView(controller);
-			bookForm.setModel(book);
+			TemplateFormsView bookForm = new TemplateFormsView(controller);
+			bookForm.setModel(book.getFormTemplatesLearned());
 			uiStage.addActor(bookForm);
 			bookForm.setPosition(10, 590);
 
-			SpellBookSubformView bookSubform = new SpellBookSubformView(controller);
-			bookSubform.setModel(book);
+			TemplateSubformsView bookSubform = new TemplateSubformsView(controller);
+			bookSubform.setModel(book.getSubformTemplatesLearned());
 			uiStage.addActor(bookSubform);
 			bookSubform.setPosition(10, 350);
 
-			SpellBookSpellsView bookSpells = new SpellBookSpellsView(controller);
-			bookSpells.setModel(book);
+			CustomSpellsView bookSpells = new CustomSpellsView(controller);
+			bookSpells.setModel(book.getCustomSpellForms());
 			uiStage.addActor(bookSpells);
 			bookSpells.setPosition(280, 590);
 

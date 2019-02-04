@@ -34,10 +34,9 @@ public class DebuffSlotsView extends Table implements Disposable
     public void setModel(CustomDebuffSlotsI model)
     {
         dispose();
+        clear();
 
-        if (model == null)
-            clear();
-        else
+        if (model != null)
         {
             clear();
             views = model.getCustomDebuffSlots().stream()
@@ -48,6 +47,9 @@ public class DebuffSlotsView extends Table implements Disposable
             views.forEach(view -> add(view).bottom().left());
         }
     }
+
+    // HELPER:
+    //--------------------------------------------------------------------------------------------------------
 
     private DebuffSlotView addDebuffSlotView(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {

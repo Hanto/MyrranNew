@@ -1,20 +1,13 @@
-package com.myrran.view.ui.customspell.book;
+package com.myrran.view.ui.customspell.spellbook;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.model.spell.generators.CustomSubformSlot;
-import com.myrran.view.ui.customspell.book.DetailsTable;
-import com.myrran.view.ui.customspell.book.customform.CustomFormView;
-import com.myrran.view.ui.customspell.book.customform.CustomSubformsView;
+import com.myrran.view.ui.customspell.spellbook.customspell.CustomFormView;
+import com.myrran.view.ui.customspell.spellbook.customspell.CustomSubformsView;
 import com.myrran.view.ui.customspell.header.SpellHeaderView;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /** @author Ivan Delgado Huerta */
 public class CustomSpellView extends DetailsTable implements Disposable
@@ -57,8 +50,6 @@ public class CustomSpellView extends DetailsTable implements Disposable
 
     public void setModel(CustomSpellForm model)
     {
-        //dispose();
-
         if (model == null)
         {
             formView.setModel(null);

@@ -4,13 +4,12 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.customspell.book.CustomSpellView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 
 import java.util.Comparator;
 
 /** @author Ivan Delgado Huerta */
-public class SpellBookSpellsView extends SortableTable<CustomSpellForm>
+public class CustomSpellsView extends SortableTable<CustomSpellForm>
 {
     private CustomSpellBook model;
     private CustomSpellController controller;
@@ -18,7 +17,7 @@ public class SpellBookSpellsView extends SortableTable<CustomSpellForm>
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SpellBookSpellsView(CustomSpellController spellController)
+    public CustomSpellsView(CustomSpellController spellController)
     {
         controller = spellController;
 
@@ -30,25 +29,6 @@ public class SpellBookSpellsView extends SortableTable<CustomSpellForm>
         build("Spells", true, 500, 400);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
-
-    // CREATE / UPDATE:
-    //--------------------------------------------------------------------------------------------------------
-
-    public void setModel(CustomSpellBook customSpellBook)
-    {
-        dispose();
-
-        if (customSpellBook == null)
-            removeModel();
-        else
-        {
-            model = customSpellBook;
-            setModel(model.getCustomSpellForms());
-        }
-    }
-
-    private void removeModel() {}
-    private void update() {}
 
     // HELPER:
     //--------------------------------------------------------------------------------------------------------

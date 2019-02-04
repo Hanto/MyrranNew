@@ -1,4 +1,4 @@
-package com.myrran.view.ui.customspell.book.customform;
+package com.myrran.view.ui.customspell.spellbook.customspell;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;

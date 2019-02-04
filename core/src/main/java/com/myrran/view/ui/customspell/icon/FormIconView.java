@@ -1,12 +1,19 @@
 package com.myrran.view.ui.customspell.icon;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.listeners.TouchDownListener;
+import com.myrran.view.ui.listeners.TouchDownRightListener;
 
 /** @author Ivan Delgado Huerta */
 public class FormIconView extends AbstractSpellIconView<CustomSpellForm>
 {
+    public FormIconView(CustomSpellController controller)
+    {   addListener(new TouchDownRightListener(event -> controller.removeCustomSpellDebuffs(model))); }
+
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 

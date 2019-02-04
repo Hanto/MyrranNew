@@ -170,6 +170,12 @@ public class CustomSpellBook
         formTemplatesLearned.returnBack(spellForm.getTemplateID());
     }
 
+    public void removeCustomSpellDebuffs(CustomSpellForm spellForm)
+    {
+        for (SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot: spellForm.getDebuffSlots().getCustomDebuffSlots())
+            removeCustomSpellDebuff(slot);
+    }
+
     public void removeCustomSpellDebuff(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
         if (slot.hasData())
