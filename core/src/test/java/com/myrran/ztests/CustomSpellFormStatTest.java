@@ -70,7 +70,6 @@ public class CustomSpellFormStatTest
         }
     }
 
-
     @SuppressWarnings("unchecked")
     private static <T extends Object>T unmarshal(Class<T> classz) throws JAXBException
     {

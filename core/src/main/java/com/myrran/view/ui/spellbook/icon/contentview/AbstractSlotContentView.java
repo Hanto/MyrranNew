@@ -1,6 +1,8 @@
 package com.myrran.view.ui.spellbook.icon.contentview;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.components.observable.ObservableI;
 import com.myrran.model.spell.generators.SpellSlotI;
@@ -66,10 +68,19 @@ public abstract class AbstractSlotContentView<U extends ObservableI, V> extends 
     //--------------------------------------------------------------------------------------------------------
 
     public void setLockColor(Color color)
-    {   setName1Color(color); }
+    {
+        setName1Color(color);
+        name1.addAction(Actions.forever(Actions.sequence(
+            Actions.fadeOut(0.2f, Interpolation.circleIn),
+            Actions.fadeIn(1.0f, Interpolation.circleOut))));
+    }
 
     public void setDefaultLockColor()
-    {   setName1Color(model.hasData() ? Color.ORANGE : Color.LIGHT_GRAY); }
+    {
+        name1.clearActions();
+        name1.addAction(Actions.fadeIn(0.4f));
+        setName1Color(model.hasData() ? Color.ORANGE : Color.LIGHT_GRAY);
+    }
 
     // MVC:
     //--------------------------------------------------------------------------------------------------------

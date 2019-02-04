@@ -51,7 +51,6 @@ public class SubformSlotContentView extends AbstractSlotContentView<CustomSpellS
         else
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/IconoVacio2"));
-            setCorner("0");
             setName1(model.getLock().toString().toLowerCase());
             setName1Color(Color.LIGHT_GRAY);
         }
