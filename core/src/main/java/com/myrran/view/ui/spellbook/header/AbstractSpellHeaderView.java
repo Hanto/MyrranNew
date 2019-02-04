@@ -58,7 +58,7 @@ public abstract class AbstractSpellHeaderView<T extends ObservableI>
         iconBackground  = new WidgetImage();
         availableTotal  = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
         keys            = new WidgetText(font10, Color.WHITE, Color.BLACK, 1);
-        name            = new WidgetText(font20, Color.ORANGE, Color.BLACK, 1);
+        name            = new WidgetText(font20, Color.ORANGE, Color.BLACK, 2);
         cost            = new WidgetText(font14, magenta, Color.BLACK, 1);
 
         createLayout();

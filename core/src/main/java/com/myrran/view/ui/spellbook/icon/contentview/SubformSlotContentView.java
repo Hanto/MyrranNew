@@ -43,16 +43,17 @@ public class SubformSlotContentView extends AbstractSlotContentView<CustomSpellS
         if (model.hasData())
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/FireBall2"));
-            Integer baseAndStats = contentModel.getStatCost() + contentModel.getBaseCost();
-            setCorner(baseAndStats.toString());
             setName1(contentModel.getName());
             setName1Color(Color.ORANGE);
+            Integer baseAndStats = contentModel.getStatCost() + contentModel.getBaseCost();
+            setCorner(baseAndStats.toString());
         }
         else
         {
             setBackground(Atlas.get().getTexture("TexturasIconos/IconoVacio2"));
             setName1(model.getLock().toString().toLowerCase());
             setName1Color(Color.LIGHT_GRAY);
+            setCorner(null);
         }
     }
 }
