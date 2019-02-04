@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.customspell.book.customform.CustomSpellView;
+import com.myrran.view.ui.customspell.book.CustomSpellView;
 import com.myrran.view.ui.listeners.TouchDownListener;
 
 import java.util.Comparator;

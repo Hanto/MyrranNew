@@ -86,7 +86,7 @@ public class CustomSubformView extends DetailsTable implements Disposable, Prope
         if (model.hasData())
         {
             formStats.setModel(model.getContent());
-            debuffsSlotsStatsView.setModel(model.getContent().getCustomDebuffSlots());
+            debuffsSlotsStatsView.setModel(model.getContent().getDebuffSlots());
             debuffsSlotsView.setModel(model.getContent().getDebuffSlots());
         }
         else

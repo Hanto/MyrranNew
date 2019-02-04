@@ -6,7 +6,6 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.*;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,14 +42,14 @@ public class DebuffSlotsView extends Table implements Disposable
             clear();
             views = model.getCustomDebuffSlots().stream()
                 .sorted(Comparator.comparing(CustomDebuffSlot::getID))
-                .map(this::addDebuffIcons)
+                .map(this::addDebuffSlotView)
                 .collect(Collectors.toList());
 
             views.forEach(view -> add(view).bottom().left());
         }
     }
 
-    private DebuffSlotView addDebuffIcons(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
+    private DebuffSlotView addDebuffSlotView(SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> slot)
     {
         DebuffSlotView icon = new DebuffSlotView(controller);
         icon.setModel(slot);

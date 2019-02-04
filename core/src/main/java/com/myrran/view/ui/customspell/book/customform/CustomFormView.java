@@ -61,8 +61,8 @@ public class CustomFormView extends DetailsTable implements Disposable
         {
             icon.setModel(model);
             formStats.setModel(model);
-            debuffsSlotsStatsView.setModel(model.getCustomDebuffSlots());
-            debuffsSlotsView.setModel(model.getCustomDebuffSlots());
+            debuffsSlotsStatsView.setModel(model.getDebuffSlots());
+            debuffsSlotsView.setModel(model.getDebuffSlots());
         }
     }
 
