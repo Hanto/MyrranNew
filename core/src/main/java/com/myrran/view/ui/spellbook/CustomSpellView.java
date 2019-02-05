@@ -1,17 +1,14 @@
 package com.myrran.view.ui.spellbook;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.listeners.ActorMoveListener;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.customspell.CustomFormView;
 import com.myrran.view.ui.spellbook.customspell.CustomSubformsView;
 import com.myrran.view.ui.spellbook.header.SpellHeaderView;
-import com.myrran.view.ui.listeners.ActorMoveListener;
-import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.DetailedTable;
 
 /** @author Ivan Delgado Huerta */
@@ -20,6 +17,8 @@ public class CustomSpellView extends DetailedTable implements Disposable
     private SpellHeaderView header;
     private CustomFormView formView;
     private CustomSubformsView subForms;
+
+    private static final int MINWIDTH = 348;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -35,7 +34,7 @@ public class CustomSpellView extends DetailedTable implements Disposable
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.3f));
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.55f));
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.90f));
 
         createLayout();
         createLayoutImp();
@@ -76,14 +75,12 @@ public class CustomSpellView extends DetailedTable implements Disposable
     private void createLayoutImp()
     {
         tableHeader.clear();
-        tableHeader.add(header);
+        tableHeader.add(header).minWidth(MINWIDTH);
 
         tableDetails.clear();
         tableDetails.top().left();;
 
-        //tableDetails.add().size(32, 0);
-        tableDetails.add(formView).top().left().row();
-        //tableDetails.add().size(32, 0);
+        tableDetails.add(formView).minWidth(MINWIDTH).top().left().row();
         tableDetails.add(subForms).top().left().row();
     }
 }

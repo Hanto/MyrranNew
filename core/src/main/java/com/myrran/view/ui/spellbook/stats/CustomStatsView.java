@@ -39,7 +39,8 @@ public class CustomStatsView extends Table implements Disposable
 
         if (model != null)
         {
-            clear();
+            padLeft(4);
+
             views = model.getCustomSpellStats().stream()
                 .sorted(Comparator.comparing(CustomSpellStat::getName))
                 .map(CustomStatView::new)

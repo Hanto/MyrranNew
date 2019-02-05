@@ -8,6 +8,7 @@ import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.header.FormHeaderView;
 import com.myrran.view.ui.spellbook.icon.iconview.SlotIconsView;
 import com.myrran.view.ui.spellbook.stats.TemplateStatsView;
+import com.myrran.view.ui.spellbook.stats.StatHeader;
 import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.DetailedTable;
 
@@ -18,6 +19,8 @@ public class TemplateFormView extends DetailedTable implements DetailedActorI, D
     private TemplateStatsView subformStats;
     private SlotIconsView debuffIcons;
     private SlotIconsView subformIcons;
+
+    private static final int MINWIDTH = 245;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -32,7 +35,7 @@ public class TemplateFormView extends DetailedTable implements DetailedActorI, D
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
         tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.3f));
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.75f));
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
 
         createLayout();
     }
@@ -71,14 +74,12 @@ public class TemplateFormView extends DetailedTable implements DetailedActorI, D
     private void createLayoutImp()
     {
         tableHeader.clear();
-        tableHeader.add(header);
+        tableHeader.add(header).minWidth(MINWIDTH);
 
         tableDetails.clear();
-        //tableDetails.add().size(32, 0);
-        tableDetails.add(subformStats).padBottom(4).row();
-        //tableDetails.add().size(32, 0);
+        tableDetails.add(new StatHeader().createTemplateStatsHeader()).left().row();
+        tableDetails.add(subformStats).minWidth(MINWIDTH).row();
         tableDetails.add(debuffIcons).left().row();
-        //tableDetails.add().size(32, 0);
         tableDetails.add(subformIcons).left().row();
     }
 }

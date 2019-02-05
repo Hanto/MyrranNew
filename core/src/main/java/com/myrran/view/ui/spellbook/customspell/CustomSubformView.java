@@ -4,12 +4,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSubformSlot;
-import com.myrran.view.ui.spellbook.stats.CustomStatsView;
-import com.myrran.view.ui.spellbook.stats.DebuffSlotsStatsView;
-import com.myrran.view.ui.widgets.DetailedTable;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.icon.contentview.DebuffSlotsContentView;
 import com.myrran.view.ui.spellbook.icon.contentview.SubformSlotContentView;
-import com.myrran.view.ui.listeners.TouchDownListener;
+import com.myrran.view.ui.spellbook.stats.CustomStatsView;
+import com.myrran.view.ui.spellbook.stats.DebuffSlotsStatsView;
+import com.myrran.view.ui.spellbook.stats.StatHeader;
+import com.myrran.view.ui.widgets.DetailedTable;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -20,6 +21,7 @@ public class CustomSubformView extends DetailedTable implements Disposable, Prop
     private CustomSubformSlot model;
 
     private SubformSlotContentView icon;
+    private StatHeader statHeader;
     private CustomStatsView formStats;
     private DebuffSlotsStatsView debuffsSlotsStatsView;
     private DebuffSlotsContentView debuffsSlotsView;
@@ -30,6 +32,7 @@ public class CustomSubformView extends DetailedTable implements Disposable, Prop
     public CustomSubformView(CustomSpellController controller)
     {
         icon                    = new SubformSlotContentView(controller);
+        statHeader              = new StatHeader();
         formStats               = new CustomStatsView(controller);
         debuffsSlotsStatsView   = new DebuffSlotsStatsView(controller);
         debuffsSlotsView        = new DebuffSlotsContentView(controller);
@@ -85,15 +88,19 @@ public class CustomSubformView extends DetailedTable implements Disposable, Prop
 
         if (model.hasData())
         {
+            statHeader.createCustomStatsHeader();
             formStats.setModel(model.getContent());
             debuffsSlotsStatsView.setModel(model.getContent().getDebuffSlots());
             debuffsSlotsView.setModel(model.getContent().getDebuffSlots());
+            tableDetails.padBottom(4);
         }
         else
         {
+            statHeader.clearTable();
             formStats.setModel(null);
             debuffsSlotsStatsView.setModel(null);
             debuffsSlotsView.setModel(null);
+            tableDetails.padBottom(0);
         }
     }
 
@@ -107,7 +114,7 @@ public class CustomSubformView extends DetailedTable implements Disposable, Prop
         tableHeader.add(debuffsSlotsView).left().row();
 
         tableDetails.clear();
-        tableDetails.padBottom(4).padLeft(4).padBottom(2);
+        tableDetails.add(statHeader).left().row();
         tableDetails.add(formStats).left().row();
         tableDetails.add(debuffsSlotsStatsView).left().row();
     }

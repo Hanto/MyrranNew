@@ -3,15 +3,12 @@ package com.myrran.view.ui.widgets;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.widgets.DetailedActorI;
-import com.myrran.view.ui.widgets.WidgetText;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -68,7 +65,6 @@ public abstract class SortableTable<T> extends Table implements Disposable
         if (width != 0 || height != 0)
         {
             scrollPane = new ScrollPane(contentTable);
-            scrollPane.setTouchable(Touchable.childrenOnly);
             scrollPaneWidth = width;
             scrollPaneHeight = height;
         }

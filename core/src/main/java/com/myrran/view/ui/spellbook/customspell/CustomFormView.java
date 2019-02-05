@@ -4,12 +4,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
+import com.myrran.view.ui.listeners.TouchDownListener;
+import com.myrran.view.ui.spellbook.icon.contentview.DebuffSlotsContentView;
 import com.myrran.view.ui.spellbook.icon.iconview.FormIconView;
 import com.myrran.view.ui.spellbook.stats.CustomStatsView;
 import com.myrran.view.ui.spellbook.stats.DebuffSlotsStatsView;
+import com.myrran.view.ui.spellbook.stats.StatHeader;
 import com.myrran.view.ui.widgets.DetailedTable;
-import com.myrran.view.ui.spellbook.icon.contentview.DebuffSlotsContentView;
-import com.myrran.view.ui.listeners.TouchDownListener;
 
 /** @author Ivan Delgado Huerta */
 public class CustomFormView extends DetailedTable implements Disposable
@@ -63,6 +64,7 @@ public class CustomFormView extends DetailedTable implements Disposable
             formStats.setModel(model);
             debuffsSlotsStatsView.setModel(model.getDebuffSlots());
             debuffsSlotsView.setModel(model.getDebuffSlots());
+            tableDetails.padBottom(4);
         }
     }
 
@@ -76,7 +78,7 @@ public class CustomFormView extends DetailedTable implements Disposable
         tableHeader.add(debuffsSlotsView).left().row();
 
         tableDetails.clear();
-        tableDetails.padBottom(4).padLeft(4).padTop(2);
+        tableDetails.add(new StatHeader().createCustomStatsHeader()).left().row();
         tableDetails.add(formStats).left().row();
         tableDetails.add(debuffsSlotsStatsView).left().row();
     }

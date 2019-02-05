@@ -74,6 +74,7 @@ public class Atlas implements Disposable
         textureAtlas = assetManager.get("Atlas/Atlas.Atlas", TextureAtlas.class);
 
         addNinePatch("TexturasIconos/IconoVacioNine");
+        addNinePatch("TexturasIconos/IconoVacioNine2");
 
         addTexture("TexturasIconos/IconoVacio2");
         addTexture("TexturasIconos/FireBall2");
@@ -120,7 +121,7 @@ public class Atlas implements Disposable
 
     public NinePatchDrawable getNinePatchDrawable(String name, float alpha)
     {
-        NinePatch ninePatch = getNinePatch("TexturasIconos/IconoVacioNine");
+        NinePatch ninePatch = getNinePatch(name);
         return new NinePatchDrawable(ninePatch).tint(new Color(1, 1, 1, alpha));
     }
 }

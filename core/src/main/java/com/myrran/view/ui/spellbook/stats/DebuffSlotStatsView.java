@@ -109,7 +109,7 @@ public class DebuffSlotStatsView extends Table implements PropertyChangeListener
         header.add(totalCost).bottom().right().padBottom(vPad).row();
 
         top().left();
-        add(header).left().row();
+        add(header).padLeft(4).left().row();
         add(stats);
     }
 
