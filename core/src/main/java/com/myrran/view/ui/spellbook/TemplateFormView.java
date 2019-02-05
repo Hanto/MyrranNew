@@ -3,6 +3,7 @@ package com.myrran.view.ui.spellbook;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.templates.TemplateSpellForm;
+import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.header.FormHeaderView;
 import com.myrran.view.ui.spellbook.icon.iconview.SlotIconsView;
@@ -29,6 +30,10 @@ public class TemplateFormView extends DetailedTable implements DetailedActorI, D
         subformIcons    = new SlotIconsView();
 
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
+
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.3f));
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.75f));
+
         createLayout();
     }
 
@@ -69,11 +74,11 @@ public class TemplateFormView extends DetailedTable implements DetailedActorI, D
         tableHeader.add(header);
 
         tableDetails.clear();
-        tableDetails.add().size(32, 0);
+        //tableDetails.add().size(32, 0);
         tableDetails.add(subformStats).padBottom(4).row();
-        tableDetails.add().size(32, 0);
+        //tableDetails.add().size(32, 0);
         tableDetails.add(debuffIcons).left().row();
-        tableDetails.add().size(32, 0);
+        //tableDetails.add().size(32, 0);
         tableDetails.add(subformIcons).left().row();
     }
 }

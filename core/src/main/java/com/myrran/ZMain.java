@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
@@ -65,15 +67,15 @@ public class ZMain extends ApplicationAdapter
             uiStage.addActor(bookForm);
             bookForm.setPosition(10, 200);
 
-            CustomSpellsView bookSpells = new CustomSpellsView(controller);
-            bookSpells.setModel(book.getCustomSpellForms());
-            uiStage.addActor(bookSpells);
-            bookSpells.setPosition(280, 590);
-
             CustomSpellView formView2 = new CustomSpellView(controller);
             uiStage.addActor(formView2);
             formView2.setModel(spell);
             formView2.setPosition(600, 597);
+
+            CustomSpellsView bookSpells = new CustomSpellsView(controller);
+            bookSpells.setModel(book.getCustomSpellForms());
+            uiStage.addActor(bookSpells);
+            bookSpells.setPosition(280, 290);
 
             uiStage.addActor(fps);
 

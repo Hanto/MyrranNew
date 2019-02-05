@@ -3,6 +3,7 @@ package com.myrran.view.ui.widgets;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.widgets.DetailedActorI;
 
 /** @author Ivan Delgado Huerta */
