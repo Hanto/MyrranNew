@@ -1,12 +1,9 @@
 package com.myrran.view.ui.spellbook;
 
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.SortableTable;
 
@@ -30,7 +27,7 @@ public class CustomSpellsView extends SortableTable<CustomSpellForm>
         addSortOption("dslots", Comparator.comparing(form -> form.getDebuffSlots().getCustomDebuffSlots().size()));
         addSortOption("cost", Comparator.comparing(CustomSpellForm::getTotalCost));
 
-        build("Spells", true, 370, 400);
+        build("Spells", true, 348+8, 400);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 

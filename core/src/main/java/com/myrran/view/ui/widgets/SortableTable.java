@@ -3,6 +3,7 @@ package com.myrran.view.ui.widgets;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
@@ -19,6 +20,7 @@ public abstract class SortableTable<T> extends Table implements Disposable
     // SORT OPTIONS:
     //--------------------------------------------------------------------------------------------------------
 
+    protected Table rootTable;
     private Table optionsTable;
     private SortOptions actualSortOptions;
     private boolean detailsVisible = false;
@@ -54,11 +56,14 @@ public abstract class SortableTable<T> extends Table implements Disposable
 
     protected void build(String text, boolean movable, float width, float height)
     {
+        rootTable       = new Table().top().left();
+        optionsTable    = new Table().top().left();
+        contentTable    = new Table().top().left();
         name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 2);
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
-        contentTable    = new Table();
 
+        rootTable.setTouchable(Touchable.enabled);
         reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 
@@ -70,10 +75,16 @@ public abstract class SortableTable<T> extends Table implements Disposable
         }
 
         if (movable)
-            name.addListener(new ActorMoveListener(this));
+        {
+            optionsTable.setTouchable(Touchable.enabled);
+            optionsTable.addListener(new ActorMoveListener(this));
+        }
 
         createOptionsLayout();
         createLayout();
+
+        rootTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.2f));
+        optionsTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.2f));
     }
 
     @Override public void dispose()
@@ -133,15 +144,18 @@ public abstract class SortableTable<T> extends Table implements Disposable
 
     private void createOptionsLayout()
     {
-        optionsTable = new Table().top().left();
-        optionsTable.add(showDetailsText).minWidth(80).bottom().left();
+        optionsTable.add(name).padBottom(-8).padTop(-4).left().row();
+
+        Table sortOptionsTable = new Table().top().left();
+
+        sortOptionsTable.add(showDetailsText).minWidth(80).bottom().left();
 
         sortMap.values().stream()
             .sorted(Comparator.comparing(sortOption -> sortOption.insertOrder))
-            .forEach(sortOption -> optionsTable.add(sortOption.widgetText));
+            .forEach(sortOption -> sortOptionsTable.add(sortOption.widgetText));
 
-        optionsTable.add(reverseOrderText);
-        optionsTable.row();
+        sortOptionsTable.add(reverseOrderText);
+        optionsTable.add(sortOptionsTable);
     }
 
     // CONTENT LAYOUT:
@@ -151,9 +165,15 @@ public abstract class SortableTable<T> extends Table implements Disposable
     {
         clear();
         top().left();
-        add(name).top().left().padBottom(-8).padTop(-8).row();
-        add(optionsTable).top().left().row();
-        add(scrollPane == null ? contentTable : scrollPane).size(scrollPaneWidth, scrollPaneHeight).top().left().row();
+
+        rootTable.add(optionsTable).fillX().top().left().row();
+
+        if (scrollPane == null)
+            rootTable.add(contentTable).top().left().row();
+        else
+            rootTable.add(scrollPane).size(scrollPaneWidth, scrollPaneHeight).top().left().row();
+
+        add(rootTable);
     }
 
     // UPDATE:

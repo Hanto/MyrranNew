@@ -1,14 +1,15 @@
 package com.myrran.view.ui.widgets;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.myrran.view.ui.Atlas;
-import com.myrran.view.ui.widgets.DetailedActorI;
+import com.myrran.view.ui.listeners.TouchDownListener;
 
 /** @author Ivan Delgado Huerta */
 public abstract class DetailedTable extends Table implements DetailedActorI
 {
+    protected Table rootTable;
     protected Table tableHeader;
     protected Table tableDetails;
 
@@ -17,8 +18,12 @@ public abstract class DetailedTable extends Table implements DetailedActorI
 
     public DetailedTable()
     {
+        rootTable       = new Table().top().left();
         tableHeader     = new Table().top().left();
         tableDetails    = new Table().top().left();
+
+        rootTable.setTouchable(Touchable.enabled);
+        rootTable.addListener(new TouchDownListener(e -> this.toFront()));
     }
 
     // CONSTRUCTOR:
@@ -28,9 +33,12 @@ public abstract class DetailedTable extends Table implements DetailedActorI
     {
         clear();
         top().left();
-        add(tableHeader).bottom().left().row();
-        add(tableDetails).top().left().row();
-        cellDetails = getCell(tableDetails);
+
+        rootTable.add(tableHeader).bottom().left().row();
+        rootTable.add(tableDetails).top().left().row();
+        cellDetails = rootTable.getCell(tableDetails);
+
+        add(rootTable);
         showDetails();
     }
 
