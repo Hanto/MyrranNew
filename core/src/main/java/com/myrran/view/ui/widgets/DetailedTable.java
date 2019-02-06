@@ -13,7 +13,6 @@ public abstract class DetailedTable extends Table implements DetailedActorI
     protected Table tableHeader;
     protected Table tableDetails;
 
-
     private boolean detailsVisible = false;
     private Cell<Actor> cellDetails;
 
