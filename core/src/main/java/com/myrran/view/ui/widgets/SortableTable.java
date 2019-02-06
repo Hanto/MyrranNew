@@ -95,8 +95,8 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         Table header = new Table().top().left();
 
         header.add(name).padLeft(5).left();
-        header.add(minimize).expand().padTop(2).right();
-        header.add(maximize).right().padTop(2).row();
+        header.add(minimize).expand().right();
+        header.add(maximize).right().row();
 
         tableHeader.add(header).minWidth(250).left().row();
     }
