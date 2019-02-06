@@ -29,13 +29,15 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
     private WidgetText closeDetailsText;
     private WidgetText reverseOrderText;
     private Map<String, SortOptions> sortMap = new HashMap<>();
+    private WidgetImage minimize;
+    private WidgetImage maximize;
+    private Table sortOptionsTable = new Table().bottom().left();
 
     // CONTENT:
     //--------------------------------------------------------------------------------------------------------
 
+
     private ScrollPane scrollPane;
-    private float scrollPaneWidth = 0;
-    private float scrollPaneHeight = 0;
     private WidgetText name;
     private Map<T, Actor> modelToActorMap = new HashMap<>();
     private List<Actor> sortedActors;
@@ -65,25 +67,26 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         closeDetailsText= new WidgetText(HIDE, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
-
+        minimize        = new WidgetImage(Atlas.get().getTexture("TexturasMisc/RebindOff"));
+        maximize        = new WidgetImage(Atlas.get().getTexture("TexturasMisc/RebindOff"));
 
         rootTable.setTouchable(Touchable.enabled);
         reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails(true)));
         closeDetailsText.addListener(new TouchDownListener(o -> setShowDetails(false)));
-        name.addListener(new TouchDownListener(event ->
+        minimize.addListener(new TouchDownListener(event ->
         {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));
 
         if (width != 0 || height != 0)
         {
             scrollPane = new ScrollPane(tableContent);
+            tableDetails.add(sortOptionsTable).expand().fillX().left().row();
             tableDetails.add(scrollPane).size(width, height);
-            scrollPaneWidth = width;
-            scrollPaneHeight = height;
         }
         else
         {
-            tableDetails = tableContent;
+            tableDetails.add(sortOptionsTable).expand().fillX().left().row();
+            tableDetails.add(tableContent);
         }
 
         if (movable)
@@ -95,8 +98,9 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         createOptionsLayout();
         createLayout();
 
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.2f));
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.2f));
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.85f));
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.85f));
+        sortOptionsTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.85f));
     }
 
     @Override public void dispose()
@@ -149,7 +153,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
 
     private void createOptionsLayout()
     {
-        Table sortOptionsTable = new Table().top().left();
+        //sortOptionsTable = new Table().top().left();
 
         sortOptionsTable.add(showDetailsText).bottom().left();
         sortOptionsTable.add(closeDetailsText).bottom().left();
@@ -160,8 +164,14 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
 
         sortOptionsTable.add(reverseOrderText).bottom().left();
 
-        tableHeader.add(name).padBottom(-8).padLeft(3).left().row();
-        tableHeader.add(sortOptionsTable).padLeft(3).minWidth(249);
+        Table header = new Table().top().left();
+
+        header.add(name).padLeft(3).left();
+        header.add(minimize).expand().padTop(2).right();
+        header.add(maximize).right().padTop(2).row();
+
+        tableHeader.add(header).minWidth(250).left().row();
+        //tableContent.add(sortOptionsTable).padLeft(3).minWidth(249);
     }
 
     // UPDATE:

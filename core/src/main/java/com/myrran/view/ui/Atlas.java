@@ -76,6 +76,8 @@ public class Atlas implements Disposable
         addNinePatch("TexturasIconos/IconoVacioNine");
         addNinePatch("TexturasIconos/IconoVacioNine2");
 
+        addTexture("TexturasMisc/RebindOn");
+        addTexture("TexturasMisc/RebindOff");
         addTexture("TexturasIconos/IconoVacio2");
         addTexture("TexturasIconos/FireBall2");
         addTexture("TexturasMisc/RebindOn");
@@ -85,6 +87,7 @@ public class Atlas implements Disposable
         addTexture("TexturasMisc/CasillaTalentoFondo");
         addTexture("TexturasMisc/CasillaTalento");
         addTexture("TexturasMisc/Casillero2");
+
         addFont("8");
         addFont("10");
         addFont("11");
@@ -122,6 +125,13 @@ public class Atlas implements Disposable
     public NinePatchDrawable getNinePatchDrawable(String name, float alpha)
     {
         NinePatch ninePatch = getNinePatch(name);
-        return new NinePatchDrawable(ninePatch).tint(new Color(1, 1, 1, alpha));
+        return new NinePatchDrawable(ninePatch).tint(new Color(0.6f, 0.6f, 0.6f, alpha));
+    }
+
+    public NinePatchDrawable getNinePatchDrawable(String name, Color color, float alpha)
+    {
+        NinePatch ninePatch = getNinePatch(name);
+        Color tint = new Color(color.r, color.g, color.b, alpha);
+        return new NinePatchDrawable(ninePatch).tint(tint);
     }
 }

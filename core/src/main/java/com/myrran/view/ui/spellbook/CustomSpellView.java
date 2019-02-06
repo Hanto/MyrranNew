@@ -1,6 +1,7 @@
 package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Disposable;
@@ -37,8 +38,8 @@ public class CustomSpellView extends DetailedTable implements Disposable
 
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
         header.getIcon().addListener(new TouchDownRightListener(event -> newWindow(movable, controller)));
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.3f));
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.90f));
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.85f));
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", Color.WHITE, 0.90f));
 
         if (movable)
         {

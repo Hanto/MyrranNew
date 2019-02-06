@@ -1,5 +1,6 @@
 package com.myrran.view.ui.spellbook;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
@@ -34,8 +35,8 @@ public class TemplateDebuffView extends DetailedTable implements Disposable
         controller.getDadDebuff().addSource(dadSource);
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.3f));
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.85f));
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", Color.WHITE,0.90f));
 
         createLayout();
     }

@@ -25,12 +25,12 @@ public class StatHeader extends Table implements Disposable, PropertyChangeListe
     private BitmapFont font11 = Atlas.get().getFont("11");
     private BitmapFont font10 = Atlas.get().getFont("10");
     private Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
-    private Color orange = Color.ORANGE;
+    private Color orange = Color.LIGHT_GRAY;
     private Table nameTable            = new Table().top().left();
     private WidgetText name            = new WidgetText("Name", font10, orange,   Color.BLACK,1);
     private WidgetText totalCost       = new WidgetText(font10, magenta, Color.BLACK, 1);
     private WidgetText baseValue       = new WidgetText("Min", font10, orange,  Color.BLACK,1);
-    private WidgetText upgradesView    = new WidgetText("Upgrades", font10, orange,  Color.BLACK,1);
+    private WidgetText upgradesView    = new WidgetText("", font10, orange,  Color.BLACK,1);
     private WidgetText total           = new WidgetText("Max", font10, orange, Color.BLACK,1);
     private WidgetText numUpgrades     = new WidgetText("ups", font10, orange, Color.BLACK,1);
     private WidgetText upgradeCost     = new WidgetText("cost", font10, orange, Color.BLACK,1);
@@ -79,6 +79,7 @@ public class StatHeader extends Table implements Disposable, PropertyChangeListe
     {
         if (model != null)
         {
+            name.setTextColor(Color.ORANGE);
             name.setText(model.getName());
             totalCost.setText(model.getTotalCost().toString());
         }
