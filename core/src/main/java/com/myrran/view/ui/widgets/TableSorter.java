@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /** @author Ivan Delgado Huerta */
-public class SortOptionsTable<T> extends Table
+public class TableSorter<T>
 {
     private Map<String, SortOptions> sortMap = new HashMap<>();
     private SortOptions actualSortOptions;
@@ -19,8 +19,9 @@ public class SortOptionsTable<T> extends Table
     private WidgetText showDetailsText;
     private WidgetText closeDetailsText;
     private WidgetText reverseOrderText;
+    protected Table optionsTable = new Table().bottom().left();
 
-    private Map<T, Actor> modelToActorMap;
+    private Map<T, Actor> modelToActor;
     private Table sortedTable;
 
     private static final String ASC = "Asc";
@@ -33,19 +34,26 @@ public class SortOptionsTable<T> extends Table
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SortOptionsTable(Map<T, Actor> modelToActor, Table contentTable)
+    public TableSorter(Map<T, Actor> modelToActorMap, Table contentTable)
     {
-        modelToActorMap = modelToActor;
+        modelToActor = modelToActorMap;
         sortedTable = contentTable;
+
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         closeDetailsText= new WidgetText(HIDE, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
+
+        showDetailsText.addListener(new TouchDownListener(event -> setShowDetails(true)));
+        closeDetailsText.addListener(new TouchDownListener(event -> setShowDetails(false)));
+        reverseOrderText.addListener(new TouchDownListener(event -> setSortOption(actualSortOptions)));
+
+        optionsTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
     }
 
     // SORT OPTIONS:
     //--------------------------------------------------------------------------------------------------------
 
-    private void addSortOption(String text, Comparator<T>comparator)
+    public void addSortOption(String text, Comparator<T>comparator)
     {
         SortOptions option = new SortOptions(text, comparator);
 
@@ -75,27 +83,37 @@ public class SortOptionsTable<T> extends Table
         sortModel();
     }
 
-    private void sortModel()
+    protected void sortModel()
     {
-        modelToActorMap.keySet().stream()
+        sortedTable.clearChildren();
+
+        modelToActor.keySet().stream()
             .sorted(reverseOrder ? actualSortOptions.comparator.reversed() : actualSortOptions.comparator)
-            .map(t -> modelToActorMap.get(t))
+            .map(t -> modelToActor.get(t))
             .forEach(actor -> sortedTable.add(actor).fillX().expandX().row());
+    }
+
+    protected void setShowDetails(boolean visible)
+    {
+        modelToActor.values().stream()
+                .filter(DetailedActorI.class::isInstance)
+                .map(DetailedActorI.class::cast)
+                .forEach(actor -> actor.showDetails(visible));
     }
 
     // CREATE LAYOUT:
     //--------------------------------------------------------------------------------------------------------
 
-    private void createOptionsLayout()
+    protected void createOptionsLayout()
     {
-        add(showDetailsText).padLeft(3).bottom().left();
-        add(closeDetailsText).bottom().left();
+        optionsTable.add(showDetailsText).padLeft(3).bottom().left();
+        optionsTable.add(closeDetailsText).bottom().left();
 
         sortMap.values().stream()
             .sorted(Comparator.comparing(sortOption -> sortOption.insertOrder))
-            .forEach(sortOption -> add(sortOption.widgetText).bottom().left());
+            .forEach(sortOption -> optionsTable.add(sortOption.widgetText).bottom().left());
 
-        add(reverseOrderText).bottom().left();
+        optionsTable.add(reverseOrderText).bottom().left();
     }
 
     // SORT OBJECT:
