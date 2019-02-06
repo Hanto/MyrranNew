@@ -20,7 +20,7 @@ public abstract class SortableTable<T> extends Table implements Disposable
     // SORT OPTIONS:
     //--------------------------------------------------------------------------------------------------------
 
-    protected Table rootTable;
+    private Table rootTable;
     private Table optionsTable;
     private SortOptions actualSortOptions;
     private boolean detailsVisible = false;
@@ -63,7 +63,7 @@ public abstract class SortableTable<T> extends Table implements Disposable
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
 
-        rootTable.setTouchable(Touchable.enabled);
+        rootTable.setTouchable(Touchable.childrenOnly);
         reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
         showDetailsText.addListener(new TouchDownListener(o -> setShowDetails()));
 

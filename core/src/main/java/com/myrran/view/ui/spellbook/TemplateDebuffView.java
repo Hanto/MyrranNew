@@ -5,10 +5,9 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
 import com.myrran.view.ui.Atlas;
+import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.header.DebuffHeaderView;
 import com.myrran.view.ui.spellbook.stats.TemplateStatsView;
-import com.myrran.view.ui.listeners.TouchDownListener;
-import com.myrran.view.ui.spellbook.stats.StatHeader;
 import com.myrran.view.ui.widgets.DetailedTable;
 
 /** @author Ivan Delgado Huerta */
@@ -76,7 +75,6 @@ public class TemplateDebuffView extends DetailedTable implements Disposable
         tableHeader.add(header).minWidth(MINWIDTH);
 
         tableDetails.clear();
-        tableDetails.add(new StatHeader().createTemplateStatsHeader()).left().row();
         tableDetails.add(statsView).minWidth(MINWIDTH).top().left().row();
     }
 }

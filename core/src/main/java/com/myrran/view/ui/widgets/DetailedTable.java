@@ -31,7 +31,7 @@ public abstract class DetailedTable extends Table implements DetailedActorI
 
     protected void createLayout()
     {
-        clear();
+        clearChildren();
         top().left();
 
         rootTable.add(tableHeader).bottom().left().row();

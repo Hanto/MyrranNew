@@ -26,7 +26,7 @@ public class DebuffSlotStatsView extends Table implements PropertyChangeListener
     private WidgetText name;
     private WidgetText totalCost;
 
-    private static final BitmapFont font14 = Atlas.get().getFont("14");
+    private static final BitmapFont font14 = Atlas.get().getFont("11");
     private static final BitmapFont font10 = Atlas.get().getFont("10");
     private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
@@ -105,12 +105,11 @@ public class DebuffSlotStatsView extends Table implements PropertyChangeListener
         int vPad = -4;
 
         Table header = new Table().top().left();
-        header.add(name).bottom().left().padBottom(vPad);
-        header.add(totalCost).bottom().right().padBottom(vPad).row();
+        header.add(name).bottom().left();
+        header.add(totalCost).bottom().right().row();
 
         top().left();
-        add(header).padLeft(4).left().row();
-        add(stats);
+        add(stats).left().row();
     }
 
     // MVC:

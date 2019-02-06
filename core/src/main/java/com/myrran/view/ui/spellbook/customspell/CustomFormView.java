@@ -9,7 +9,6 @@ import com.myrran.view.ui.spellbook.icon.contentview.DebuffSlotsContentView;
 import com.myrran.view.ui.spellbook.icon.iconview.FormIconView;
 import com.myrran.view.ui.spellbook.stats.CustomStatsView;
 import com.myrran.view.ui.spellbook.stats.DebuffSlotsStatsView;
-import com.myrran.view.ui.spellbook.stats.StatHeader;
 import com.myrran.view.ui.widgets.DetailedTable;
 
 /** @author Ivan Delgado Huerta */
@@ -56,7 +55,7 @@ public class CustomFormView extends DetailedTable implements Disposable
             formStats.setModel(null);
             debuffsSlotsStatsView.setModel(null);
             debuffsSlotsView.setModel(null);
-            clear();
+            clearChildren();
         }
         else
         {
@@ -73,12 +72,11 @@ public class CustomFormView extends DetailedTable implements Disposable
 
     private void createLayoutImp()
     {
-        tableHeader.clear();
+        tableHeader.clearChildren();
         tableHeader.add(icon).left().bottom();
         tableHeader.add(debuffsSlotsView).left().row();
 
-        tableDetails.clear();
-        tableDetails.add(new StatHeader().createCustomStatsHeader()).left().row();
+        tableDetails.clearChildren();
         tableDetails.add(formStats).left().row();
         tableDetails.add(debuffsSlotsStatsView).left().row();
     }

@@ -65,11 +65,6 @@ public class ZMain extends ApplicationAdapter
             uiStage.addActor(bookForm);
             bookForm.setPosition(10, 200);
 
-            CustomSpellView formView2 = new CustomSpellView(controller);
-            uiStage.addActor(formView2);
-            formView2.setModel(spell);
-            formView2.setPosition(600, 597);
-
             CustomSpellsView bookSpells = new CustomSpellsView(controller);
             bookSpells.setModel(book.getCustomSpellForms());
             uiStage.addActor(bookSpells);

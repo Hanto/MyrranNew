@@ -16,7 +16,9 @@ public class TemplateStatsView extends Table
     {
         clear();
         top().left();
-        padBottom(4).padLeft(4).padTop(2);
+        padBottom(2).padTop(2).padLeft(4);
+
+        add(new StatHeader().createTemplateStatsHeader()).left().row();
 
         model.stream()
             .sorted(Comparator.comparing(TemplateSpellStat::getName))

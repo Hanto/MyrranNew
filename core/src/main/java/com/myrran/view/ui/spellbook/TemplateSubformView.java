@@ -9,7 +9,6 @@ import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.header.SubformHeaderView;
 import com.myrran.view.ui.spellbook.icon.iconview.SlotIconsView;
 import com.myrran.view.ui.spellbook.stats.TemplateStatsView;
-import com.myrran.view.ui.spellbook.stats.StatHeader;
 import com.myrran.view.ui.widgets.DetailedActorI;
 import com.myrran.view.ui.widgets.DetailedTable;
 
@@ -83,7 +82,6 @@ public class TemplateSubformView extends DetailedTable implements DetailedActorI
         tableHeader.add(header).minWidth(MINWIDTH);
 
         tableDetails.clear();
-        tableDetails.add(new StatHeader().createTemplateStatsHeader()).left().row();
         tableDetails.add(subformStats).minWidth(MINWIDTH).row();
         tableDetails.add(debuffIcons).left().row();
     }

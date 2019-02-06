@@ -1,11 +1,15 @@
 package com.myrran.view.ui.spellbook;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
+import com.myrran.view.ui.listeners.TouchDownRightListener;
 import com.myrran.view.ui.spellbook.customspell.CustomFormView;
 import com.myrran.view.ui.spellbook.customspell.CustomSubformsView;
 import com.myrran.view.ui.spellbook.header.SpellHeaderView;
@@ -14,6 +18,8 @@ import com.myrran.view.ui.widgets.DetailedTable;
 /** @author Ivan Delgado Huerta */
 public class CustomSpellView extends DetailedTable implements Disposable
 {
+    private CustomSpellForm model;
+
     private SpellHeaderView header;
     private CustomFormView formView;
     private CustomSubformsView subForms;
@@ -29,12 +35,16 @@ public class CustomSpellView extends DetailedTable implements Disposable
         formView        = new CustomFormView(controller);
         subForms        = new CustomSubformsView(controller);
 
-        if (movable)
-            header.getIcon().addListener(new ActorMoveListener(this));
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
-
+        header.getIcon().addListener(new TouchDownRightListener(event -> newWindow(movable, controller)));
         tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.3f));
         tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.90f));
+
+        if (movable)
+        {
+            tableHeader.setTouchable(Touchable.enabled);
+            tableHeader.addListener(new ActorMoveListener(this));
+        }
 
         createLayout();
         createLayoutImp();
@@ -55,6 +65,8 @@ public class CustomSpellView extends DetailedTable implements Disposable
 
     public void setModel(CustomSpellForm model)
     {
+        this.model = model;
+
         if (model == null)
         {
             formView.setModel(null);
@@ -74,13 +86,37 @@ public class CustomSpellView extends DetailedTable implements Disposable
 
     private void createLayoutImp()
     {
-        tableHeader.clear();
+        tableHeader.clearChildren();
         tableHeader.add(header).minWidth(MINWIDTH);
 
-        tableDetails.clear();
+        tableDetails.clearChildren();
         tableDetails.top().left();;
 
         tableDetails.add(formView).minWidth(MINWIDTH).top().left().row();
         tableDetails.add(subForms).top().left().row();
+    }
+
+    // NEW WINDOW:
+    //--------------------------------------------------------------------------------------------------------
+
+    private void newWindow(boolean movable, CustomSpellController controller)
+    {
+        if (!movable)
+        {
+            CustomSpellView spellView = new CustomSpellView(controller);
+            getStage().addActor(spellView);
+            spellView.setModel(model);
+            spellView.setPosition(Gdx.input.getX(), Gdx.graphics.getHeight() -Gdx.input.getY());
+            spellView.addAction(new Action()
+            {
+                @Override public boolean act(float delta)
+                {   spellView.toFront(); return false; }
+            });
+        }
+        else
+        {
+            dispose();
+            remove();
+        }
     }
 }

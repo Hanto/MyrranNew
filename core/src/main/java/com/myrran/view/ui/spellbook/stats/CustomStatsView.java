@@ -16,12 +16,16 @@ public class CustomStatsView extends Table implements Disposable
 {
     private CustomSpellController controller;
     private List<CustomStatView> views;
+    protected StatHeader statHeader;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
     public CustomStatsView(CustomSpellController spellController)
-    {   controller = spellController; }
+    {
+        controller = spellController;
+        statHeader = new StatHeader();
+    }
 
     @Override public void dispose()
     {
@@ -36,16 +40,18 @@ public class CustomStatsView extends Table implements Disposable
     {
         dispose();
         clear();
+        padTop(0).padBottom(0);
 
         if (model != null)
         {
-            padLeft(4);
+            padTop(2).padBottom(2).padLeft(4);
 
             views = model.getCustomSpellStats().stream()
                 .sorted(Comparator.comparing(CustomSpellStat::getName))
                 .map(CustomStatView::new)
                 .collect(Collectors.toList());
 
+            add(statHeader.createCustomStatsHeader(model)).left().row();
             views.forEach(row -> add(row).left().bottom().row());
 
             createListeners(model);
