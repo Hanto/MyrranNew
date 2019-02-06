@@ -12,6 +12,7 @@ import java.util.Comparator;
 public class TemplateDebuffsView extends SortableTable<TemplateSpellDebuff>
 {
     private CustomSpellController controller;
+    protected static final int MINWIDTH = 245;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------

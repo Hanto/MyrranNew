@@ -75,6 +75,6 @@ public class TemplateDebuffView extends DetailedTable implements Disposable
         tableHeader.add(header).minWidth(MINWIDTH);
 
         tableDetails.clear();
-        tableDetails.add(statsView).minWidth(MINWIDTH).top().left().row();
+        tableDetails.add(statsView).minWidth(MINWIDTH);
     }
 }

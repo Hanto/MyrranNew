@@ -92,7 +92,7 @@ public class CustomSpellView extends DetailedTable implements Disposable
         tableDetails.clearChildren();
         tableDetails.top().left();;
 
-        tableDetails.add(formView).minWidth(MINWIDTH).top().left().row();
+        tableDetails.add(formView).minWidth(MINWIDTH).row();
         tableDetails.add(subForms).top().left().row();
     }
 
@@ -110,7 +110,7 @@ public class CustomSpellView extends DetailedTable implements Disposable
             spellView.addAction(new Action()
             {
                 @Override public boolean act(float delta)
-                {   spellView.toFront(); return false; }
+                {   spellView.toFront(); return true; }
             });
         }
         else

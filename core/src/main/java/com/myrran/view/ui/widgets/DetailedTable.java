@@ -13,8 +13,12 @@ public abstract class DetailedTable extends Table implements DetailedActorI
     protected Table tableHeader;
     protected Table tableDetails;
 
+
     protected boolean detailsVisible = false;
     protected Cell<Actor> cellDetails;
+
+    // CONSTRUCTOR:
+    //--------------------------------------------------------------------------------------------------------
 
     public DetailedTable()
     {
@@ -34,8 +38,8 @@ public abstract class DetailedTable extends Table implements DetailedActorI
         clearChildren();
         top().left();
 
-        rootTable.add(tableHeader).bottom().left().row();
-        rootTable.add(tableDetails).top().left().row();
+        rootTable.add(tableHeader).top().left().row();
+        rootTable.add(tableDetails).fillX().expand().top().left().row();
         cellDetails = rootTable.getCell(tableDetails);
 
         add(rootTable);
