@@ -16,7 +16,7 @@ public class CustomStatsView extends Table implements Disposable
 {
     private CustomSpellController controller;
     private List<CustomStatView> views;
-    protected StatHeader statHeader;
+    private StatHeader statHeader;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -31,6 +31,8 @@ public class CustomStatsView extends Table implements Disposable
     {
         if (views != null)
             views.forEach(CustomStatView::dispose);
+
+        statHeader.dispose();
     }
 
     // UPDATE:
@@ -51,7 +53,8 @@ public class CustomStatsView extends Table implements Disposable
                 .map(CustomStatView::new)
                 .collect(Collectors.toList());
 
-            add(statHeader.createCustomStatsHeader(model)).left().row();
+            statHeader.setModel(model);
+            add(statHeader).left().row();
             views.forEach(row -> add(row).left().bottom().row());
 
             createListeners(model);

@@ -9,6 +9,8 @@ import java.util.List;
 /** @author Ivan Delgado Huerta */
 public class TemplateStatsView extends Table
 {
+    private StatHeader statHeader = new StatHeader();
+
     // UPDATE:
     //--------------------------------------------------------------------------------------------------------
 
@@ -18,7 +20,8 @@ public class TemplateStatsView extends Table
         top().left();
         padBottom(2).padTop(2).padLeft(4);
 
-        add(new StatHeader().createTemplateStatsHeader()).left().row();
+        statHeader.setModel(model);
+        add(statHeader).left().row();
 
         model.stream()
             .sorted(Comparator.comparing(TemplateSpellStat::getName))

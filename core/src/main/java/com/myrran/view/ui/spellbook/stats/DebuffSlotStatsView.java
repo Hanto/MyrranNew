@@ -19,16 +19,9 @@ import java.beans.PropertyChangeListener;
 public class DebuffSlotStatsView extends Table implements PropertyChangeListener, Disposable
 {
     private SpellSlotI<CustomSpellDebuff, TemplateSpellDebuff> debuffSlot;
-    private CustomSpellDebuff spellDebuff;
     private CustomSpellController controller;
 
     private CustomStatsView stats;
-    private WidgetText name;
-    private WidgetText totalCost;
-
-    private static final BitmapFont font14 = Atlas.get().getFont("11");
-    private static final BitmapFont font10 = Atlas.get().getFont("10");
-    private static final Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -36,8 +29,6 @@ public class DebuffSlotStatsView extends Table implements PropertyChangeListener
     public DebuffSlotStatsView(CustomSpellController customSpellController)
     {
         controller      = customSpellController;
-        name            = new WidgetText(font14, Color.ORANGE, Color.BLACK, 1);
-        totalCost       = new WidgetText(font10, magenta, Color.BLACK, 1);
         stats           = new CustomStatsView(controller);
 
         createLayout();
@@ -49,9 +40,6 @@ public class DebuffSlotStatsView extends Table implements PropertyChangeListener
 
         if (debuffSlot != null)
             debuffSlot.removeObserver(this);
-
-        if (spellDebuff != null)
-            spellDebuff.removeObserver(this);
     }
 
     // UPDATE:
@@ -62,39 +50,21 @@ public class DebuffSlotStatsView extends Table implements PropertyChangeListener
         dispose();
 
         if (customDebuffSlot == null)
-            removeModel();
+            stats.setModel(null);
         else
         {
             debuffSlot = customDebuffSlot;
-            spellDebuff = debuffSlot.getContent();
             debuffSlot.addObserver(this);
-            spellDebuff.addObserver(this);
             update();
         }
-    }
-
-    private void removeModel()
-    {
-        debuffSlot = null;
-        stats.setModel(null);
-        name.setText(null);
-        totalCost.setText(null);
     }
 
     private void update()
     {
         if (debuffSlot.hasData())
-        {
-            stats.setModel(spellDebuff);
-            name.setText(spellDebuff.getName());
-            totalCost.setText(spellDebuff.getTotalCost().toString());
-        }
+            stats.setModel(debuffSlot.getContent());
         else
-        {
             stats.setModel(null);
-            name.setText(null);
-            totalCost.setText(null);
-        }
     }
 
     // CREATE LAYOUT:
@@ -102,12 +72,6 @@ public class DebuffSlotStatsView extends Table implements PropertyChangeListener
 
     private void createLayout()
     {
-        int vPad = -4;
-
-        Table header = new Table().top().left();
-        header.add(name).bottom().left();
-        header.add(totalCost).bottom().right().row();
-
         top().left();
         add(stats).left().row();
     }
