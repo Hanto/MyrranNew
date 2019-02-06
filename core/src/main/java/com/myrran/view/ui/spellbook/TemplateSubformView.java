@@ -39,7 +39,7 @@ public class TemplateSubformView extends DetailedTable implements DetailedActorI
         controller.getDadSubform().addSource(dadSource);
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
 
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.85f));
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
         tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", Color.WHITE,0.90f));
 
         createLayout();

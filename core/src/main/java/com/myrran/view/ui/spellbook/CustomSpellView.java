@@ -38,7 +38,7 @@ public class CustomSpellView extends DetailedTable implements Disposable
 
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
         header.getIcon().addListener(new TouchDownRightListener(event -> newWindow(movable, controller)));
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.85f));
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.90f));
         tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", Color.WHITE, 0.90f));
 
         if (movable)

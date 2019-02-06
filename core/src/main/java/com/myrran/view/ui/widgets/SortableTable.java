@@ -1,6 +1,5 @@
 package com.myrran.view.ui.widgets;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -36,7 +35,6 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
     // CONTENT:
     //--------------------------------------------------------------------------------------------------------
 
-
     private ScrollPane scrollPane;
     private WidgetText name;
     private Map<T, Actor> modelToActorMap = new HashMap<>();
@@ -58,24 +56,22 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
 
     protected void build(String text, boolean movable, float width, float height)
     {
-        detailsVisible = true;
-        rootTable       = new Table().top().left();
-        tableHeader     = new Table().top().left();
         tableContent    = new Table().top().left();
-        tableDetails    = new Table().top().left();
-        name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 2);
+        name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 3);
         reverseOrderText= new WidgetText(DESC, Atlas.get().getFont("10"), Color.WHITE, Color.BLACK, 1);
         showDetailsText = new WidgetText(SHOW, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         closeDetailsText= new WidgetText(HIDE, Atlas.get().getFont("14"), Color.WHITE, Color.BLACK, 1);
         minimize        = new WidgetImage(Atlas.get().getTexture("TexturasMisc/RebindOff"));
         maximize        = new WidgetImage(Atlas.get().getTexture("TexturasMisc/RebindOff"));
 
-        rootTable.setTouchable(Touchable.enabled);
-        reverseOrderText.addListener(new TouchDownListener(o -> setSortOption(actualSortOptions.text)));
-        showDetailsText.addListener(new TouchDownListener(o -> setShowDetails(true)));
-        closeDetailsText.addListener(new TouchDownListener(o -> setShowDetails(false)));
-        minimize.addListener(new TouchDownListener(event ->
-        {   if (event.getButton() == Input.Buttons.LEFT) showDetails(); }));
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.45f));
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
+        sortOptionsTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
+
+        reverseOrderText.addListener(new TouchDownListener(event -> setSortOption(actualSortOptions.text)));
+        showDetailsText.addListener(new TouchDownListener(event -> setShowDetails(true)));
+        closeDetailsText.addListener(new TouchDownListener(event -> setShowDetails(false)));
+        minimize.addListener(new TouchDownListener(event -> showDetails()));
 
         if (width != 0 || height != 0)
         {
@@ -97,10 +93,6 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
 
         createOptionsLayout();
         createLayout();
-
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.85f));
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.85f));
-        sortOptionsTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.85f));
     }
 
     @Override public void dispose()
@@ -153,9 +145,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
 
     private void createOptionsLayout()
     {
-        //sortOptionsTable = new Table().top().left();
-
-        sortOptionsTable.add(showDetailsText).bottom().left();
+        sortOptionsTable.add(showDetailsText).padLeft(3).bottom().left();
         sortOptionsTable.add(closeDetailsText).bottom().left();
 
         sortMap.values().stream()
@@ -166,12 +156,11 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
 
         Table header = new Table().top().left();
 
-        header.add(name).padLeft(3).left();
+        header.add(name).padLeft(5).left();
         header.add(minimize).expand().padTop(2).right();
         header.add(maximize).right().padTop(2).row();
 
         tableHeader.add(header).minWidth(250).left().row();
-        //tableContent.add(sortOptionsTable).padLeft(3).minWidth(249);
     }
 
     // UPDATE:

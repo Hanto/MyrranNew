@@ -9,13 +9,13 @@ import com.myrran.view.ui.listeners.TouchDownListener;
 /** @author Ivan Delgado Huerta */
 public abstract class DetailedTable extends Table implements DetailedActorI
 {
-    protected Table rootTable;
+    private Table rootTable;
     protected Table tableHeader;
     protected Table tableDetails;
 
 
-    protected boolean detailsVisible = false;
-    protected Cell<Actor> cellDetails;
+    private boolean detailsVisible = false;
+    private Cell<Actor> cellDetails;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
