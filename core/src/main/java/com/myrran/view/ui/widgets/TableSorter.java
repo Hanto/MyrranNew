@@ -19,7 +19,7 @@ public class TableSorter<T>
     private WidgetText showDetailsText;
     private WidgetText closeDetailsText;
     private WidgetText reverseOrderText;
-    protected Table optionsTable = new Table().bottom().left();
+    private Table optionsTable = new Table().bottom().left();
 
     private Map<T, Actor> modelToActor;
     private Table sortedTable;
@@ -46,8 +46,6 @@ public class TableSorter<T>
         showDetailsText.addListener(new TouchDownListener(event -> setShowDetails(true)));
         closeDetailsText.addListener(new TouchDownListener(event -> setShowDetails(false)));
         reverseOrderText.addListener(new TouchDownListener(event -> setSortOption(actualSortOptions)));
-
-        optionsTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
     }
 
     // SORT OPTIONS:
@@ -83,6 +81,12 @@ public class TableSorter<T>
         sortModel();
     }
 
+    public Table getOptionsTable()
+    {   return optionsTable; }
+
+    // SORT PROCESS:
+    //--------------------------------------------------------------------------------------------------------
+
     protected void sortModel()
     {
         sortedTable.clearChildren();
@@ -114,6 +118,7 @@ public class TableSorter<T>
             .forEach(sortOption -> optionsTable.add(sortOption.widgetText).bottom().left());
 
         optionsTable.add(reverseOrderText).bottom().left();
+        optionsTable.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
     }
 
     // SORT OBJECT:

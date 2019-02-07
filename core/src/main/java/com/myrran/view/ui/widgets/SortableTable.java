@@ -1,7 +1,6 @@
 package com.myrran.view.ui.widgets;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -11,70 +10,45 @@ import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.listeners.ActorMoveListener;
 import com.myrran.view.ui.listeners.TouchDownListener;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 /** @author Ivan Delgado Huerta */
 public abstract class SortableTable<T> extends DetailedTable implements Disposable
 {
-    private Table tableContent;
-
-    private WidgetImage minimize;
-    private WidgetImage maximize;
-    private TableSorter<T> tableSorter;
-
     // CONTENT:
     //--------------------------------------------------------------------------------------------------------
 
-    private ScrollPane scrollPane;
-    private WidgetText name;
+    private Table tableContent = new Table().top().left();
     private Map<T, Actor> modelToActorMap = new HashMap<>();
 
+    // HEADER:
+    //--------------------------------------------------------------------------------------------------------
 
-    private static final BitmapFont font20 = Atlas.get().getFont("20");
+    private WidgetText name;
+    private WidgetImage minimize;
+    private WidgetImage maximize;
+    private TableSorter<T> tableSorter = new TableSorter<>(modelToActorMap, tableContent);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public SortableTable()
-    {
-        tableContent= new Table().top().left();
-        tableSorter = new TableSorter<>(modelToActorMap, tableContent);
-    }
+    protected void build(String text)
+    {   build(text, 0, 0); }
 
-    protected void build(String text, boolean movable)
-    {   build(text, movable, 0, 0); }
-
-    protected void build(String text, boolean movable, float width, float height)
+    protected void build(String text, float width, float height)
     {
-        name            = new WidgetText(text, font20, Color.WHITE, Color.BLACK, 3);
+        name            = new WidgetText(text, Atlas.get().getFont("20"), Color.WHITE, Color.BLACK, 3);
         minimize        = new WidgetImage(Atlas.get().getTexture("TexturasMisc/RebindOff"));
         maximize        = new WidgetImage(Atlas.get().getTexture("TexturasMisc/RebindOff"));
 
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.45f));
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
-
         minimize.addListener(new TouchDownListener(event -> showDetails()));
-
-        if (width != 0 || height != 0)
-        {
-            scrollPane = new ScrollPane(tableContent);
-            tableDetails.add(tableSorter.optionsTable).expand().fillX().left().row();
-            tableDetails.add(scrollPane).size(width, height);
-        }
-        else
-        {
-            tableDetails.add(tableSorter.optionsTable).expand().fillX().left().row();
-            tableDetails.add(tableContent);
-        }
-
-        if (movable)
-        {
-            tableHeader.setTouchable(Touchable.enabled);
-            tableHeader.addListener(new ActorMoveListener(this));
-        }
 
         tableSorter.createOptionsLayout();
         createHeader();
+        createDetails(width, height);
         createLayout();
     }
 
@@ -99,6 +73,25 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         header.add(maximize).right().row();
 
         tableHeader.add(header).minWidth(250).left().row();
+        tableHeader.setTouchable(Touchable.enabled);
+        tableHeader.addListener(new ActorMoveListener(this));
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
+    }
+
+    private void createDetails(float width, float height)
+    {
+        if (width != 0 || height != 0)
+        {
+            ScrollPane scrollPane = new ScrollPane(tableContent);
+            tableDetails.add(tableSorter.getOptionsTable()).expand().fillX().left().row();
+            tableDetails.add(scrollPane).size(width, height);
+        }
+        else
+        {
+            tableDetails.add(tableSorter.getOptionsTable()).expand().fillX().left().row();
+            tableDetails.add(tableContent);
+        }
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.45f));
     }
 
     // UPDATE:

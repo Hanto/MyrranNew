@@ -27,7 +27,7 @@ public class TemplateDebuffsView extends SortableTable<TemplateSpellDebuff>
         addSortOption("available", Comparator.comparing(TemplateSpellDebuff::getAvailable));
         addSortOption("total", Comparator.comparing(TemplateSpellDebuff::getTotal));
 
-        build("Debuff SpellBook", true);
+        build("Debuff SpellBook");
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 

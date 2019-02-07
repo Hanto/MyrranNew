@@ -38,8 +38,6 @@ public class CustomSpellView extends DetailedTable implements Disposable
 
         header.getIconName().addListener(new TouchDownListener(o -> showDetails()));
         header.getIcon().addListener(new TouchDownRightListener(event -> newWindow(movable, controller)));
-        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.90f));
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", Color.WHITE, 0.90f));
 
         if (movable)
         {
@@ -89,12 +87,15 @@ public class CustomSpellView extends DetailedTable implements Disposable
     {
         tableHeader.clearChildren();
         tableHeader.add(header).minWidth(MINWIDTH);
+        tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.90f));
 
         tableDetails.clearChildren();
         tableDetails.top().left();;
 
         tableDetails.add(formView).minWidth(MINWIDTH).row();
         tableDetails.add(subForms).top().left().row();
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", Color.WHITE, 0.90f));
+
     }
 
     // NEW WINDOW:

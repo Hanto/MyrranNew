@@ -2,7 +2,6 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.templates.TemplateSpellForm;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.SortableTable;
@@ -27,7 +26,7 @@ public class TemplateFormsView extends SortableTable<TemplateSpellForm>
         addSortOption("available", Comparator.comparing(TemplateSpellForm::getAvailable));
         addSortOption("total", Comparator.comparing(TemplateSpellForm::getTotal));
 
-        build("SpellForm SpellBook", true);
+        build("SpellForm SpellBook");
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 
