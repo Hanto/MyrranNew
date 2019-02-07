@@ -88,6 +88,16 @@ public class Atlas implements Disposable
         addTexture("TexturasMisc/CasillaTalento");
         addTexture("TexturasMisc/Casillero2");
 
+        addFont("Calibri14");
+        addFont("Calibri13");
+        addFont("Calibri12");
+        addFont("Calibri11");
+        addFont("Calibri10");
+        addFont("Arial14");
+        addFont("Arial13");
+        addFont("Arial12");
+        addFont("Arial11");
+        addFont("Arial10");
         addFont("8");
         addFont("10");
         addFont("11");

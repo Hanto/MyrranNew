@@ -2,7 +2,6 @@ package com.myrran.view.ui.spellbook;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.myrran.controller.CustomSpellController;
-import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.widgets.SortableTable;
@@ -12,7 +11,6 @@ import java.util.Comparator;
 /** @author Ivan Delgado Huerta */
 public class CustomSpellsView extends SortableTable<CustomSpellForm>
 {
-    private CustomSpellBook model;
     private CustomSpellController controller;
 
     // CONSTRUCTOR:

@@ -53,26 +53,30 @@ public class ZMain extends ApplicationAdapter
             TemplateDebuffsView bookDebuff = new TemplateDebuffsView(controller);
             bookDebuff.setModel(book.getDebuffsTemplatesLearned());
             uiStage.addActor(bookDebuff);
-            bookDebuff.setPosition(10, 690);
+            bookDebuff.setPosition(3, 765);
 
             TemplateSubformsView bookSubform = new TemplateSubformsView(controller);
             bookSubform.setModel(book.getSubformTemplatesLearned());
             uiStage.addActor(bookSubform);
-            bookSubform.setPosition(10, 425);
+            bookSubform.setPosition(272, 765);
 
             TemplateFormsView bookForm = new TemplateFormsView(controller);
             bookForm.setModel(book.getFormTemplatesLearned());
             uiStage.addActor(bookForm);
-            bookForm.setPosition(10, 200);
+            bookForm.setPosition(541, 765);
 
             CustomSpellsView bookSpells = new CustomSpellsView(controller);
             bookSpells.setModel(book.getCustomSpellForms());
             uiStage.addActor(bookSpells);
-            bookSpells.setPosition(280, 290);
+            bookSpells.setPosition(810, 765);
 
             uiStage.addActor(fps);
 
             Gdx.input.setInputProcessor(uiStage);
+
+            WidgetText text = new WidgetText("A", Atlas.get().getFont("Calibri14"), Color.WHITE, Color.BLACK, 1);
+            System.out.println(text.getHeight());
+
         }
         catch (Exception e)
         { 	LOG.error("PUMBA",e); }
@@ -90,8 +94,8 @@ public class ZMain extends ApplicationAdapter
             //batch.draw(img, 0, 0);
             //batch.end();
 
-            //uiStage.setDebugUnderMouse(true);
-            //uiStage.setDebugAll(true);
+            uiStage.setDebugUnderMouse(true);
+            uiStage.setDebugAll(true);
 
             uiStage.act();
             uiStage.draw();

@@ -22,17 +22,17 @@ public class StatHeader extends Table implements Disposable, PropertyChangeListe
 
     private int vPad = -4;
     private int hPad = +3;
-    private BitmapFont font11 = Atlas.get().getFont("11");
+    private BitmapFont font12 = Atlas.get().getFont("Calibri12");
     private BitmapFont font10 = Atlas.get().getFont("10");
     private Color magenta = new Color(170/255f, 70/255f, 255/255f, 1f);
     private Color orange = Color.LIGHT_GRAY;
     private Table nameTable            = new Table().top().left();
-    private WidgetText name            = new WidgetText("Name", font10, orange,   Color.BLACK,1);
-    private WidgetText totalCost       = new WidgetText(font10, magenta, Color.BLACK, 1);
+    private WidgetText name            = new WidgetText("Name", font12, orange,   Color.BLACK,1);
+    private WidgetText totalCost       = new WidgetText(font12, magenta, Color.BLACK, 1);
     private WidgetText baseValue       = new WidgetText("Min", font10, orange,  Color.BLACK,1);
     private WidgetText upgradesView    = new WidgetText("", font10, orange,  Color.BLACK,1);
     private WidgetText total           = new WidgetText("Max", font10, orange, Color.BLACK,1);
-    private WidgetText upgrades         = new WidgetText("Ranks", font10, orange, Color.BLACK, 1);
+    private WidgetText upgrades         = new WidgetText("ranks", font10, orange, Color.BLACK, 1);
     private WidgetText maxUpgrades     = new WidgetText("ranks", font10, orange, Color.BLACK,1);
     private WidgetText upgradeCost     = new WidgetText("cost", font10, orange, Color.BLACK,1);
     private WidgetText bonusPerUpgrade = new WidgetText("bon", font10, orange, Color.BLACK,1);
@@ -121,7 +121,7 @@ public class StatHeader extends Table implements Disposable, PropertyChangeListe
     private void createNameLayout()
     {
         nameTable.add(name).bottom().left();
-        nameTable.add(totalCost).bottom().right().row();
+        nameTable.add(totalCost).padBottom(-1).bottom().right().row();
     }
 
     // MVC:
