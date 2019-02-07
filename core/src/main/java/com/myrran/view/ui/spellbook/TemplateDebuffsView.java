@@ -12,7 +12,6 @@ import java.util.Comparator;
 public class TemplateDebuffsView extends SortableTable<TemplateSpellDebuff>
 {
     private CustomSpellController controller;
-    protected static final int MINWIDTH = 245;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -27,7 +26,7 @@ public class TemplateDebuffsView extends SortableTable<TemplateSpellDebuff>
         addSortOption("available", Comparator.comparing(TemplateSpellDebuff::getAvailable));
         addSortOption("total", Comparator.comparing(TemplateSpellDebuff::getTotal));
 
-        build("Debuff SpellBook");
+        build("Debuff SpellBook", TemplateDebuffView.getItemsWidth(), 400);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 

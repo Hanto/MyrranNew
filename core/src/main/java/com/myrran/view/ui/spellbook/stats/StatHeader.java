@@ -32,11 +32,11 @@ public class StatHeader extends Table implements Disposable, PropertyChangeListe
     private WidgetText baseValue       = new WidgetText("Min", font10, orange,  Color.BLACK,1);
     private WidgetText upgradesView    = new WidgetText("", font10, orange,  Color.BLACK,1);
     private WidgetText total           = new WidgetText("Max", font10, orange, Color.BLACK,1);
-    private WidgetText numUpgrades     = new WidgetText("ups", font10, orange, Color.BLACK,1);
+    private WidgetText upgrades         = new WidgetText("Ranks", font10, orange, Color.BLACK, 1);
+    private WidgetText maxUpgrades     = new WidgetText("ranks", font10, orange, Color.BLACK,1);
     private WidgetText upgradeCost     = new WidgetText("cost", font10, orange, Color.BLACK,1);
     private WidgetText bonusPerUpgrade = new WidgetText("bon", font10, orange, Color.BLACK,1);
-    private WidgetText maxUpgrades     = new WidgetText("ups", font10, orange, Color.BLACK,1);
-    private WidgetText gearBonus       = new WidgetText("Max", font10, orange, Color.BLACK,1);
+    private WidgetText gearBonus       = new WidgetText("gear", font10, orange, Color.BLACK,1);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -91,12 +91,12 @@ public class StatHeader extends Table implements Disposable, PropertyChangeListe
     private void createTemplateLayout()
     {
         clearChildren();
-        add(nameTable).left()       .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(baseValue).right()      .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(total).right()          .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(nameTable).left()       .minWidth(90).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(baseValue).right()      .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(total).right()          .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(maxUpgrades).right()    .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(upgradeCost).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(bonusPerUpgrade).right().minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(maxUpgrades).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         row();
     }
 
@@ -107,14 +107,13 @@ public class StatHeader extends Table implements Disposable, PropertyChangeListe
     {
 
         clearChildren();
-        add(nameTable).left()       .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(baseValue).right()      .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(nameTable).left()       .minWidth(90).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(baseValue).right()      .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(upgradesView).center()  .minWidth(75).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(total).right()          .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(numUpgrades).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(total).right()          .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(upgrades).right()       .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(upgradeCost).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(bonusPerUpgrade).right().minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(maxUpgrades).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(gearBonus).right()      .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         row();
     }

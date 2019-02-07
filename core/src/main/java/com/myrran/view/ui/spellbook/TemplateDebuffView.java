@@ -20,7 +20,11 @@ public class TemplateDebuffView extends DetailedTable implements Disposable
     private DebuffHeaderView header;
     private TemplateStatsView statsView;
 
-    private static final int MINWIDTH = 245;
+    private static final int MINWIDTH = 253;
+    private static final int BORDERSIZE = 8;
+
+    public static int getItemsWidth()
+    {   return MINWIDTH + BORDERSIZE; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------

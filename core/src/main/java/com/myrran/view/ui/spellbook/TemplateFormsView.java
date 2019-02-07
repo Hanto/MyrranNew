@@ -26,7 +26,7 @@ public class TemplateFormsView extends SortableTable<TemplateSpellForm>
         addSortOption("available", Comparator.comparing(TemplateSpellForm::getAvailable));
         addSortOption("total", Comparator.comparing(TemplateSpellForm::getTotal));
 
-        build("SpellForm SpellBook");
+        build("SpellForm SpellBook", TemplateFormView.getItemsWidth(), 400);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 

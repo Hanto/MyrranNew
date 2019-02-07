@@ -23,7 +23,11 @@ public class TemplateSubformView extends DetailedTable implements DetailedActorI
     private TemplateStatsView subformStats;
     private SlotIconsView debuffIcons;
 
-    private static final int MINWIDTH = 245;
+    private static final int MINWIDTH = 253;
+    private static final int BORDERSIZE = 8;
+
+    public static int getItemsWidth()
+    {   return MINWIDTH + BORDERSIZE; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------

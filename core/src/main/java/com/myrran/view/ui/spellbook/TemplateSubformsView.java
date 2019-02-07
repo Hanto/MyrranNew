@@ -25,7 +25,7 @@ public class TemplateSubformsView extends SortableTable<TemplateSpellSubform>
         addSortOption("available", Comparator.comparing(TemplateSpellSubform::getAvailable));
         addSortOption("total", Comparator.comparing(TemplateSpellSubform::getTotal));
 
-        build("Subform SpellBook");
+        build("Subform SpellBook", TemplateSubformView.getItemsWidth(),400);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 

@@ -94,12 +94,12 @@ public class TemplateStatView extends Table
         int vPad = -4;
         int hPad = +3;
 
-        add(name).left()            .minWidth(80).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(baseValue).right()      .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(total).right()          .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(name).left()            .minWidth(90).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(baseValue).right()      .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(total).right()          .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(maxUpgrades).right()    .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(upgradeCost).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         add(bonusPerUpgrade).right().minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(maxUpgrades).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         row();
     }
 

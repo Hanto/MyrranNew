@@ -25,7 +25,11 @@ public class CustomSpellView extends DetailedTable implements Disposable
     private CustomFormView formView;
     private CustomSubformsView subForms;
 
-    private static final int MINWIDTH = 348;
+    private static final int MINWIDTH = 353;
+    private static final int BORDERSIZE = 8;
+
+    public static int getItemsWidth()
+    {   return MINWIDTH + BORDERSIZE; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------

@@ -3,6 +3,7 @@ package com.myrran.view.ui.widgets;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
@@ -21,6 +22,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
     // CONTENT:
     //--------------------------------------------------------------------------------------------------------
 
+    private ScrollPane scrollPane;
     private Table tableContent = new Table().top().left();
     private Map<T, Actor> modelToActorMap = new HashMap<>();
 
@@ -35,8 +37,8 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    protected void build(String text)
-    {   build(text, 0, 0); }
+    protected void build(String text, float width)
+    {   build(text, width, 0); }
 
     protected void build(String text, float width, float height)
     {
@@ -47,7 +49,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         minimize.addListener(new TouchDownListener(event -> showDetails()));
 
         tableSorter.createOptionsLayout();
-        createHeader();
+        createHeader(width);
         createDetails(width, height);
         createLayout();
     }
@@ -64,7 +66,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
     // OPTIONS LAYOUT:
     //--------------------------------------------------------------------------------------------------------
 
-    private void createHeader()
+    private void createHeader(float width)
     {
         Table header = new Table().top().left();
 
@@ -72,7 +74,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         header.add(minimize).expand().right();
         header.add(maximize).right().row();
 
-        tableHeader.add(header).minWidth(250).left().row();
+        tableHeader.add(header).minWidth(width).left().row();
         tableHeader.setTouchable(Touchable.enabled);
         tableHeader.addListener(new ActorMoveListener(this));
         tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
@@ -80,18 +82,22 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
 
     private void createDetails(float width, float height)
     {
-        if (width != 0 || height != 0)
+        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.45f));
+        tableDetails.add(tableSorter.getOptionsTable()).expand().fillX().left().row();
+
+        if (height != 0)
         {
-            ScrollPane scrollPane = new ScrollPane(tableContent);
-            tableDetails.add(tableSorter.getOptionsTable()).expand().fillX().left().row();
+            scrollPane = new ScrollPane(tableContent);
             tableDetails.add(scrollPane).size(width, height);
         }
         else
-        {
-            tableDetails.add(tableSorter.getOptionsTable()).expand().fillX().left().row();
-            tableDetails.add(tableContent);
-        }
-        tableDetails.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine2", 0.45f));
+        {   tableDetails.add(tableContent); }
+    }
+
+    public void setScrollPaneHeight(float height)
+    {
+        Cell cell = tableDetails.getCell(scrollPane);
+        if (cell != null) cell.height(height);
     }
 
     // UPDATE:

@@ -27,7 +27,7 @@ public class CustomSpellsView extends SortableTable<CustomSpellForm>
         addSortOption("dslots", Comparator.comparing(form -> form.getDebuffSlots().getCustomDebuffSlots().size()));
         addSortOption("cost", Comparator.comparing(CustomSpellForm::getTotalCost));
 
-        build("Spells", 348+8, 400);
+        build("Spells", CustomSpellView.getItemsWidth(), 400);
         addListener(new TouchDownListener(e -> this.toFront()));
     }
 
