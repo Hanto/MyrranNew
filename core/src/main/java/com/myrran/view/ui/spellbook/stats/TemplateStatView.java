@@ -35,7 +35,7 @@ public class TemplateStatView extends Table
     public TemplateStatView()
     {
         BitmapFont font14 = Atlas.get().getFont("14");
-        BitmapFont font11 = Atlas.get().getFont("11");
+        BitmapFont font12 = Atlas.get().getFont("Calibri12");
         BitmapFont font10 = Atlas.get().getFont("10");
         Color white = Color.WHITE;
         Color orange = Color.ORANGE;
@@ -43,7 +43,7 @@ public class TemplateStatView extends Table
         Color purpleH = new Color(110/255f, 110/255f, 211/255f, 1);
         Color black = Color.BLACK;
 
-        name            = new WidgetText(font11, white,   black,1);
+        name            = new WidgetText(font12, white,   black,1);
         baseValue       = new WidgetText(font14, orange,  black,1);
         total           = new WidgetText(font14, purpleH, black,1);
         upgradeCost     = new WidgetText(font10, purpleL, black,1);
@@ -94,12 +94,12 @@ public class TemplateStatView extends Table
         int vPad = -4;
         int hPad = +3;
 
-        add(name).left()            .minWidth(90).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(baseValue).right()      .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(total).right()          .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(maxUpgrades).right()    .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(upgradeCost).right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
-        add(bonusPerUpgrade).right().minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(name).bottom().left()            .minWidth(90).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(baseValue).bottom().right()      .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(total).bottom().right()          .minWidth(35).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(maxUpgrades).bottom().right()    .minWidth(30).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(upgradeCost).bottom().right()    .minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
+        add(bonusPerUpgrade).bottom().right().minWidth(20).padRight(hPad).padTop(vPad).padBottom(vPad);
         row();
     }
 
