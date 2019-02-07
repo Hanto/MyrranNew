@@ -74,9 +74,6 @@ public class ZMain extends ApplicationAdapter
 
             Gdx.input.setInputProcessor(uiStage);
 
-            WidgetText text = new WidgetText("A", Atlas.get().getFont("Calibri14"), Color.WHITE, Color.BLACK, 1);
-            System.out.println(text.getHeight());
-
         }
         catch (Exception e)
         { 	LOG.error("PUMBA",e); }
@@ -94,8 +91,8 @@ public class ZMain extends ApplicationAdapter
             //batch.draw(img, 0, 0);
             //batch.end();
 
-            uiStage.setDebugUnderMouse(true);
-            uiStage.setDebugAll(true);
+            //uiStage.setDebugUnderMouse(true);
+            //uiStage.setDebugAll(true);
 
             uiStage.act();
             uiStage.draw();
