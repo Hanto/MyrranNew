@@ -74,7 +74,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         header.add(minimize).expand().right();
         header.add(maximize).right().row();
 
-        tableHeader.add(header).minWidth(width).left().row();
+        tableHeader.add(header).minWidth(width+1).left().row();
         tableHeader.setTouchable(Touchable.enabled);
         tableHeader.addListener(new ActorMoveListener(this));
         tableHeader.setBackground(Atlas.get().getNinePatchDrawable("TexturasIconos/IconoVacioNine", 0.90f));
@@ -88,7 +88,7 @@ public abstract class SortableTable<T> extends DetailedTable implements Disposab
         if (height != 0)
         {
             scrollPane = new ScrollPane(tableContent);
-            tableDetails.add(scrollPane).size(width, height);
+            tableDetails.add(scrollPane).size(width+1, height);
         }
         else
         {   tableDetails.add(tableContent); }
