@@ -2,7 +2,7 @@ package com.myrran.view.ui.spellbook.header;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 
 /** @author Ivan Delgado Huerta */
 public class SubformHeaderView extends AbstractSpellHeaderView<TemplateSpellSubform>

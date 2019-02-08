@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import static com.myrran.view.ui.widgets.DaD.Payload;

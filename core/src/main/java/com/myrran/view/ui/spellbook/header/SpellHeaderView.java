@@ -1,7 +1,7 @@
 package com.myrran.view.ui.spellbook.header;
 
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 
 /** @author Ivan Delgado Huerta */
 public class SpellHeaderView extends AbstractSpellHeaderView<CustomSpellForm>

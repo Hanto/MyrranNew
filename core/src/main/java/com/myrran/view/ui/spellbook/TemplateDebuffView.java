@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffSource;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.header.DebuffHeaderView;
 import com.myrran.view.ui.spellbook.stats.TemplateStatsView;

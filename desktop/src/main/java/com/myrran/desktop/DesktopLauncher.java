@@ -4,7 +4,7 @@ import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
-import com.myrran.ZMain;
+import com.myrran.view.ZMain;
 import com.myrran.data.GraphicSettings;
 import com.myrran.data.Settings;
 

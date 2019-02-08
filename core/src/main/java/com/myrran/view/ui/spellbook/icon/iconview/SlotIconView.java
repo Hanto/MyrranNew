@@ -2,7 +2,7 @@ package com.myrran.view.ui.spellbook.icon.iconview;
 
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.model.spell.templates.TemplateSpellSlot;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 
 /** @author Ivan Delgado Huerta */
 public class SlotIconView extends AbstractIconView<TemplateSpellSlot>

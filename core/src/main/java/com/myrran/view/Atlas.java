@@ -1,4 +1,4 @@
-package com.myrran.view.ui;
+package com.myrran.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -23,6 +23,7 @@ public class Atlas implements Disposable
 {
     private AssetManager assetManager;
     private TextureAtlas textureAtlas;
+    public TextureAtlas spineAtlas;
 
     private Map<String, TextureRegion> textures = new HashMap<>();
     private Map<String, BitmapFont> fonts = new HashMap<>();
@@ -70,8 +71,11 @@ public class Atlas implements Disposable
     {
         assetManager = new AssetManager();
         assetManager.load("Atlas/Atlas.Atlas", TextureAtlas.class);
+        assetManager.load("spine/spineboy.atlas", TextureAtlas.class);
+
         assetManager.finishLoading();
-        textureAtlas = assetManager.get("Atlas/Atlas.Atlas", TextureAtlas.class);
+        textureAtlas= assetManager.get("Atlas/Atlas.Atlas", TextureAtlas.class);
+        spineAtlas  = assetManager.get("spine/spineboy.atlas", TextureAtlas.class);
 
         addNinePatch("TexturasIconos/IconoVacioNine");
         addNinePatch("TexturasIconos/IconoVacioNine2");

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.myrran.model.spell.generators.SpellStatI;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.widgets.WidgetText;
 
 import java.text.DecimalFormat;

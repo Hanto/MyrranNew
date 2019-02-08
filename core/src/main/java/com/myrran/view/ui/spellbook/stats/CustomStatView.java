@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.myrran.model.spell.generators.CustomSpellStat;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.spellbook.stats.bar.UpgradeBarView;
 import com.myrran.view.ui.widgets.WidgetText;
 

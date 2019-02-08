@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadSubformSource;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.listeners.TouchDownListener;
 import com.myrran.view.ui.spellbook.header.SubformHeaderView;
 import com.myrran.view.ui.spellbook.icon.iconview.SlotIconsView;

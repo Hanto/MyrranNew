@@ -5,7 +5,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DaDSubformTarget;
 import com.myrran.model.spell.generators.CustomSpellSubform;
 import com.myrran.model.spell.templates.TemplateSpellSubform;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.listeners.TouchDownRightListener;
 
 /** @author Ivan Delgado Huerta */

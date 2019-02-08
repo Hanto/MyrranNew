@@ -1,4 +1,4 @@
-package com.myrran;
+package com.myrran.view;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -11,9 +11,9 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
-import com.myrran.view.ui.Atlas;
 import com.myrran.view.ui.spellbook.*;
 import com.myrran.view.ui.widgets.WidgetText;
+import com.myrran.view.world.WorldView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,6 +32,8 @@ public class ZMain extends ApplicationAdapter
     private CustomSpellForm spell;
     private CustomSpellController controller;
     private WidgetText fps;
+
+    WorldView worldView;
 
     private static final Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
@@ -72,6 +74,8 @@ public class ZMain extends ApplicationAdapter
 
             uiStage.addActor(fps);
 
+            worldView = new WorldView();
+
             Gdx.input.setInputProcessor(uiStage);
 
         }
@@ -87,9 +91,12 @@ public class ZMain extends ApplicationAdapter
             Gdx.gl.glClearColor(0.05f, 0.05f, 0.05f, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            //batch.begin();
+            batch.begin();
+
+            worldView.render(batch);
+
             //batch.draw(img, 0, 0);
-            //batch.end();
+            batch.end();
 
             //uiStage.setDebugUnderMouse(true);
             //uiStage.setDebugAll(true);

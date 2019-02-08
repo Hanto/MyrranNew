@@ -5,7 +5,7 @@ import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.DadDebuffTarget;
 import com.myrran.model.spell.generators.CustomSpellDebuff;
 import com.myrran.model.spell.templates.TemplateSpellDebuff;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.listeners.TouchDownRightListener;
 
 /** @author Ivan Delgado Huerta */

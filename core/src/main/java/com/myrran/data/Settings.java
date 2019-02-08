@@ -1,6 +1,5 @@
 package com.myrran.data;
 
-import com.myrran.view.ui.Atlas;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -3,7 +3,7 @@ package com.myrran.view.ui.spellbook.icon.iconview;
 import com.badlogic.gdx.graphics.Color;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.model.spell.generators.CustomSpellForm;
-import com.myrran.view.ui.Atlas;
+import com.myrran.view.Atlas;
 import com.myrran.view.ui.listeners.TouchDownRightListener;
 
 /** @author Ivan Delgado Huerta */
