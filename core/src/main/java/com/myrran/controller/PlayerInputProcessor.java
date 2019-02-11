@@ -5,51 +5,72 @@ import com.badlogic.gdx.InputProcessor;
 /** @author Ivan Delgado Huerta */
 public class PlayerInputProcessor implements InputProcessor
 {
-    @Override
-    public boolean keyDown(int keycode)
+    private PlayerInputs inputs;
+
+    // CONSTRUCTOR:
+    //--------------------------------------------------------------------------------------------------------
+
+    public PlayerInputProcessor(PlayerInputs playerInputs)
+    {   inputs = playerInputs; }
+
+    // MAIN:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override public boolean keyDown(int keycode)
     {
-        return false;
+        switch (keycode)
+        {
+            case 47: inputs.setInputDown(true); break;
+            case 51: inputs.setInputUp(true); break;
+            case 29: inputs.setInputLeft(true); break;
+            case 32: inputs.setInputRight(true); break;
+        }
+
+        System.out.println(inputs.getDirection());
+
+        return true;
     }
 
-    @Override
-    public boolean keyUp(int keycode)
+    @Override public boolean keyUp(int keycode)
     {
-        return false;
+        switch (keycode)
+        {
+            case 47: inputs.setInputDown(false); break;
+            case 51: inputs.setInputUp(false); break;
+            case 29: inputs.setInputLeft(false); break;
+            case 32: inputs.setInputRight(false); break;
+        }
+
+        System.out.println(inputs.getDirection());
+
+        return true;
     }
 
-    @Override
-    public boolean keyTyped(char character)
-    {
-        return false;
-    }
+    // UNINPLEMENTED:
+    //--------------------------------------------------------------------------------------------------------
 
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button)
+    @Override public boolean keyTyped(char character)
     {
-        return false;
+        return true;
     }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button)
+    @Override public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
-        return false;
+        return true;
     }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer)
+    @Override public boolean touchUp(int screenX, int screenY, int pointer, int button)
     {
-        return false;
+        return true;
     }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY)
+    @Override public boolean touchDragged(int screenX, int screenY, int pointer)
     {
-        return false;
+        return true;
     }
-
-    @Override
-    public boolean scrolled(int amount)
+    @Override public boolean mouseMoved(int screenX, int screenY)
     {
-        return false;
+        return true;
+    }
+    @Override public boolean scrolled(int amount)
+    {
+        return true;
     }
 }

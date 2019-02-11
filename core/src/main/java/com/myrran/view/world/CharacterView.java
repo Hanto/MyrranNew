@@ -4,12 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.esotericsoftware.spine.*;
+import com.myrran.controller.PlayerInputs;
 import com.myrran.view.Atlas;
 
 import java.util.EnumMap;
 
 /** @author Ivan Delgado Huerta */
-public class Character
+public class CharacterView
 {
     static float fps = 1 / 60f;
     SkeletonJson skeletonJson;
@@ -18,24 +19,45 @@ public class Character
     enum State { idle, run, jump, death, fall }
 
     Skeleton skeleton;
-    Bone rearUpperArmBone, rearBracerBone, gunBone, headBone, torsoBone, frontUpperArmBone;
 
     SkeletonRenderer skeletonRenderer;
     AnimationState animationState;
 
+    PlayerInputs inputs;
+    PlayerInputs.AnimationState currentAnimState;
+
     private EnumMap<State, Animation>animations = new EnumMap<>(State.class);
 
+    public CharacterView(PlayerInputs inputs)
+    {
+        this();
+        this.inputs = inputs;
+        this.currentAnimState = inputs.getAnimationState();
+    }
 
-    public Character()
+    private void setAnimationState()
+    {
+        if (currentAnimState != inputs.getAnimationState())
+        {
+            currentAnimState = inputs.getAnimationState();
+            if (currentAnimState == PlayerInputs.AnimationState.idle)
+                animationState.setAnimation(0, animations.get(State.idle), true);
+            else if (currentAnimState == PlayerInputs.AnimationState.runningRigh)
+            {
+                animationState.setAnimation(0, animations.get(State.run), true);
+                skeleton.setFlipX(false);
+            }
+            else
+            {
+                animationState.setAnimation(0, animations.get(State.run), true);
+                skeleton.setFlipX(true);
+            }
+        }
+    }
+
+    public CharacterView()
     {
         loadAssets();
-
-        /*rearUpperArmBone = skeleton.findBone("rear_upper_arm");
-        rearBracerBone = skeleton.findBone("rear_bracer");
-        gunBone = skeleton.findBone("gun");
-        headBone = skeleton.findBone("head");
-        torsoBone = skeleton.findBone("torso");
-        frontUpperArmBone = skeleton.findBone("front_upper_arm");*/
 
         skeleton = new Skeleton(skeletonData);
         animationState = new AnimationState(animationStateData);
@@ -74,6 +96,8 @@ public class Character
     {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        setAnimationState();
 
         animationState.update(Gdx.graphics.getDeltaTime());
         animationState.apply(skeleton);

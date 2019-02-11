@@ -9,12 +9,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.myrran.controller.CustomSpellController;
+import com.myrran.controller.PlayerInputProcessor;
+import com.myrran.controller.PlayerInputs;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.spellbook.*;
 import com.myrran.view.ui.widgets.WidgetText;
-import com.myrran.view.world.Character;
+import com.myrran.view.world.CharacterView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +27,9 @@ import java.io.File;
 public class ZMain extends ApplicationAdapter
 {
     private InputMultiplexer inputMultiplexer;
+    private PlayerInputProcessor playerInputProcessor;
+    private PlayerInputs playerInputs;
+
     private SpriteBatch batch;
     private BitmapFont font;
     private WidgetText text;
@@ -35,7 +40,7 @@ public class ZMain extends ApplicationAdapter
     private CustomSpellController controller;
     private WidgetText fps;
 
-    Character character;
+    CharacterView characterView;
 
     private static final Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
@@ -45,6 +50,9 @@ public class ZMain extends ApplicationAdapter
         try
         {
             inputMultiplexer = new InputMultiplexer();
+            playerInputs = new PlayerInputs();
+            playerInputProcessor = new PlayerInputProcessor(playerInputs);
+
             uiStage = new Stage();
             batch = new SpriteBatch();
             font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
@@ -77,11 +85,13 @@ public class ZMain extends ApplicationAdapter
 
             uiStage.addActor(fps);
 
-            character = new Character();
-
             inputMultiplexer.addProcessor(uiStage);
+            inputMultiplexer.addProcessor(playerInputProcessor);
 
             Gdx.input.setInputProcessor(inputMultiplexer);
+
+
+            characterView = new CharacterView(playerInputs);
 
         }
         catch (Exception e)
@@ -98,7 +108,7 @@ public class ZMain extends ApplicationAdapter
 
             batch.begin();
 
-            character.render(batch);
+            characterView.render(batch);
 
             batch.end();
 
