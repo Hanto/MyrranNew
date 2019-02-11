@@ -2,6 +2,7 @@ package com.myrran.view;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,7 +14,7 @@ import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
 import com.myrran.view.ui.spellbook.*;
 import com.myrran.view.ui.widgets.WidgetText;
-import com.myrran.view.world.WorldView;
+import com.myrran.view.world.Character;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,6 +24,7 @@ import java.io.File;
 
 public class ZMain extends ApplicationAdapter
 {
+    private InputMultiplexer inputMultiplexer;
     private SpriteBatch batch;
     private BitmapFont font;
     private WidgetText text;
@@ -33,7 +35,7 @@ public class ZMain extends ApplicationAdapter
     private CustomSpellController controller;
     private WidgetText fps;
 
-    WorldView worldView;
+    Character character;
 
     private static final Logger LOG = LogManager.getFormatterLogger(Atlas.class);
 
@@ -42,6 +44,7 @@ public class ZMain extends ApplicationAdapter
     {
         try
         {
+            inputMultiplexer = new InputMultiplexer();
             uiStage = new Stage();
             batch = new SpriteBatch();
             font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
@@ -74,9 +77,11 @@ public class ZMain extends ApplicationAdapter
 
             uiStage.addActor(fps);
 
-            worldView = new WorldView();
+            character = new Character();
 
-            Gdx.input.setInputProcessor(uiStage);
+            inputMultiplexer.addProcessor(uiStage);
+
+            Gdx.input.setInputProcessor(inputMultiplexer);
 
         }
         catch (Exception e)
@@ -93,9 +98,8 @@ public class ZMain extends ApplicationAdapter
 
             batch.begin();
 
-            worldView.render(batch);
+            character.render(batch);
 
-            //batch.draw(img, 0, 0);
             batch.end();
 
             //uiStage.setDebugUnderMouse(true);
