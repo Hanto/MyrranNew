@@ -15,8 +15,6 @@ public class PlayerInputs
     private boolean outputLeft;
     private boolean outputRight;
 
-    public enum AnimationState { idle, runningRigh, runningLeft }
-
     // MOVEMENT:
     //--------------------------------------------------------------------------------------------------------
 
@@ -48,20 +46,11 @@ public class PlayerInputs
         outputUp = !outputDown && inputUp;
     }
 
-    public int getDirectionX()
+    private int getDirectionX()
     {   return outputLeft ? -1 : (outputRight ? 1 : 0); }
 
-    public int getDirectionY()
+    private int getDirectionY()
     {   return outputDown ? -1 : (outputUp ? 1 : 0); }
-
-    public AnimationState getAnimationState()
-    {
-        Vector2 direction = getDirection();
-        if (direction.x == 0f && direction.y == 0f)
-            return AnimationState.idle;
-        else
-            return direction.x < 0 ? AnimationState.runningLeft : AnimationState.runningRigh;
-    }
 
     public Vector2 getDirection()
     {   return new Vector2(getDirectionX(), getDirectionY()); }

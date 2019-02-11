@@ -8,15 +8,20 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.esotericsoftware.spine.SkeletonRenderer;
 import com.myrran.controller.CustomSpellController;
 import com.myrran.controller.PlayerInputProcessor;
 import com.myrran.controller.PlayerInputs;
+import com.myrran.model.mob.Player;
 import com.myrran.model.spell.generators.CustomSpellBook;
 import com.myrran.model.spell.generators.CustomSpellForm;
 import com.myrran.model.spell.templates.TemplateSpellBook;
-import com.myrran.view.ui.spellbook.*;
+import com.myrran.view.ui.spellbook.CustomSpellsView;
+import com.myrran.view.ui.spellbook.TemplateDebuffsView;
+import com.myrran.view.ui.spellbook.TemplateFormsView;
+import com.myrran.view.ui.spellbook.TemplateSubformsView;
 import com.myrran.view.ui.widgets.WidgetText;
-import com.myrran.view.world.CharacterView;
+import com.myrran.view.mob.PlayerView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,8 +34,10 @@ public class ZMain extends ApplicationAdapter
     private InputMultiplexer inputMultiplexer;
     private PlayerInputProcessor playerInputProcessor;
     private PlayerInputs playerInputs;
+    private Player player;
 
     private SpriteBatch batch;
+    private SkeletonRenderer skeletonRenderer;
     private BitmapFont font;
     private WidgetText text;
     private Stage uiStage;
@@ -40,9 +47,11 @@ public class ZMain extends ApplicationAdapter
     private CustomSpellController controller;
     private WidgetText fps;
 
-    CharacterView characterView;
+    private PlayerView characterView;
 
     private static final Logger LOG = LogManager.getFormatterLogger(Atlas.class);
+
+    public ZMain() {}
 
     @Override
     public void create ()
@@ -51,8 +60,10 @@ public class ZMain extends ApplicationAdapter
         {
             inputMultiplexer = new InputMultiplexer();
             playerInputs = new PlayerInputs();
+            player = new Player(playerInputs);
             playerInputProcessor = new PlayerInputProcessor(playerInputs);
-
+            skeletonRenderer = new SkeletonRenderer();
+            skeletonRenderer.setPremultipliedAlpha(true);
             uiStage = new Stage();
             batch = new SpriteBatch();
             font = new BitmapFont(Gdx.files.internal("fonts/" + "20.fnt"), false);
@@ -90,9 +101,7 @@ public class ZMain extends ApplicationAdapter
 
             Gdx.input.setInputProcessor(inputMultiplexer);
 
-
-            characterView = new CharacterView(playerInputs);
-
+            characterView = new PlayerView(player);
         }
         catch (Exception e)
         { 	LOG.error("PUMBA",e); }
@@ -107,9 +116,7 @@ public class ZMain extends ApplicationAdapter
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
             batch.begin();
-
-            characterView.render(batch);
-
+            characterView.render(skeletonRenderer, batch);
             batch.end();
 
             //uiStage.setDebugUnderMouse(true);

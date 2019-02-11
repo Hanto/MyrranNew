@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Disposable;
+import com.esotericsoftware.spine.AnimationStateData;
+import com.esotericsoftware.spine.SkeletonData;
+import com.esotericsoftware.spine.SkeletonJson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,11 +26,12 @@ public class Atlas implements Disposable
 {
     private AssetManager assetManager;
     private TextureAtlas textureAtlas;
-    public TextureAtlas spineAtlas;
 
     private Map<String, TextureRegion> textures = new HashMap<>();
     private Map<String, BitmapFont> fonts = new HashMap<>();
     private Map<String, NinePatch> ninePatches = new HashMap<>();
+    private Map<String, SkeletonData> skeletonsData = new HashMap<>();
+    private Map<String, AnimationStateData> animationsData = new HashMap<>();
 
     private static final DecimalFormat df = new DecimalFormat("0.0");
     private static final DecimalFormatSymbols simbolos = df.getDecimalFormatSymbols();
@@ -37,6 +41,8 @@ public class Atlas implements Disposable
     // SETTERS / GETTERS:
     //--------------------------------------------------------------------------------------------------------
 
+    public SkeletonData getSkeletonData(String name)            { return skeletonsData.get(name); }
+    public AnimationStateData getAnimationStateData(String name){ return animationsData.get(name); }
     public NinePatch getNinePatch(String name)                  { return ninePatches.get(name); }
     public TextureRegion getTexture(String name)                { return textures.get(name); }
     public BitmapFont getFont(String name)                      { return fonts.get(name); }
@@ -53,9 +59,7 @@ public class Atlas implements Disposable
     {   return Singleton.get; }
 
     private Atlas()
-    {
-        loadData();
-    }
+    {   loadData(); }
 
     @Override public void dispose()
     {
@@ -70,12 +74,16 @@ public class Atlas implements Disposable
     private void loadData()
     {
         assetManager = new AssetManager();
-        assetManager.load("Atlas/Atlas.Atlas", TextureAtlas.class);
-        assetManager.load("spine/spineboy.atlas", TextureAtlas.class);
+        loadAtlas("Atlas/Atlas");
+        loadAtlas("spine/spineboy");
 
         assetManager.finishLoading();
-        textureAtlas= assetManager.get("Atlas/Atlas.Atlas", TextureAtlas.class);
-        spineAtlas  = assetManager.get("spine/spineboy.atlas", TextureAtlas.class);
+
+        // SPINE:
+        loadSpineData("spine/spineboy");
+
+        // TEXTURES:
+        textureAtlas = assetManager.get("Atlas/Atlas.atlas", TextureAtlas.class);
 
         addNinePatch("TexturasIconos/IconoVacioNine");
         addNinePatch("TexturasIconos/IconoVacioNine2");
@@ -110,6 +118,25 @@ public class Atlas implements Disposable
 
         simbolos.setDecimalSeparator('.');
         df.setDecimalFormatSymbols(simbolos);
+    }
+
+    private void loadAtlas(String name)
+    {
+        LOG.info("Adding textureAtlas: %s", name);
+        assetManager.load(name + ".atlas", TextureAtlas.class);
+    }
+
+    private void loadSpineData(String name)
+    {
+        LOG.info("Adding skeleton data: %s", name);
+        TextureAtlas spineAtlas = assetManager.get(name+".atlas", TextureAtlas.class);
+        SkeletonJson json = new SkeletonJson(spineAtlas); json.setScale(0.08f);
+        SkeletonData skeletonData = json.readSkeletonData(Gdx.files.internal(name + ".json"));
+        AnimationStateData animationData = new AnimationStateData(skeletonData);
+        animationData.setDefaultMix(0.1f);
+
+        skeletonsData.put(name, skeletonData);
+        animationsData.put(name, animationData);
     }
 
     private void addNinePatch(String name)
