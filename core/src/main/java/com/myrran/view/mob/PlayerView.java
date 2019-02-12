@@ -2,24 +2,26 @@ package com.myrran.view.mob;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Disposable;
 import com.esotericsoftware.spine.*;
 import com.myrran.model.mob.Player;
 import com.myrran.view.Atlas;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.EnumMap;
 
 /** @author Ivan Delgado Huerta */
-public class PlayerView
+public class PlayerView implements PropertyChangeListener, Disposable
 {
-    enum State { idle, run, jump, death, fall }
+    private Player model;
 
+    private float directionX = 0;
     private Skeleton skeleton;
     private AnimationState animationState;
-
-    private Player model;
-    private Player.AnimationState currentAnimState;
-
     private EnumMap<State, Animation>animations = new EnumMap<>(State.class);
+    public enum State { idle, run, jump, death, fall }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -27,53 +29,64 @@ public class PlayerView
     public PlayerView(Player player)
     {
         model = player;
-        //currentAnimState = model.getAnimationState();
+        model.addObserver(this);
 
         SkeletonData skeletonData = Atlas.get().getSkeletonData("spine/spineboy");
         AnimationStateData animationData = Atlas.get().getAnimationStateData("spine/spineboy");
         skeleton = new Skeleton(skeletonData);
         animationState = new AnimationState(animationData);
-        animations.put(State.run, skeletonData.findAnimation("run"));
-        animations.put(State.idle, skeletonData.findAnimation("idle"));
+
+        for (State current : State.values())
+            animations.put(current, skeletonData.findAnimation(current.toString()));
 
         animationState.setAnimation(0, animations.get(State.idle), true);
         skeleton.setPosition(550, 200);
     }
 
+    @Override public void dispose()
+    {   model.removeObserver(this); }
+
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
 
-    private void setAnimationState()
+    private void setMovement()
     {
-        /*if (currentAnimState != model.getAnimationState())
+        Vector2 vector = model.getDirectionVector();
+
+        if (directionX != vector.x)
         {
-            currentAnimState = model.getAnimationState();
-            if (currentAnimState == Player.AnimationState.idle)
-                animationState.setAnimation(0, animations.get(State.idle), true);
-            else
+            directionX = vector.x;
+
+            if (vector.x < 0)
             {
                 animationState.setAnimation(0, animations.get(State.run), true);
-
-                if (currentAnimState == Player.AnimationState.runningLeft)
-                    skeleton.setFlipX(true);
-                else
-                    skeleton.setFlipX(false);
+                skeleton.setFlipX(true);
             }
-
-        }*/
+            else if (vector.x > 0)
+            {
+                animationState.setAnimation(0, animations.get(State.run), true);
+                skeleton.setFlipX(false);
+            }
+            else if (vector.x == 0)
+            {   animationState.setAnimation(0, animations.get(State.idle), true); }
+        }
     }
 
-    // UNINPLEMENTED:
+    // DRAW:
     //--------------------------------------------------------------------------------------------------------
 
     public void render(SkeletonRenderer skeletonRenderer, SpriteBatch batch)
     {
-        setAnimationState();
-
         animationState.update(Gdx.graphics.getDeltaTime());
         animationState.apply(skeleton);
         skeleton.updateWorldTransform();
 
         skeletonRenderer.draw(batch, skeleton);
     }
+
+    // MVC:
+    //--------------------------------------------------------------------------------------------------------
+
+    @Override public void propertyChange(PropertyChangeEvent evt)
+    {   setMovement(); }
 }

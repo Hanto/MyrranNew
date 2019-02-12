@@ -7,13 +7,16 @@ import com.myrran.model.mob.Player;
 public class PlayerInputProcessor implements InputProcessor
 {
     private Player model;
-    private PlayerInputs inputs = new PlayerInputs(model);
+    private PlayerInputs inputs;
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
     public PlayerInputProcessor(Player player)
-    {   model = player; }
+    {
+        model = player;
+        inputs = new PlayerInputs(model);
+    }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------
