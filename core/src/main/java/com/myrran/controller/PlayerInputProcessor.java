@@ -1,17 +1,19 @@
 package com.myrran.controller;
 
 import com.badlogic.gdx.InputProcessor;
+import com.myrran.model.mob.Player;
 
 /** @author Ivan Delgado Huerta */
 public class PlayerInputProcessor implements InputProcessor
 {
-    private PlayerInputs inputs;
+    private Player model;
+    private PlayerInputs inputs = new PlayerInputs(model);
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
 
-    public PlayerInputProcessor(PlayerInputs playerInputs)
-    {   inputs = playerInputs; }
+    public PlayerInputProcessor(Player player)
+    {   model = player; }
 
     // MAIN:
     //--------------------------------------------------------------------------------------------------------

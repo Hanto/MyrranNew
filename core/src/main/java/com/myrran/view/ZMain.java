@@ -59,9 +59,8 @@ public class ZMain extends ApplicationAdapter
         try
         {
             inputMultiplexer = new InputMultiplexer();
-            playerInputs = new PlayerInputs();
-            player = new Player(playerInputs);
-            playerInputProcessor = new PlayerInputProcessor(playerInputs);
+            player = new Player();
+            playerInputProcessor = new PlayerInputProcessor(player);
             skeletonRenderer = new SkeletonRenderer();
             skeletonRenderer.setPremultipliedAlpha(true);
             uiStage = new Stage();

@@ -1,10 +1,14 @@
 package com.myrran.controller;
 
 import com.badlogic.gdx.math.Vector2;
+import com.myrran.model.mob.Player;
 
 /** @author Ivan Delgado Huerta */
 public class PlayerInputs
 {
+    private Player model;
+    private Vector2 orientation = new Vector2();
+
     private boolean inputUp;
     private boolean inputDown;
     private boolean inputLeft;
@@ -15,6 +19,12 @@ public class PlayerInputs
     private boolean outputLeft;
     private boolean outputRight;
 
+    // CONSTRUCTOR:
+    //--------------------------------------------------------------------------------------------------------
+
+    public PlayerInputs(Player player)
+    {   model = player; }
+
     // MOVEMENT:
     //--------------------------------------------------------------------------------------------------------
 
@@ -23,6 +33,7 @@ public class PlayerInputs
         inputRight = b;
         outputRight = !outputLeft && inputRight;
         outputLeft = !outputRight && inputLeft;
+        setPlayerOrientationVector();
     }
 
     public void setInputLeft(boolean b)
@@ -30,6 +41,7 @@ public class PlayerInputs
         inputLeft = b;
         outputLeft = !outputRight && inputLeft;
         outputRight = !outputLeft && inputRight;
+        setPlayerOrientationVector();
     }
 
     public void setInputUp(boolean b)
@@ -37,6 +49,7 @@ public class PlayerInputs
         inputUp = b;
         outputUp = !outputDown && inputUp;
         outputDown = !outputUp && inputDown;
+        setPlayerOrientationVector();
     }
 
     public void setInputDown(boolean b)
@@ -44,7 +57,14 @@ public class PlayerInputs
         inputDown = b;
         outputDown = !outputUp && inputDown;
         outputUp = !outputDown && inputUp;
+        setPlayerOrientationVector();
     }
+
+    private void setPlayerOrientationVector()
+    {   model.setOrientation(getOrientationVector()); }
+
+    // HELPER:
+    //--------------------------------------------------------------------------------------------------------
 
     private int getOrientationX()
     {   return outputLeft ? -1 : (outputRight ? 1 : 0); }
@@ -52,6 +72,9 @@ public class PlayerInputs
     private int getOrientationY()
     {   return outputDown ? -1 : (outputUp ? 1 : 0); }
 
-    public Vector2 getOrientationVector()
-    {   return new Vector2(getOrientationX(), getOrientationY()); }
+    private Vector2 getOrientationVector()
+    {
+        orientation.set(getOrientationX(), getOrientationY());
+        return orientation;
+    }
 }

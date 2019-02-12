@@ -27,7 +27,7 @@ public class PlayerView
     public PlayerView(Player player)
     {
         model = player;
-        currentAnimState = model.getAnimationState();
+        //currentAnimState = model.getAnimationState();
 
         SkeletonData skeletonData = Atlas.get().getSkeletonData("spine/spineboy");
         AnimationStateData animationData = Atlas.get().getAnimationStateData("spine/spineboy");
@@ -45,7 +45,7 @@ public class PlayerView
 
     private void setAnimationState()
     {
-        if (currentAnimState != model.getAnimationState())
+        /*if (currentAnimState != model.getAnimationState())
         {
             currentAnimState = model.getAnimationState();
             if (currentAnimState == Player.AnimationState.idle)
@@ -60,7 +60,7 @@ public class PlayerView
                     skeleton.setFlipX(false);
             }
 
-        }
+        }*/
     }
 
     // UNINPLEMENTED:
