@@ -31,12 +31,12 @@ public class PlayerView
 
         SkeletonData skeletonData = Atlas.get().getSkeletonData("spine/spineboy");
         AnimationStateData animationData = Atlas.get().getAnimationStateData("spine/spineboy");
-
         skeleton = new Skeleton(skeletonData);
         animationState = new AnimationState(animationData);
         animations.put(State.run, skeletonData.findAnimation("run"));
         animations.put(State.idle, skeletonData.findAnimation("idle"));
 
+        animationState.setAnimation(0, animations.get(State.idle), true);
         skeleton.setPosition(550, 200);
     }
 

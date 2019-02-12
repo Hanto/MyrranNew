@@ -46,12 +46,12 @@ public class PlayerInputs
         outputUp = !outputDown && inputUp;
     }
 
-    private int getDirectionX()
+    private int getOrientationX()
     {   return outputLeft ? -1 : (outputRight ? 1 : 0); }
 
-    private int getDirectionY()
+    private int getOrientationY()
     {   return outputDown ? -1 : (outputUp ? 1 : 0); }
 
-    public Vector2 getDirection()
-    {   return new Vector2(getDirectionX(), getDirectionY()); }
+    public Vector2 getOrientationVector()
+    {   return new Vector2(getOrientationX(), getOrientationY()); }
 }

@@ -24,7 +24,7 @@ public class Player
 
     public AnimationState getAnimationState()
     {
-        Vector2 direction = playerInputs.getDirection();
+        Vector2 direction = playerInputs.getOrientationVector();
         if (direction.x == 0f && direction.y == 0f)
             return AnimationState.idle;
         else
