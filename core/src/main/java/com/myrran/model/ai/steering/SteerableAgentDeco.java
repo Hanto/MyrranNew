@@ -19,6 +19,9 @@ public interface SteerableAgentDeco extends SteerableAgentI, SpatialDeco, MovLim
     default Vector2 getLinearVelocity()
     {   return getSteerableAgent().getLinearVelocity(); }
 
+    default void setLinearVelocity(Vector2 vector)
+    {   getSteerableAgent().setLinearVelocity(vector); }
+
     default float getAngularVelocity()
     {   return getSteerableAgent().getAngularVelocity(); }
 

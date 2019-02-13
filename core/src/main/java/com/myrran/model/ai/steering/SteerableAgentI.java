@@ -9,6 +9,7 @@ import com.myrran.model.ai.steering.SpatialI;
 /** @author Ivan Delgado Huerta */
 public interface SteerableAgentI extends Steerable<Vector2>
 {
+    void setLinearVelocity(Vector2 vector);
     void setAngularVelocity(float newAngularVelocity);
     void setBoundingRadius(float newBoundingRadius);
     SpatialI getSpatial();

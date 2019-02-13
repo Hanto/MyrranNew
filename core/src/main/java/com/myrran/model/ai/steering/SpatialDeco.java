@@ -6,10 +6,13 @@ import com.badlogic.gdx.math.Vector2;
 /** @author Ivan Delgado Huerta */
 public interface SpatialDeco extends Location<Vector2>
 {
-    Location<Vector2> getSpatial();
+    SpatialI getSpatial();
 
     default Vector2 getPosition()
     {   return getSpatial().getPosition(); }
+
+    default void setPosition(float x, float y)
+    {   getSpatial().setPosition(x, y); }
 
     default float getOrientation()
     {   return getSpatial().getOrientation(); }

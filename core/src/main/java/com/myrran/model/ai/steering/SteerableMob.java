@@ -42,9 +42,17 @@ public class SteerableMob implements SteerableAgentDeco
 
     private void applySteering(SteeringAcceleration<Vector2> steering, float delta)
     {
-        //position and velocity:
-        getPosition().mulAdd(getLinearVelocity(), delta);
-        getLinearVelocity().mulAdd(steering.linear, delta).limit(getMaxLinearSpeed());
+        Vector2 vector = new Vector2();
+
+        //Position:
+        vector.set(getPosition());
+        vector.mulAdd(getLinearVelocity(), delta);
+        setPosition(vector.x, vector.y);
+
+        //Velocity:
+        vector.set(getLinearVelocity());
+        vector.mulAdd(steering.linear, delta);
+        setLinearVelocity(vector);
 
         //Orientation:
         if (independentFacing)

@@ -24,7 +24,10 @@ public class SteerableAgent implements SteerableAgentI, SpatialDeco, MovLimiterD
 
     @Override public Vector2 getLinearVelocity()
     {   return linearVelocity; }
-    
+
+    @Override public void setLinearVelocity(Vector2 vector)
+    {   linearVelocity.set(vector).limit(getMaxAngularSpeed()); }
+
     @Override public float getAngularVelocity()
     {   return angularVelocity; }
 
