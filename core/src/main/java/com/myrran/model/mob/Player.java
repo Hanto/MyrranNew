@@ -4,19 +4,19 @@ import com.badlogic.gdx.math.Vector2;
 import com.myrran.model.components.observable.Observable;
 import com.myrran.model.components.observable.ObservableDeco;
 import com.myrran.model.components.observable.ObservableI;
+import com.myrran.model.ai.steering.SteerableAgent;
+import com.myrran.model.ai.steering.SteerableAgentDeco;
 
 /** @author Ivan Delgado Huerta */
-public class Player implements ObservableDeco
+public class Player implements ObservableDeco, SteerableAgentDeco
 {
-    private Vector2 position = new Vector2(0, 0);
     private Vector2 directionVector = new Vector2(0, 0);
-    private float orientation;
+    private SteerableAgent steerable = new SteerableAgent();
     private ObservableI observable = new Observable(this);
 
-    public Vector2 getPosition()                    { return position; }
-    public float getOrientation()                   { return orientation; }
-    public Vector2 getDirectionVector()           { return directionVector; }
-    @Override public ObservableI getObservable()    { return observable; }
+    public Vector2 getDirectionVector()                 { return directionVector; }
+    @Override public SteerableAgent getSteerableAgent() { return steerable; }
+    @Override public ObservableI getObservable()        { return observable; }
 
     // CONSTRUCTOR:
     //--------------------------------------------------------------------------------------------------------
@@ -27,7 +27,7 @@ public class Player implements ObservableDeco
     public void setOrientation(Vector2 vector)
     {
         directionVector.set(vector);
-        orientation = directionVector.angleRad();
+        setOrientation(directionVector.angleRad());
         notifyChange();
     }
 

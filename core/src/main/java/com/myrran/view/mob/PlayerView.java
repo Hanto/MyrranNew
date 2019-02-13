@@ -17,7 +17,7 @@ public class PlayerView implements PropertyChangeListener, Disposable
 {
     private Player model;
 
-    private float directionX = 0;
+    private float lastDirectionX = 0;
     private Skeleton skeleton;
     private AnimationState animationState;
     private EnumMap<State, Animation>animations = new EnumMap<>(State.class);
@@ -29,8 +29,6 @@ public class PlayerView implements PropertyChangeListener, Disposable
     public PlayerView(Player player)
     {
         model = player;
-        model.addObserver(this);
-
         SkeletonData skeletonData = Atlas.get().getSkeletonData("spine/spineboy");
         AnimationStateData animationData = Atlas.get().getAnimationStateData("spine/spineboy");
         skeleton = new Skeleton(skeletonData);
@@ -41,6 +39,7 @@ public class PlayerView implements PropertyChangeListener, Disposable
 
         animationState.setAnimation(0, animations.get(State.idle), true);
         skeleton.setPosition(550, 200);
+        model.addObserver(this);
     }
 
     @Override public void dispose()
@@ -53,21 +52,16 @@ public class PlayerView implements PropertyChangeListener, Disposable
     {
         Vector2 vector = model.getDirectionVector();
 
-        if (directionX != vector.x)
+        if (lastDirectionX != vector.x)
         {
-            directionX = vector.x;
+            lastDirectionX = vector.x;
 
-            if (vector.x < 0)
+            if (vector.x != 0)
             {
                 animationState.setAnimation(0, animations.get(State.run), true);
-                skeleton.setFlipX(true);
+                skeleton.setFlipX(vector.x < 0);
             }
-            else if (vector.x > 0)
-            {
-                animationState.setAnimation(0, animations.get(State.run), true);
-                skeleton.setFlipX(false);
-            }
-            else if (vector.x == 0)
+            else
             {   animationState.setAnimation(0, animations.get(State.idle), true); }
         }
     }
