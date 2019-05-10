@@ -74,7 +74,7 @@ public class Atlas implements Disposable
     private void loadData()
     {
         assetManager = new AssetManager();
-        loadAtlas("Atlas/Atlas");
+        loadAtlas("atlas/atlas");
         loadAtlas("spine/spineboy");
 
         assetManager.finishLoading();
@@ -83,7 +83,7 @@ public class Atlas implements Disposable
         loadSpineData("spine/spineboy");
 
         // TEXTURES:
-        textureAtlas = assetManager.get("Atlas/Atlas.atlas", TextureAtlas.class);
+        textureAtlas = assetManager.get("atlas/atlas.atlas", TextureAtlas.class);
 
         addNinePatch("TexturasIconos/IconoVacioNine");
         addNinePatch("TexturasIconos/IconoVacioNine2");
